@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/KL_Planner.dir/Anmeldung.cpp.obj"
   "CMakeFiles/KL_Planner.dir/Professor.cpp.obj"
-  "CMakeFiles/KL_Planner.dir/Prüfung.cpp.obj"
+  "CMakeFiles/KL_Planner.dir/Pruefung.cpp.obj"
   "CMakeFiles/KL_Planner.dir/Raum.cpp.obj"
   "CMakeFiles/KL_Planner.dir/ReadInput.cpp.obj"
   "CMakeFiles/KL_Planner.dir/Student.cpp.obj"

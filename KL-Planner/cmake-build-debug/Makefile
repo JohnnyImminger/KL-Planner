@@ -38,19 +38,19 @@ cmake_force:
 SHELL = cmd.exe
 
 # The CMake executable.
-CMAKE_COMMAND = C:\Users\Johnny\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\201.7846.88\bin\cmake\win\bin\cmake.exe
+CMAKE_COMMAND = C:\Users\flogr\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\201.7846.88\bin\cmake\win\bin\cmake.exe
 
 # The command to remove a file.
-RM = C:\Users\Johnny\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\201.7846.88\bin\cmake\win\bin\cmake.exe -E remove -f
+RM = C:\Users\flogr\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\201.7846.88\bin\cmake\win\bin\cmake.exe -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\dev\Repo\KL-Planner\KL-Planner
+CMAKE_SOURCE_DIR = C:\Users\flogr\CLionProjects\KL-Planner\KL-Planner
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\dev\Repo\KL-Planner\KL-Planner\cmake-build-debug
+CMAKE_BINARY_DIR = C:\Users\flogr\CLionProjects\KL-Planner\KL-Planner\cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -58,7 +58,7 @@ CMAKE_BINARY_DIR = C:\dev\Repo\KL-Planner\KL-Planner\cmake-build-debug
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	C:\Users\Johnny\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\201.7846.88\bin\cmake\win\bin\cmake.exe -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	C:\Users\flogr\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\201.7846.88\bin\cmake\win\bin\cmake.exe -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -69,7 +69,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	C:\Users\Johnny\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\201.7846.88\bin\cmake\win\bin\cmake.exe -E echo "No interactive CMake dialog available."
+	C:\Users\flogr\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\201.7846.88\bin\cmake\win\bin\cmake.exe -E echo "No interactive CMake dialog available."
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -79,9 +79,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\dev\Repo\KL-Planner\KL-Planner\cmake-build-debug\CMakeFiles C:\dev\Repo\KL-Planner\KL-Planner\cmake-build-debug\CMakeFiles\progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\flogr\CLionProjects\KL-Planner\KL-Planner\cmake-build-debug\CMakeFiles C:\Users\flogr\CLionProjects\KL-Planner\KL-Planner\cmake-build-debug\CMakeFiles\progress.marks
 	$(MAKE) -f CMakeFiles\Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\dev\Repo\KL-Planner\KL-Planner\cmake-build-debug\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\flogr\CLionProjects\KL-Planner\KL-Planner\cmake-build-debug\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -176,32 +176,32 @@ Professor.cpp.s:
 	$(MAKE) -f CMakeFiles\KL_Planner.dir\build.make CMakeFiles/KL_Planner.dir/Professor.cpp.s
 .PHONY : Professor.cpp.s
 
-Prüfung.obj: Prüfung.cpp.obj
+Pruefung.obj: Pruefung.cpp.obj
 
-.PHONY : Prüfung.obj
+.PHONY : Pruefung.obj
 
 # target to build an object file
-Prüfung.cpp.obj:
-	$(MAKE) -f CMakeFiles\KL_Planner.dir\build.make CMakeFiles/KL_Planner.dir/Prüfung.cpp.obj
-.PHONY : Prüfung.cpp.obj
+Pruefung.cpp.obj:
+	$(MAKE) -f CMakeFiles\KL_Planner.dir\build.make CMakeFiles/KL_Planner.dir/Pruefung.cpp.obj
+.PHONY : Pruefung.cpp.obj
 
-Prüfung.i: Prüfung.cpp.i
+Pruefung.i: Pruefung.cpp.i
 
-.PHONY : Prüfung.i
+.PHONY : Pruefung.i
 
 # target to preprocess a source file
-Prüfung.cpp.i:
-	$(MAKE) -f CMakeFiles\KL_Planner.dir\build.make CMakeFiles/KL_Planner.dir/Prüfung.cpp.i
-.PHONY : Prüfung.cpp.i
+Pruefung.cpp.i:
+	$(MAKE) -f CMakeFiles\KL_Planner.dir\build.make CMakeFiles/KL_Planner.dir/Pruefung.cpp.i
+.PHONY : Pruefung.cpp.i
 
-Prüfung.s: Prüfung.cpp.s
+Pruefung.s: Pruefung.cpp.s
 
-.PHONY : Prüfung.s
+.PHONY : Pruefung.s
 
 # target to generate assembly for a file
-Prüfung.cpp.s:
-	$(MAKE) -f CMakeFiles\KL_Planner.dir\build.make CMakeFiles/KL_Planner.dir/Prüfung.cpp.s
-.PHONY : Prüfung.cpp.s
+Pruefung.cpp.s:
+	$(MAKE) -f CMakeFiles\KL_Planner.dir\build.make CMakeFiles/KL_Planner.dir/Pruefung.cpp.s
+.PHONY : Pruefung.cpp.s
 
 Raum.obj: Raum.cpp.obj
 
@@ -326,9 +326,9 @@ help:
 	@echo ... Professor.obj
 	@echo ... Professor.i
 	@echo ... Professor.s
-	@echo ... Prüfung.obj
-	@echo ... Prüfung.i
-	@echo ... Prüfung.s
+	@echo ... Pruefung.obj
+	@echo ... Pruefung.i
+	@echo ... Pruefung.s
 	@echo ... Raum.obj
 	@echo ... Raum.i
 	@echo ... Raum.s
