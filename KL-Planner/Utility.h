@@ -1,0 +1,23 @@
+//
+// Created by stein on 08.06.2020.
+//
+
+#ifndef KL_PLANNER_UTILITY_H
+#define KL_PLANNER_UTILITY_H
+
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <algorithm>
+#include <vector>
+#include <sstream>
+
+using namespace std;
+
+class Utility {
+public:
+    vector<string> splitString(string &s, char delimiter);
+};
+
+
+#endif //KL_PLANNER_UTILITY_H
