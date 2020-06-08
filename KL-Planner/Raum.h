@@ -19,22 +19,17 @@ using namespace std;
 class Raum {
 public:
     Raum();
-    Raum(string &art, int adrBau, int adrRaum, int kap);
-
     friend std::ostream& operator<<(std::ostream &out, const Raum &raum);
     static vector<Raum> parseRaumliste(string pathToFile);
 
 private:
+    Raum(string &art, int adrBau, int adrRaum, int kap);
+
     string raumArt;
     int adrBau;
     int adrRaum;
     int kapazataet;
     //auslastung
-
-    Raum parseRaum(string &s);
-
-
 };
-
 
 #endif //KL_PLANNER_RAUM_H

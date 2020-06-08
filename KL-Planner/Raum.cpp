@@ -24,26 +24,28 @@ vector<Raum> Raum::parseRaumliste(string pathToFile) {
     if(!inputStream) {
         cerr << "Fehler beim Oeffnen der Datei " << pathToFile << endl;
     }
+    cout << "Starte Einlesen von Raumliste!" << endl;
+
     size_t lines = 0;
     vector<Raum> list;
-
+    string line;
     while (!inputStream.eof()){
-        string line;
         getline(inputStream, line);
-        //TODO list.push_back(parseRaum(line));
-        cout << line << "\n";
+        vector<string> splitRaum = Utility::splitString(line, ';');
+        vector<string> splitAdr = Utility::splitString(splitRaum[1],'/');
+        int adrBau;
+        int adrRaum;
+        int kap;
+        istringstream(splitAdr[0]) >> adrBau;
+        istringstream(splitAdr[1]) >> adrRaum;
+        istringstream(splitRaum[2]) >> kap;
+        Raum a (splitRaum[0], adrBau, adrRaum,kap);
+        list.push_back(a);
+        cout << a << endl;
         ++lines;
     }
-    cout << "Done! " << lines << " lines written.\n";
+    cout << "Raumliste eingelesen! - " << lines << "Zeilen eingelesen" << endl;
     return list;
-}
-
-Raum Raum::parseRaum(string &s) {
-    vector<string> splitRaum = Utility::splitString(s, ';');
-    int adrBau = stoi(splitRaum[1]);
-    int adrRaum = stoi(splitRaum[2]);
-    int kap = stoi(splitRaum[3]);
-    return Raum(splitRaum[0],adrBau,adrRaum,kap);
 }
 
 std::ostream &operator<<(ostream &out, const Raum &raum) {
