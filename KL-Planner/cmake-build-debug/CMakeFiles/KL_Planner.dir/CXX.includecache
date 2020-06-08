@@ -6,9 +6,21 @@
 
 #IncludeRegexTransform: 
 
-C:/Users/flogr/CLionProjects/KL-Planner/KL-Planner/Pruefung.cpp
-Pruefung.h
-C:/Users/flogr/CLionProjects/KL-Planner/KL-Planner/Pruefung.h
+C:/Users/flogr/CLionProjects/KL-Planner/KL-Planner/Utility.cpp
+Utility.h
+C:/Users/flogr/CLionProjects/KL-Planner/KL-Planner/Utility.h
 
-C:/Users/flogr/CLionProjects/KL-Planner/KL-Planner/Pruefung.h
+C:/Users/flogr/CLionProjects/KL-Planner/KL-Planner/Utility.h
+iostream
+-
+fstream
+-
+string
+-
+algorithm
+-
+vector
+-
+sstream
+-
 

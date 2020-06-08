@@ -116,6 +116,12 @@
 		<Unit filename="C:/Users/flogr/CLionProjects/KL-Planner/KL-Planner/Student.h">
 			<Option target="KL_Planner"/>
 		</Unit>
+		<Unit filename="C:/Users/flogr/CLionProjects/KL-Planner/KL-Planner/Utility.cpp">
+			<Option target="KL_Planner"/>
+		</Unit>
+		<Unit filename="C:/Users/flogr/CLionProjects/KL-Planner/KL-Planner/Utility.h">
+			<Option target="KL_Planner"/>
+		</Unit>
 		<Unit filename="C:/Users/flogr/CLionProjects/KL-Planner/KL-Planner/main.cpp">
 			<Option target="KL_Planner"/>
 		</Unit>

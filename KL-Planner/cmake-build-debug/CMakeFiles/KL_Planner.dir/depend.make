@@ -19,5 +19,8 @@ CMakeFiles/KL_Planner.dir/ReadInput.cpp.obj: ../ReadInput.h
 CMakeFiles/KL_Planner.dir/Student.cpp.obj: ../Student.cpp
 CMakeFiles/KL_Planner.dir/Student.cpp.obj: ../Student.h
 
+CMakeFiles/KL_Planner.dir/Utility.cpp.obj: ../Utility.cpp
+CMakeFiles/KL_Planner.dir/Utility.cpp.obj: ../Utility.h
+
 CMakeFiles/KL_Planner.dir/main.cpp.obj: ../main.cpp
 
