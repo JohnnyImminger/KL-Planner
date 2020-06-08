@@ -5,8 +5,33 @@
 #ifndef KL_PLANNER_RAUM_H
 #define KL_PLANNER_RAUM_H
 
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <algorithm>
+#include <vector>
+#include <sstream>
+#include "Raum.h"
+#include "Utility.h"
+
+using namespace std;
 
 class Raum {
+public:
+    Raum();
+    Raum(string &art, int adrBau, int adrRaum, int kap);
+
+    vector<Raum> parseRaumliste(string pathToFile);
+
+private:
+    string raumArt;
+    int adrBau;
+    int adrRaum;
+    int kapazataet;
+    //auslastung
+
+    Raum parseRaum(string &s);
+
 
 };
 
