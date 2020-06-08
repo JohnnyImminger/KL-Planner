@@ -21,7 +21,7 @@ public:
     Raum();
     Raum(string &art, int adrBau, int adrRaum, int kap);
 
-    vector<Raum> parseRaumliste(string pathToFile);
+    static vector<Raum> parseRaumliste(string pathToFile);
 
 private:
     string raumArt;
