@@ -5,13 +5,9 @@
 #ifndef KL_PLANNER_RAUM_H
 #define KL_PLANNER_RAUM_H
 
-#include <iostream>
-#include <fstream>
 #include <string>
-#include <algorithm>
 #include <vector>
-#include <sstream>
-#include "Raum.h"
+#include <iostream>
 #include "Utility.h"
 
 using namespace std;

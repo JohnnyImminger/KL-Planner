@@ -3,8 +3,6 @@
 //
 
 #include "Anmeldung.h"
-#include "Utility.h"
-#include <iostream>
 
 
 Anmeldung::Anmeldung() {
