@@ -45,3 +45,8 @@ Raum Raum::parseRaum(string &s) {
     int kap = stoi(splitRaum[3]);
     return Raum(splitRaum[0],adrBau,adrRaum,kap);
 }
+
+std::ostream &operator<<(ostream &out, const Raum &raum) {
+    out << raum.raumArt << ';' << raum.adrBau << '/' << raum.adrRaum << ';' << raum.kapazataet;
+    return out;
+}

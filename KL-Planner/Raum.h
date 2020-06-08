@@ -21,6 +21,7 @@ public:
     Raum();
     Raum(string &art, int adrBau, int adrRaum, int kap);
 
+    friend std::ostream& operator<<(std::ostream &out, const Raum &raum);
     static vector<Raum> parseRaumliste(string pathToFile);
 
 private:
