@@ -6,9 +6,31 @@
 
 #IncludeRegexTransform: 
 
-C:/dev/Repo/KL-Planner/KL-Planner/Pruefung.cpp
-Pruefung.h
-C:/dev/Repo/KL-Planner/KL-Planner/Pruefung.h
+C:/dev/Repo/KL-Planner/KL-Planner/Anmeldung.cpp
+Anmeldung.h
+C:/dev/Repo/KL-Planner/KL-Planner/Anmeldung.h
+Utility.h
+C:/dev/Repo/KL-Planner/KL-Planner/Utility.h
+iostream
+-
 
-C:/dev/Repo/KL-Planner/KL-Planner/Pruefung.h
+C:/dev/Repo/KL-Planner/KL-Planner/Anmeldung.h
+string
+-
+vector
+-
+
+C:/dev/Repo/KL-Planner/KL-Planner/Utility.h
+iostream
+-
+fstream
+-
+string
+-
+algorithm
+-
+vector
+-
+sstream
+-
 

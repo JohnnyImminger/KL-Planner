@@ -16,7 +16,15 @@ vector<Anmeldung> Anmeldung::parse(string &filename) {
     while (!input.eof()){
         getline(input, line);
         vector<string> split = Utility::splitString(line, ';');
-        Anmeldung a(stoi(split[0]), split[1], stoi(split[2]), stoi(split[3]), split[4], split[5], stoi(split[0]));
+        int matNr;
+        int pVer;
+        int pNr;
+        int pSem;
+        istringstream(split[0]) >> matNr;
+        istringstream(split[2]) >> pVer;
+        istringstream(split[3]) >> pNr;
+        istringstream(split[6]) >> pSem;
+        Anmeldung a(matNr, split[1], pVer, pNr, split[4], split[5], pSem);
         list.push_back(a);
         cout << a << endl;
     }

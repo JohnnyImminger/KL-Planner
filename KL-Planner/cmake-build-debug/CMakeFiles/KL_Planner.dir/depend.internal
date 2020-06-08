@@ -4,6 +4,7 @@
 CMakeFiles/KL_Planner.dir/Anmeldung.cpp.obj
  C:/dev/Repo/KL-Planner/KL-Planner/Anmeldung.cpp
  C:/dev/Repo/KL-Planner/KL-Planner/Anmeldung.h
+ C:/dev/Repo/KL-Planner/KL-Planner/Utility.h
 CMakeFiles/KL_Planner.dir/Professor.cpp.obj
  C:/dev/Repo/KL-Planner/KL-Planner/Professor.cpp
  C:/dev/Repo/KL-Planner/KL-Planner/Professor.h
@@ -19,5 +20,9 @@ CMakeFiles/KL_Planner.dir/ReadInput.cpp.obj
 CMakeFiles/KL_Planner.dir/Student.cpp.obj
  C:/dev/Repo/KL-Planner/KL-Planner/Student.cpp
  C:/dev/Repo/KL-Planner/KL-Planner/Student.h
+CMakeFiles/KL_Planner.dir/Utility.cpp.obj
+ C:/dev/Repo/KL-Planner/KL-Planner/Utility.cpp
+ C:/dev/Repo/KL-Planner/KL-Planner/Utility.h
 CMakeFiles/KL_Planner.dir/main.cpp.obj
+ C:/dev/Repo/KL-Planner/KL-Planner/Anmeldung.h
  C:/dev/Repo/KL-Planner/KL-Planner/main.cpp

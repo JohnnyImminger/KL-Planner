@@ -12,11 +12,10 @@ using namespace std;
 
 class Anmeldung {
 public:
-    vector<Anmeldung> parse(string &filename);
+    static vector<Anmeldung> parse(string &filename);
     friend std::ostream& operator<<(std::ostream &out, const Anmeldung &anmeldung);
 private:
     Anmeldung(int matrikelNr, string &studiengang, int pVersion, int pNummer, string &pForm, string &dText, int pSemester);
-    static vector<string> split(string &s, char delimiter);
     int matrikelNr;
     string studiengang;
     int pVersion;
