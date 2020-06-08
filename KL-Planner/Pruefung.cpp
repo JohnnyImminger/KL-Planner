@@ -83,6 +83,6 @@ std::ostream &operator<<(ostream &out, const Pruefung &pruefung) {
     out << pruefung.studiengang << ';' << pruefung.verteilt << ';' << pruefung.pVersion << ';' << pruefung.pNummer << ';'
     << pruefung.pName << ';' << pruefung.pPruefer1<< ';' << pruefung.pruefer1 << ';' << pruefung.pPruefer2 << ';'
     << pruefung.pruefer2 << ';' << pruefung.pDauer << ';' << pruefung.pForm << ';' << pruefung.pSemester << ';'
-    << pruefung.angeboten << endl;
+    << pruefung.angeboten;
     return out;
 }
