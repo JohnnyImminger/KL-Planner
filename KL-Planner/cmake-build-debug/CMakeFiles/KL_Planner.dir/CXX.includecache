@@ -1,0 +1,14 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/flogr/CLionProjects/KL-Planner/KL-Planner/Pruefung.cpp
+Pruefung.h
+C:/Users/flogr/CLionProjects/KL-Planner/KL-Planner/Pruefung.h
+
+C:/Users/flogr/CLionProjects/KL-Planner/KL-Planner/Pruefung.h
+
