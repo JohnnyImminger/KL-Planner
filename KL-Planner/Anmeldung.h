@@ -16,7 +16,6 @@ public:
     friend std::ostream& operator<<(std::ostream &out, const Anmeldung &anmeldung);
 private:
     Anmeldung(int matrikelNr, string &studiengang, int pVersion, int pNummer, string &pForm, string &dText, int pSemester);
-    Anmeldung parseAnmeldung(vector<string> split);
     static vector<string> split(string &s, char delimiter);
     int matrikelNr;
     string studiengang;

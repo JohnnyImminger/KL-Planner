@@ -16,7 +16,7 @@ using namespace std;
 
 class Utility {
 public:
-    vector<string> splitString(string &s, char delimiter);
+    static vector<string> splitString(string &s, char delimiter);
 };
 
 
