@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated>
+      <config projectName="KL_Planner" targetName="KL_Planner" />
+    </generated>
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="59f7b0d5-51f8-4587-aafb-e51da8a6d63a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/KL-Planner-GitHub.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KL-Planner/cmake-build-debug/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/KL-Planner/cmake-build-debug/CMakeCache.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KL-Planner/cmake-build-debug/CMakeFiles/3.16.5/CMakeCCompiler.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/KL-Planner/cmake-build-debug/CMakeFiles/3.16.5/CMakeCCompiler.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KL-Planner/cmake-build-debug/CMakeFiles/3.16.5/CMakeCXXCompiler.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/KL-Planner/cmake-build-debug/CMakeFiles/3.16.5/CMakeCXXCompiler.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KL-Planner/cmake-build-debug/CMakeFiles/3.16.5/CMakeDetermineCompilerABI_C.bin" beforeDir="false" afterPath="$PROJECT_DIR$/KL-Planner/cmake-build-debug/CMakeFiles/3.16.5/CMakeDetermineCompilerABI_C.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KL-Planner/cmake-build-debug/CMakeFiles/3.16.5/CMakeDetermineCompilerABI_CXX.bin" beforeDir="false" afterPath="$PROJECT_DIR$/KL-Planner/cmake-build-debug/CMakeFiles/3.16.5/CMakeDetermineCompilerABI_CXX.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KL-Planner/cmake-build-debug/CMakeFiles/3.16.5/CMakeRCCompiler.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/KL-Planner/cmake-build-debug/CMakeFiles/3.16.5/CMakeRCCompiler.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KL-Planner/cmake-build-debug/CMakeFiles/3.16.5/CompilerIdC/a.exe" beforeDir="false" afterPath="$PROJECT_DIR$/KL-Planner/cmake-build-debug/CMakeFiles/3.16.5/CompilerIdC/a.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KL-Planner/cmake-build-debug/CMakeFiles/3.16.5/CompilerIdCXX/a.exe" beforeDir="false" afterPath="$PROJECT_DIR$/KL-Planner/cmake-build-debug/CMakeFiles/3.16.5/CompilerIdCXX/a.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KL-Planner/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/KL-Planner/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KL-Planner/cmake-build-debug/CMakeFiles/CMakeOutput.log" beforeDir="false" afterPath="$PROJECT_DIR$/KL-Planner/cmake-build-debug/CMakeFiles/CMakeOutput.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KL-Planner/cmake-build-debug/CMakeFiles/KL_Planner.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/KL-Planner/cmake-build-debug/CMakeFiles/KL_Planner.dir/DependInfo.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KL-Planner/cmake-build-debug/CMakeFiles/KL_Planner.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/KL-Planner/cmake-build-debug/CMakeFiles/KL_Planner.dir/build.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KL-Planner/cmake-build-debug/CMakeFiles/KL_Planner.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/KL-Planner/cmake-build-debug/CMakeFiles/KL_Planner.dir/cmake_clean.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KL-Planner/cmake-build-debug/CMakeFiles/KL_Planner.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/KL-Planner/cmake-build-debug/CMakeFiles/KL_Planner.dir/depend.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KL-Planner/cmake-build-debug/CMakeFiles/KL_Planner.dir/flags.make" beforeDir="false" afterPath="$PROJECT_DIR$/KL-Planner/cmake-build-debug/CMakeFiles/KL_Planner.dir/flags.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KL-Planner/cmake-build-debug/CMakeFiles/KL_Planner.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/KL-Planner/cmake-build-debug/CMakeFiles/KL_Planner.dir/link.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KL-Planner/cmake-build-debug/CMakeFiles/KL_Planner.dir/objects1.rsp" beforeDir="false" afterPath="$PROJECT_DIR$/KL-Planner/cmake-build-debug/CMakeFiles/KL_Planner.dir/objects1.rsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KL-Planner/cmake-build-debug/CMakeFiles/KL_Planner.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/KL-Planner/cmake-build-debug/CMakeFiles/KL_Planner.dir/progress.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KL-Planner/cmake-build-debug/CMakeFiles/Makefile.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/KL-Planner/cmake-build-debug/CMakeFiles/Makefile.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KL-Planner/cmake-build-debug/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/KL-Planner/cmake-build-debug/CMakeFiles/Makefile2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KL-Planner/cmake-build-debug/CMakeFiles/TargetDirectories.txt" beforeDir="false" afterPath="$PROJECT_DIR$/KL-Planner/cmake-build-debug/CMakeFiles/TargetDirectories.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KL-Planner/cmake-build-debug/CMakeFiles/clion-environment.txt" beforeDir="false" afterPath="$PROJECT_DIR$/KL-Planner/cmake-build-debug/CMakeFiles/clion-environment.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KL-Planner/cmake-build-debug/CMakeFiles/clion-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/KL-Planner/cmake-build-debug/CMakeFiles/clion-log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KL-Planner/cmake-build-debug/CMakeFiles/progress.marks" beforeDir="false" afterPath="$PROJECT_DIR$/KL-Planner/cmake-build-debug/CMakeFiles/progress.marks" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KL-Planner/cmake-build-debug/KL_Planner.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/KL-Planner/cmake-build-debug/KL_Planner.cbp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KL-Planner/cmake-build-debug/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/KL-Planner/cmake-build-debug/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KL-Planner/cmake-build-debug/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/KL-Planner/cmake-build-debug/cmake_install.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KL-Planner/gitignore" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1d37Eiu4q0h9tEqdIEmnL11us2a" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="cf.first.check.clang-format" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/KL-Planner/CMakeLists.txt" />
+  </component>
+  <component name="RunManager">
+    <configuration name="KL_Planner" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="KL_Planner" TARGET_NAME="KL_Planner" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="KL_Planner" RUN_TARGET_NAME="KL_Planner">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="59f7b0d5-51f8-4587-aafb-e51da8a6d63a" name="Default Changelist" comment="" />
+      <created>1591641812810</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1591641812810</updated>
+      <workItem from="1591641819017" duration="1950000" />
+    </task>
+    <task id="LOCAL-00001" summary="Added parsing the file, creating the object is missing.">
+      <created>1591642751823</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1591642751823</updated>
+    </task>
+    <task id="LOCAL-00002" summary="test">
+      <created>1591643037697</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1591643037697</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="origin/master" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="master" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Added parsing the file, creating the object is missing." />
+    <MESSAGE value="test" />
+    <option name="LAST_COMMIT_MESSAGE" value="test" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="372" y="49" key="CommitChangelistDialog2" timestamp="1591643036452">
+      <screen x="0" y="0" width="1500" height="960" />
+    </state>
+    <state x="372" y="49" key="CommitChangelistDialog2/0.0.1500.960@0.0.1500.960" timestamp="1591643036452" />
+    <state x="531" y="235" key="FileChooserDialogImpl" timestamp="1591642029371">
+      <screen x="0" y="0" width="1500" height="960" />
+    </state>
+    <state x="531" y="235" key="FileChooserDialogImpl/0.0.1500.960@0.0.1500.960" timestamp="1591642029371" />
+    <state width="1458" height="316" key="GridCell.Tab.0.bottom" timestamp="1591642761501">
+      <screen x="0" y="0" width="1500" height="960" />
+    </state>
+    <state width="1458" height="316" key="GridCell.Tab.0.bottom/0.0.1500.960@0.0.1500.960" timestamp="1591642761501" />
+    <state width="1458" height="316" key="GridCell.Tab.0.center" timestamp="1591642761500">
+      <screen x="0" y="0" width="1500" height="960" />
+    </state>
+    <state width="1458" height="316" key="GridCell.Tab.0.center/0.0.1500.960@0.0.1500.960" timestamp="1591642761500" />
+    <state width="1458" height="316" key="GridCell.Tab.0.left" timestamp="1591642761500">
+      <screen x="0" y="0" width="1500" height="960" />
+    </state>
+    <state width="1458" height="316" key="GridCell.Tab.0.left/0.0.1500.960@0.0.1500.960" timestamp="1591642761499" />
+    <state width="1458" height="316" key="GridCell.Tab.0.right" timestamp="1591642761501">
+      <screen x="0" y="0" width="1500" height="960" />
+    </state>
+    <state width="1458" height="316" key="GridCell.Tab.0.right/0.0.1500.960@0.0.1500.960" timestamp="1591642761501" />
+    <state width="1458" height="316" key="GridCell.Tab.1.bottom" timestamp="1591642761503">
+      <screen x="0" y="0" width="1500" height="960" />
+    </state>
+    <state width="1458" height="316" key="GridCell.Tab.1.bottom/0.0.1500.960@0.0.1500.960" timestamp="1591642761503" />
+    <state width="1458" height="316" key="GridCell.Tab.1.center" timestamp="1591642761502">
+      <screen x="0" y="0" width="1500" height="960" />
+    </state>
+    <state width="1458" height="316" key="GridCell.Tab.1.center/0.0.1500.960@0.0.1500.960" timestamp="1591642761502" />
+    <state width="1458" height="316" key="GridCell.Tab.1.left" timestamp="1591642761501">
+      <screen x="0" y="0" width="1500" height="960" />
+    </state>
+    <state width="1458" height="316" key="GridCell.Tab.1.left/0.0.1500.960@0.0.1500.960" timestamp="1591642761501" />
+    <state width="1458" height="316" key="GridCell.Tab.1.right" timestamp="1591642761502">
+      <screen x="0" y="0" width="1500" height="960" />
+    </state>
+    <state width="1458" height="316" key="GridCell.Tab.1.right/0.0.1500.960@0.0.1500.960" timestamp="1591642761502" />
+    <state x="343" y="200" key="Vcs.Push.Dialog.v2" timestamp="1591643049108">
+      <screen x="0" y="0" width="1500" height="960" />
+    </state>
+    <state x="343" y="200" key="Vcs.Push.Dialog.v2/0.0.1500.960@0.0.1500.960" timestamp="1591643049108" />
+    <state x="558" y="394" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1591643090271">
+      <screen x="0" y="0" width="1500" height="960" />
+    </state>
+    <state x="558" y="394" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1500.960@0.0.1500.960" timestamp="1591643090271" />
+  </component>
+</project>
