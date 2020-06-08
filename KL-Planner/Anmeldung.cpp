@@ -39,6 +39,7 @@ vector<Anmeldung> Anmeldung::parse(string filename) {
     size_t lines = 0;
     vector<Anmeldung> list;
     string line;
+    //TODO verbessere die eof Bedingung, für korrekte Erkennung
     while (!input.eof()){
         getline(input, line);
         vector<string> split = Utility::splitString(line, ';');
