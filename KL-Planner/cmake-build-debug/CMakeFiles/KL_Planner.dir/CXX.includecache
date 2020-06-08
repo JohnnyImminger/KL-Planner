@@ -1,0 +1,14 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/dev/Repo/KL-Planner/KL-Planner/Pruefung.cpp
+Pruefung.h
+C:/dev/Repo/KL-Planner/KL-Planner/Pruefung.h
+
+C:/dev/Repo/KL-Planner/KL-Planner/Pruefung.h
+
