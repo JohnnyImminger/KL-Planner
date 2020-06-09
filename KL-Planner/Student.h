@@ -5,6 +5,7 @@
 #ifndef KL_PLANNER_STUDENT_H
 #define KL_PLANNER_STUDENT_H
 
+#include "Utility.h"
 
 class Student {
 

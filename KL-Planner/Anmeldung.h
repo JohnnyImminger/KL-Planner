@@ -5,9 +5,6 @@
 #ifndef KL_PLANNER_ANMELDUNG_H
 #define KL_PLANNER_ANMELDUNG_H
 
-#include <string>
-#include <vector>
-#include <iostream>
 #include "Utility.h"
 
 

@@ -5,6 +5,7 @@
 #ifndef KL_PLANNER_PROFESSOR_H
 #define KL_PLANNER_PROFESSOR_H
 
+#include "Utility.h"
 
 class Professor {
 

@@ -1,4 +1,3 @@
-#include <iostream>
 #include "Raum.h"
 #include "Anmeldung.h"
 #include "Pruefung.h"

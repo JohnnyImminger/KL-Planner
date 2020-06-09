@@ -5,6 +5,7 @@
 #ifndef KL_PLANNER_READINPUT_H
 #define KL_PLANNER_READINPUT_H
 
+#include "Utility.h"
 
 class ReadInput {
 
