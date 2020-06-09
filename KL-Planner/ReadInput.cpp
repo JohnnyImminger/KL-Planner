@@ -79,13 +79,13 @@ vector<Student> ReadInput::initStudenten(vector<Anmeldung> &anmeldungenListe, ve
 }
 
 void ReadInput::attachStudentsToKlausur() {
-    cout << "Start Studenten zu Klausuren hinzufügen" << endl;
+    cout << "Start Studenten zu Klausuren hinzufuegen" << endl;
     for (const Student& student: studenten) {
         for (int klausurIndex: student.getKlausurIndizes()) {
             klausuren.at(klausurIndex).addStudent(student.getIndex());
         }
     }
-    cout << "Studenten zu Klausuren hinzugefügt" << endl;
+    cout << "Studenten zu Klausuren hinzugefuegt" << endl;
 }
 
 
