@@ -91,7 +91,7 @@ private:
     int dauerTimeSlots;
     int tag;
     int startZeitTimeSlot;
-    int raumRef;
+    int raumRef = -1;
 
     /*_____________________________________
      * Methoden:
