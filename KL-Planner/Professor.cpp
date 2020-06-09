@@ -45,11 +45,16 @@ int Professor::getAnzPruefungen() const {
     return anzPruefungen;
 }
 
+const vector<int> &Professor::getKlausurAufsichtIndex() const {
+    return klausurAufsichtIndex;
+}
 /*______________________________________________________________
  * Methoden:
  */
 
 void Professor::addPruefung(int pIndex) {
-    pAufsichtIndex.push_back(pIndex);
+    klausurAufsichtIndex.push_back(pIndex);
     this->anzPruefungen++;
 }
+
+

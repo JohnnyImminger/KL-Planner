@@ -29,6 +29,8 @@ public:
     const string &getName() const;
     int getAnzPruefungen() const;
 
+    const vector<int> &getKlausurAufsichtIndex() const;
+
     /*_____________________________________
      * Methoden:
      */
@@ -41,7 +43,7 @@ private:
     int identNr;
     string name;
     int anzPruefungen;
-    vector<int> pAufsichtIndex;
+    vector<int> klausurAufsichtIndex;
 
     /*_____________________________________
      * Methoden:

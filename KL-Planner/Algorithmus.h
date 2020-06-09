@@ -40,9 +40,9 @@ private:
      */
 
     //Utility::isTimeSlotTooLong(startTimeSlot, dauerTimeSlot)
-    bool isTimeSlotValidForProf(Professor prof, int startTimeSlot, int dauerTimeSlot);
-    bool isTimeSlotValidForStudent(Student student, int startTimeSlot, int dauerTimeSlot);
-    bool isTimeSlotValidForRoom(Raum raum,int startTimeSlot, int dauerTimeSlot);
+    bool isTimeSlotValidForProf(Professor& prof, int startTimeSlot, int dauerTimeSlot, int tag);
+    bool isTimeSlotValidForStudent(Student& student, int startTimeSlot, int dauerTimeSlot, int tag);
+    bool isTimeSlotValidForRoom(Raum& raum,int startTimeSlot, int dauerTimeSlot, int tag);
 
 };
 
