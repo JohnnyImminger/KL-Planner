@@ -3,3 +3,7 @@
 //
 
 #include "ReadInput.h"
+
+vector<Pruefung> *ReadInput::getPruefungen() {
+    return nullptr;
+}

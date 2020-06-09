@@ -32,6 +32,8 @@ public:
     int getPSemester() const;
     bool isAngeboten() const;
     const vector<Anmeldung> &getAnmeldungen() const;
+    int getIndex();
+    void setIndex(int index);
 
 private:
     Pruefung(string& studiengang, int verteilt, int pVersion, int pNummer, string& pName,
@@ -51,6 +53,7 @@ private:
     string pForm;
     int pSemester;
     bool angeboten;
+    int index;
 
     vector<Anmeldung> anmeldungen;
 

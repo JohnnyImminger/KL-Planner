@@ -44,7 +44,6 @@ vector<Raum> Raum::parseRaumliste(const string& pathToFile) {
         istringstream(splitRaum[2]) >> kap;
         Raum a (splitRaum[0], adrBau, adrRaum,kap);
         list.push_back(a);
-        cout << a << endl;
         ++lines;
     }
     cout << "Raumliste eingelesen! - " << lines << " Zeilen eingelesen" << endl;
