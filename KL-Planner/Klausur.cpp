@@ -141,6 +141,7 @@ vector<Klausur> Klausur::parse(string pathToFile) {
     size_t lines = 0;
     vector<Klausur> list;
     string line;
+    getline(input, line);
     int index = 0;
     while (!input.eof()){
         getline(input, line);
