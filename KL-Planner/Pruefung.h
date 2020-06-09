@@ -6,6 +6,7 @@
 #define KL_PLANNER_PRUEFUNG_H
 
 #include "Utility.h"
+#include "Anmeldung.h"
 
 using namespace std;
 
@@ -15,6 +16,22 @@ public:
     Pruefung();
     friend std::ostream& operator<<(std::ostream &out, const Pruefung &anmeldung);
     static vector<Pruefung> parse(string pathToFile);
+    void collectAnmeldungen(vector<Anmeldung> anmeldungenListe);
+
+    const string &getStudiengang() const;
+    int getVerteilt() const;
+    int getPVersion() const;
+    int getPNummer() const;
+    const string &getPName() const;
+    int getPPruefer1() const;
+    const string &getPruefer1() const;
+    int getPPruefer2() const;
+    const string &getPruefer2() const;
+    float getPDauer() const;
+    const string &getPForm() const;
+    int getPSemester() const;
+    bool isAngeboten() const;
+    const vector<Anmeldung> &getAnmeldungen() const;
 
 private:
     Pruefung(string& studiengang, int verteilt, int pVersion, int pNummer, string& pName,
@@ -34,6 +51,8 @@ private:
     string pForm;
     int pSemester;
     bool angeboten;
+
+    vector<Anmeldung> anmeldungen;
 
 };
 

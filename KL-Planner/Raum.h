@@ -15,6 +15,11 @@ public:
     friend std::ostream& operator<<(std::ostream &out, const Raum &raum);
     static vector<Raum> parseRaumliste(const string& pathToFile);
 
+    const string &getRaumArt() const;
+    int getAdrBau() const;
+    int getAdrRaum() const;
+    int getKapazataet() const;
+
 private:
     Raum(string &art, int adrBau, int adrRaum, int kap);
 

@@ -55,3 +55,19 @@ std::ostream &operator<<(ostream &out, const Raum &raum) {
     out << raum.raumArt << ';' << raum.adrBau << '/' << raum.adrRaum << ';' << raum.kapazataet;
     return out;
 }
+
+const string &Raum::getRaumArt() const {
+    return raumArt;
+}
+
+int Raum::getAdrBau() const {
+    return adrBau;
+}
+
+int Raum::getAdrRaum() const {
+    return adrRaum;
+}
+
+int Raum::getKapazataet() const {
+    return kapazataet;
+}

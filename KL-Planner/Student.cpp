@@ -26,3 +26,15 @@ std::ostream &operator<<(ostream &out, const Student &student) {
     out << student.matrikelNr << ';' << student.studiengang << ';' << student.anzPruefungen;
     return out;
 }
+
+int Student::getMatrikelNr() const {
+    return matrikelNr;
+}
+
+const string &Student::getStudiengang() const {
+    return studiengang;
+}
+
+int Student::getAnzPruefungen() const {
+    return anzPruefungen;
+}

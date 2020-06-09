@@ -15,6 +15,9 @@ public:
     friend std::ostream& operator<<(std::ostream &out, const Professor &student);
 
     void addPruefung();
+    int getIdentNr() const;
+    const string &getName() const;
+    int getAnzPruefungen() const;
 
 private:
     Professor(int identNr, string& name);

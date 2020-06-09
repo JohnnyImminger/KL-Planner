@@ -65,3 +65,31 @@ std::ostream &operator<<(ostream &out, const Anmeldung &anmeldung) {
     return out;
 }
 
+int Anmeldung::getMatrikelNr() const {
+    return matrikelNr;
+}
+
+const string &Anmeldung::getStudiengang() const {
+    return studiengang;
+}
+
+int Anmeldung::getPVersion() const {
+    return pVersion;
+}
+
+int Anmeldung::getPNummer() const {
+    return pNummer;
+}
+
+const string &Anmeldung::getPForm() const {
+    return pForm;
+}
+
+const string &Anmeldung::getDText() const {
+    return dText;
+}
+
+int Anmeldung::getPSemester() const {
+    return pSemester;
+}
+
