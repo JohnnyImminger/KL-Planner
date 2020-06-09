@@ -7,7 +7,6 @@
 
 #include "Utility.h"
 
-
 using namespace std;
 
 class Anmeldung {
