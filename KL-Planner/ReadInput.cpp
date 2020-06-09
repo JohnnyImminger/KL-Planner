@@ -72,7 +72,7 @@ void ReadInput::createStudenten() {
             studenten.push_back(s);
         }
     }
-    cout << "done creating studenten - " << professoren.size() << " Studenten created" << endl;
+    cout << "done creating studenten - " << studenten.size() << " Studenten created" << endl;
 }
 
 int ReadInput::isStudentInVector(int matrikelNr) {
