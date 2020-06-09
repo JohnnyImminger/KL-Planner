@@ -81,9 +81,20 @@ vector<Pruefung> Pruefung::parse(string pathToFile) {
     return list;
 }
 
-void Pruefung::collectAnmeldungen(vector<Anmeldung> anmeldungenListe) {
-
+void Pruefung::collectAnmeldungen(vector<Anmeldung>& anmeldungenListe) {
+    int counter = 0;
+    for (auto& anmeldung : anmeldungenListe){
+        //TODO muss pNummer und pVersion identisch sein?
+        if (anmeldung.getPNummer() == this->pNummer && anmeldung.getPVersion() == this->pVersion){
+            this->anmeldungen.push_back(anmeldung);
+            counter++;
+        }
+    }
+    this->anzTeilnehmer = counter;
+    cout << "Added " << counter << "Anmeldungen zu Prüfung " << this->pName << endl;
 }
+
+
 
 std::ostream &operator<<(ostream &out, const Pruefung &pruefung) {
     out << pruefung.studiengang << ';' << pruefung.verteilt << ';' << pruefung.pVersion << ';' << pruefung.pNummer << ';'
@@ -155,6 +166,10 @@ int Pruefung::getIndex() {
 
 void Pruefung::setIndex(int index) {
     this->index = index;
+}
+
+int Pruefung::getAnzTeilnehmer() const {
+    return anzTeilnehmer;
 }
 
 

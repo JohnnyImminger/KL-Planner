@@ -7,6 +7,8 @@
 
 #include "Utility.h"
 #include "Anmeldung.h"
+#include "Student.h"
+
 
 using namespace std;
 
@@ -16,7 +18,7 @@ public:
     Pruefung();
     friend std::ostream& operator<<(std::ostream &out, const Pruefung &anmeldung);
     static vector<Pruefung> parse(string pathToFile);
-    void collectAnmeldungen(vector<Anmeldung> anmeldungenListe);
+    void collectAnmeldungen(vector<Anmeldung>& anmeldungenListe);
 
     const string &getStudiengang() const;
     int getVerteilt() const;
@@ -34,6 +36,7 @@ public:
     const vector<Anmeldung> &getAnmeldungen() const;
     int getIndex();
     void setIndex(int index);
+    int getAnzTeilnehmer() const;
 
 private:
     Pruefung(string& studiengang, int verteilt, int pVersion, int pNummer, string& pName,
@@ -56,6 +59,7 @@ private:
     int index;
 
     vector<Anmeldung> anmeldungen;
+    int anzTeilnehmer;
 
 };
 
