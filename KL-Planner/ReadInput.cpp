@@ -4,24 +4,29 @@
 
 #include "ReadInput.h"
 
-vector<Klausur> *ReadInput::getPruefungen() {
-    return nullptr;
-}
 
 vector<Professor> ReadInput::createProfs() {
     vector<Professor> profs;
-    vector<Klausur> klausuren = *ReadInput::getPruefungen();
-    for (Klausur klausur: klausuren) {
+    for (Klausur klausur: ReadInput::klausuren) {
         if (klausur.getPPruefer1() != 0) {
             int index = isProfInVector(profs, klausur.getPPruefer1());
             if (index >= 0) {
                 profs.at(index).addPruefung(klausur.getIndex());
             } else {
-
+                Professor p(klausur.getPPruefer1(), klausur.getPruefer1());
+                p.addPruefung(klausur.getIndex());
+                profs.push_back(p);
             }
         }
         if (klausur.getPPruefer2() != 0) {
-
+            int index = isProfInVector(profs, klausur.getPPruefer2());
+            if (index >= 0) {
+                profs.at(index).addPruefung(klausur.getIndex());
+            } else {
+                Professor p(klausur.getPPruefer2(), klausur.getPruefer2());
+                p.addPruefung(klausur.getIndex());
+                profs.push_back(p);
+            }
         }
     }
 

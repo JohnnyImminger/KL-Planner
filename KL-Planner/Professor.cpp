@@ -10,7 +10,7 @@ Professor::Professor() {
     this->anzPruefungen = 0;
 }
 
-Professor::Professor(int identNr, string &name) {
+Professor::Professor(int identNr, string name) {
     this->identNr = identNr;
     this->name = name;
     this->anzPruefungen = 0;
