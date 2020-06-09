@@ -23,7 +23,11 @@ public:
     vector <Student> studenten;
 
     void parseInput();
-
+private:
+    /*
+     * initialisiert alle Studenten über die Anmeldungen und added direkt die jeweiligen Prueufungen
+     */
+    static vector<Student> initStudenten(vector<Anmeldung> &anmeldungenListe, vector<Pruefung> &pruefungenListe);
     static vector<Pruefung>* getPruefungen();
     /*
      * durchsucht einen vector von Professoren anhand der Identifikationsnummer und gibt den index zurück
