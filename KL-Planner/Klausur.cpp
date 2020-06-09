@@ -1,8 +1,12 @@
 //
-// Created by Johnny on 08.06.2020.
+// Created by Johnny Imminger, Felix Steinke and Florian Grabowski
 //
 
 #include "Klausur.h"
+
+/*
+ * Konstruktoren
+ */
 
 Klausur::Klausur() {
     this->studiengang = "DummyPruefung";
@@ -36,8 +40,97 @@ Klausur::Klausur(string& studiengang, int verteilt, int pVersion, int pNummer, s
     this->pForm = pForm;
     this->pSemester = pSemester;
     this->angeboten = angeboten;
-
 }
+/*
+ * toString()
+ */
+
+std::ostream &operator<<(ostream &out, const Klausur &klausur) {
+    out << klausur.studiengang << ';' << klausur.verteilt << ';' << klausur.pVersion << ';' << klausur.pNummer << ';'
+        << klausur.pName << ';' << klausur.pPruefer1 << ';' << klausur.pruefer1 << ';' << klausur.pPruefer2 << ';'
+        << klausur.pruefer2 << ';' << klausur.pDauer << ';' << klausur.pForm << ';' << klausur.pSemester << ';'
+        << klausur.angeboten;
+    return out;
+}
+
+/*
+ * Getter
+ */
+
+const string &Klausur::getStudiengang() const {
+    return studiengang;
+}
+
+int Klausur::getVerteilt() const {
+    return verteilt;
+}
+
+int Klausur::getPVersion() const {
+    return pVersion;
+}
+
+int Klausur::getPNummer() const {
+    return pNummer;
+}
+
+const string &Klausur::getPName() const {
+    return pName;
+}
+
+int Klausur::getPPruefer1() const {
+    return pPruefer1;
+}
+
+const string &Klausur::getPruefer1() const {
+    return pruefer1;
+}
+
+int Klausur::getPPruefer2() const {
+    return pPruefer2;
+}
+
+const string &Klausur::getPruefer2() const {
+    return pruefer2;
+}
+
+float Klausur::getPDauer() const {
+    return pDauer;
+}
+
+const string &Klausur::getPForm() const {
+    return pForm;
+}
+
+int Klausur::getPSemester() const {
+    return pSemester;
+}
+
+bool Klausur::isAngeboten() const {
+    return angeboten;
+}
+
+int Klausur::getIndex() {
+    return this->index;
+}
+
+int Klausur::getAnzTeilnehmer() const {
+    return anzTeilnehmer;
+}
+
+const vector<int> &Klausur::getStudenten() const {
+    return studenten;
+}
+/*
+ * Setter
+ */
+
+void Klausur::setIndex(int index) {
+    this->index = index;
+}
+
+/*______________________________________________________________
+ * Methoden:
+ */
 
 vector<Klausur> Klausur::parse(string pathToFile) {
     ifstream input(pathToFile);
@@ -97,81 +190,6 @@ void Klausur::collectAnmeldungen(vector<Anmeldung>& anmeldungenListe) {
 
 
 
-std::ostream &operator<<(ostream &out, const Klausur &pruefung) {
-    out << pruefung.studiengang << ';' << pruefung.verteilt << ';' << pruefung.pVersion << ';' << pruefung.pNummer << ';'
-    << pruefung.pName << ';' << pruefung.pPruefer1<< ';' << pruefung.pruefer1 << ';' << pruefung.pPruefer2 << ';'
-    << pruefung.pruefer2 << ';' << pruefung.pDauer << ';' << pruefung.pForm << ';' << pruefung.pSemester << ';'
-    << pruefung.angeboten;
-    return out;
-}
-
-const string &Klausur::getStudiengang() const {
-    return studiengang;
-}
-
-int Klausur::getVerteilt() const {
-    return verteilt;
-}
-
-int Klausur::getPVersion() const {
-    return pVersion;
-}
-
-int Klausur::getPNummer() const {
-    return pNummer;
-}
-
-const string &Klausur::getPName() const {
-    return pName;
-}
-
-int Klausur::getPPruefer1() const {
-    return pPruefer1;
-}
-
-const string &Klausur::getPruefer1() const {
-    return pruefer1;
-}
-
-int Klausur::getPPruefer2() const {
-    return pPruefer2;
-}
-
-const string &Klausur::getPruefer2() const {
-    return pruefer2;
-}
-
-float Klausur::getPDauer() const {
-    return pDauer;
-}
-
-const string &Klausur::getPForm() const {
-    return pForm;
-}
-
-int Klausur::getPSemester() const {
-    return pSemester;
-}
-
-bool Klausur::isAngeboten() const {
-    return angeboten;
-}
-
-int Klausur::getIndex() {
-    return this->index;
-}
-
-void Klausur::setIndex(int index) {
-    this->index = index;
-}
-
-int Klausur::getAnzTeilnehmer() const {
-    return anzTeilnehmer;
-}
-
-const vector<int> &Klausur::getStudenten() const {
-    return studenten;
-}
 
 void Klausur::addStudent(int studentenIndex) {
     anzTeilnehmer++;
