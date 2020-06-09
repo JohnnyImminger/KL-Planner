@@ -26,7 +26,7 @@ public:
     const string &getRaumArt() const;
     int getAdrBau() const;
     int getAdrRaum() const;
-    int getKapazataet() const;
+    int getKapazitaet() const;
 
     /*_____________________________________
      * Methoden:
@@ -34,6 +34,12 @@ public:
 
     //holt sich die Daten aus der csv
     static vector<Raum> parse(const string& pathToFile);
+
+    //prüft ob die Timeslots verfügbar sind, berücksichtigt direkt die Pause für den Raum
+    bool areTimeSlotsFree(int startTimeSlot, int dauerTimeSlot);
+
+    //belegt die Timeslots, berücksichtigt direkt die Pause für den Raum
+    void useTimeSlots(int startTimeSlot, int dauerTimeSlot);
 
 private:
     /*
@@ -43,7 +49,10 @@ private:
     string raumArt;
     int adrBau;
     int adrRaum;
-    int kapazataet;
+    int kapazitaet;
+
+    //[40] je 15min slots + die Pause als imaginärer Puffer, false = nicht belegt
+    bool timeSlots[Utility::timeSlotsProTag + Utility::timeSlotsPauseRaum] = {false};
 
     /*_____________________________________
      * Methoden:

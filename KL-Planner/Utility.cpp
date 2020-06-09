@@ -21,39 +21,6 @@ string Utility::removeChars(string &s, string &charsToRemove) {
     return s;
 }
 
-/*
- * Vorgaben durch die Aufgabenstellung
- */
-
-float Utility::klausurPauseProf() {
-    return 0.5;
+bool Utility::isTimeSlotTooLong(int startTimeSlot, int dauerTimeSlot) {
+    return startTimeSlot + dauerTimeSlot <= Utility::timeSlotsProTag;
 }
-
-float Utility::klausurPauseStudent() {
-    return 4;
-}
-
-float Utility::klausurPauseRaum() {
-    return 1;
-}
-
-int Utility::maxKlausurenStudentProTag() {
-    return 2;
-}
-
-float Utility::startZeitKlausurTag() {
-    return 8;
-}
-
-float Utility::endZeitKlausurTag() {
-    return 18;
-}
-
-float Utility::klausurTimeSlot() {
-    return endZeitKlausurTag() - startZeitKlausurTag();
-}
-
-int Utility::klausurTage() {
-    return 9;
-}
-

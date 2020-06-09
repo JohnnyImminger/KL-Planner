@@ -12,14 +12,14 @@ Raum::Raum() {
     this->raumArt = "DummyRaum";
     this->adrBau = 404;
     this->adrRaum = 404;
-    this->kapazataet = 0;
+    this->kapazitaet = 0;
 }
 
 Raum::Raum(string &art, int adrBau, int adrRaum, int kap) {
     this->raumArt = art;
     this->adrBau = adrBau;
     this->adrRaum = adrRaum;
-    this->kapazataet = kap;
+    this->kapazitaet = kap;
 }
 
 /*
@@ -27,7 +27,7 @@ Raum::Raum(string &art, int adrBau, int adrRaum, int kap) {
  */
 
 std::ostream &operator<<(ostream &out, const Raum &raum) {
-    out << raum.raumArt << ';' << raum.adrBau << '/' << raum.adrRaum << ';' << raum.kapazataet;
+    out << raum.raumArt << ';' << raum.adrBau << '/' << raum.adrRaum << ';' << raum.kapazitaet;
     return out;
 }
 
@@ -47,8 +47,8 @@ int Raum::getAdrRaum() const {
     return adrRaum;
 }
 
-int Raum::getKapazataet() const {
-    return kapazataet;
+int Raum::getKapazitaet() const {
+    return kapazitaet;
 }
 
 /*______________________________________________________________
@@ -84,3 +84,26 @@ vector<Raum> Raum::parse(const string& pathToFile) {
     cout << lines << " Raeume eingelesen" << endl;
     return list;
 }
+
+bool Raum::areTimeSlotsFree(int startTimeSlot, int dauerTimeSlot) {
+    if (startTimeSlot < 0){
+        return false;
+    }
+    if (Utility::isTimeSlotTooLong(startTimeSlot, dauerTimeSlot)){
+        return false;
+    }
+    for (int i = startTimeSlot; i < (startTimeSlot + dauerTimeSlot + Utility::timeSlotsPauseRaum); ++i) {
+        if (this->timeSlots[i]){
+            return false;
+        }
+    }
+    return true;
+}
+
+void Raum::useTimeSlots(int startTimeSlot, int dauerTimeSlot) {
+    for (int i = startTimeSlot; i < (startTimeSlot + dauerTimeSlot + Utility::timeSlotsPauseRaum); ++i) {
+        this->timeSlots[i] = true;
+    }
+}
+
+

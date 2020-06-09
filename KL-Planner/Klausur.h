@@ -47,6 +47,7 @@ public:
     void setIndex(int index);
     int getAnzTeilnehmer() const;
 
+    int getPDauerTimeSlots() const;
 
     /*_____________________________________
      * Methoden:
@@ -73,6 +74,7 @@ private:
     int pPruefer2;
     string pruefer2;
     float pDauer;
+    int pDauerTimeSlots;
     string pForm;
     int pSemester;
     bool angeboten;

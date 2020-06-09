@@ -19,6 +19,7 @@ Klausur::Klausur() {
     this->pPruefer2 = 404;
     this->pruefer2 = "DummyPruefung";
     this->pDauer = 0;
+    this->pDauerTimeSlots = 0;
     this->pForm = "DummyPruefung";
     this->pSemester = 404;
     this->angeboten = false;
@@ -37,6 +38,7 @@ Klausur::Klausur(string& studiengang, int verteilt, int pVersion, int pNummer, s
     this->pPruefer2 = pPruefer2;
     this->pruefer2 = pruefer2;
     this->pDauer = pDauer;
+    this->pDauerTimeSlots = (int) ((pDauer/60) * Utility::timeSlotsProStunde);
     this->pForm = pForm;
     this->pSemester = pSemester;
     this->angeboten = angeboten;
@@ -120,6 +122,11 @@ int Klausur::getAnzTeilnehmer() const {
 const vector<int> &Klausur::getStudenten() const {
     return studenten;
 }
+
+int Klausur::getPDauerTimeSlots() const {
+    return pDauerTimeSlots;
+}
+
 /*
  * Setter
  */
@@ -178,5 +185,7 @@ void Klausur::addStudent(int studentenIndex) {
     anzTeilnehmer++;
     studenten.push_back(studentenIndex);
 }
+
+
 
 
