@@ -52,7 +52,6 @@ vector<Anmeldung> Anmeldung::parse(const string& filename) {
         istringstream(split[6]) >> pSem;
         Anmeldung a(matNr, split[1], pVer, pNr, split[4], split[5], pSem);
         list.push_back(a);
-        cout << a << endl;
         ++lines;
     }
     cout << "Anmeldungen eingelesen! - " << lines << "Zeilen eingelesen" << endl;

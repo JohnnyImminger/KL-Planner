@@ -6,11 +6,13 @@
 #define KL_PLANNER_READINPUT_H
 
 #include "Utility.h"
+#include "Pruefung.h"
 
 using namespace std;
 
 class ReadInput {
-
+public:
+    static vector<Pruefung>* getPruefungen();
 };
 
 

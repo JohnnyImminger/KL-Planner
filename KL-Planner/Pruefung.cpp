@@ -49,6 +49,7 @@ vector<Pruefung> Pruefung::parse(string pathToFile) {
     size_t lines = 0;
     vector<Pruefung> list;
     string line;
+    int index = 0;
     while (!input.eof()){
         getline(input, line);
         if(line.empty()) break;
@@ -71,9 +72,10 @@ vector<Pruefung> Pruefung::parse(string pathToFile) {
         angeboten = split[12] == "J";
         Pruefung a(split[0],verteilt,pVersion,pNummer,split[4],pPruefer1, split[6], pPruefer2,
                 split[8], pDauer, split[10], pSemeser, angeboten);
+        a.setIndex(index);
         list.push_back(a);
-        cout << a << endl;
         ++lines;
+        index++;
     }
     cout << "Pruefungen eingelesen! - " << lines << "Zeilen eingelesen" << endl;
     return list;
@@ -156,6 +158,14 @@ bool Pruefung::isAngeboten() const {
 
 const vector<Anmeldung> &Pruefung::getAnmeldungen() const {
     return anmeldungen;
+}
+
+int Pruefung::getIndex() {
+    return 0;
+}
+
+void Pruefung::setIndex(int index) {
+    this->index = index;
 }
 
 int Pruefung::getAnzTeilnehmer() const {

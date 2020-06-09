@@ -34,6 +34,8 @@ public:
     int getPSemester() const;
     bool isAngeboten() const;
     const vector<Anmeldung> &getAnmeldungen() const;
+    int getIndex();
+    void setIndex(int index);
     int getAnzTeilnehmer() const;
 
 private:
@@ -54,6 +56,7 @@ private:
     string pForm;
     int pSemester;
     bool angeboten;
+    int index;
 
     vector<Anmeldung> anmeldungen;
     int anzTeilnehmer;
