@@ -24,7 +24,8 @@ public:
     const string &getStudiengang() const;
     int getAnzKlausuren() const;
     const vector<int> &getKlausurIndizes() const;
-
+    int getIndex() const ;
+    void setIndex(int index);
     /*_____________________________________
      * Methoden:
      */
@@ -40,6 +41,7 @@ private:
     string studiengang;
     int anzKlausuren;
     vector<int> klausurIndizes; //speicherindex der Klausur im Pruefungsarray
+    int index;
 
     /*_____________________________________
      * Methoden:

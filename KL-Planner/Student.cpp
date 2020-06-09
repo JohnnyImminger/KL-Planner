@@ -40,6 +40,15 @@ int Student::getAnzKlausuren() const {
 const vector<int> &Student::getKlausurIndizes() const {
     return klausurIndizes;
 }
+
+int Student::getIndex() const{
+    return index;
+}
+
+void Student::setIndex(int index) {
+    this->index = index;
+}
+
 /*______________________________________________________________
  * Methoden:
  */

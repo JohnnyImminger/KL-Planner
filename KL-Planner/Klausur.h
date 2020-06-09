@@ -26,6 +26,8 @@ public:
     /*
      * Getter und Setter
      */
+    static vector<Klausur> parse(string pathToFile);
+
     const string &getStudiengang() const;
     int getVerteilt() const;
     int getPVersion() const;
@@ -39,10 +41,11 @@ public:
     const string &getPForm() const;
     int getPSemester() const;
     bool isAngeboten() const;
-    const vector<Anmeldung> &getAnmeldungen() const;
+    const vector<int> &getStudenten() const;
     int getIndex();
     void setIndex(int index);
     int getAnzTeilnehmer() const;
+    void addStudent(int studentenIndex);
 
     /*_____________________________________
      * Methoden:
@@ -72,7 +75,7 @@ private:
     bool angeboten;
     int index;
 
-    vector<Anmeldung> anmeldungen;
+    vector<int> studenten;
     int anzTeilnehmer;
 
     /*_____________________________________
