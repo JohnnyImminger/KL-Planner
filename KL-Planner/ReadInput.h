@@ -33,9 +33,16 @@ private:
      * durchsucht einen vector von Professoren anhand der Identifikationsnummer und gibt den index zurück
      * ist der Professor nicht enthalten, ist der rückgabewert -1
      */
-    int isProfInVector(vector<Professor> &profs, int nr);
-    vector<Professor> createProfs();
-
+    int isProfInVector(int nr);
+    /*
+     * füllt den vector professoren anhand der Klausurenliste, speichert in jedem Prof die Indizes der Klausuren
+     */
+    void createProfs();
+    /*
+     * weist jeder klausur eine Liste von Studenten zu
+     * !! darf erst gerufen werden, nachdem die Studenten erzeugt wurden
+     */
+    void attachStudentsToKlausur();
 };
 
 

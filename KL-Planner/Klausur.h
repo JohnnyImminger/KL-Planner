@@ -18,7 +18,6 @@ public:
     Klausur();
     friend std::ostream& operator<<(std::ostream &out, const Klausur &anmeldung);
     static vector<Klausur> parse(string pathToFile);
-    void collectAnmeldungen(vector<Anmeldung>& anmeldungenListe);
 
     const string &getStudiengang() const;
     int getVerteilt() const;
@@ -33,10 +32,11 @@ public:
     const string &getPForm() const;
     int getPSemester() const;
     bool isAngeboten() const;
-    const vector<Anmeldung> &getAnmeldungen() const;
+    const vector<int> &getStudenten() const;
     int getIndex();
     void setIndex(int index);
     int getAnzTeilnehmer() const;
+    void addStudent(int studentenIndex);
 
 private:
     Klausur(string& studiengang, int verteilt, int pVersion, int pNummer, string& pName,
@@ -58,7 +58,7 @@ private:
     bool angeboten;
     int index;
 
-    vector<Anmeldung> anmeldungen;
+    vector<int> studenten;
     int anzTeilnehmer;
 
 };

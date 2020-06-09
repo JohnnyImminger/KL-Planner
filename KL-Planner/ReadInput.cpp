@@ -7,6 +7,7 @@
 void ReadInput::init() {
     parseInput();
     createProfs();
+    attachStudentsToKlausur();
 }
 
 void ReadInput::parseInput() {
@@ -15,39 +16,37 @@ void ReadInput::parseInput() {
     klausuren = Klausur::parse("../../input/Angebotene_Pruefungen_KL.csv");
 }
 
-vector<Professor> ReadInput::createProfs() {
+void ReadInput::createProfs() {
     cout << "creating profs" << endl;
-    vector<Professor> profs;
     for (Klausur klausur: klausuren) {
         if (klausur.getPPruefer1() != 0) {
-            int index = isProfInVector(profs, klausur.getPPruefer1());
+            int index = isProfInVector(klausur.getPPruefer1());
             if (index >= 0) {
-                profs.at(index).addPruefung(klausur.getIndex());
+                professoren.at(index).addPruefung(klausur.getIndex());
             } else {
                 Professor p(klausur.getPPruefer1(), klausur.getPruefer1());
                 p.addPruefung(klausur.getIndex());
-                profs.push_back(p);
+                professoren.push_back(p);
             }
         }
         if (klausur.getPPruefer2() != 0) {
-            int index = isProfInVector(profs, klausur.getPPruefer2());
+            int index = isProfInVector(klausur.getPPruefer2());
             if (index >= 0) {
-                profs.at(index).addPruefung(klausur.getIndex());
+                professoren.at(index).addPruefung(klausur.getIndex());
             } else {
                 Professor p(klausur.getPPruefer2(), klausur.getPruefer2());
                 p.addPruefung(klausur.getIndex());
-                profs.push_back(p);
+                professoren.push_back(p);
             }
         }
     }
-    cout << "done creating profs - " << profs.size() << " Profs created" << endl;
-    return profs;
+    cout << "done creating profs - " << professoren.size() << " Profs created" << endl;
 }
 
-int ReadInput::isProfInVector(vector<Professor> &profs, int nr) {
+int ReadInput::isProfInVector(int nr) {
     int index = -1;
-    for (int i = 0; i < profs.size(); ++i) {
-        if(profs.at(i).getIdentNr() == nr) {
+    for (int i = 0; i < professoren.size(); ++i) {
+        if(professoren.at(i).getIdentNr() == nr) {
             index = i;
             break;
         }
@@ -77,6 +76,16 @@ vector<Student> ReadInput::initStudenten(vector<Anmeldung> &anmeldungenListe, ve
      */
     cout << counter << " Studenten wurden erzeugt."  << endl;
     return liste;
+}
+
+void ReadInput::attachStudentsToKlausur() {
+    cout << "Start Studenten zu Klausuren hinzufügen" << endl;
+    for (const Student& student: studenten) {
+        for (int klausurIndex: student.getKlausurIndizes()) {
+            klausuren.at(klausurIndex).addStudent(student.getIndex());
+        }
+    }
+    cout << "Studenten zu Klausuren hinzugefügt" << endl;
 }
 
 

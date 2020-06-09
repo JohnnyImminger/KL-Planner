@@ -80,7 +80,7 @@ vector<Klausur> Klausur::parse(string pathToFile) {
     cout << "Pruefungen eingelesen! - " << lines << "Zeilen eingelesen" << endl;
     return list;
 }
-
+/*
 void Klausur::collectAnmeldungen(vector<Anmeldung>& anmeldungenListe) {
     int counter = 0;
     for (auto& anmeldung : anmeldungenListe){
@@ -93,6 +93,7 @@ void Klausur::collectAnmeldungen(vector<Anmeldung>& anmeldungenListe) {
     this->anzTeilnehmer = counter;
     cout << "Added " << counter << "Anmeldungen zu Prüfung " << this->pName << endl;
 }
+ */
 
 
 
@@ -156,10 +157,6 @@ bool Klausur::isAngeboten() const {
     return angeboten;
 }
 
-const vector<Anmeldung> &Klausur::getAnmeldungen() const {
-    return anmeldungen;
-}
-
 int Klausur::getIndex() {
     return this->index;
 }
@@ -170,6 +167,15 @@ void Klausur::setIndex(int index) {
 
 int Klausur::getAnzTeilnehmer() const {
     return anzTeilnehmer;
+}
+
+const vector<int> &Klausur::getStudenten() const {
+    return studenten;
+}
+
+void Klausur::addStudent(int studentenIndex) {
+    anzTeilnehmer++;
+    studenten.push_back(studentenIndex);
 }
 
 
