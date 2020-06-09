@@ -6,17 +6,19 @@
 
 void ReadInput::init() {
     parseInput();
+    createProfs();
 }
 
 void ReadInput::parseInput() {
-    this->raeume = Raum::parseRaumliste("../../input/Raumliste.csv");
-    this->anmeldungen = Anmeldung::parse("../../input/Anmeldungen_WS2019_KL.csv");
-    this->klausuren = Klausur::parse("../../input/Angebotene_Pruefungen_KL.csv");
+    raeume = Raum::parseRaumliste("../../input/Raumliste.csv");
+    anmeldungen = Anmeldung::parse("../../input/Anmeldungen_WS2019_KL.csv");
+    klausuren = Klausur::parse("../../input/Angebotene_Pruefungen_KL.csv");
 }
 
 vector<Professor> ReadInput::createProfs() {
+    cout << "creating profs" << endl;
     vector<Professor> profs;
-    for (Klausur klausur: ReadInput::klausuren) {
+    for (Klausur klausur: klausuren) {
         if (klausur.getPPruefer1() != 0) {
             int index = isProfInVector(profs, klausur.getPPruefer1());
             if (index >= 0) {
@@ -38,7 +40,7 @@ vector<Professor> ReadInput::createProfs() {
             }
         }
     }
-
+    cout << "done creating profs - " << profs.size() << " Profs created" << endl;
     return profs;
 }
 
