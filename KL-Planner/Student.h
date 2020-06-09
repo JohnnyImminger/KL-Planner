@@ -7,7 +7,7 @@
 
 #include "Utility.h"
 #include "Anmeldung.h"
-#include "Pruefung.h"
+#include "Klausur.h"
 
 using namespace std;
 
@@ -18,7 +18,7 @@ public:
     //getter
     int getMatrikelNr() const;
     const string &getStudiengang() const;
-    //void addPruefung(Anmeldung &anmeldung, vector<Pruefung> &pruefungenListe); //added den Index aus Pruefungen in den Vector über identifikation in Anmeldung
+    //void addPruefung(Anmeldung &anmeldung, vector<Klausur> &pruefungenListe); //added den Index aus Pruefungen in den Vector über identifikation in Anmeldung
     void addKlausur(int klausurIndex);
 private:
     Student(int matikelNr, string studiengang); //Konstruktor
@@ -27,7 +27,7 @@ private:
     string studiengang;
     //auslastung
     int anzKlausuren;
-    vector<int> klausurIndizes; //speicherindex der Pruefung im Pruefungsarray
+    vector<int> klausurIndizes; //speicherindex der Klausur im Pruefungsarray
 
 };
 

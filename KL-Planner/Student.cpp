@@ -37,9 +37,9 @@ void Student::addKlausur(int klausurIndex) {
 }
 
 /*
-void Student::addPruefung(Anmeldung &anmeldung, vector<Pruefung> &pruefungenListe) {
+void Student::addPruefung(Anmeldung &anmeldung, vector<Klausur> &pruefungenListe) {
     for (int i=0; i<pruefungenListe.size(); i++){
-        Pruefung pruefung = pruefungenListe [i];
+        Klausur pruefung = pruefungenListe [i];
         //TODO muss pNummer und pVersion identisch sein?
         if (pruefung.getPNummer() == anmeldung.getPNummer() && pruefung.getPVersion() == anmeldung.getPVersion()){
             this->pruefungsIndex.push_back(i);

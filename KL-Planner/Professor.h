@@ -6,7 +6,7 @@
 #define KL_PLANNER_PROFESSOR_H
 
 #include "Utility.h"
-#include "Pruefung.h"
+#include "Klausur.h"
 
 using namespace std;
 

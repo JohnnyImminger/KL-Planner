@@ -2,9 +2,9 @@
 // Created by Johnny on 08.06.2020.
 //
 
-#include "Pruefung.h"
+#include "Klausur.h"
 
-Pruefung::Pruefung() {
+Klausur::Klausur() {
     this->studiengang = "DummyPruefung";
     this->verteilt = 404;
     this->pVersion = 404;
@@ -20,9 +20,9 @@ Pruefung::Pruefung() {
     this->angeboten = false;
 }
 
-Pruefung::Pruefung(string& studiengang, int verteilt, int pVersion, int pNummer, string& pName, int pPruefer1,
-                   string& pruefer1, int pPruefer2, string& pruefer2, float pDauer, string& pForm, int pSemester,
-                   bool angeboten) {
+Klausur::Klausur(string& studiengang, int verteilt, int pVersion, int pNummer, string& pName, int pPruefer1,
+                 string& pruefer1, int pPruefer2, string& pruefer2, float pDauer, string& pForm, int pSemester,
+                 bool angeboten) {
     this->studiengang = studiengang;
     this->verteilt = verteilt;
     this->pVersion = pVersion;
@@ -39,7 +39,7 @@ Pruefung::Pruefung(string& studiengang, int verteilt, int pVersion, int pNummer,
 
 }
 
-vector<Pruefung> Pruefung::parse(string pathToFile) {
+vector<Klausur> Klausur::parse(string pathToFile) {
     ifstream input(pathToFile);
     if(!input) {
         cerr << "Fehler beim Oeffnen der Datei " << pathToFile << endl;
@@ -47,7 +47,7 @@ vector<Pruefung> Pruefung::parse(string pathToFile) {
     cout << "Starte Einlesen von Pruefungen!" << endl;
 
     size_t lines = 0;
-    vector<Pruefung> list;
+    vector<Klausur> list;
     string line;
     int index = 0;
     while (!input.eof()){
@@ -70,8 +70,8 @@ vector<Pruefung> Pruefung::parse(string pathToFile) {
         istringstream(split[9]) >> pDauer;
         istringstream(split[11]) >> pSemeser;
         angeboten = split[12] == "J";
-        Pruefung a(split[0],verteilt,pVersion,pNummer,split[4],pPruefer1, split[6], pPruefer2,
-                split[8], pDauer, split[10], pSemeser, angeboten);
+        Klausur a(split[0], verteilt, pVersion, pNummer, split[4], pPruefer1, split[6], pPruefer2,
+                  split[8], pDauer, split[10], pSemeser, angeboten);
         a.setIndex(index);
         list.push_back(a);
         ++lines;
@@ -81,7 +81,7 @@ vector<Pruefung> Pruefung::parse(string pathToFile) {
     return list;
 }
 
-void Pruefung::collectAnmeldungen(vector<Anmeldung>& anmeldungenListe) {
+void Klausur::collectAnmeldungen(vector<Anmeldung>& anmeldungenListe) {
     int counter = 0;
     for (auto& anmeldung : anmeldungenListe){
         //TODO muss pNummer und pVersion identisch sein?
@@ -96,7 +96,7 @@ void Pruefung::collectAnmeldungen(vector<Anmeldung>& anmeldungenListe) {
 
 
 
-std::ostream &operator<<(ostream &out, const Pruefung &pruefung) {
+std::ostream &operator<<(ostream &out, const Klausur &pruefung) {
     out << pruefung.studiengang << ';' << pruefung.verteilt << ';' << pruefung.pVersion << ';' << pruefung.pNummer << ';'
     << pruefung.pName << ';' << pruefung.pPruefer1<< ';' << pruefung.pruefer1 << ';' << pruefung.pPruefer2 << ';'
     << pruefung.pruefer2 << ';' << pruefung.pDauer << ';' << pruefung.pForm << ';' << pruefung.pSemester << ';'
@@ -104,71 +104,71 @@ std::ostream &operator<<(ostream &out, const Pruefung &pruefung) {
     return out;
 }
 
-const string &Pruefung::getStudiengang() const {
+const string &Klausur::getStudiengang() const {
     return studiengang;
 }
 
-int Pruefung::getVerteilt() const {
+int Klausur::getVerteilt() const {
     return verteilt;
 }
 
-int Pruefung::getPVersion() const {
+int Klausur::getPVersion() const {
     return pVersion;
 }
 
-int Pruefung::getPNummer() const {
+int Klausur::getPNummer() const {
     return pNummer;
 }
 
-const string &Pruefung::getPName() const {
+const string &Klausur::getPName() const {
     return pName;
 }
 
-int Pruefung::getPPruefer1() const {
+int Klausur::getPPruefer1() const {
     return pPruefer1;
 }
 
-const string &Pruefung::getPruefer1() const {
+const string &Klausur::getPruefer1() const {
     return pruefer1;
 }
 
-int Pruefung::getPPruefer2() const {
+int Klausur::getPPruefer2() const {
     return pPruefer2;
 }
 
-const string &Pruefung::getPruefer2() const {
+const string &Klausur::getPruefer2() const {
     return pruefer2;
 }
 
-float Pruefung::getPDauer() const {
+float Klausur::getPDauer() const {
     return pDauer;
 }
 
-const string &Pruefung::getPForm() const {
+const string &Klausur::getPForm() const {
     return pForm;
 }
 
-int Pruefung::getPSemester() const {
+int Klausur::getPSemester() const {
     return pSemester;
 }
 
-bool Pruefung::isAngeboten() const {
+bool Klausur::isAngeboten() const {
     return angeboten;
 }
 
-const vector<Anmeldung> &Pruefung::getAnmeldungen() const {
+const vector<Anmeldung> &Klausur::getAnmeldungen() const {
     return anmeldungen;
 }
 
-int Pruefung::getIndex() {
+int Klausur::getIndex() {
     return 0;
 }
 
-void Pruefung::setIndex(int index) {
+void Klausur::setIndex(int index) {
     this->index = index;
 }
 
-int Pruefung::getAnzTeilnehmer() const {
+int Klausur::getAnzTeilnehmer() const {
     return anzTeilnehmer;
 }
 

@@ -4,14 +4,14 @@
 
 #include "ReadInput.h"
 
-vector<Pruefung> *ReadInput::getPruefungen() {
+vector<Klausur> *ReadInput::getPruefungen() {
     return nullptr;
 }
 
 vector<Professor> ReadInput::createProfs() {
     vector<Professor> profs;
-    vector<Pruefung> klausuren = *ReadInput::getPruefungen();
-    for (Pruefung klausur: klausuren) {
+    vector<Klausur> klausuren = *ReadInput::getPruefungen();
+    for (Klausur klausur: klausuren) {
         if (klausur.getPPruefer1() != 0) {
             int index = isProfInVector(profs, klausur.getPPruefer1());
             if (index >= 0) {
@@ -42,10 +42,10 @@ int ReadInput::isProfInVector(vector<Professor> &profs, int nr) {
 void ReadInput::parseInput() {
     this->raeume = Raum::parseRaumliste("../../input/Raumliste.csv");
     this->anmeldungen = Anmeldung::parse("../../input/Anmeldungen_WS2019_KL.csv");
-    this->klausuren = Pruefung::parse("../../input/Angebotene_Pruefungen_KL.csv");
+    this->klausuren = Klausur::parse("../../input/Angebotene_Pruefungen_KL.csv");
 }
 
-vector<Student> ReadInput::initStudenten(vector<Anmeldung> &anmeldungenListe, vector<Pruefung> &pruefungenListe) {
+vector<Student> ReadInput::initStudenten(vector<Anmeldung> &anmeldungenListe, vector<Klausur> &pruefungenListe) {
     int counter = 0;
     vector<Student> liste;
     //TODO

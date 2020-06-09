@@ -1,6 +1,6 @@
 #include "Raum.h"
 #include "Anmeldung.h"
-#include "Pruefung.h"
+#include "Klausur.h"
 #include "Professor.h"
 
 int main() {

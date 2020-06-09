@@ -2,8 +2,8 @@
 // Created by Johnny on 08.06.2020.
 //
 
-#ifndef KL_PLANNER_PRUEFUNG_H
-#define KL_PLANNER_PRUEFUNG_H
+#ifndef KL_PLANNER_KLAUSUR_H
+#define KL_PLANNER_KLAUSUR_H
 
 #include "Utility.h"
 #include "Anmeldung.h"
@@ -12,12 +12,12 @@
 
 using namespace std;
 
-class Pruefung {
+class Klausur {
 
 public:
-    Pruefung();
-    friend std::ostream& operator<<(std::ostream &out, const Pruefung &anmeldung);
-    static vector<Pruefung> parse(string pathToFile);
+    Klausur();
+    friend std::ostream& operator<<(std::ostream &out, const Klausur &anmeldung);
+    static vector<Klausur> parse(string pathToFile);
     void collectAnmeldungen(vector<Anmeldung>& anmeldungenListe);
 
     const string &getStudiengang() const;
@@ -39,9 +39,9 @@ public:
     int getAnzTeilnehmer() const;
 
 private:
-    Pruefung(string& studiengang, int verteilt, int pVersion, int pNummer, string& pName,
-             int pPruefer1, string& pruefer1, int pPruefer2, string& pruefer2,
-             float pDauer, string& pForm, int pSemester, bool angeboten);
+    Klausur(string& studiengang, int verteilt, int pVersion, int pNummer, string& pName,
+            int pPruefer1, string& pruefer1, int pPruefer2, string& pruefer2,
+            float pDauer, string& pForm, int pSemester, bool angeboten);
 
     string studiengang;
     int verteilt; //maybe bool
@@ -63,4 +63,4 @@ private:
 
 };
 
-#endif //KL_PLANNER_PRUEFUNG_H
+#endif //KL_PLANNER_KLAUSUR_H
