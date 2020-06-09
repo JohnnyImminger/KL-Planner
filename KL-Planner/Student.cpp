@@ -11,11 +11,13 @@
 Student::Student() {
     this->matrikelNr = 404;
     this->studiengang = "DummyStudent";
+    this->anzKlausuren = 0;
 }
 
 Student::Student(int matikelNr, string studiengang) {
     this->matrikelNr = matikelNr;
     this->studiengang = studiengang;
+    this->anzKlausuren = 0;
 }
 
 /*
