@@ -10,6 +10,19 @@
 using namespace std;
 
 class Student {
+public:
+    Student();
+    friend std::ostream& operator<<(std::ostream &out, const Student &student);
+
+    void addPruefung();
+
+private:
+    Student(int matikelNr, string& studiengang);
+
+    int matrikelNr;
+    string studiengang;
+    int anzPruefungen;
+    //auslastung
 
 };
 
