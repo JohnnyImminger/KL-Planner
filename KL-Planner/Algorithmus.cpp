@@ -32,4 +32,16 @@ void Algorithmus::printResult() {
 
 }
 
+bool Algorithmus::isTimeSlotValidForProf(Professor prof, int startTimeSlot, int dauerTimeSlot) {
+
+}
+
+bool Algorithmus::isTimeSlotValidForStudent(Student student, int startTimeSlot, int dauerTimeSlot) {
+    return false;
+}
+
+bool Algorithmus::isTimeSlotValidForRoom(Raum raum, int startTimeSlot, int dauerTimeSlot) {
+    return false;
+}
+
 

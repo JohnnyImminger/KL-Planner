@@ -18,7 +18,6 @@ public:
 
     explicit Algorithmus(ReadInput& data);
 
-
     /*_____________________________________
      * Methoden:
      */
@@ -40,6 +39,10 @@ private:
      * Methoden:
      */
 
+    //Utility::isTimeSlotTooLong(startTimeSlot, dauerTimeSlot)
+    bool isTimeSlotValidForProf(Professor prof, int startTimeSlot, int dauerTimeSlot);
+    bool isTimeSlotValidForStudent(Student student, int startTimeSlot, int dauerTimeSlot);
+    bool isTimeSlotValidForRoom(Raum raum,int startTimeSlot, int dauerTimeSlot);
 
 };
 
