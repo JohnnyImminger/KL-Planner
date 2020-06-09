@@ -13,3 +13,10 @@ vector<string> Utility::splitString(string &s, char delimiter) {
     }
     return tokens;
 }
+
+string Utility::removeChars(string &s, string &charsToRemove) {
+    for (char c: charsToRemove) {
+        s.erase(std::remove(s.begin(), s.end(), c), s.end());
+    }
+    return s;
+}

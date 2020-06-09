@@ -13,7 +13,7 @@ class Raum {
 public:
     Raum();
     friend std::ostream& operator<<(std::ostream &out, const Raum &raum);
-    static vector<Raum> parseRaumliste(string pathToFile);
+    static vector<Raum> parseRaumliste(const string& pathToFile);
 
     const string &getRaumArt() const;
     int getAdrBau() const;
