@@ -3,12 +3,12 @@
 //
 
 #include "ReadInput.h"
-#include "BasicAlg.h"
+#include "Algorithmus.h"
 
 int main() {
     ReadInput data;
     data.init();
-    BasicAlg basic;
+    Algorithmus basic;
     basic.run();
     return 0;
 }
