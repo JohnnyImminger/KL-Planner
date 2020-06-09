@@ -25,7 +25,7 @@ public:
 
     void run();
     void initTage();
-    void printResult();
+    void printResult(const string &filename);
 
 private:
     /*

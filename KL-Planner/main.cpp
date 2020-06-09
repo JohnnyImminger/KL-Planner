@@ -11,5 +11,6 @@ int main() {
     Algorithmus alg = Algorithmus(data);
     alg.initTage();
     alg.run();
+    alg.printResult("../../output/result.csv");
     return 0;
 }
