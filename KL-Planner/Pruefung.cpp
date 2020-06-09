@@ -79,8 +79,15 @@ vector<Pruefung> Pruefung::parse(string pathToFile) {
     return list;
 }
 
-void Pruefung::collectAnmeldungen(vector<Anmeldung> anmeldungenListe) {
-
+void Pruefung::collectAnmeldungen(vector<Anmeldung>& anmeldungenListe) {
+    int counter = 0;
+    for (auto& anmeldung : anmeldungenListe){
+        if (anmeldung.getPNummer() == this->pNummer && anmeldung.getPVersion() == this->pVersion){
+            this->anmeldungen.push_back(anmeldung);
+            counter++;
+        }
+    }
+    cout << "Added " << counter << "Anmeldungen zu Prüfung " << this->pName << endl;
 }
 
 std::ostream &operator<<(ostream &out, const Pruefung &pruefung) {

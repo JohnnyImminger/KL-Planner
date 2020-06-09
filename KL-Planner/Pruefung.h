@@ -16,7 +16,7 @@ public:
     Pruefung();
     friend std::ostream& operator<<(std::ostream &out, const Pruefung &anmeldung);
     static vector<Pruefung> parse(string pathToFile);
-    void collectAnmeldungen(vector<Anmeldung> anmeldungenListe);
+    void collectAnmeldungen(vector<Anmeldung>& anmeldungenListe);
 
     const string &getStudiengang() const;
     int getVerteilt() const;
