@@ -7,6 +7,7 @@
 void ReadInput::init() {
     parseInput();
     createProfs();
+    createStudenten();
     attachStudentsToKlausur();
 }
 
@@ -18,7 +19,7 @@ void ReadInput::parseInput() {
 
 void ReadInput::createProfs() {
     cout << "creating profs" << endl;
-    for (Klausur klausur: klausuren) {
+    for (Klausur& klausur: klausuren) {
         if (klausur.getPPruefer1() != 0) {
             int index = isProfInVector(klausur.getPPruefer1());
             if (index >= 0) {
@@ -43,10 +44,10 @@ void ReadInput::createProfs() {
     cout << "done creating profs - " << professoren.size() << " Profs created" << endl;
 }
 
-int ReadInput::isProfInVector(int nr) {
+int ReadInput::isProfInVector(int identNr) {
     int index = -1;
     for (int i = 0; i < professoren.size(); ++i) {
-        if(professoren.at(i).getIdentNr() == nr) {
+        if(professoren.at(i).getIdentNr() == identNr) {
             index = i;
             break;
         }
@@ -54,28 +55,39 @@ int ReadInput::isProfInVector(int nr) {
     return index;
 }
 
-
-
-vector<Student> ReadInput::initStudenten(vector<Anmeldung> &anmeldungenListe, vector<Klausur> &pruefungenListe) {
-    int counter = 0;
-    vector<Student> liste;
-    //TODO
-    /*
-    for (auto& anmeldung : anmeldungenListe){
-        for (auto& studenten : liste){
-            if (studenten.getMatrikelNr() == anmeldung.getMatrikelNr()){
-                studenten.addPruefung(anmeldung, pruefungenListe);
-                break;
-            }
-            Student st = Student(anmeldung.getMatrikelNr(),anmeldung.getStudiengang());
-            st.addPruefung(anmeldung, pruefungenListe);
-            liste.push_back(Student(anmeldung.getMatrikelNr(),anmeldung.getStudiengang()));
-            counter++;
+void ReadInput::createStudenten() {
+    cout << "creating studenten" << endl;
+    for (Anmeldung& anmeldung: anmeldungen) {
+        int index = isStudentInVector(anmeldung.getMatrikelNr());
+        if (index >= 0) {
+            studenten.at(index).addKlausur(findKlausurIndex(anmeldung.getPNummer(), anmeldung.getPVersion()));
+        } else {
+            Student s = Student(s.getMatrikelNr(), s.getStudiengang());
+            s.addKlausur(findKlausurIndex(anmeldung.getPNummer(), anmeldung.getPVersion()));
+            studenten.push_back(s);
         }
     }
-     */
-    cout << counter << " Studenten wurden erzeugt."  << endl;
-    return liste;
+    cout << "done creating studenten - " << professoren.size() << " Studenten created" << endl;
+}
+
+int ReadInput::isStudentInVector(int matrikelNr) {
+    int index = -1;
+    for (int i = 0; i < studenten.size(); ++i) {
+        if(studenten.at(i).getMatrikelNr() == matrikelNr) {
+            index = i;
+            break;
+        }
+    }
+    return index;
+}
+
+int ReadInput::findKlausurIndex(int pNummer, int pVersion) {
+    for (Klausur& klausur: klausuren) {
+        if (klausur.getPNummer() == pNummer && klausur.getPVersion() == pVersion){
+            return klausur.getIndex();
+        }
+    }
+    return -1;
 }
 
 void ReadInput::attachStudentsToKlausur() {
@@ -90,15 +102,3 @@ void ReadInput::attachStudentsToKlausur() {
 
 
 
-/*
- * void Student::addPruefung(Anmeldung &anmeldung, vector<Klausur> &pruefungenListe) {
-    for (int i=0; i<pruefungenListe.size(); i++){
-        Klausur pruefung = pruefungenListe [i];
-        //TODO muss pNummer und pVersion identisch sein?
-        if (pruefung.getPNummer() == anmeldung.getPNummer() && pruefung.getPVersion() == anmeldung.getPVersion()){
-            this->pruefungsIndex.push_back(i);
-            break;
-        }
-    }
-}
- */

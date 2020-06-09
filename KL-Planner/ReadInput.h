@@ -28,6 +28,7 @@ public:
     /*_____________________________________
      * Methoden:
      */
+
     //füllt alle Daten auf
     void init();
 
@@ -35,26 +36,21 @@ private:
     /*_____________________________________
      * Methoden:
      */
+
     //ruft alle parse Methoden für die csv-Dateien auf
     void parseInput();
-    //initialisiert alle Studenten über die Anmeldungen und added direkt die jeweiligen Prueufungen
-    vector<Student> initStudenten(vector<Anmeldung> &anmeldungenListe, vector<Klausur> &pruefungenListe);
-    //durchsucht einen vector von Professoren anhand der Identifikationsnummer und gibt den index zurück ist der Professor nicht enthalten, ist der rückgabewert -1
-
-    /*
-     * durchsucht einen vector von Professoren anhand der Identifikationsnummer und gibt den index zurück
-     * ist der Professor nicht enthalten, ist der rückgabewert -1
-     */
-    int isProfInVector(int nr);
-    /*
-     * füllt den vector professoren anhand der Klausurenliste, speichert in jedem Prof die Indizes der Klausuren
-     */
+    //füllt den vector professoren anhand der Klausurenliste, speichert in jedem Prof die Indizes der Klausuren
     void createProfs();
-    /*
-     * weist jeder klausur eine Liste von Studenten zu
-     * !! darf erst gerufen werden, nachdem die Studenten erzeugt wurden
-     */
+    //durchsucht einen vector von Professoren anhand der Identifikationsnummer und gibt den index zurück ist der Professor nicht enthalten, ist der rückgabewert -1
+    int isProfInVector(int identNr);
+
+    //darf erst gerufen werden, nachdem die Studenten erzeugt wurden!! - weist jeder klausur eine Liste von Studenten zu
     void attachStudentsToKlausur();
+
+    //TODO add comment like Prof
+    void createStudenten();
+    int isStudentInVector(int matrikelNr);
+    int findKlausurIndex(int pNummer, int pVersion);
 };
 
 
