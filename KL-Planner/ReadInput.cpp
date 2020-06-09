@@ -56,14 +56,19 @@ int ReadInput::isProfInVector(int identNr) {
 }
 
 void ReadInput::createStudenten() {
-    cout << "creating studenten" << endl;
+
     for (Anmeldung& anmeldung: anmeldungen) {
         int index = isStudentInVector(anmeldung.getMatrikelNr());
+        int klausurIndex = findKlausurIndex(anmeldung.getPNummer(), anmeldung.getPVersion());
+        if (klausurIndex < 0){
+            cout << "Klausur konnte nicht gefunden werden!" << endl;
+            continue;
+        }
         if (index >= 0) {
-            studenten.at(index).addKlausur(findKlausurIndex(anmeldung.getPNummer(), anmeldung.getPVersion()));
+            studenten.at(index).addKlausur(klausurIndex);
         } else {
-            Student s = Student(s.getMatrikelNr(), s.getStudiengang());
-            s.addKlausur(findKlausurIndex(anmeldung.getPNummer(), anmeldung.getPVersion()));
+            Student s = Student(anmeldung.getMatrikelNr(), anmeldung.getStudiengang());
+            s.addKlausur(klausurIndex);
             studenten.push_back(s);
         }
     }
