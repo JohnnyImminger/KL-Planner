@@ -16,24 +16,25 @@ using namespace std;
 
 class ReadInput {
 public:
-    static vector <Klausur> klausuren;
-    static vector <Anmeldung> anmeldungen;
-    static vector <Raum> raeume;
-    static vector <Professor> professoren;
-    static vector <Student> studenten;
+    vector <Klausur> klausuren;
+    vector <Anmeldung> anmeldungen;
+    vector <Raum> raeume;
+    vector <Professor> professoren;
+    vector <Student> studenten;
 
-    void parseInput();
+    void init();
 private:
+    void parseInput();
     /*
      * initialisiert alle Studenten über die Anmeldungen und added direkt die jeweiligen Prueufungen
      */
-    static vector<Student> initStudenten(vector<Anmeldung> &anmeldungenListe, vector<Klausur> &pruefungenListe);
+    vector<Student> initStudenten(vector<Anmeldung> &anmeldungenListe, vector<Klausur> &pruefungenListe);
     /*
      * durchsucht einen vector von Professoren anhand der Identifikationsnummer und gibt den index zurück
      * ist der Professor nicht enthalten, ist der rückgabewert -1
      */
-    static int isProfInVector(vector<Professor> &profs, int nr);
-    static vector<Professor> createProfs();
+    int isProfInVector(vector<Professor> &profs, int nr);
+    vector<Professor> createProfs();
 
 };
 

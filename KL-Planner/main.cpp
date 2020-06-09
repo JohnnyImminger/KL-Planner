@@ -1,9 +1,7 @@
-#include "Raum.h"
-#include "Anmeldung.h"
-#include "Klausur.h"
-#include "Professor.h"
+#include "ReadInput.h"
 
 int main() {
-
+    ReadInput data;
+    data.init();
     return 0;
 }

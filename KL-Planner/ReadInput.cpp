@@ -4,6 +4,15 @@
 
 #include "ReadInput.h"
 
+void ReadInput::init() {
+    parseInput();
+}
+
+void ReadInput::parseInput() {
+    this->raeume = Raum::parseRaumliste("../../input/Raumliste.csv");
+    this->anmeldungen = Anmeldung::parse("../../input/Anmeldungen_WS2019_KL.csv");
+    this->klausuren = Klausur::parse("../../input/Angebotene_Pruefungen_KL.csv");
+}
 
 vector<Professor> ReadInput::createProfs() {
     vector<Professor> profs;
@@ -44,11 +53,7 @@ int ReadInput::isProfInVector(vector<Professor> &profs, int nr) {
     return index;
 }
 
-void ReadInput::parseInput() {
-    this->raeume = Raum::parseRaumliste("../../input/Raumliste.csv");
-    this->anmeldungen = Anmeldung::parse("../../input/Anmeldungen_WS2019_KL.csv");
-    this->klausuren = Klausur::parse("../../input/Angebotene_Pruefungen_KL.csv");
-}
+
 
 vector<Student> ReadInput::initStudenten(vector<Anmeldung> &anmeldungenListe, vector<Klausur> &pruefungenListe) {
     int counter = 0;
@@ -71,3 +76,18 @@ vector<Student> ReadInput::initStudenten(vector<Anmeldung> &anmeldungenListe, ve
     cout << counter << " Studenten wurden erzeugt."  << endl;
     return liste;
 }
+
+
+
+/*
+ * void Student::addPruefung(Anmeldung &anmeldung, vector<Klausur> &pruefungenListe) {
+    for (int i=0; i<pruefungenListe.size(); i++){
+        Klausur pruefung = pruefungenListe [i];
+        //TODO muss pNummer und pVersion identisch sein?
+        if (pruefung.getPNummer() == anmeldung.getPNummer() && pruefung.getPVersion() == anmeldung.getPVersion()){
+            this->pruefungsIndex.push_back(i);
+            break;
+        }
+    }
+}
+ */
