@@ -7,6 +7,8 @@
 
 /*
  * Klasse bringt alle wichtigen Librarys and bietet nützliche Methoden
+ *
+ * Veränderbare Vorgaben der Aufgabenstellung
  */
 
 #include <iostream>
@@ -22,6 +24,19 @@ class Utility {
 public:
     static vector<string> splitString(string &s, char delimiter);
     static string removeChars(string &s, string &charsToRemove);
+
+    /*
+     * Varialbe Vorgaben durch Aufgabenstellung
+     */
+    static float klausurPauseProf();
+    static float klausurPauseStudent();
+    static float klausurPauseRaum();
+    static int maxKlausurenStudentProTag();
+    static float startZeitKlausurTag();
+    static float endZeitKlausurTag();
+    static float klausurTimeSlot();
+    static int klausurTage();
+
 };
 
 
