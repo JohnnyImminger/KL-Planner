@@ -26,7 +26,6 @@ public:
     /*
      * Getter und Setter
      */
-    static vector<Klausur> parse(string pathToFile);
 
     const string &getStudiengang() const;
     int getVerteilt() const;
@@ -53,7 +52,7 @@ public:
     //holt sich die Daten aus der csv
     static vector<Klausur> parse(string pathToFile);
     //TODO
-    void collectAnmeldungen(vector<Anmeldung>& anmeldungenListe);
+    //void collectAnmeldungen(vector<Anmeldung>& anmeldungenListe);
 
 
 private:

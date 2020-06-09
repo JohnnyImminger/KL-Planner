@@ -109,10 +109,6 @@ bool Klausur::isAngeboten() const {
     return angeboten;
 }
 
-const vector<Anmeldung> &Klausur::getAnmeldungen() const {
-    return anmeldungen;
-}
-
 int Klausur::getIndex() {
     return this->index;
 }
@@ -121,6 +117,9 @@ int Klausur::getAnzTeilnehmer() const {
     return anzTeilnehmer;
 }
 
+const vector<int> &Klausur::getStudenten() const {
+    return studenten;
+}
 /*
  * Setter
  */
@@ -191,28 +190,6 @@ void Klausur::collectAnmeldungen(vector<Anmeldung>& anmeldungenListe) {
 
 
 
-
-
-
-bool Klausur::isAngeboten() const {
-    return angeboten;
-}
-
-int Klausur::getIndex() {
-    return this->index;
-}
-
-void Klausur::setIndex(int index) {
-    this->index = index;
-}
-
-int Klausur::getAnzTeilnehmer() const {
-    return anzTeilnehmer;
-}
-
-const vector<int> &Klausur::getStudenten() const {
-    return studenten;
-}
 
 void Klausur::addStudent(int studentenIndex) {
     anzTeilnehmer++;

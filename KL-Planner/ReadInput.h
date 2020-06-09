@@ -40,9 +40,6 @@ private:
     //initialisiert alle Studenten über die Anmeldungen und added direkt die jeweiligen Prueufungen
     vector<Student> initStudenten(vector<Anmeldung> &anmeldungenListe, vector<Klausur> &pruefungenListe);
     //durchsucht einen vector von Professoren anhand der Identifikationsnummer und gibt den index zurück ist der Professor nicht enthalten, ist der rückgabewert -1
-    int isProfInVector(vector<Professor> &profs, int nr);
-    //TODO
-    vector<Professor> createProfs();
 
     /*
      * durchsucht einen vector von Professoren anhand der Identifikationsnummer und gibt den index zurück
