@@ -46,8 +46,15 @@ public:
     int getIndex();
     void setIndex(int index);
     int getAnzTeilnehmer() const;
-
-    int getPDauerTimeSlots() const;
+    int getDauerTimeSlots() const;
+    int getTag() const;
+    int getStartZeitTimeSlot() const;
+    int getAdrBau() const;
+    int getAdrRaum() const;
+    void setTag(int tag);
+    void setStartZeitTimeSlot(int startZeitTimeSlot);
+    void setAdrBau(int adrBau);
+    void setAdrRaum(int adrRaum);
 
     /*_____________________________________
      * Methoden:
@@ -74,7 +81,6 @@ private:
     int pPruefer2;
     string pruefer2;
     float pDauer;
-    int pDauerTimeSlots;
     string pForm;
     int pSemester;
     bool angeboten;
@@ -82,6 +88,13 @@ private:
 
     vector<int> studenten;
     int anzTeilnehmer;
+
+
+    int dauerTimeSlots;
+    int tag;
+    int startZeitTimeSlot;
+    int adrBau;
+    int adrRaum;
 
     /*_____________________________________
      * Methoden:
