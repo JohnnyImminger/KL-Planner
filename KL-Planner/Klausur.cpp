@@ -161,7 +161,7 @@ const vector<Anmeldung> &Klausur::getAnmeldungen() const {
 }
 
 int Klausur::getIndex() {
-    return 0;
+    return this->index;
 }
 
 void Klausur::setIndex(int index) {
