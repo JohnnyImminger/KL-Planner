@@ -1,5 +1,5 @@
 //
-// Created by Johnny on 08.06.2020.
+// Created by Johnny Imminger, Felix Steinke and Florian Grabowski
 //
 
 #ifndef KL_PLANNER_STUDENT_H
@@ -28,6 +28,8 @@ public:
     /*_____________________________________
      * Methoden:
      */
+
+    //Methode added nur die Referenz aus dem Klausur-Vektor zu dem Studenten
     void addKlausur(int klausurIndex);
 
 private:
@@ -38,6 +40,7 @@ private:
     string studiengang;
     int anzKlausuren;
     vector<int> klausurIndizes; //speicherindex der Klausur im Pruefungsarray
+
     /*_____________________________________
      * Methoden:
      */

@@ -1,5 +1,5 @@
 //
-// Created by Johnny on 08.06.2020.
+// Created by Johnny Imminger, Felix Steinke and Florian Grabowski
 //
 
 #ifndef KL_PLANNER_KLAUSUR_H
@@ -15,11 +15,17 @@ using namespace std;
 class Klausur {
 
 public:
+    /*
+     * Konstruktoren und toString();
+     */
     Klausur();
+    Klausur(string& studiengang, int verteilt, int pVersion, int pNummer, string& pName,
+            int pPruefer1, string& pruefer1, int pPruefer2, string& pruefer2,
+            float pDauer, string& pForm, int pSemester, bool angeboten);
     friend std::ostream& operator<<(std::ostream &out, const Klausur &anmeldung);
-    static vector<Klausur> parse(string pathToFile);
-    void collectAnmeldungen(vector<Anmeldung>& anmeldungenListe);
-
+    /*
+     * Getter und Setter
+     */
     const string &getStudiengang() const;
     int getVerteilt() const;
     int getPVersion() const;
@@ -38,11 +44,19 @@ public:
     void setIndex(int index);
     int getAnzTeilnehmer() const;
 
-private:
-    Klausur(string& studiengang, int verteilt, int pVersion, int pNummer, string& pName,
-            int pPruefer1, string& pruefer1, int pPruefer2, string& pruefer2,
-            float pDauer, string& pForm, int pSemester, bool angeboten);
+    /*_____________________________________
+     * Methoden:
+     */
+    //holt sich die Daten aus der csv
+    static vector<Klausur> parse(string pathToFile);
+    //TODO
+    void collectAnmeldungen(vector<Anmeldung>& anmeldungenListe);
 
+
+private:
+    /*
+     * Attribute
+     */
     string studiengang;
     int verteilt; //maybe bool
     int pVersion;
@@ -60,6 +74,10 @@ private:
 
     vector<Anmeldung> anmeldungen;
     int anzTeilnehmer;
+
+    /*_____________________________________
+     * Methoden:
+     */
 
 };
 

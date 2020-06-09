@@ -1,5 +1,5 @@
 //
-// Created by Johnny on 08.06.2020.
+// Created by Johnny Imminger, Felix Steinke and Florian Grabowski
 //
 
 #ifndef KL_PLANNER_READINPUT_H
@@ -16,24 +16,32 @@ using namespace std;
 
 class ReadInput {
 public:
+    /*
+     * Attribute
+     */
     vector <Klausur> klausuren;
     vector <Anmeldung> anmeldungen;
     vector <Raum> raeume;
     vector <Professor> professoren;
     vector <Student> studenten;
 
+    /*_____________________________________
+     * Methoden:
+     */
+    //füllt alle Daten auf
     void init();
+
 private:
+    /*_____________________________________
+     * Methoden:
+     */
+    //ruft alle parse Methoden für die csv-Dateien auf
     void parseInput();
-    /*
-     * initialisiert alle Studenten über die Anmeldungen und added direkt die jeweiligen Prueufungen
-     */
+    //initialisiert alle Studenten über die Anmeldungen und added direkt die jeweiligen Prueufungen
     vector<Student> initStudenten(vector<Anmeldung> &anmeldungenListe, vector<Klausur> &pruefungenListe);
-    /*
-     * durchsucht einen vector von Professoren anhand der Identifikationsnummer und gibt den index zurück
-     * ist der Professor nicht enthalten, ist der rückgabewert -1
-     */
+    //durchsucht einen vector von Professoren anhand der Identifikationsnummer und gibt den index zurück ist der Professor nicht enthalten, ist der rückgabewert -1
     int isProfInVector(vector<Professor> &profs, int nr);
+    //TODO
     vector<Professor> createProfs();
 
 };

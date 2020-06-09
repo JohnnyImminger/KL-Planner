@@ -1,9 +1,12 @@
 //
-// Created by Johnny on 08.06.2020.
+// Created by Johnny Imminger, Felix Steinke and Florian Grabowski
 //
 
 #include "Raum.h"
 
+/*
+ * Konstruktoren
+ */
 
 Raum::Raum() {
     this->raumArt = "DummyRaum";
@@ -19,7 +22,40 @@ Raum::Raum(string &art, int adrBau, int adrRaum, int kap) {
     this->kapazataet = kap;
 }
 
-vector<Raum> Raum::parseRaumliste(const string& pathToFile) {
+/*
+ * toString()
+ */
+
+std::ostream &operator<<(ostream &out, const Raum &raum) {
+    out << raum.raumArt << ';' << raum.adrBau << '/' << raum.adrRaum << ';' << raum.kapazataet;
+    return out;
+}
+
+/*
+ * Getter
+ */
+
+const string &Raum::getRaumArt() const {
+    return raumArt;
+}
+
+int Raum::getAdrBau() const {
+    return adrBau;
+}
+
+int Raum::getAdrRaum() const {
+    return adrRaum;
+}
+
+int Raum::getKapazataet() const {
+    return kapazataet;
+}
+
+/*______________________________________________________________
+ * Methoden:
+ */
+
+vector<Raum> Raum::parse(const string& pathToFile) {
     ifstream inputStream(pathToFile);
     if(!inputStream) {
         cerr << "Fehler beim Oeffnen der Datei " << pathToFile << endl;
@@ -48,25 +84,4 @@ vector<Raum> Raum::parseRaumliste(const string& pathToFile) {
     }
     cout << "Raumliste eingelesen! - " << lines << " Zeilen eingelesen" << endl;
     return list;
-}
-
-std::ostream &operator<<(ostream &out, const Raum &raum) {
-    out << raum.raumArt << ';' << raum.adrBau << '/' << raum.adrRaum << ';' << raum.kapazataet;
-    return out;
-}
-
-const string &Raum::getRaumArt() const {
-    return raumArt;
-}
-
-int Raum::getAdrBau() const {
-    return adrBau;
-}
-
-int Raum::getAdrRaum() const {
-    return adrRaum;
-}
-
-int Raum::getKapazataet() const {
-    return kapazataet;
 }

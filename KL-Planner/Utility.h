@@ -1,9 +1,13 @@
 //
-// Created by stein on 08.06.2020.
+// Created by Johnny Imminger, Felix Steinke and Florian Grabowski
 //
 
 #ifndef KL_PLANNER_UTILITY_H
 #define KL_PLANNER_UTILITY_H
+
+/*
+ * Klasse bringt alle wichtigen Librarys and bietet nützliche Methoden
+ */
 
 #include <iostream>
 #include <fstream>

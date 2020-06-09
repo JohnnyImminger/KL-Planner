@@ -1,9 +1,12 @@
 //
-// Created by Johnny on 08.06.2020.
+// Created by Johnny Imminger, Felix Steinke and Florian Grabowski
 //
 
 #include "Anmeldung.h"
 
+/*
+ * Konstruktoren
+ */
 
 Anmeldung::Anmeldung() {
     this->matrikelNr = 404;
@@ -25,7 +28,49 @@ Anmeldung::Anmeldung(int matrikelNr, string &studiengang, int pVersion, int pNum
     this->dText = dText;
     this->pSemester = pSemester;
 }
+/*
+ * toString()
+ */
 
+std::ostream &operator<<(ostream &out, const Anmeldung &anmeldung) {
+    out << anmeldung.matrikelNr << ';' << anmeldung.studiengang << ';' << anmeldung.pVersion << ';' << anmeldung.pNummer << ';' << anmeldung.pForm << ';' << anmeldung.dText << ';' << anmeldung.pSemester;
+    return out;
+}
+
+/*
+ * Getter
+ */
+
+int Anmeldung::getMatrikelNr() const {
+    return matrikelNr;
+}
+
+const string &Anmeldung::getStudiengang() const {
+    return studiengang;
+}
+
+int Anmeldung::getPVersion() const {
+    return pVersion;
+}
+
+int Anmeldung::getPNummer() const {
+    return pNummer;
+}
+
+const string &Anmeldung::getPForm() const {
+    return pForm;
+}
+
+const string &Anmeldung::getDText() const {
+    return dText;
+}
+
+int Anmeldung::getPSemester() const {
+    return pSemester;
+}
+/*______________________________________________________________
+ * Methoden:
+ */
 
 vector<Anmeldung> Anmeldung::parse(const string& filename) {
     ifstream input(filename);
@@ -59,36 +104,9 @@ vector<Anmeldung> Anmeldung::parse(const string& filename) {
 }
 
 
-std::ostream &operator<<(ostream &out, const Anmeldung &anmeldung) {
-    out << anmeldung.matrikelNr << ';' << anmeldung.studiengang << ';' << anmeldung.pVersion << ';' << anmeldung.pNummer << ';' << anmeldung.pForm << ';' << anmeldung.dText << ';' << anmeldung.pSemester;
-    return out;
-}
 
-int Anmeldung::getMatrikelNr() const {
-    return matrikelNr;
-}
 
-const string &Anmeldung::getStudiengang() const {
-    return studiengang;
-}
 
-int Anmeldung::getPVersion() const {
-    return pVersion;
-}
 
-int Anmeldung::getPNummer() const {
-    return pNummer;
-}
 
-const string &Anmeldung::getPForm() const {
-    return pForm;
-}
-
-const string &Anmeldung::getDText() const {
-    return dText;
-}
-
-int Anmeldung::getPSemester() const {
-    return pSemester;
-}
 

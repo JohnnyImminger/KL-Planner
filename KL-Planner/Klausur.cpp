@@ -1,8 +1,12 @@
 //
-// Created by Johnny on 08.06.2020.
+// Created by Johnny Imminger, Felix Steinke and Florian Grabowski
 //
 
 #include "Klausur.h"
+
+/*
+ * Konstruktoren
+ */
 
 Klausur::Klausur() {
     this->studiengang = "DummyPruefung";
@@ -36,73 +40,22 @@ Klausur::Klausur(string& studiengang, int verteilt, int pVersion, int pNummer, s
     this->pForm = pForm;
     this->pSemester = pSemester;
     this->angeboten = angeboten;
-
 }
+/*
+ * toString()
+ */
 
-vector<Klausur> Klausur::parse(string pathToFile) {
-    ifstream input(pathToFile);
-    if(!input) {
-        cerr << "Fehler beim Oeffnen der Datei " << pathToFile << endl;
-    }
-    cout << "Starte Einlesen von Pruefungen!" << endl;
-
-    size_t lines = 0;
-    vector<Klausur> list;
-    string line;
-    int index = 0;
-    while (!input.eof()){
-        getline(input, line);
-        if(line.empty()) break;
-        vector<string> split = Utility::splitString(line, ';');
-        int verteilt;
-        int pVersion;
-        int pNummer;
-        int pPruefer1;
-        int pPruefer2;
-        float pDauer;
-        int pSemeser;
-        bool angeboten;
-        istringstream(split[1]) >> verteilt;
-        istringstream(split[2]) >> pVersion;
-        istringstream(split[3]) >> pNummer;
-        istringstream(split[5]) >> pPruefer1;
-        istringstream(split[7]) >> pPruefer2;
-        istringstream(split[9]) >> pDauer;
-        istringstream(split[11]) >> pSemeser;
-        angeboten = split[12] == "J";
-        Klausur a(split[0], verteilt, pVersion, pNummer, split[4], pPruefer1, split[6], pPruefer2,
-                  split[8], pDauer, split[10], pSemeser, angeboten);
-        a.setIndex(index);
-        list.push_back(a);
-        ++lines;
-        index++;
-    }
-    cout << "Pruefungen eingelesen! - " << lines << "Zeilen eingelesen" << endl;
-    return list;
-}
-
-void Klausur::collectAnmeldungen(vector<Anmeldung>& anmeldungenListe) {
-    int counter = 0;
-    for (auto& anmeldung : anmeldungenListe){
-        //TODO muss pNummer und pVersion identisch sein?
-        if (anmeldung.getPNummer() == this->pNummer && anmeldung.getPVersion() == this->pVersion){
-            this->anmeldungen.push_back(anmeldung);
-            counter++;
-        }
-    }
-    this->anzTeilnehmer = counter;
-    cout << "Added " << counter << "Anmeldungen zu Prüfung " << this->pName << endl;
-}
-
-
-
-std::ostream &operator<<(ostream &out, const Klausur &pruefung) {
-    out << pruefung.studiengang << ';' << pruefung.verteilt << ';' << pruefung.pVersion << ';' << pruefung.pNummer << ';'
-    << pruefung.pName << ';' << pruefung.pPruefer1<< ';' << pruefung.pruefer1 << ';' << pruefung.pPruefer2 << ';'
-    << pruefung.pruefer2 << ';' << pruefung.pDauer << ';' << pruefung.pForm << ';' << pruefung.pSemester << ';'
-    << pruefung.angeboten;
+std::ostream &operator<<(ostream &out, const Klausur &klausur) {
+    out << klausur.studiengang << ';' << klausur.verteilt << ';' << klausur.pVersion << ';' << klausur.pNummer << ';'
+        << klausur.pName << ';' << klausur.pPruefer1 << ';' << klausur.pruefer1 << ';' << klausur.pPruefer2 << ';'
+        << klausur.pruefer2 << ';' << klausur.pDauer << ';' << klausur.pForm << ';' << klausur.pSemester << ';'
+        << klausur.angeboten;
     return out;
 }
+
+/*
+ * Getter
+ */
 
 const string &Klausur::getStudiengang() const {
     return studiengang;
@@ -164,12 +117,81 @@ int Klausur::getIndex() {
     return this->index;
 }
 
+int Klausur::getAnzTeilnehmer() const {
+    return anzTeilnehmer;
+}
+
+/*
+ * Setter
+ */
+
 void Klausur::setIndex(int index) {
     this->index = index;
 }
 
-int Klausur::getAnzTeilnehmer() const {
-    return anzTeilnehmer;
+/*______________________________________________________________
+ * Methoden:
+ */
+
+vector<Klausur> Klausur::parse(string pathToFile) {
+    ifstream input(pathToFile);
+    if(!input) {
+        cerr << "Fehler beim Oeffnen der Datei " << pathToFile << endl;
+    }
+    cout << "Starte Einlesen von Pruefungen!" << endl;
+
+    size_t lines = 0;
+    vector<Klausur> list;
+    string line;
+    int index = 0;
+    while (!input.eof()){
+        getline(input, line);
+        if(line.empty()) break;
+        vector<string> split = Utility::splitString(line, ';');
+        int verteilt;
+        int pVersion;
+        int pNummer;
+        int pPruefer1;
+        int pPruefer2;
+        float pDauer;
+        int pSemeser;
+        bool angeboten;
+        istringstream(split[1]) >> verteilt;
+        istringstream(split[2]) >> pVersion;
+        istringstream(split[3]) >> pNummer;
+        istringstream(split[5]) >> pPruefer1;
+        istringstream(split[7]) >> pPruefer2;
+        istringstream(split[9]) >> pDauer;
+        istringstream(split[11]) >> pSemeser;
+        angeboten = split[12] == "J";
+        Klausur a(split[0], verteilt, pVersion, pNummer, split[4], pPruefer1, split[6], pPruefer2,
+                  split[8], pDauer, split[10], pSemeser, angeboten);
+        a.setIndex(index);
+        list.push_back(a);
+        ++lines;
+        index++;
+    }
+    cout << "Pruefungen eingelesen! - " << lines << "Zeilen eingelesen" << endl;
+    return list;
 }
+
+void Klausur::collectAnmeldungen(vector<Anmeldung>& anmeldungenListe) {
+    int counter = 0;
+    for (auto& anmeldung : anmeldungenListe){
+        //TODO muss pNummer und pVersion identisch sein?
+        if (anmeldung.getPNummer() == this->pNummer && anmeldung.getPVersion() == this->pVersion){
+            this->anmeldungen.push_back(anmeldung);
+            counter++;
+        }
+    }
+    this->anzTeilnehmer = counter;
+    cout << "Added " << counter << "Anmeldungen zu Prüfung " << this->pName << endl;
+}
+
+
+
+
+
+
 
 

@@ -1,5 +1,5 @@
 //
-// Created by stein on 08.06.2020.
+// Created by Johnny Imminger, Felix Steinke and Florian Grabowski
 //
 
 #include "Utility.h"

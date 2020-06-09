@@ -1,8 +1,12 @@
 //
-// Created by Johnny on 08.06.2020.
+// Created by Johnny Imminger, Felix Steinke and Florian Grabowski
 //
 
 #include "Professor.h"
+
+/*
+ * Konstruktoren
+ */
 
 Professor::Professor() {
     this->identNr = 404;
@@ -16,15 +20,17 @@ Professor::Professor(int identNr, string name) {
     this->anzPruefungen = 0;
 }
 
-void Professor::addPruefung(int pIndex) {
-    pAufsichtIndex.push_back(pIndex);
-    this->anzPruefungen++;
-}
+/*
+ * toString()
+ */
 
 std::ostream &operator<<(ostream &out, const Professor &professor) {
     out << professor.identNr << ';' << professor.name << ';' << professor.anzPruefungen;
     return out;
 }
+/*
+ * Getter
+ */
 
 int Professor::getIdentNr() const {
     return identNr;
@@ -36,4 +42,13 @@ const string &Professor::getName() const {
 
 int Professor::getAnzPruefungen() const {
     return anzPruefungen;
+}
+
+/*______________________________________________________________
+ * Methoden:
+ */
+
+void Professor::addPruefung(int pIndex) {
+    pAufsichtIndex.push_back(pIndex);
+    this->anzPruefungen++;
 }

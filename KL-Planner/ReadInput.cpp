@@ -1,5 +1,5 @@
 //
-// Created by Johnny on 08.06.2020.
+// Created by Johnny Imminger, Felix Steinke and Florian Grabowski
 //
 
 #include "ReadInput.h"
@@ -9,7 +9,7 @@ void ReadInput::init() {
 }
 
 void ReadInput::parseInput() {
-    this->raeume = Raum::parseRaumliste("../../input/Raumliste.csv");
+    this->raeume = Raum::parse("../../input/Raumliste.csv");
     this->anmeldungen = Anmeldung::parse("../../input/Anmeldungen_WS2019_KL.csv");
     this->klausuren = Klausur::parse("../../input/Angebotene_Pruefungen_KL.csv");
 }
