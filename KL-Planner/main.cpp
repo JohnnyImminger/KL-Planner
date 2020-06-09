@@ -8,7 +8,7 @@
 int main() {
     ReadInput data;
     data.init();
-    Algorithmus basic;
+    Algorithmus basic = Algorithmus(data);
     basic.run();
     return 0;
 }
