@@ -7,12 +7,19 @@
 
 #include "Utility.h"
 #include "Pruefung.h"
+#include "Professor.h"
 
 using namespace std;
 
 class ReadInput {
 public:
     static vector<Pruefung>* getPruefungen();
+    /*
+     * durchsucht einen vector von Professoren anhand der Identifikationsnummer und gibt den index zurück
+     * ist der Professor nicht enthalten, ist der rückgabewert -1
+     */
+    static int isProfInVector(vector<Professor> &profs, int nr);
+    static vector<Professor> createProfs();
 };
 
 

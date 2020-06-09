@@ -19,11 +19,11 @@ public:
     int getMatrikelNr() const;
     const string &getStudiengang() const;
 
-    static vector<Student> initStudenten(vector<Anmeldung>& anmeldungenListe, vector<Pruefung>& pruefungenListe); //initialisiert alle Studenten über die Anmeldungen und added direkt die jeweiligen Prueufungen
+    static vector<Student> initStudenten(vector<Anmeldung> &anmeldungenListe, vector<Pruefung> &pruefungenListe); //initialisiert alle Studenten über die Anmeldungen und added direkt die jeweiligen Prueufungen
 
 private:
     Student(int matikelNr, string studiengang); //Konstruktor
-    void addPruefung(Anmeldung& anmeldung, vector<Pruefung>& pruefungenListe); //added den Index aus Pruefungen in den Vector über identifikation in Anmeldung
+    void addPruefung(Anmeldung &anmeldung, vector<Pruefung> &pruefungenListe); //added den Index aus Pruefungen in den Vector über identifikation in Anmeldung
 
     int matrikelNr;
     string studiengang;

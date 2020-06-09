@@ -31,7 +31,7 @@ const string &Student::getStudiengang() const {
     return studiengang;
 }
 
-vector<Student> Student::initStudenten(vector<Anmeldung>& anmeldungenListe, vector<Pruefung>& pruefungenListe) {
+vector<Student> Student::initStudenten(vector<Anmeldung> &anmeldungenListe, vector<Pruefung> &pruefungenListe) {
     int counter = 0;
     vector<Student> liste;
     for (auto& anmeldung : anmeldungenListe){
@@ -50,7 +50,7 @@ vector<Student> Student::initStudenten(vector<Anmeldung>& anmeldungenListe, vect
     return liste;
 }
 
-void Student::addPruefung(Anmeldung& anmeldung, vector<Pruefung>& pruefungenListe) {
+void Student::addPruefung(Anmeldung &anmeldung, vector<Pruefung> &pruefungenListe) {
     for (int i=0; i<pruefungenListe.size(); i++){
         Pruefung pruefung = pruefungenListe [i];
         //TODO muss pNummer und pVersion identisch sein?
