@@ -31,25 +31,12 @@ const string &Student::getStudiengang() const {
     return studiengang;
 }
 
-vector<Student> Student::initStudenten(vector<Anmeldung> &anmeldungenListe, vector<Pruefung> &pruefungenListe) {
-    int counter = 0;
-    vector<Student> liste;
-    for (auto& anmeldung : anmeldungenListe){
-        for (auto& studenten : liste){
-            if (studenten.getMatrikelNr() == anmeldung.getMatrikelNr()){
-                studenten.addPruefung(anmeldung, pruefungenListe);
-                break;
-            }
-            Student st = Student(anmeldung.getMatrikelNr(),anmeldung.getStudiengang());
-            st.addPruefung(anmeldung, pruefungenListe);
-            liste.push_back(Student(anmeldung.getMatrikelNr(),anmeldung.getStudiengang()));
-            counter++;
-        }
-    }
-    cout << counter << " Studenten wurden erzeugt."  << endl;
-    return liste;
+void Student::addKlausur(int klausurIndex) {
+    anzKlausuren++;
+    klausurIndizes.push_back(klausurIndex);
 }
 
+/*
 void Student::addPruefung(Anmeldung &anmeldung, vector<Pruefung> &pruefungenListe) {
     for (int i=0; i<pruefungenListe.size(); i++){
         Pruefung pruefung = pruefungenListe [i];
@@ -60,3 +47,4 @@ void Student::addPruefung(Anmeldung &anmeldung, vector<Pruefung> &pruefungenList
         }
     }
 }
+ */

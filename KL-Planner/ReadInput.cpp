@@ -43,5 +43,26 @@ void ReadInput::parseInput() {
     this->raeume = Raum::parseRaumliste("../../input/Raumliste.csv");
     this->anmeldungen = Anmeldung::parse("../../input/Anmeldungen_WS2019_KL.csv");
     this->klausuren = Pruefung::parse("../../input/Angebotene_Pruefungen_KL.csv");
+}
 
+vector<Student> ReadInput::initStudenten(vector<Anmeldung> &anmeldungenListe, vector<Pruefung> &pruefungenListe) {
+    int counter = 0;
+    vector<Student> liste;
+    //TODO
+    /*
+    for (auto& anmeldung : anmeldungenListe){
+        for (auto& studenten : liste){
+            if (studenten.getMatrikelNr() == anmeldung.getMatrikelNr()){
+                studenten.addPruefung(anmeldung, pruefungenListe);
+                break;
+            }
+            Student st = Student(anmeldung.getMatrikelNr(),anmeldung.getStudiengang());
+            st.addPruefung(anmeldung, pruefungenListe);
+            liste.push_back(Student(anmeldung.getMatrikelNr(),anmeldung.getStudiengang()));
+            counter++;
+        }
+    }
+     */
+    cout << counter << " Studenten wurden erzeugt."  << endl;
+    return liste;
 }
