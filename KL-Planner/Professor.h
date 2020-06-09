@@ -13,6 +13,7 @@ using namespace std;
 class Professor {
 public:
     Professor();
+    Professor(int identNr, string name);
     friend std::ostream& operator<<(std::ostream &out, const Professor &student);
     void addPruefung(int pIndex);
     int getIdentNr() const;
@@ -21,7 +22,6 @@ public:
 
 
 private:
-    Professor(int identNr, string& name);
     int identNr;
     string name;
     int anzPruefungen;
