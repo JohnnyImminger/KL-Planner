@@ -7,6 +7,8 @@
 
 #include "Utility.h"
 #include "Anmeldung.h"
+#include "Student.h"
+
 
 using namespace std;
 
@@ -32,6 +34,7 @@ public:
     int getPSemester() const;
     bool isAngeboten() const;
     const vector<Anmeldung> &getAnmeldungen() const;
+    int getAnzTeilnehmer() const;
 
 private:
     Pruefung(string& studiengang, int verteilt, int pVersion, int pNummer, string& pName,
@@ -53,6 +56,7 @@ private:
     bool angeboten;
 
     vector<Anmeldung> anmeldungen;
+    int anzTeilnehmer;
 
 };
 

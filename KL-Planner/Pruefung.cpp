@@ -88,8 +88,11 @@ void Pruefung::collectAnmeldungen(vector<Anmeldung>& anmeldungenListe) {
             counter++;
         }
     }
+    this->anzTeilnehmer = counter;
     cout << "Added " << counter << "Anmeldungen zu Prüfung " << this->pName << endl;
 }
+
+
 
 std::ostream &operator<<(ostream &out, const Pruefung &pruefung) {
     out << pruefung.studiengang << ';' << pruefung.verteilt << ';' << pruefung.pVersion << ';' << pruefung.pNummer << ';'
@@ -153,6 +156,10 @@ bool Pruefung::isAngeboten() const {
 
 const vector<Anmeldung> &Pruefung::getAnmeldungen() const {
     return anmeldungen;
+}
+
+int Pruefung::getAnzTeilnehmer() const {
+    return anzTeilnehmer;
 }
 
 
