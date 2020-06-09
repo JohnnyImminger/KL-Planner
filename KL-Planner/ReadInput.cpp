@@ -38,3 +38,10 @@ int ReadInput::isProfInVector(vector<Professor> &profs, int nr) {
     }
     return index;
 }
+
+void ReadInput::parseInput() {
+    this->raeume = Raum::parseRaumliste("../../input/Raumliste.csv");
+    this->anmeldungen = Anmeldung::parse("../../input/Anmeldungen_WS2019_KL.csv");
+    this->klausuren = Pruefung::parse("../../input/Angebotene_Pruefungen_KL.csv");
+
+}

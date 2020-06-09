@@ -7,7 +7,6 @@
 
 #include "Utility.h"
 #include "Pruefung.h"
-#include "ReadInput.h"
 
 using namespace std;
 
