@@ -14,12 +14,15 @@ public:
     /*
      * Konstruktoren und toString();
      */
+
     Anmeldung();
     Anmeldung(int matrikelNr, string &studiengang, int pVersion, int pNummer, string &pForm, string &dText, int pSemester);
     friend std::ostream& operator<<(std::ostream &out, const Anmeldung &anmeldung);
+
     /*
      * Getter
      */
+
     int getMatrikelNr() const;
     const string &getStudiengang() const;
     int getPVersion() const;
@@ -31,6 +34,7 @@ public:
     /*_____________________________________
      * Methoden:
      */
+
     //holt sich die Daten aus der csv
     static vector<Anmeldung> parse(const string& filename);
 
@@ -38,6 +42,7 @@ private:
     /*
      * Attribute
      */
+
     int matrikelNr;
     string studiengang;
     int pVersion;

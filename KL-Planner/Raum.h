@@ -14,12 +14,15 @@ public:
     /*
      * Konstruktoren und toString();
      */
+
     Raum();
     Raum(string &art, int adrBau, int adrRaum, int kap);
     friend std::ostream& operator<<(std::ostream &out, const Raum &raum);
+
     /*
      * Getter
      */
+
     const string &getRaumArt() const;
     int getAdrBau() const;
     int getAdrRaum() const;
@@ -28,6 +31,7 @@ public:
     /*_____________________________________
      * Methoden:
      */
+
     //holt sich die Daten aus der csv
     static vector<Raum> parse(const string& pathToFile);
 
@@ -35,6 +39,7 @@ private:
     /*
      * Attribute
      */
+
     string raumArt;
     int adrBau;
     int adrRaum;

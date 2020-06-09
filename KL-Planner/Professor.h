@@ -15,12 +15,15 @@ public:
     /*
      * Konstruktoren und toString();
      */
+
     Professor();
     Professor(int identNr, string name);
     friend std::ostream& operator<<(std::ostream &out, const Professor &student);
+
     /*
      * Getter
      */
+
     void addPruefung(int pIndex);
     int getIdentNr() const;
     const string &getName() const;
@@ -34,6 +37,7 @@ private:
     /*
      * Attribute
      */
+
     int identNr;
     string name;
     int anzPruefungen;

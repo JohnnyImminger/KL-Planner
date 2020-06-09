@@ -173,23 +173,6 @@ vector<Klausur> Klausur::parse(string pathToFile) {
     cout << "Pruefungen eingelesen! - " << lines << "Zeilen eingelesen" << endl;
     return list;
 }
-/*
-void Klausur::collectAnmeldungen(vector<Anmeldung>& anmeldungenListe) {
-    int counter = 0;
-    for (auto& anmeldung : anmeldungenListe){
-        //TODO muss pNummer und pVersion identisch sein?
-        if (anmeldung.getPNummer() == this->pNummer && anmeldung.getPVersion() == this->pVersion){
-            this->anmeldungen.push_back(anmeldung);
-            counter++;
-        }
-    }
-    this->anzTeilnehmer = counter;
-    cout << "Added " << counter << "Anmeldungen zu Prüfung " << this->pName << endl;
-}
- */
-
-
-
 
 void Klausur::addStudent(int studentenIndex) {
     anzTeilnehmer++;

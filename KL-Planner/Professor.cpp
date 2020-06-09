@@ -28,6 +28,7 @@ std::ostream &operator<<(ostream &out, const Professor &professor) {
     out << professor.identNr << ';' << professor.name << ';' << professor.anzPruefungen;
     return out;
 }
+
 /*
  * Getter
  */

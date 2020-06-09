@@ -28,6 +28,7 @@ Anmeldung::Anmeldung(int matrikelNr, string &studiengang, int pVersion, int pNum
     this->dText = dText;
     this->pSemester = pSemester;
 }
+
 /*
  * toString()
  */
@@ -68,6 +69,7 @@ const string &Anmeldung::getDText() const {
 int Anmeldung::getPSemester() const {
     return pSemester;
 }
+
 /*______________________________________________________________
  * Methoden:
  */

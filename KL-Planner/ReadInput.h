@@ -19,6 +19,7 @@ public:
     /*
      * Attribute
      */
+
     vector <Klausur> klausuren;
     vector <Anmeldung> anmeldungen;
     vector <Raum> raeume;
@@ -39,17 +40,23 @@ private:
 
     //ruft alle parse Methoden für die csv-Dateien auf
     void parseInput();
+
     //füllt den vector professoren anhand der Klausurenliste, speichert in jedem Prof die Indizes der Klausuren
     void createProfs();
+
     //durchsucht einen vector von Professoren anhand der Identifikationsnummer und gibt den index zurück ist der Professor nicht enthalten, ist der rückgabewert -1
     int isProfInVector(int identNr);
 
     //darf erst gerufen werden, nachdem die Studenten erzeugt wurden!! - weist jeder klausur eine Liste von Studenten zu
     void attachStudentsToKlausur();
 
-    //TODO add comment like Prof
+    //füllt den vector student anhand der Anmeldungsliste, speichert in jedem Student die zur Anmeldung zugehörige Klausur
     void createStudenten();
+
+    //durchsucht einen vector von Studenten anhand der Identifikationsnummer und gibt den index zurück ist der Student nicht enthalten, ist der rückgabewert -1
     int isStudentInVector(int matrikelNr);
+
+    //durchsucht die klausuren nach pNummer (je nach Absrache auch nach pVersion) und gibt den Index der Klausur zurück
     int findKlausurIndex(int pNummer, int pVersion);
 };
 

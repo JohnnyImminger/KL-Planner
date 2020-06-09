@@ -14,18 +14,22 @@ public:
     /*
      * Konstruktoren und toString();
      */
+
     Student();
     Student(int matikelNr, string studiengang);
     friend std::ostream& operator<<(std::ostream &out, const Student &student);
+
     /*
-     * Getter
+     * Getter und Setter
      */
+
     int getMatrikelNr() const;
     const string &getStudiengang() const;
     int getAnzKlausuren() const;
     const vector<int> &getKlausurIndizes() const;
     int getIndex() const ;
     void setIndex(int index);
+
     /*_____________________________________
      * Methoden:
      */
@@ -37,6 +41,7 @@ private:
     /*
      * Attribute
      */
+
     int matrikelNr;
     string studiengang;
     int anzKlausuren;

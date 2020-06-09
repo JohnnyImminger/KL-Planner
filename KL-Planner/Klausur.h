@@ -18,11 +18,13 @@ public:
     /*
      * Konstruktoren und toString();
      */
+
     Klausur();
     Klausur(string& studiengang, int verteilt, int pVersion, int pNummer, string& pName,
             int pPruefer1, string& pruefer1, int pPruefer2, string& pruefer2,
             float pDauer, string& pForm, int pSemester, bool angeboten);
     friend std::ostream& operator<<(std::ostream &out, const Klausur &anmeldung);
+
     /*
      * Getter und Setter
      */
@@ -44,21 +46,23 @@ public:
     int getIndex();
     void setIndex(int index);
     int getAnzTeilnehmer() const;
-    void addStudent(int studentenIndex);
+
 
     /*_____________________________________
      * Methoden:
      */
+
     //holt sich die Daten aus der csv
     static vector<Klausur> parse(string pathToFile);
-    //TODO
-    //void collectAnmeldungen(vector<Anmeldung>& anmeldungenListe);
 
+    //added den Index des Studenten
+    void addStudent(int studentenIndex);
 
 private:
     /*
      * Attribute
      */
+
     string studiengang;
     int verteilt; //maybe bool
     int pVersion;
