@@ -4,6 +4,8 @@
 
 #include "ReadInput.h"
 
+#include <utility>
+
 void ReadInput::init() {
     parseInput();
     createProfs();
@@ -21,29 +23,24 @@ void ReadInput::createProfs() {
     cout << "creating profs" << endl;
     for (Klausur& klausur: klausuren) {
         if (klausur.getPPruefer1() != 0) {
-            int index = isProfInVector(klausur.getPPruefer1());
-            if (index >= 0) {
-                professoren.at(index).addPruefung(klausur.getIndex());
-            } else {
-                Professor p(klausur.getPPruefer1(), klausur.getPruefer1());
-                p.addPruefung(klausur.getIndex());
-                professoren.push_back(p);
-            }
+            processProf(klausur.getIndex(), klausur.getPPruefer1(), klausur.getPruefer1());
         }
         if (klausur.getPPruefer2() != 0) {
-            int index = isProfInVector(klausur.getPPruefer2());
-            if (index >= 0) {
-                professoren.at(index).addPruefung(klausur.getIndex());
-            } else {
-                Professor p(klausur.getPPruefer2(), klausur.getPruefer2());
-                p.addPruefung(klausur.getIndex());
-                professoren.push_back(p);
-            }
+            processProf(klausur.getIndex(), klausur.getPPruefer2(), klausur.getPruefer2());
         }
     }
     cout << "done creating profs - " << professoren.size() << " Profs created" << endl;
 }
-
+void ReadInput::processProf(int klausurIndex, int id, const string &name) {
+    int index = isProfInVector(id);
+    if (index >= 0) {
+        professoren.at(index).addPruefung(klausurIndex);
+    } else {
+        Professor p(id, name);
+        p.addPruefung(klausurIndex);
+        professoren.push_back(p);
+    }
+}
 int ReadInput::isProfInVector(int identNr) {
     int index = -1;
     for (int i = 0; i < professoren.size(); ++i) {
@@ -104,6 +101,3 @@ void ReadInput::attachStudentsToKlausur() {
     }
     cout << "Studenten zu Klausuren hinzugefuegt" << endl;
 }
-
-
-
