@@ -8,7 +8,8 @@
 int main() {
     ReadInput data;
     data.init();
-    Algorithmus basic = Algorithmus(data);
-    basic.run();
+    Algorithmus alg = Algorithmus(data);
+    alg.initTage();
+    alg.run();
     return 0;
 }

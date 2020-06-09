@@ -22,4 +22,14 @@ void Algorithmus::run() {
 
 }
 
+void Algorithmus::initTage() {
+    for (int i = 0; i < Utility::klausurTage; i++) {
+        tage[i] = data.raeume;
+    }
+}
+
+void Algorithmus::printResult() {
+
+}
+
 

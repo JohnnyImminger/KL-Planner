@@ -24,6 +24,8 @@ public:
      */
 
     void run();
+    void initTage();
+    void printResult();
 
 private:
     /*
@@ -31,7 +33,8 @@ private:
      */
 
     ReadInput data;
-
+    //9 Tage
+    vector<Raum> tage [Utility::klausurTage];
 
     /*_____________________________________
      * Methoden:
