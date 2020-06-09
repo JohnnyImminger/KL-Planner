@@ -24,3 +24,15 @@ std::ostream &operator<<(ostream &out, const Professor &professor) {
     out << professor.identNr << ';' << professor.name << ';' << professor.anzPruefungen;
     return out;
 }
+
+int Professor::getIdentNr() const {
+    return identNr;
+}
+
+const string &Professor::getName() const {
+    return name;
+}
+
+int Professor::getAnzPruefungen() const {
+    return anzPruefungen;
+}

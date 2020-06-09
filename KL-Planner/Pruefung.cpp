@@ -79,6 +79,10 @@ vector<Pruefung> Pruefung::parse(string pathToFile) {
     return list;
 }
 
+void Pruefung::collectAnmeldungen(vector<Anmeldung> anmeldungenListe) {
+
+}
+
 std::ostream &operator<<(ostream &out, const Pruefung &pruefung) {
     out << pruefung.studiengang << ';' << pruefung.verteilt << ';' << pruefung.pVersion << ';' << pruefung.pNummer << ';'
     << pruefung.pName << ';' << pruefung.pPruefer1<< ';' << pruefung.pruefer1 << ';' << pruefung.pPruefer2 << ';'
@@ -86,3 +90,61 @@ std::ostream &operator<<(ostream &out, const Pruefung &pruefung) {
     << pruefung.angeboten;
     return out;
 }
+
+const string &Pruefung::getStudiengang() const {
+    return studiengang;
+}
+
+int Pruefung::getVerteilt() const {
+    return verteilt;
+}
+
+int Pruefung::getPVersion() const {
+    return pVersion;
+}
+
+int Pruefung::getPNummer() const {
+    return pNummer;
+}
+
+const string &Pruefung::getPName() const {
+    return pName;
+}
+
+int Pruefung::getPPruefer1() const {
+    return pPruefer1;
+}
+
+const string &Pruefung::getPruefer1() const {
+    return pruefer1;
+}
+
+int Pruefung::getPPruefer2() const {
+    return pPruefer2;
+}
+
+const string &Pruefung::getPruefer2() const {
+    return pruefer2;
+}
+
+float Pruefung::getPDauer() const {
+    return pDauer;
+}
+
+const string &Pruefung::getPForm() const {
+    return pForm;
+}
+
+int Pruefung::getPSemester() const {
+    return pSemester;
+}
+
+bool Pruefung::isAngeboten() const {
+    return angeboten;
+}
+
+const vector<Anmeldung> &Pruefung::getAnmeldungen() const {
+    return anmeldungen;
+}
+
+
