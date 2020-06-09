@@ -17,7 +17,7 @@ class Anmeldung {
 public:
     Anmeldung();
     friend std::ostream& operator<<(std::ostream &out, const Anmeldung &anmeldung);
-    static vector<Anmeldung> parse(string filename);
+    static vector<Anmeldung> parse(const string& filename);
 
 private:
     Anmeldung(int matrikelNr, string &studiengang, int pVersion, int pNummer, string &pForm, string &dText, int pSemester);

@@ -27,7 +27,7 @@ Anmeldung::Anmeldung(int matrikelNr, string &studiengang, int pVersion, int pNum
 }
 
 
-vector<Anmeldung> Anmeldung::parse(string filename) {
+vector<Anmeldung> Anmeldung::parse(const string& filename) {
     ifstream input(filename);
     if(!input) {
         cerr << "Fehler beim Oeffnen der Datei " << filename << endl;
@@ -37,9 +37,10 @@ vector<Anmeldung> Anmeldung::parse(string filename) {
     size_t lines = 0;
     vector<Anmeldung> list;
     string line;
-    //TODO verbessere die eof Bedingung, für korrekte Erkennung
-    while (!input.eof()){
+    getline(input, line);
+    while (!input.eof()) {
         getline(input, line);
+        if(line.empty()) break;
         vector<string> split = Utility::splitString(line, ';');
         int matNr;
         int pVer;

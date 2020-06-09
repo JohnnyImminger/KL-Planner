@@ -31,6 +31,7 @@ vector<Raum> Raum::parseRaumliste(string pathToFile) {
     string line;
     while (!inputStream.eof()){
         getline(inputStream, line);
+        if(line.empty()) break;
         vector<string> splitRaum = Utility::splitString(line, ';');
         vector<string> splitAdr = Utility::splitString(splitRaum[1],'/');
         int adrBau;

@@ -49,9 +49,9 @@ vector<Pruefung> Pruefung::parse(string pathToFile) {
     size_t lines = 0;
     vector<Pruefung> list;
     string line;
-    //TODO verbessere die eof Bedingung, für korrekte Erkennung
     while (!input.eof()){
         getline(input, line);
+        if(line.empty()) break;
         vector<string> split = Utility::splitString(line, ';');
         int verteilt;
         int pVersion;
