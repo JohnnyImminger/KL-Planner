@@ -82,6 +82,7 @@ vector<Pruefung> Pruefung::parse(string pathToFile) {
 void Pruefung::collectAnmeldungen(vector<Anmeldung>& anmeldungenListe) {
     int counter = 0;
     for (auto& anmeldung : anmeldungenListe){
+        //TODO muss pNummer und pVersion identisch sein?
         if (anmeldung.getPNummer() == this->pNummer && anmeldung.getPVersion() == this->pVersion){
             this->anmeldungen.push_back(anmeldung);
             counter++;
