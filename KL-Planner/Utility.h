@@ -10,12 +10,14 @@
 #include <string>
 #include <vector>
 #include <sstream>
+#include <algorithm>
 
 using namespace std;
 
 class Utility {
 public:
     static vector<string> splitString(string &s, char delimiter);
+    static string removeChars(string &s, string &charsToRemove);
 };
 
 

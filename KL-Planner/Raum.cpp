@@ -19,7 +19,7 @@ Raum::Raum(string &art, int adrBau, int adrRaum, int kap) {
     this->kapazataet = kap;
 }
 
-vector<Raum> Raum::parseRaumliste(string pathToFile) {
+vector<Raum> Raum::parseRaumliste(const string& pathToFile) {
     ifstream inputStream(pathToFile);
     if(!inputStream) {
         cerr << "Fehler beim Oeffnen der Datei " << pathToFile << endl;
@@ -32,7 +32,9 @@ vector<Raum> Raum::parseRaumliste(string pathToFile) {
     while (!inputStream.eof()){
         getline(inputStream, line);
         if(line.empty()) break;
-        vector<string> splitRaum = Utility::splitString(line, ';');
+        string remove("\"");
+        line = Utility::removeChars(line, remove);
+        vector<string> splitRaum = Utility::splitString(line, ',');
         vector<string> splitAdr = Utility::splitString(splitRaum[1],'/');
         int adrBau;
         int adrRaum;
@@ -45,7 +47,7 @@ vector<Raum> Raum::parseRaumliste(string pathToFile) {
         cout << a << endl;
         ++lines;
     }
-    cout << "Raumliste eingelesen! - " << lines << "Zeilen eingelesen" << endl;
+    cout << "Raumliste eingelesen! - " << lines << " Zeilen eingelesen" << endl;
     return list;
 }
 
