@@ -60,7 +60,6 @@ vector<Raum> Raum::parse(const string& pathToFile) {
     if(!inputStream) {
         cerr << "Fehler beim Oeffnen der Datei " << pathToFile << endl;
     }
-    cout << "Starte Einlesen von Raumliste!" << endl;
 
     size_t lines = 0;
     vector<Raum> list;
@@ -82,6 +81,6 @@ vector<Raum> Raum::parse(const string& pathToFile) {
         list.push_back(a);
         ++lines;
     }
-    cout << "Raumliste eingelesen! - " << lines << " Zeilen eingelesen" << endl;
+    cout << lines << " Raeume eingelesen" << endl;
     return list;
 }

@@ -79,7 +79,6 @@ vector<Anmeldung> Anmeldung::parse(const string& filename) {
     if(!input) {
         cerr << "Fehler beim Oeffnen der Datei " << filename << endl;
     }
-    cout << "Starte Einlesen von Anmeldungen!" << endl;
 
     size_t lines = 0;
     vector<Anmeldung> list;
@@ -101,7 +100,7 @@ vector<Anmeldung> Anmeldung::parse(const string& filename) {
         list.push_back(a);
         ++lines;
     }
-    cout << "Anmeldungen eingelesen! - " << lines << "Zeilen eingelesen" << endl;
+    cout << lines << " Anmeldungen eingelesen" << endl;
     return list;
 }
 

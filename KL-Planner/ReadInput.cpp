@@ -20,7 +20,6 @@ void ReadInput::parseInput() {
 }
 
 void ReadInput::createProfs() {
-    cout << "creating profs" << endl;
     for (Klausur& klausur: klausuren) {
         if (klausur.getPPruefer1() != 0) {
             processProf(klausur.getIndex(), klausur.getPPruefer1(), klausur.getPruefer1());
@@ -29,7 +28,7 @@ void ReadInput::createProfs() {
             processProf(klausur.getIndex(), klausur.getPPruefer2(), klausur.getPruefer2());
         }
     }
-    cout << "done creating profs - " << professoren.size() << " Profs created" << endl;
+    cout << professoren.size() << " Professoren angelegt" << endl;
 }
 void ReadInput::processProf(int klausurIndex, int id, const string &name) {
     int index = isProfInVector(id);
@@ -72,7 +71,7 @@ void ReadInput::createStudenten() {
         }
     }
     cout << "Klausuren nicht gefunden: " << count << endl;
-    cout << "done creating studenten - " << studenten.size() << " Studenten created" << endl;
+    cout << studenten.size() << " Studenten angelegt" << endl;
 }
 
 int ReadInput::isStudentInVector(int matrikelNr) {
@@ -97,7 +96,6 @@ int ReadInput::findKlausurIndex(int pNummer, int pVersion) {
 }
 
 void ReadInput::attachStudentsToKlausur() {
-    cout << "Start Studenten zu Klausuren hinzufuegen" << endl;
     for (const Student& student: studenten) {
         for (int klausurIndex: student.getKlausurIndizes()) {
             klausuren.at(klausurIndex).addStudent(student.getIndex());

@@ -137,7 +137,6 @@ vector<Klausur> Klausur::parse(string pathToFile) {
     if(!input) {
         cerr << "Fehler beim Oeffnen der Datei " << pathToFile << endl;
     }
-    cout << "Starte Einlesen von Pruefungen!" << endl;
 
     size_t lines = 0;
     vector<Klausur> list;
@@ -170,7 +169,7 @@ vector<Klausur> Klausur::parse(string pathToFile) {
         ++lines;
         index++;
     }
-    cout << "Pruefungen eingelesen! - " << lines << "Zeilen eingelesen" << endl;
+    cout << lines << " Klausuren eingelesen" << endl;
     return list;
 }
 
