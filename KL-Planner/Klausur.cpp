@@ -140,13 +140,10 @@ int Klausur::getStartZeitTimeSlot() const {
     return startZeitTimeSlot;
 }
 
-int Klausur::getAdrBau() const {
-    return adrBau;
+int Klausur::getRaumRef() {
+    return raumRef;
 }
 
-int Klausur::getAdrRaum() const {
-    return adrRaum;
-}
 /*
  * Setter
  */
@@ -163,13 +160,10 @@ void Klausur::setStartZeitTimeSlot(int startZeitTimeSlot) {
     Klausur::startZeitTimeSlot = startZeitTimeSlot;
 }
 
-void Klausur::setAdrBau(int adrBau) {
-    Klausur::adrBau = adrBau;
+void Klausur::setRaumRef() {
+
 }
 
-void Klausur::setAdrRaum(int adrRaum) {
-    Klausur::adrRaum = adrRaum;
-}
 /*______________________________________________________________
  * Methoden:
  */
@@ -215,11 +209,4 @@ vector<Klausur> Klausur::parse(string pathToFile) {
     cout << lines << " Klausuren eingelesen" << endl;
     return list;
 }
-
-
-
-
-
-
-
 

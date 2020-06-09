@@ -49,12 +49,10 @@ public:
     int getDauerTimeSlots() const;
     int getTag() const;
     int getStartZeitTimeSlot() const;
-    int getAdrBau() const;
-    int getAdrRaum() const;
     void setTag(int tag);
     void setStartZeitTimeSlot(int startZeitTimeSlot);
-    void setAdrBau(int adrBau);
-    void setAdrRaum(int adrRaum);
+    int getRaumRef();
+    void setRaumRef();
 
     /*_____________________________________
      * Methoden:
@@ -93,8 +91,7 @@ private:
     int dauerTimeSlots;
     int tag;
     int startZeitTimeSlot;
-    int adrBau;
-    int adrRaum;
+    int raumRef;
 
     /*_____________________________________
      * Methoden:

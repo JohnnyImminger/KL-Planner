@@ -32,12 +32,13 @@ void Algorithmus::printResult(const string &filename) {
     ofstream file;
     file.open(filename);
     for (int i = 0; i < data.klausuren.size(); ++i) {
-        file << data.klausuren.at(i) << ';';
-        file << ' ' << ';';
-        file << ' ' << ';';
-        file << ' ' << ';';
-        file << ' ' << ';';
-        file << endl;
+        Klausur cKlausur = data.klausuren.at(i);
+        Raum cRaum = data.raeume.at(cKlausur.getRaumRef());
+        file << cKlausur << ';';
+        file << cRaum.getAdrBau() << '/';
+        file << cRaum.getAdrRaum() << ';';
+        file << cKlausur.getTag() << ';';
+        file << (float)cKlausur.getStartZeitTimeSlot()/Utility::timeSlotsProStunde + Utility::startZeitProTag << endl;
     }
 
 }
