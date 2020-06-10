@@ -28,6 +28,9 @@ public:
     int getIdentNr() const;
     const string &getName() const;
     int getAnzPruefungen() const;
+    int getIndex() const;
+    void setIndex(int index);
+
 
     const vector<int> &getKlausurAufsichtIndices() const;
 
@@ -39,7 +42,7 @@ private:
     /*
      * Attribute
      */
-
+    int index;
     int identNr;
     string name;
     int anzPruefungen;

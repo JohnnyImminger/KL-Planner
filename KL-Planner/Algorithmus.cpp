@@ -34,26 +34,38 @@ Algorithmus::Algorithmus(ReadInput& data) {
 void Algorithmus::run() {
     map<string, vector<int>> klausuren = klausurenGroupByStudiengang();
     sortMap(klausuren);
-
+    string lastStudiengang = "AB";
+    int nextKlausur = selectNextKlausur(lastStudiengang, klausuren);
 
 }
 
-void Algorithmus::sortMap(const map<string, vector<int>>& map) {
-    for (const pair<string, vector<int>>& studiengang: map) {
-        vector<int> curr = studiengang.second;
-        //sort(curr.begin(), curr.end(), &Algorithmus::compareKlausurteilnehmergroesseByIndex);
+int Algorithmus::selectNextKlausur(string &lastStg, map <string, vector<int>> &map) {
+
+
+
+    return 0;
+}
+
+void Algorithmus::sortMap(const map<string, vector<int>>& map) { //TODO sort funktioniert nicht
+    for (const auto & studiengang: map) {
+        vector<int> klausuren = studiengang.second;
+        bool swapped;
+        do {
+            swapped = false;
+            for (int i = 0; i < klausuren.size()-1; ++i) {
+                if(data.klausuren.at(klausuren.at(i)).getAnzTeilnehmer() > data.klausuren.at(klausuren.at(i+1)).getAnzTeilnehmer()) {
+                    int tmp = klausuren.at(i);
+                    klausuren.at(i) = klausuren.at(i+1);
+                    klausuren.at(i+1) = tmp;
+                    swapped = true;
+                }
+            }
+        } while (swapped);
     }
 }
 
-int Algorithmus::compareKlausurteilnehmergroesseByIndex(int index1, int index2) {
-    int k1 = data.klausuren.at(index1).getAnzTeilnehmer();
-    int k2 = data.klausuren.at(index2).getAnzTeilnehmer();
-    if (k1 > k2) return 1;
-    if (k1 == k2) return 0;
-    return -1;
-}
-
 map<string, vector<int>> Algorithmus::klausurenGroupByStudiengang() {
+    //TODO ergebnis der methode ist so nicht verwendbar-> im debugger zu sehen
     map<string,vector<int>> result;
     for(Klausur klausur : data.klausuren){
         if(result.find(klausur.getStudiengang()) == result.end()) {

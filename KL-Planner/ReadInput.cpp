@@ -28,8 +28,18 @@ void ReadInput::createProfs() {
             processProf(klausur.getIndex(), klausur.getPPruefer2(), klausur.getPruefer2());
         }
     }
+    indexProfs();
     cout << professoren.size() << " Professoren angelegt" << endl;
 }
+
+void ReadInput::indexProfs() {
+    int index = 0;
+    for (Professor &prof: professoren) {
+        prof.setIndex(index);
+        index++;
+    }
+}
+
 void ReadInput::processProf(int klausurIndex, int id, const string &name) {
     int index = isProfInVector(id);
     if (index >= 0) {
