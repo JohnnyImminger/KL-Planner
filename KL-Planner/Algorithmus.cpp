@@ -165,7 +165,7 @@ bool Algorithmus::einsortierenKlausur(Klausur &klausur) {
     int dauerTimeSlot = klausur.getDauerTimeSlots();
     int anzTeilnehmer = klausur.getAnzTeilnehmer();
     int raumIndex = 0;
-
+    //TODO baue Methode um, dass ein guter Raum zur kapazität gesucht wird, dann wird die frühste zeit an allen tagen versucht, bei fehlversuchen wird die fehlerschranke zur kapazität erhöht
     while(true){
         /*______________________________________________________________________________________________________________
          * Das Ende eines Tages wird erst sehr spät erreicht und resettet den Prozess
@@ -184,11 +184,13 @@ bool Algorithmus::einsortierenKlausur(Klausur &klausur) {
          * Suche einen Raum - niedirige Uhrzeiten werden zuerst aufgefüllt
          */
         //Überprüft ob genug räume an diesem Tag zur verfügung stehen um die kapazitaet unterzubringen
-        if (checkRaeumeByVectorSizeForEinsortieren(klausur, startTag, raumIndex)){
+        if (!checkRaeumeByVectorSizeForEinsortieren(klausur, startTag, raumIndex)){
             startTag++;
+            raumIndex = 0;
             //wenn in allen Tagen nichts zu dieser Zeit gefunden wurde, erhöhe die Zeit
             if (startTag == lastSortedDay){
                 startZeitTimeSlot++;
+                raumIndex = 0;
             }
             continue;
         }
@@ -203,11 +205,13 @@ bool Algorithmus::einsortierenKlausur(Klausur &klausur) {
         //Prüfe ob der Termin den Profs der Klausur passt --> Nein --> buche späteren Zeitpunkt
         if (!checkProfForEinsortieren(klausur, startZeitTimeSlot, dauerTimeSlot, startTag)){
             startZeitTimeSlot++;
+            raumIndex = 0;
             continue;
         }
         //Prüfe ob der Termin den Studenten der Klausur passt --> Nein --> nehme späteren Zeitpunkt
         if (!checkStudentForEinsortieren(klausur, startZeitTimeSlot, dauerTimeSlot, startTag)){
             startZeitTimeSlot++;
+            raumIndex = 0;
             continue;
         }
         /*______________________________________________________________________________________________________________
@@ -248,6 +252,7 @@ bool Algorithmus::checkRaeumeByKapazitaetForEinsortieren(Klausur &klausur, int s
     int anzTeilnehmer = klausur.getAnzTeilnehmer();
     while (anzTeilnehmer > 0){
         Raum raum = tage[startTag].at(tempRaumIndex);
+        //TODO nutze is valid methode
         if (!raum.areTimeSlotsFree(startZeitTimeSlot,dauerTimeSlot)){
             return false;
         }
@@ -268,7 +273,7 @@ bool Algorithmus::checkProfForEinsortieren(Klausur &klausur, int startZeitTimeSl
 
 bool Algorithmus::checkStudentForEinsortieren(Klausur &klausur, int startZeitTimeSlot, int dauerTimeSlot, int startTag) {
     for (int studentIndex : klausur.getStudenten()) {
-        if (!isTimeSlotValidForProf(data.professoren.at(studentIndex),startZeitTimeSlot,dauerTimeSlot,startTag)){
+        if (!isTimeSlotValidForStudent(data.studenten.at(studentIndex),startZeitTimeSlot,dauerTimeSlot,startTag)){
             return false;
         }
     }
