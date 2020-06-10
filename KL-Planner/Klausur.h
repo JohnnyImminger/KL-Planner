@@ -51,8 +51,9 @@ public:
     int getStartZeitTimeSlot() const;
     void setTag(int tag);
     void setStartZeitTimeSlot(int startZeitTimeSlot);
-    int getRaumRef();
-    void setRaumRef();
+    vector<int> getRaumRefs();
+    void addRaumRef(int raumRef);
+    void removeRaumRef(int index);
 
     /*_____________________________________
      * Methoden:
@@ -91,7 +92,7 @@ private:
     int dauerTimeSlots;
     int tag;
     int startZeitTimeSlot;
-    int raumRef = -1;
+    vector<int> raumRefs;
 
     /*_____________________________________
      * Methoden:

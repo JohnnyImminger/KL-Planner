@@ -140,8 +140,8 @@ int Klausur::getStartZeitTimeSlot() const {
     return startZeitTimeSlot;
 }
 
-int Klausur::getRaumRef() {
-    return raumRef;
+vector<int> Klausur::getRaumRefs() {
+    return raumRefs;
 }
 
 /*
@@ -160,8 +160,12 @@ void Klausur::setStartZeitTimeSlot(int startZeitTimeSlot) {
     Klausur::startZeitTimeSlot = startZeitTimeSlot;
 }
 
-void Klausur::setRaumRef() {
+void Klausur::addRaumRef(int raumRef) {
+    raumRefs.push_back(raumRef);
+}
 
+void Klausur::removeRaumRef(int elementToRemove) {
+    raumRefs.erase(raumRefs.begin()+elementToRemove);
 }
 
 /*______________________________________________________________

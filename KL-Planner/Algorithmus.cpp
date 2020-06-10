@@ -33,15 +33,19 @@ void Algorithmus::printResult(const string &filename) {
     file.open(filename);
     for (int i = 0; i < data.klausuren.size(); ++i) {
         Klausur cKlausur = data.klausuren.at(i);
-        Raum cRaum = data.raeume.at(cKlausur.getRaumRef());
+
         file << cKlausur << ';';
-        file << cRaum.getAdrBau() << '/';
-        file << cRaum.getAdrRaum() << ';';
+
+        vector<int> klausurRaeume = cKlausur.getRaumRefs();
+        for (int j: klausurRaeume) {
+            Raum cRaum = data.raeume.at(j);
+            file << cRaum.getAdrBau() << '/';
+            file << cRaum.getAdrRaum() << ';';
+        }
+
         file << cKlausur.getTag() << ';';
         file << (float)cKlausur.getStartZeitTimeSlot()/Utility::timeSlotsProStunde + Utility::startZeitProTag << endl;
     }
-
-
 }
 
 bool Algorithmus::isTimeSlotValidForProf(Professor& prof, int startTimeSlot, int dauerTimeSlot, int tag) {
@@ -50,7 +54,7 @@ bool Algorithmus::isTimeSlotValidForProf(Professor& prof, int startTimeSlot, int
         //Hol die Klausur aus der Referenz
         Klausur beaufsichtigteKlausur = data.klausuren[index];
         //ist die Klausur vergeben?
-        if (beaufsichtigteKlausur.getRaumRef() == -1) {
+        if (beaufsichtigteKlausur.getRaumRefs().empty()) {
             continue;
         }
         //findet die Klausur am selben Tag statt?
@@ -73,7 +77,7 @@ bool Algorithmus::isTimeSlotValidForStudent(Student& student, int startTimeSlot,
         //Hol die Klausur aus der Referenz
         Klausur angemeldeteKlausur = data.klausuren[index];
         //ist die Klausur vergeben?
-        if (angemeldeteKlausur.getRaumRef() == -1) {
+        if (angemeldeteKlausur.getRaumRefs().empty()) {
             continue;
         }
         //findet die Klausur am selben Tag statt?
