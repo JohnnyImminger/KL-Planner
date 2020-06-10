@@ -39,18 +39,21 @@ void Algorithmus::run() {
 }
 
 void Algorithmus::sortMap(const map<string, vector<int>>& map) {
-    for (const pair<string, vector<int>>& studiengang: map) {
-        vector<int> curr = studiengang.second;
-        //sort(curr.begin(), curr.end(), &Algorithmus::compareKlausurteilnehmergroesseByIndex);
+    for (pair<string, vector<int>> studiengang: map) {
+        vector<int> current = studiengang.second;
+        bool swapped;
+        do {
+            swapped = false;
+            for (int i = 0; i < current.size()-1; ++i) {
+                if (data.klausuren.at(current.at(i)).getAnzTeilnehmer() < data.klausuren.at(current.at(i+1)).getAnzTeilnehmer()) {
+                    int temp = current.at(i);
+                    current.at(i) = current.at(i+1);
+                    current.at(i+1) = temp;
+                    swapped = true;
+                }
+            }
+        } while (swapped);
     }
-}
-
-int Algorithmus::compareKlausurteilnehmergroesseByIndex(int index1, int index2) {
-    int k1 = data.klausuren.at(index1).getAnzTeilnehmer();
-    int k2 = data.klausuren.at(index2).getAnzTeilnehmer();
-    if (k1 > k2) return 1;
-    if (k1 == k2) return 0;
-    return -1;
 }
 
 map<string, vector<int>> Algorithmus::klausurenGroupByStudiengang() {
