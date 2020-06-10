@@ -20,7 +20,7 @@ public:
      */
 
     Klausur();
-    Klausur(string& studiengang, string vertiefung, int pVersion, int pNummer, string& pName,
+    Klausur(string& studiengang, string& vertiefung, int pVersion, int pNummer, string& pName,
             int pPruefer1, string& pruefer1, int pPruefer2, string& pruefer2,
             float pDauer, string& pForm, int pSemester, bool angeboten);
     friend std::ostream& operator<<(std::ostream &out, const Klausur &anmeldung);
@@ -54,6 +54,10 @@ public:
     vector<int> getRaumRefs();
     void addRaumRef(int raumRef);
     void removeRaumRef(int index);
+    bool isEingeplant() const;
+    bool isPlanbar() const;
+    void setEingeplant(bool eingeplant);
+    void setPlanbar(bool planbar);
 
     /*_____________________________________
      * Methoden:
@@ -88,12 +92,15 @@ private:
     vector<int> studenten;
     int anzTeilnehmer;
 
-    //TODO isEingeplant anlegen?
+private:
+
     int dauerTimeSlots;
     int tag;
     int startZeitTimeSlot;
     vector<int> raumRefs;
 
+    bool planbar;
+    bool eingeplant;
     /*_____________________________________
      * Methoden:
      */
