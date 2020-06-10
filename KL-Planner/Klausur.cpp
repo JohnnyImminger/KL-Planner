@@ -151,6 +151,11 @@ bool Klausur::isEingeplant() const {
 bool Klausur::isPlanbar() const {
     return planbar;
 }
+
+vector<int> Klausur::getProfs() {
+    return profRefs;
+}
+
 /*
  * Setter
  */
@@ -182,6 +187,11 @@ void Klausur::setEingeplant(bool eingeplant) {
 void Klausur::setPlanbar(bool planbar) {
     Klausur::planbar = planbar;
 }
+
+void Klausur::addProf(int profIndex) {
+    profRefs.push_back(profIndex);
+}
+
 /*______________________________________________________________
  * Methoden:
  */
@@ -237,8 +247,3 @@ void Klausur::outputIgnored(const string& line) {
     output << line << endl;
     output.close();
 }
-
-
-
-
-

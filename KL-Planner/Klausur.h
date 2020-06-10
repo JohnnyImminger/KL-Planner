@@ -58,6 +58,8 @@ public:
     bool isPlanbar() const;
     void setEingeplant(bool eingeplant);
     void setPlanbar(bool planbar);
+    void addProf(int profIndex);
+    vector<int> getProfs();
 
     /*_____________________________________
      * Methoden:
@@ -92,12 +94,11 @@ private:
     vector<int> studenten;
     int anzTeilnehmer;
 
-private:
-
     int dauerTimeSlots;
     int tag;
     int startZeitTimeSlot;
     vector<int> raumRefs;
+    vector<int> profRefs;
 
     bool planbar;
     bool eingeplant;
