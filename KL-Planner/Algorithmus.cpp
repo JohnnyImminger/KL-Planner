@@ -67,7 +67,7 @@ bool Algorithmus::isTimeSlotValidForProf(Professor& prof, int startTimeSlot, int
     return true;
 }
 
-bool Algorithmus::isTimeSlotValidForStudent(Student& student, int startTimeSlot, int dauerTimeSlot, int tag) { //TODO isTimeSlotValidForStudent implementiern
+bool Algorithmus::isTimeSlotValidForStudent(Student& student, int startTimeSlot, int dauerTimeSlot, int tag) {
     //iteriere über alle Klausuren die ein Prof hat
     for (int index : student.getKlausurIndices()) {
         //Hol die Klausur aus der Referenz
@@ -79,9 +79,9 @@ bool Algorithmus::isTimeSlotValidForStudent(Student& student, int startTimeSlot,
         //findet die Klausur am selben Tag statt?
         if (angemeldeteKlausur.getTag() == tag) {
             //Ende der vorhandene Klausur + Prof Pause <= neue Startzeit
-            bool c1 = angemeldeteKlausur.getStartZeitTimeSlot() + angemeldeteKlausur.getDauerTimeSlots() + Utility::timeSlotsPauseProf <= startTimeSlot;
+            bool c1 = angemeldeteKlausur.getStartZeitTimeSlot() + angemeldeteKlausur.getDauerTimeSlots() + Utility::timeSlotsPauseStudent <= startTimeSlot;
             //Start der vorhandenen Klausur >= Ende der neuen Klausur + Prof Pause
-            bool c2 = angemeldeteKlausur.getStartZeitTimeSlot() >= startTimeSlot + dauerTimeSlot + Utility::timeSlotsPauseProf;
+            bool c2 = angemeldeteKlausur.getStartZeitTimeSlot() >= startTimeSlot + dauerTimeSlot + Utility::timeSlotsPauseStudent;
             if(!(c1&&c2)) {
                 return false;
             }
