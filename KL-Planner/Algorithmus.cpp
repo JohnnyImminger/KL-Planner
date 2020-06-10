@@ -94,8 +94,8 @@ bool Algorithmus::isTimeSlotValidForStudent(Student& student, int startTimeSlot,
     return true;
 }
 
-bool Algorithmus::isTimeSlotValidForRoom(Raum& raum, int startTimeSlot, int dauerTimeSlot, int tag) { //TODO isTimeSlotValidForRoom implementiern
-    return false;
+bool Algorithmus::isTimeSlotValidForRoom(Raum& raum, int startTimeSlot, int dauerTimeSlot, int tag) { //TODO überprüfen von Konsrukten
+    return raum.areTimeSlotsFree(startTimeSlot,dauerTimeSlot);
 }
 
 
