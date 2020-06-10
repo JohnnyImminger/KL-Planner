@@ -26,7 +26,7 @@ public:
     static string removeChars(string &s, string &charsToRemove);
 
     /*
-     * Varialbe Vorgaben durch Aufgabenstellung - Zeitangaben in Stunden --> float
+     * Variable Vorgaben durch Aufgabenstellung - Zeitangaben in Stunden --> float
      */
 
     //Bei Lehrenden muss zwischen zwei Einsaetzen eine Pause von mindestens 30 Minuten liegen.

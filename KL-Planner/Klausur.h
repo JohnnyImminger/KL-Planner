@@ -97,6 +97,7 @@ private:
     /*_____________________________________
      * Methoden:
      */
+    static void outputIgnored(const string& line);
 
 };
 
