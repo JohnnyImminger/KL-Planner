@@ -56,7 +56,7 @@ void ReadInput::createStudenten() {
     int studentenCount = 0;
     for (Anmeldung& anmeldung: anmeldungen) {
         int index = isStudentInVector(anmeldung.getMatrikelNr());
-        int klausurIndex = findKlausurIndex(anmeldung.getPNummer(), anmeldung.getPVersion());
+        int klausurIndex = findKlausurIndex(anmeldung.getStudiengang(), anmeldung.getPVersion(), anmeldung.getPNummer());
         if (klausurIndex < 0){
             //cout << anmeldung << endl;
             //cout << "Klausur konnte nicht gefunden werden!" << endl;
@@ -88,12 +88,12 @@ int ReadInput::isStudentInVector(int matrikelNr) {
     return index;
 }
 
-int ReadInput::findKlausurIndex(int pNummer, int pVersion) {
+int ReadInput::findKlausurIndex(const string& studiengang, int pVersion, int pNummer) {
     for (Klausur& klausur: klausuren) {
-        //TODO is pVersion important?
-        if (klausur.getPNummer() == pNummer){ //&& klausur.getPVersion() == pVersion
-            return klausur.getIndex();
-        }
+        if (studiengang != klausur.getStudiengang()) continue;
+        if (pVersion != klausur.getPVersion()) continue;
+        if (pNummer != klausur.getPNummer()) continue;
+        return klausur.getIndex();
     }
     return -1;
 }

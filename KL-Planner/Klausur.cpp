@@ -168,7 +168,7 @@ void Klausur::setRaumRef() {
  * Methoden:
  */
 
-vector<Klausur> Klausur::parse(string pathToFile) {
+vector<Klausur> Klausur::parse(const string& pathToFile) {
     ifstream input(pathToFile);
     if(!input) {
         cerr << "Fehler beim Oeffnen der Datei " << pathToFile << endl;
