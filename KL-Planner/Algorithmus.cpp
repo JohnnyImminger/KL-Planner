@@ -67,11 +67,11 @@ bool Algorithmus::isTimeSlotValidForProf(Professor& prof, int startTimeSlot, int
     return true;
 }
 
-bool Algorithmus::isTimeSlotValidForStudent(Student& student, int startTimeSlot, int dauerTimeSlot, int tag) {
+bool Algorithmus::isTimeSlotValidForStudent(Student& student, int startTimeSlot, int dauerTimeSlot, int tag) { //TODO isTimeSlotValidForStudent implementiern
     return false;
 }
 
-bool Algorithmus::isTimeSlotValidForRoom(Raum& raum, int startTimeSlot, int dauerTimeSlot, int tag) {
+bool Algorithmus::isTimeSlotValidForRoom(Raum& raum, int startTimeSlot, int dauerTimeSlot, int tag) { //TODO isTimeSlotValidForRoom implementiern
     return false;
 }
 
