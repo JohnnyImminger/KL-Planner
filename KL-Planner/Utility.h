@@ -27,21 +27,27 @@ public:
 
     static bool isTimeSlotTooLong(int startTimeSlot, int dauerTimeSlot);
     /*
-     * Varialbe Vorgaben durch Aufgabenstellung
+     * Varialbe Vorgaben durch Aufgabenstellung - Zeitangaben in Stunden --> float
      */
-    //TODO comments der Aufgabenstellung zur Erklärung
+
+    //Bei Lehrenden muss zwischen zwei Einsaetzen eine Pause von mindestens 30 Minuten liegen.
     constexpr const static float pauseProf = 0.5; //30min
+    //Fur die Studierenden muss eine Pause von mindestens 4 Stunden zwischen zwei Klausuren liegen.
     constexpr const static float pauseStudent = 4;
+    //In demselben Raum muss zwischen zwei Klausuren eine Pause von mindestens einer Stunde liegen.
     constexpr const static float pauseRaum = 1;
+    //Dabei durfen Studierende hoechstens 2 Klausuren an einem Tag schreiben.
     const static int maxKlausurenProTagStudent = 2;
+    //Tag - (zwischen 8 und 18 Uhr)
     constexpr const static float startZeitProTag = 8;
     constexpr const static float endZeitProTag = 18;
+    //SS2020: 20.07.2020 - 29.07.2020
     const static int klausurTage = 9;
 
     constexpr const static float gesamtZeitProTag = endZeitProTag - startZeitProTag;
 
     /*
-     * Umrechnung der Zeiten in Timeslots
+     * Umrechnung der Zeiten in Timeslots - Zeitangaben werden von Stunden in Timeslots umgerechnet
      */
 
     const static int timeSlotsProStunde = 4; //15min pro Slot
