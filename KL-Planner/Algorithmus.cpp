@@ -55,7 +55,6 @@ bool Algorithmus::isTimeSlotValidForProf(Professor& prof, int startTimeSlot, int
         }
         //findet die Klausur am selben Tag statt?
         if (beaufsichtigteKlausur.getTag() == tag) {
-            //TODO die conditions überprüfen
             //Ende der vorhandene Klausur + Prof Pause <= neue Startzeit
             bool c1 = beaufsichtigteKlausur.getStartZeitTimeSlot() + beaufsichtigteKlausur.getDauerTimeSlots() + Utility::timeSlotsPauseProf <= startTimeSlot;
             //Start der vorhandenen Klausur >= Ende der neuen Klausur + Prof Pause
