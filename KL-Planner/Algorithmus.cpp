@@ -35,14 +35,14 @@ void Algorithmus::run() {
     map<string, vector<int>> klausuren = klausurenGroupByStudiengang();
     sortMap(klausuren);
     string letzterStudiengang = "AB";
-    int nextKlausur = selectNextKlausur(klausuren, letzterStudiengang);
+    int nextKlausurIndex = selectNextKlausur(klausuren, letzterStudiengang);
 
 
 }
 
 
 int Algorithmus::selectNextKlausur(map<string, vector<int>> &map, string &letzterStudiengang) {
-
+    //TODO
 }
 
 void Algorithmus::sortMap(const map<string, vector<int>>& map) { // TODO bubblesort verändert nichts
