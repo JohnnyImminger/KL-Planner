@@ -10,7 +10,7 @@
 
 Klausur::Klausur() {
     this->studiengang = "DummyPruefung";
-    this->vertiefung = 404;
+    this->vertiefung = "DummyPruefung";
     this->pVersion = 404;
     this->pNummer = 404;
     this->pName = "DummyPruefung";
@@ -25,7 +25,7 @@ Klausur::Klausur() {
     this->angeboten = false;
 }
 
-Klausur::Klausur(string& studiengang, string vertiefung, int pVersion, int pNummer, string& pName, int pPruefer1,
+Klausur::Klausur(string& studiengang, string& vertiefung, int pVersion, int pNummer, string& pName, int pPruefer1,
                  string& pruefer1, int pPruefer2, string& pruefer2, float pDauer, string& pForm, int pSemester,
                  bool angeboten) {
     this->studiengang = studiengang;
