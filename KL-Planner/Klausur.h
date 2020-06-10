@@ -20,7 +20,7 @@ public:
      */
 
     Klausur();
-    Klausur(string& studiengang, string vertiefung, int pVersion, int pNummer, string& pName,
+    Klausur(string& studiengang, string& vertiefung, int pVersion, int pNummer, string& pName,
             int pPruefer1, string& pruefer1, int pPruefer2, string& pruefer2,
             float pDauer, string& pForm, int pSemester, bool angeboten);
     friend std::ostream& operator<<(std::ostream &out, const Klausur &anmeldung);
