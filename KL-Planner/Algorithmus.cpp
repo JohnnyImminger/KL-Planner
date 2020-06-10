@@ -11,6 +11,7 @@
 
 Algorithmus::Algorithmus(ReadInput& data) {
     this->data = data;
+    this->lastSortedDay = 0;
 }
 
 
@@ -156,3 +157,123 @@ bool Algorithmus::isTimeSlotValidForRoom(int raum, int startTimeSlot, int dauerT
 bool Algorithmus::isTimeSlotTooLong(int startTimeSlot, int dauerTimeSlot) {
     return startTimeSlot + dauerTimeSlot <= Utility::timeSlotsProTag;
 }
+
+bool Algorithmus::einsortierenKlausur(Klausur &klausur) {
+    int failCount = 0;
+    int startZeitTimeSlot = 0;
+    int startTag = lastSortedDay;
+    int dauerTimeSlot = klausur.getDauerTimeSlots();
+    int anzTeilnehmer = klausur.getAnzTeilnehmer();
+    int raumIndex = 0;
+
+    while(true){
+        /*______________________________________________________________________________________________________________
+         * Das Ende eines Tages wird erst sehr spät erreicht und resettet den Prozess
+         */
+        if (isTimeSlotTooLong(startZeitTimeSlot,dauerTimeSlot)){
+            if (failCount >= 18){
+                return false;
+            }
+            startZeitTimeSlot = 0;
+            startTag = Utility::getRandomInt(Utility::klausurTage);
+
+            failCount++;
+            continue;
+        }
+        /*______________________________________________________________________________________________________________
+         * Suche einen Raum - niedirige Uhrzeiten werden zuerst aufgefüllt
+         */
+        //Überprüft ob genug räume an diesem Tag zur verfügung stehen um die kapazitaet unterzubringen
+        if (checkRaeumeByVectorSizeForEinsortieren(klausur, startTag, raumIndex)){
+            startTag++;
+            //wenn in allen Tagen nichts zu dieser Zeit gefunden wurde, erhöhe die Zeit
+            if (startTag == lastSortedDay){
+                startZeitTimeSlot++;
+            }
+            continue;
+        }
+        //überprüft ob genug die Räume zu dieser Zeit verfügbar sind um die kapazitaet unterzubringen
+        if (!checkRaeumeByKapazitaetForEinsortieren(klausur, startZeitTimeSlot, dauerTimeSlot, startTag, raumIndex)){
+            raumIndex++;
+            continue;
+        }
+        /*______________________________________________________________________________________________________________
+         * Raum gefunden! Überprüfe Termin für die Teilnehmer der Prüfung
+         */
+        //Prüfe ob der Termin den Profs der Klausur passt --> Nein --> buche späteren Zeitpunkt
+        if (!checkProfForEinsortieren(klausur, startZeitTimeSlot, dauerTimeSlot, startTag)){
+            startZeitTimeSlot++;
+            continue;
+        }
+        //Prüfe ob der Termin den Studenten der Klausur passt --> Nein --> nehme späteren Zeitpunkt
+        if (!checkStudentForEinsortieren(klausur, startZeitTimeSlot, dauerTimeSlot, startTag)){
+            startZeitTimeSlot++;
+            continue;
+        }
+        /*______________________________________________________________________________________________________________
+         * BUCHUNGSPOZESS
+         */
+        //TODO für die Zukunft müsste beim buchen eines Raumes der die Kapazitaet der Timeslots der Räume abgezogen werden
+        klausur.setTag(startTag);
+        klausur.setStartZeitTimeSlot(startZeitTimeSlot);
+        while (anzTeilnehmer > 0){
+            klausur.addRaumRef(raumIndex);
+            tage[startTag].at(raumIndex).useTimeSlots(startZeitTimeSlot,dauerTimeSlot);
+            anzTeilnehmer -= tage[startTag].at(raumIndex).getKapazitaet();
+            raumIndex++;
+        }
+        lastSortedDay = startTag;
+        return true;
+    } //while (true)
+}
+
+bool Algorithmus::checkRaeumeByVectorSizeForEinsortieren(Klausur &klausur, int startTag, int raumStartIndex) {
+    int tempRaumIndex = raumStartIndex;
+    int anzTeilnehmer = klausur.getAnzTeilnehmer();
+    while (anzTeilnehmer > 0){
+        //Falls das es keine Räume mehr zu dieser Uhrzeit gibt, gehe zum nächsten Tag zur selben Uhrzeit
+        if (tempRaumIndex >= data.raeume.size()){
+            return false;
+        }
+        anzTeilnehmer -= tage[startTag].at(tempRaumIndex).getKapazitaet();
+        tempRaumIndex++;
+    }
+    return true;
+}
+
+
+bool Algorithmus::checkRaeumeByKapazitaetForEinsortieren(Klausur &klausur, int startZeitTimeSlot, int dauerTimeSlot, int startTag, int raumStartIndex) {
+    //TODO diese variable ist unnötig, aber es MUSS kopiert werden!
+    int tempRaumIndex = raumStartIndex;
+    int anzTeilnehmer = klausur.getAnzTeilnehmer();
+    while (anzTeilnehmer > 0){
+        Raum raum = tage[startTag].at(tempRaumIndex);
+        if (!raum.areTimeSlotsFree(startZeitTimeSlot,dauerTimeSlot)){
+            return false;
+        }
+        anzTeilnehmer -= raum.getKapazitaet();
+        tempRaumIndex++;
+    }
+    return true;
+}
+
+bool Algorithmus::checkProfForEinsortieren(Klausur &klausur, int startZeitTimeSlot, int dauerTimeSlot, int startTag) {
+    for (int profIndex : klausur.getProfs()) {
+        if (!isTimeSlotValidForProf(data.professoren.at(profIndex),startZeitTimeSlot,dauerTimeSlot,startTag)){
+            return false;
+        }
+    }
+    return true;
+}
+
+bool Algorithmus::checkStudentForEinsortieren(Klausur &klausur, int startZeitTimeSlot, int dauerTimeSlot, int startTag) {
+    for (int studentIndex : klausur.getStudenten()) {
+        if (!isTimeSlotValidForProf(data.professoren.at(studentIndex),startZeitTimeSlot,dauerTimeSlot,startTag)){
+            return false;
+        }
+    }
+    return true;
+}
+
+
+
