@@ -18,6 +18,18 @@ Algorithmus::Algorithmus(ReadInput& data) {
 * Methoden:
 */
 
+/*
+ * gruppieren der Klausuren nach studiengang
+ * innerhalb der studiengänge nach größe der klausuren sortieren
+ * rotierend alle studiengänge durchgehen und jeweils eine klausur einsortieren
+ * klausur gegebenenfalls teilen und passenden raum suchen:
+ *      - schauen ob der(die) raum(räume) zur gleichen zeit frei sind
+ *          - wenn nein nächsten aktuelle startzeit ++ und nochmal versuchen
+ *      - schauen ob der prof zeit hat
+ *          - wenn nein neuen slot suchen
+ *      - schauen ob alle studierenden zeit haben
+ *          - wenn nein neuen slot suchen
+ */
 void Algorithmus::run() {
     for(Klausur klausur : data.klausuren){
         //TODO Einplanungsprozess
