@@ -45,7 +45,7 @@ int Algorithmus::selectNextKlausur(map<string, vector<int>> &map, string &letzte
 
 }
 
-void Algorithmus::sortMap(const map<string, vector<int>>& map) {
+void Algorithmus::sortMap(const map<string, vector<int>>& map) { // TODO bubblesort verändert nichts
     for (pair<string, vector<int>> studiengang: map) {
         vector<int> current = studiengang.second;
         bool swapped;
@@ -66,6 +66,7 @@ void Algorithmus::sortMap(const map<string, vector<int>>& map) {
 map<string, vector<int>> Algorithmus::klausurenGroupByStudiengang() {
     map<string,vector<int>> result;
     for(Klausur klausur : data.klausuren){
+        //if(result.find(klausur.getStudiengang()) == result.end()) { // if-Bedingung für standards vor c++20, da contains erst seit version 20 enthalten ist
         if(result.contains(klausur.getStudiengang())) {
             vector<int> neuerStudiengang;
             neuerStudiengang.push_back(klausur.getIndex());
