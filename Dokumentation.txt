@@ -15,6 +15,7 @@ DatenObjekte:
 
         bool timeSlots[Utility::timeSlotsProTag + Utility::timeSlotsPauseRaum] = {false};
 
+            TODO jeder timeSlot sollte eine kapazitaet haben um 2 klausuren gleichzeitig stattfinden zu lassen
             --> Raum ist eine Ressource die eine buchbare TimeSlots besitzt.
             --> Zur leichteren Handhabung wird mit einer immaginären Pause am Ende gerechnet
             --> Timeslot = 15min

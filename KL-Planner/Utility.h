@@ -17,6 +17,7 @@
 #include <vector>
 #include <sstream>
 #include <algorithm>
+#include <random>
 
 using namespace std;
 
@@ -24,6 +25,7 @@ class Utility {
 public:
     static vector<string> splitString(string &s, char delimiter);
     static string removeChars(string &s, string &charsToRemove);
+    static int getRandomInt(int max);
 
     /*
      * Variable Vorgaben durch Aufgabenstellung - Zeitangaben in Stunden --> float

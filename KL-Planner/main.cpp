@@ -6,6 +6,7 @@
 #include "Algorithmus.h"
 
 int main() {
+    /*
     ReadInput data;
     data.init();
     Algorithmus alg = Algorithmus(data);
@@ -13,4 +14,6 @@ int main() {
     alg.run();
     alg.printResult("../../output/result.csv");
     return 0;
+    */
+
 }
