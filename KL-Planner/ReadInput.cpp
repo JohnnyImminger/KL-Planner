@@ -73,7 +73,7 @@ void ReadInput::createStudenten() {
             studentenCount++;
         }
     }
-    cout << "Klausur für Anmeldung nicht gefunden: " << countMissingSignings << endl;
+    cout << "Klausur fuer Anmeldung nicht gefunden: " << countMissingSignings << endl;
     cout << studenten.size() << " Studenten angelegt" << endl;
 }
 
