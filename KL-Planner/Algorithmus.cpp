@@ -98,4 +98,8 @@ bool Algorithmus::isTimeSlotValidForRoom(Raum& raum, int startTimeSlot, int daue
     return raum.areTimeSlotsFree(startTimeSlot,dauerTimeSlot);
 }
 
+bool Algorithmus::isTimeSlotTooLong(int startTimeSlot, int dauerTimeSlot) {
+    return startTimeSlot + dauerTimeSlot <= Utility::timeSlotsProTag;
+}
+
 

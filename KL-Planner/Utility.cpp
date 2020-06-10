@@ -20,7 +20,3 @@ string Utility::removeChars(string &s, string &charsToRemove) {
     }
     return s;
 }
-
-bool Utility::isTimeSlotTooLong(int startTimeSlot, int dauerTimeSlot) {
-    return startTimeSlot + dauerTimeSlot <= Utility::timeSlotsProTag;
-}
