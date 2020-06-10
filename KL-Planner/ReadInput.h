@@ -59,8 +59,13 @@ private:
     //durchsucht einen vector von Studenten anhand der Identifikationsnummer und gibt den index zurück ist der Student nicht enthalten, ist der rückgabewert -1
     int isStudentInVector(int matrikelNr);
 
-    //durchsucht die klausuren nach pNummer (je nach Absrache auch nach pVersion) und gibt den Index der Klausur zurück
-    int findKlausurIndex(int pNummer, int pVersion);
+    /*
+     * Klausuren sind eindeutig definier durch Studiengang, SPO-Version und Prüfungsnummer.
+     * Abgebildet durch: string studiengang, int pVersion und pNummer.
+     * Methode durchsucht den vector klausuren danach und gibt den Index der Klausur zurück.
+     * Kann die klausur nicht gefunden werden ist der Rückgabewert -1.
+     */
+    int findKlausurIndex(const string& studiengang, int pVersion, int pNummer);
 };
 
 

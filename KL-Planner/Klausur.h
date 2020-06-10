@@ -59,7 +59,7 @@ public:
      */
 
     //holt sich die Daten aus der csv
-    static vector<Klausur> parse(string pathToFile);
+    static vector<Klausur> parse(const string& pathToFile);
 
     //added den Index des Studenten
     void addStudent(int studentenIndex);
