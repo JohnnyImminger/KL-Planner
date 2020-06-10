@@ -144,6 +144,13 @@ vector<int> Klausur::getRaumRefs() {
     return raumRefs;
 }
 
+bool Klausur::isEingeplant() const {
+    return eingeplant;
+}
+
+bool Klausur::isPlanbar() const {
+    return planbar;
+}
 /*
  * Setter
  */
@@ -168,6 +175,13 @@ void Klausur::removeRaumRef(int elementToRemove) {
     raumRefs.erase(raumRefs.begin()+elementToRemove);
 }
 
+void Klausur::setEingeplant(bool eingeplant) {
+    Klausur::eingeplant = eingeplant;
+}
+
+void Klausur::setPlanbar(bool planbar) {
+    Klausur::planbar = planbar;
+}
 /*______________________________________________________________
  * Methoden:
  */
@@ -223,4 +237,8 @@ void Klausur::outputIgnored(const string& line) {
     output << line << endl;
     output.close();
 }
+
+
+
+
 
