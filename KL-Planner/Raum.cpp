@@ -56,16 +56,16 @@ int Raum::getKapazitaet() const {
  */
 
 vector<Raum> Raum::parse(const string& pathToFile) {
-    ifstream inputStream(pathToFile);
-    if(!inputStream) {
+    ifstream input(pathToFile);
+    if(!input) {
         cerr << "Fehler beim Oeffnen der Datei " << pathToFile << endl;
     }
 
     size_t lines = 0;
     vector<Raum> list;
     string line;
-    while (!inputStream.eof()){
-        getline(inputStream, line);
+    while (!input.eof()){
+        getline(input, line);
         if(line.empty()) break;
         string remove("\"");
         line = Utility::removeChars(line, remove);
@@ -81,6 +81,7 @@ vector<Raum> Raum::parse(const string& pathToFile) {
         list.push_back(a);
         ++lines;
     }
+    input.close();
     cout << lines << " Raeume eingelesen" << endl;
     return list;
 }
