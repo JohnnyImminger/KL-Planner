@@ -58,9 +58,9 @@ bool Algorithmus::isTimeSlotValidForProf(Professor& prof, int startTimeSlot, int
             //TODO die conditions überprüfen
             //Ende der vorhandene Klausur + Prof Pause <= neue Startzeit
             bool c1 = beaufsichtigteKlausur.getStartZeitTimeSlot() + beaufsichtigteKlausur.getDauerTimeSlots() + Utility::timeSlotsPauseProf <= startTimeSlot;
-            //Start der vorhandenen Klausur > Ende der neuen Klausur + Prof Pause
-            bool c2 = beaufsichtigteKlausur.getStartZeitTimeSlot() > startTimeSlot + dauerTimeSlot + Utility::timeSlotsPauseProf;
-            if(!c1 && !c2) {
+            //Start der vorhandenen Klausur >= Ende der neuen Klausur + Prof Pause
+            bool c2 = beaufsichtigteKlausur.getStartZeitTimeSlot() >= startTimeSlot + dauerTimeSlot + Utility::timeSlotsPauseProf;
+            if(!(c1&&c2)) {
                 return false;
             }
         }
