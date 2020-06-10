@@ -89,9 +89,6 @@ bool Raum::areTimeSlotsFree(int startTimeSlot, int dauerTimeSlot) {
     if (startTimeSlot < 0){
         return false;
     }
-    if (Utility::isTimeSlotTooLong(startTimeSlot, dauerTimeSlot)){
-        return false;
-    }
     for (int i = startTimeSlot; i < (startTimeSlot + dauerTimeSlot + Utility::timeSlotsPauseRaum); ++i) {
         if (this->timeSlots[i]){
             return false;

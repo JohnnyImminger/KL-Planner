@@ -25,7 +25,6 @@ public:
     static vector<string> splitString(string &s, char delimiter);
     static string removeChars(string &s, string &charsToRemove);
 
-    static bool isTimeSlotTooLong(int startTimeSlot, int dauerTimeSlot);
     /*
      * Varialbe Vorgaben durch Aufgabenstellung - Zeitangaben in Stunden --> float
      */

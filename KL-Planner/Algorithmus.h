@@ -25,6 +25,7 @@ public:
     void run();
     void initTage();
     void printResult(const string &filename);
+    bool isTimeSlotTooLong(int startTimeSlot, int dauerTimeSlot);
 
 private:
     /*
