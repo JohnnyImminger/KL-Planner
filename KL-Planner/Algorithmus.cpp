@@ -3,6 +3,7 @@
 //
 
 #include "Algorithmus.h"
+#include <map>
 
 /*
 * Konstruktoren
@@ -31,9 +32,37 @@ Algorithmus::Algorithmus(ReadInput& data) {
  *          - wenn nein neuen slot suchen
  */
 void Algorithmus::run() {
-    for(Klausur klausur : data.klausuren){
-        //TODO Einplanungsprozess
+    map<string, vector<int>> klausuren = klausurenGroupByStudiengang();
+    sortMap(klausuren);
+
+
+}
+
+void Algorithmus::sortMap(const map<string, vector<int>>& map) {
+    for (const pair<string, vector<int>>& studiengang: map) {
+        vector<int> curr = studiengang.second;
+        //sort(curr.begin(), curr.end(), &Algorithmus::compareKlausurteilnehmergroesseByIndex);
     }
+}
+
+int Algorithmus::compareKlausurteilnehmergroesseByIndex(int index1, int index2) {
+    int k1 = data.klausuren.at(index1).getAnzTeilnehmer();
+    int k2 = data.klausuren.at(index2).getAnzTeilnehmer();
+    if (k1 > k2) return 1;
+    if (k1 == k2) return 0;
+    return -1;
+}
+
+map<string, vector<int>> Algorithmus::klausurenGroupByStudiengang() {
+    map<string,vector<int>> result;
+    for(Klausur klausur : data.klausuren){
+        if(result.find(klausur.getStudiengang()) == result.end()) {
+            result.insert(pair<string, vector<int>>(klausur.getStudiengang(), vector<int>(klausur.getIndex())));
+        } else {
+            result.find(klausur.getStudiengang())->second.push_back(klausur.getIndex());
+        }
+    }
+    return result;
 }
 
 void Algorithmus::initTage() {
@@ -115,5 +144,3 @@ bool Algorithmus::isTimeSlotValidForRoom(int raum, int startTimeSlot, int dauerT
 bool Algorithmus::isTimeSlotTooLong(int startTimeSlot, int dauerTimeSlot) {
     return startTimeSlot + dauerTimeSlot <= Utility::timeSlotsProTag;
 }
-
-
