@@ -54,6 +54,10 @@ public:
     vector<int> getRaumRefs();
     void addRaumRef(int raumRef);
     void removeRaumRef(int index);
+    bool isEingeplant() const;
+    bool isPlanbar() const;
+    void setEingeplant(bool eingeplant);
+    void setPlanbar(bool planbar);
 
     /*_____________________________________
      * Methoden:
@@ -88,12 +92,15 @@ private:
     vector<int> studenten;
     int anzTeilnehmer;
 
-    //TODO isEingeplant anlegen?
+private:
+
     int dauerTimeSlots;
     int tag;
     int startZeitTimeSlot;
     vector<int> raumRefs;
 
+    bool planbar;
+    bool eingeplant;
     /*_____________________________________
      * Methoden:
      */
