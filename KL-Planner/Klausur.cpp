@@ -173,16 +173,16 @@ void Klausur::removeRaumRef(int elementToRemove) {
  */
 
 vector<Klausur> Klausur::parse(const string& pathToFile) {
+    remove("../../output/ignoredKlausuren.csv");
     ifstream input(pathToFile);
     if(!input) {
         cerr << "Fehler beim Oeffnen der Datei " << pathToFile << endl;
     }
-
+    int index = 0;
     size_t lines = 0;
     vector<Klausur> list;
     string line;
     getline(input, line);
-    int index = 0;
     while (!input.eof()){
         getline(input, line);
         if(line.empty()) break;
@@ -203,6 +203,10 @@ vector<Klausur> Klausur::parse(const string& pathToFile) {
         istringstream(split[9]) >> pDauer;
         istringstream(split[11]) >> pSemeser;
         angeboten = split[12] == "J";
+        if(pDauer == 0) {
+            outputIgnored(line);
+            continue;
+        }
         Klausur a(split[0], verteilt, pVersion, pNummer, split[4], pPruefer1, split[6], pPruefer2,
                   split[8], pDauer, split[10], pSemeser, angeboten);
         a.setIndex(index);
@@ -210,7 +214,15 @@ vector<Klausur> Klausur::parse(const string& pathToFile) {
         ++lines;
         index++;
     }
+    input.close();
     cout << lines << " Klausuren eingelesen" << endl;
     return list;
+}
+
+void Klausur::outputIgnored(const string& line) {
+    ofstream output;
+    output.open("../../output/ignoredKlausuren.csv", ios_base::app);
+    output << line << endl;
+    output.close();
 }
 

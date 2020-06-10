@@ -100,6 +100,7 @@ vector<Anmeldung> Anmeldung::parse(const string& filename) {
         list.push_back(a);
         ++lines;
     }
+    input.close();
     cout << lines << " Anmeldungen eingelesen" << endl;
     return list;
 }
