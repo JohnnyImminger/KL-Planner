@@ -19,7 +19,9 @@ Algorithmus::Algorithmus(ReadInput& data) {
 */
 
 void Algorithmus::run() {
-
+    for(Klausur klausur : data.klausuren){
+        //TODO Einplanungsprozess
+    }
 }
 
 void Algorithmus::initTage() {

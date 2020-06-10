@@ -88,7 +88,7 @@ private:
     vector<int> studenten;
     int anzTeilnehmer;
 
-
+    //TODO isEingeplant anlegen?
     int dauerTimeSlots;
     int tag;
     int startZeitTimeSlot;
