@@ -20,7 +20,7 @@ public:
      */
 
     Klausur();
-    Klausur(string& studiengang, int verteilt, int pVersion, int pNummer, string& pName,
+    Klausur(string& studiengang, string vertiefung, int pVersion, int pNummer, string& pName,
             int pPruefer1, string& pruefer1, int pPruefer2, string& pruefer2,
             float pDauer, string& pForm, int pSemester, bool angeboten);
     friend std::ostream& operator<<(std::ostream &out, const Klausur &anmeldung);
@@ -30,7 +30,7 @@ public:
      */
 
     const string &getStudiengang() const;
-    int getVerteilt() const;
+    const string &getVertiefung() const;
     int getPVersion() const;
     int getPNummer() const;
     const string &getPName() const;
@@ -71,7 +71,7 @@ private:
      */
 
     string studiengang;
-    int verteilt; //maybe bool
+    string vertiefung;
     int pVersion;
     int pNummer;
     string pName;
@@ -88,7 +88,7 @@ private:
     vector<int> studenten;
     int anzTeilnehmer;
 
-
+    //TODO isEingeplant anlegen?
     int dauerTimeSlots;
     int tag;
     int startZeitTimeSlot;
