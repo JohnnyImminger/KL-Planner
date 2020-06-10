@@ -45,7 +45,7 @@ int Student::getAnzKlausuren() const {
     return anzKlausuren;
 }
 
-const vector<int> &Student::getKlausurIndizes() const {
+const vector<int> &Student::getKlausurIndices() const {
     return klausurIndizes;
 }
 

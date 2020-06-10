@@ -100,7 +100,7 @@ int ReadInput::findKlausurIndex(int pNummer, int pVersion) {
 
 void ReadInput::attachStudentsToKlausur() {
     for (const Student& student: studenten) {
-        for (int klausurIndex: student.getKlausurIndizes()) {
+        for (int klausurIndex: student.getKlausurIndices()) {
             klausuren.at(klausurIndex).addStudent(student.getIndex());
         }
     }

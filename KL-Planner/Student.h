@@ -26,7 +26,7 @@ public:
     int getMatrikelNr() const;
     const string &getStudiengang() const;
     int getAnzKlausuren() const;
-    const vector<int> &getKlausurIndizes() const;
+    const vector<int> &getKlausurIndices() const;
     int getIndex() const ;
     void setIndex(int index);
 

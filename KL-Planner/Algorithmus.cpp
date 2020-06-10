@@ -46,7 +46,7 @@ void Algorithmus::printResult(const string &filename) {
 
 bool Algorithmus::isTimeSlotValidForProf(Professor& prof, int startTimeSlot, int dauerTimeSlot, int tag) {
     //iteriere über alle Klausuren die ein Prof hat
-    for (int index : prof.getKlausurAufsichtIndex()) {
+    for (int index : prof.getKlausurAufsichtIndices()) {
         //Hol die Klausur aus der Referenz
         Klausur beaufsichtigteKlausur = data.klausuren[index];
         //ist die Klausur vergeben?
@@ -68,7 +68,26 @@ bool Algorithmus::isTimeSlotValidForProf(Professor& prof, int startTimeSlot, int
 }
 
 bool Algorithmus::isTimeSlotValidForStudent(Student& student, int startTimeSlot, int dauerTimeSlot, int tag) { //TODO isTimeSlotValidForStudent implementiern
-    return false;
+    //iteriere über alle Klausuren die ein Prof hat
+    for (int index : student.getKlausurIndices()) {
+        //Hol die Klausur aus der Referenz
+        Klausur angemeldeteKlausur = data.klausuren[index];
+        //ist die Klausur vergeben?
+        if (angemeldeteKlausur.getRaumRef() == -1) {
+            continue;
+        }
+        //findet die Klausur am selben Tag statt?
+        if (angemeldeteKlausur.getTag() == tag) {
+            //Ende der vorhandene Klausur + Prof Pause <= neue Startzeit
+            bool c1 = angemeldeteKlausur.getStartZeitTimeSlot() + angemeldeteKlausur.getDauerTimeSlots() + Utility::timeSlotsPauseProf <= startTimeSlot;
+            //Start der vorhandenen Klausur >= Ende der neuen Klausur + Prof Pause
+            bool c2 = angemeldeteKlausur.getStartZeitTimeSlot() >= startTimeSlot + dauerTimeSlot + Utility::timeSlotsPauseProf;
+            if(!(c1&&c2)) {
+                return false;
+            }
+        }
+    }
+    return true;
 }
 
 bool Algorithmus::isTimeSlotValidForRoom(Raum& raum, int startTimeSlot, int dauerTimeSlot, int tag) { //TODO isTimeSlotValidForRoom implementiern

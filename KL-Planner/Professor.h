@@ -29,7 +29,7 @@ public:
     const string &getName() const;
     int getAnzPruefungen() const;
 
-    const vector<int> &getKlausurAufsichtIndex() const;
+    const vector<int> &getKlausurAufsichtIndices() const;
 
     /*_____________________________________
      * Methoden:

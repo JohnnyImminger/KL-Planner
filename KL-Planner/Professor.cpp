@@ -45,7 +45,7 @@ int Professor::getAnzPruefungen() const {
     return anzPruefungen;
 }
 
-const vector<int> &Professor::getKlausurAufsichtIndex() const {
+const vector<int> &Professor::getKlausurAufsichtIndices() const {
     return klausurAufsichtIndex;
 }
 /*______________________________________________________________
