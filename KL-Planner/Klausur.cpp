@@ -201,6 +201,10 @@ vector<Klausur> Klausur::parse(const string& pathToFile) {
         getline(input, line);
         if(line.empty()) break;
         vector<string> split = Utility::splitString(line, ';');
+        if(split[9] == "0" || split[9].empty()) {
+            outputIgnored(line);
+            continue;
+        }
         int pVersion;
         int pNummer;
         int pPruefer1;
@@ -215,10 +219,6 @@ vector<Klausur> Klausur::parse(const string& pathToFile) {
         istringstream(split[9]) >> pDauer;
         istringstream(split[11]) >> pSemeser;
         angeboten = split[12] == "J";
-        if(pDauer == 0) {
-            outputIgnored(line);
-            continue;
-        }
         Klausur a(split[0], split[1], pVersion, pNummer, split[4], pPruefer1, split[6], pPruefer2,
                   split[8], pDauer, split[10], pSemeser, angeboten);
         a.setIndex(index);
