@@ -10,7 +10,7 @@
 
 Klausur::Klausur() {
     this->studiengang = "DummyPruefung";
-    this->verteilt = 404;
+    this->vertiefung = 404;
     this->pVersion = 404;
     this->pNummer = 404;
     this->pName = "DummyPruefung";
@@ -25,11 +25,11 @@ Klausur::Klausur() {
     this->angeboten = false;
 }
 
-Klausur::Klausur(string& studiengang, int verteilt, int pVersion, int pNummer, string& pName, int pPruefer1,
+Klausur::Klausur(string& studiengang, string vertiefung, int pVersion, int pNummer, string& pName, int pPruefer1,
                  string& pruefer1, int pPruefer2, string& pruefer2, float pDauer, string& pForm, int pSemester,
                  bool angeboten) {
     this->studiengang = studiengang;
-    this->verteilt = verteilt;
+    this->vertiefung = vertiefung;
     this->pVersion = pVersion;
     this->pNummer = pNummer;
     this->pName = pName;
@@ -48,7 +48,7 @@ Klausur::Klausur(string& studiengang, int verteilt, int pVersion, int pNummer, s
  */
 
 std::ostream &operator<<(ostream &out, const Klausur &klausur) {
-    out << klausur.studiengang << ';' << klausur.verteilt << ';' << klausur.pVersion << ';' << klausur.pNummer << ';'
+    out << klausur.studiengang << ';' << klausur.vertiefung << ';' << klausur.pVersion << ';' << klausur.pNummer << ';'
         << klausur.pName << ';' << klausur.pPruefer1 << ';' << klausur.pruefer1 << ';' << klausur.pPruefer2 << ';'
         << klausur.pruefer2 << ';' << klausur.pDauer << ';' << klausur.pForm << ';' << klausur.pSemester << ';'
         << klausur.angeboten;
@@ -63,8 +63,8 @@ const string &Klausur::getStudiengang() const {
     return studiengang;
 }
 
-int Klausur::getVerteilt() const {
-    return verteilt;
+const string &Klausur::getVertiefung() const {
+    return vertiefung;
 }
 
 int Klausur::getPVersion() const {
@@ -187,7 +187,6 @@ vector<Klausur> Klausur::parse(const string& pathToFile) {
         getline(input, line);
         if(line.empty()) break;
         vector<string> split = Utility::splitString(line, ';');
-        int verteilt;
         int pVersion;
         int pNummer;
         int pPruefer1;
@@ -195,7 +194,6 @@ vector<Klausur> Klausur::parse(const string& pathToFile) {
         float pDauer;
         int pSemeser;
         bool angeboten;
-        istringstream(split[1]) >> verteilt;
         istringstream(split[2]) >> pVersion;
         istringstream(split[3]) >> pNummer;
         istringstream(split[5]) >> pPruefer1;
@@ -203,7 +201,7 @@ vector<Klausur> Klausur::parse(const string& pathToFile) {
         istringstream(split[9]) >> pDauer;
         istringstream(split[11]) >> pSemeser;
         angeboten = split[12] == "J";
-        Klausur a(split[0], verteilt, pVersion, pNummer, split[4], pPruefer1, split[6], pPruefer2,
+        Klausur a(split[0], split[1], pVersion, pNummer, split[4], pPruefer1, split[6], pPruefer2,
                   split[8], pDauer, split[10], pSemeser, angeboten);
         a.setIndex(index);
         list.push_back(a);
