@@ -34,8 +34,15 @@ Algorithmus::Algorithmus(ReadInput& data) {
 void Algorithmus::run() {
     map<string, vector<int>> klausuren = klausurenGroupByStudiengang();
     sortMap(klausuren);
+    string letzterStudiengang = "AB";
+    int nextKlausur = selectNextKlausur(klausuren, letzterStudiengang);
 
 
+}
+
+
+int Algorithmus::selectNextKlausur(map<string, vector<int>> map, string &letzterStudiengang) {
+    return 0;
 }
 
 void Algorithmus::sortMap(const map<string, vector<int>>& map) {
@@ -60,7 +67,9 @@ map<string, vector<int>> Algorithmus::klausurenGroupByStudiengang() {
     map<string,vector<int>> result;
     for(Klausur klausur : data.klausuren){
         if(result.find(klausur.getStudiengang()) == result.end()) {
-            result.insert(pair<string, vector<int>>(klausur.getStudiengang(), vector<int>(klausur.getIndex())));
+            vector<int> neuerStudiengang;
+            neuerStudiengang.push_back(klausur.getIndex());
+            result.insert(pair<string, vector<int>>(klausur.getStudiengang(), neuerStudiengang));
         } else {
             result.find(klausur.getStudiengang())->second.push_back(klausur.getIndex());
         }
@@ -69,8 +78,8 @@ map<string, vector<int>> Algorithmus::klausurenGroupByStudiengang() {
 }
 
 void Algorithmus::initTage() {
-    for (int i = 0; i < Utility::klausurTage; i++) {
-        tage[i] = data.raeume;
+    for (auto & tag : tage) {
+        tag = data.raeume;
     }
 }
 
