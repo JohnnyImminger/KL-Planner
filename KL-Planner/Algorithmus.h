@@ -26,7 +26,7 @@ public:
     void run();
     void initTage();
     void printResult(const string &filename);
-    bool isTimeSlotTooLong(int startTimeSlot, int dauerTimeSlot);
+
 
 private:
     /*
@@ -34,8 +34,7 @@ private:
      */
 
     ReadInput data;
-    //9 Tage
-    vector<Raum> tage [Utility::klausurTage];
+    vector<Raum> tage [Utility::klausurTage]; //9 Tage
     int lastSortedDay;
 
     /*_____________________________________
@@ -58,8 +57,11 @@ private:
     //Utility::isTimeSlotTooLong(startTimeSlot, dauerTimeSlot)
     bool isTimeSlotValidForProf(Professor& prof, int startTimeSlot, int dauerTimeSlot, int tag);
     bool isTimeSlotValidForStudent(Student& student, int startTimeSlot, int dauerTimeSlot, int tag);
-    bool isTimeSlotValidForRoom(int raum,int startTimeSlot, int dauerTimeSlot, int tag);
 
+    /*______________________________________________________________________________________________________________________
+     * Klausur einsortieren und buchen
+     */
+    bool isTimeSlotTooLong(int startTimeSlot, int dauerTimeSlot);
     //versucht die Klausur in das System einzubuchen und das Ergebnis in Prüfung zu hinterlegen --> bei Erfolg return true
     bool einsortierenKlausur(Klausur& klausur);
     bool einsortierenKlausurInGleichGroßenRaum(Klausur &klausur, int maxAbweichung);
@@ -69,6 +71,8 @@ private:
     bool checkRaeumeByVectorSizeForEinsortieren(Klausur &klausur, int startTag,int raumStartIndex);
 
     vector<int> findePassendeRaumIndices(int klausurKapazitaet, int maxAbweichung);
+
+    int increaseStartTag(int startTag);
 };
 
 
