@@ -47,6 +47,9 @@ private:
     //methode um einen prof zu verarbeiten und duplizierten code zu vermeiden
     void processProf(int klausurIndex, int id, const string &name);
 
+    //vergibt allen Profs einen index
+    void indexProfs();
+
     //durchsucht einen vector von Professoren anhand der Identifikationsnummer und gibt den index zurück ist der Professor nicht enthalten, ist der rückgabewert -1
     int isProfInVector(int identNr);
 

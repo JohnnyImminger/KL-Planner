@@ -20,3 +20,7 @@ string Utility::removeChars(string &s, string &charsToRemove) {
     }
     return s;
 }
+
+int Utility::getRandomInt(int max) {
+    return rand() % max;
+}

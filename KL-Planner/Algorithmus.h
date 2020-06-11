@@ -36,6 +36,7 @@ private:
     ReadInput data;
     //9 Tage
     vector<Raum> tage [Utility::klausurTage];
+    int lastSortedDay;
 
     /*_____________________________________
      * Methoden:
@@ -44,7 +45,6 @@ private:
     //string ist der studiengangname, vector<int> eine liste mit Indices der dazugehörigen klausuren
     map<string, vector<int>> klausurenGroupByStudiengang();
     void sortMap(const map<string, vector<int>>& map);
-    void doNothing();
 
     //Utility::isTimeSlotTooLong(startTimeSlot, dauerTimeSlot)
     bool isTimeSlotValidForProf(Professor& prof, int startTimeSlot, int dauerTimeSlot, int tag);
@@ -52,6 +52,15 @@ private:
     bool isTimeSlotValidForRoom(int raum,int startTimeSlot, int dauerTimeSlot, int tag);
 
     int selectNextKlausur(map<string, vector<int>> &map, string &nextStg);
+
+    //versucht die Klausur in das System einzubuchen und das Ergebnis in Prüfung zu hinterlegen --> bei Erfolg return true
+    bool einsortierenKlausur(Klausur& klausur);
+    bool checkProfForEinsortieren(Klausur &klausur, int startZeitTimeSlot, int dauerTimeSlot, int startTag);
+    bool checkStudentForEinsortieren(Klausur &klausur, int startZeitTimeSlot, int dauerTimeSlot, int startTag);
+
+    bool checkRaeumeByKapazitaetForEinsortieren(Klausur &klausur, int startZeitTimeSlot, int dauerTimeSlot, int startTag,
+                                           int raumStartIndex);
+    bool checkRaeumeByVectorSizeForEinsortieren(Klausur &klausur, int startTag,int raumStartIndex);
 };
 
 
