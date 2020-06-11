@@ -28,20 +28,11 @@ void Algorithmus::run() {
     int nextKlausurIndex = selectNextKlausur(klausuren, nextStg);
     while (nextKlausurIndex != -1) {
         if (einsortierenKlausur(data.klausuren.at(nextKlausurIndex))) {
-            cout << "klausur eingeplant!" << endl;
         } else {
             cout << "Klausur konnte nicht eingeplant werden: " << data.klausuren.at(nextKlausurIndex) << endl;
         }
         nextKlausurIndex = selectNextKlausur(klausuren, nextStg);
     }
-    /*
-    for (Klausur& klausur: data.klausuren) {
-        if(klausur.isPlanbar() && !klausur.isEingeplant()) {
-            cout << klausur << " konnte nicht eingeplant werden!";
-        }
-    }
-     */
-    cout << "Alle Klausuren eingeplant!" << endl;
 }
 
 void Algorithmus::printResult(const string &filename) {
@@ -69,10 +60,13 @@ void Algorithmus::printRaumplanliste(const string &filename) {
     ofstream file;
     file.open(filename);
     for (int i = 0; i < Utility::klausurTage; i++) {
-        file << "day " << i << ';';
+        file << "day " << i+1 << endl;
         vector cRaume = tage[i];
         for(Raum cRaum : cRaume){
-            file << cRaum.printFreeTimeslots().rdbuf() << endl;
+            file << cRaum.getAdrBau() << '/';
+            file << cRaum.getAdrRaum() << ';';
+            cRaum.printFreeTimeslots(file);
+            file << endl;
         }
     }
     file.close();
