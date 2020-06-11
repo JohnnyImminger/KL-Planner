@@ -19,7 +19,7 @@ public:
     Raum(string &art, int adrBau, int adrRaum, int kap);
     friend std::ostream& operator<<(std::ostream &out, const Raum &raum);
 
-    string printFreeTimeslots();
+    void printFreeTimeslots(ostream& out);
 
     /*
      * Getter
