@@ -62,6 +62,7 @@ void Algorithmus::printResult(const string &filename) {
         file << cKlausur.getTag() << ';';
         file << (float)cKlausur.getStartZeitTimeSlot()/Utility::timeSlotsProStunde + Utility::startZeitProTag << endl;
     }
+    file.close();
 }
 
 void Algorithmus::printRaumplanliste(const string &filename) {

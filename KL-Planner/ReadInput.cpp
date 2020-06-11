@@ -49,7 +49,7 @@ void ReadInput::processProf(int klausurIndex, int id, const string &name) {
         Professor p(id, name);
         p.addPruefung(klausurIndex);
         professoren.push_back(p);
-        klausuren.at(klausurIndex).addProf(professoren.back().getIndex());
+        klausuren.at(klausurIndex).addProf(professoren.size()-1);
     }
 }
 int ReadInput::isProfInVector(int identNr) {
