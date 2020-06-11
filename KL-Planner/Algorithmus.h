@@ -51,7 +51,7 @@ private:
     bool isTimeSlotValidForStudent(Student& student, int startTimeSlot, int dauerTimeSlot, int tag);
     bool isTimeSlotValidForRoom(int raum,int startTimeSlot, int dauerTimeSlot, int tag);
 
-    int selectNextKlausur(map<string, vector<int>> &map, string &letzterStudiengang);
+    int selectNextKlausur(map<string, vector<int>> &map, string &nextStg);
 };
 
 

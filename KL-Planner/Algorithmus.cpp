@@ -33,19 +33,33 @@ void Algorithmus::run() {
     map<string, vector<int>> klausuren = klausurenGroupByStudiengang();
     sortMap(klausuren);
     cout << "Klausuren nach Anzahl der Teilnehmer sortiert" << endl;
-    string letzterStudiengang = "AB";
-    int nextKlausurIndex = selectNextKlausur(klausuren, letzterStudiengang);
+    string nextStg = "AB";
+    int nextKlausurIndex = selectNextKlausur(klausuren, nextStg);
     while (nextKlausurIndex != -1) {
         //TODO Klausur einplanen
-        nextKlausurIndex = selectNextKlausur(klausuren, letzterStudiengang);
+        nextKlausurIndex = selectNextKlausur(klausuren, nextStg);
     }
     cout << "Alle Klausuren eingeplant!" << endl;
 }
 
 
-int Algorithmus::selectNextKlausur(map<string, vector<int>> &map, string &letzterStudiengang) {
+int Algorithmus::selectNextKlausur(map<string, vector<int>> &map, string &nextStg) {
     while(!map.empty()) {
-
+        int nextKlausurIndex = map.at(nextStg).at(0);
+        map.at(nextStg).erase(map.at(nextStg).cbegin());
+        string last = nextStg;
+        bool next = false;
+        for (const auto& studiengang: map) {
+            if(next) {
+                nextStg = studiengang.first;
+                next = false;
+                break;
+            }
+            if(studiengang.first == nextStg) next = true;
+        }
+        if(next) nextStg = map.begin()->first;
+        if(map.at(last).empty())map.erase(last);
+        return nextKlausurIndex;
     }
     return -1;
 }
