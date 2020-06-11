@@ -51,7 +51,7 @@ private:
     bool isTimeSlotValidForStudent(Student& student, int startTimeSlot, int dauerTimeSlot, int tag);
     bool isTimeSlotValidForRoom(int raum,int startTimeSlot, int dauerTimeSlot, int tag);
 
-    int selectNextKlausur(string &lastStg, map<string, vector<int>> &map);
+    int selectNextKlausur(map<string, vector<int>> &map, string &nextStg);
 
     //versucht die Klausur in das System einzubuchen und das Ergebnis in Prüfung zu hinterlegen --> bei Erfolg return true
     bool einsortierenKlausur(Klausur& klausur);
