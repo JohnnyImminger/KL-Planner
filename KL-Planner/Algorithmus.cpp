@@ -68,7 +68,10 @@ void Algorithmus::printRaumplanliste(const string &filename) {
     ofstream file;
     file.open(filename);
     for (int i = 0; i < Utility::klausurTage; ++i) {
-        vector craume = tage[i];
+        vector cRaume = tage[i];
+        for(Raum cRaum : cRaume){
+
+        }
     }
 }
 
