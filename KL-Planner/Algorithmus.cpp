@@ -405,6 +405,10 @@ bool Algorithmus::isTimeSlotValidForStudent(Student& student, int startTimeSlot,
 }
 
 int Algorithmus::increaseStartTag(int startTag) {
-    return startTag++ == tage->size() ? 0 : startTag;
+    startTag++;
+    if (startTag == Utility::klausurTage){
+        startTag = 0;
+    }
+    return startTag;
 }
 
