@@ -20,6 +20,30 @@ void Algorithmus::initTage() {
     }
 }
 
+void Algorithmus::run() {
+    map<string, vector<int>> klausuren = klausurenGroupByStudiengang();
+    sortMap(klausuren);
+    cout << "Klausuren nach Anzahl der Teilnehmer sortiert" << endl;
+    string nextStg = "AB";
+    int nextKlausurIndex = selectNextKlausur(klausuren, nextStg);
+    while (nextKlausurIndex != -1) {
+        if (einsortierenKlausur(data.klausuren.at(nextKlausurIndex))) {
+            cout << "klausur eingeplant!" << endl;
+        } else {
+            cout << "Klausur konnte nicht eingeplant werden: " << data.klausuren.at(nextKlausurIndex) << endl;
+        }
+        nextKlausurIndex = selectNextKlausur(klausuren, nextStg);
+    }
+    /*
+    for (Klausur& klausur: data.klausuren) {
+        if(klausur.isPlanbar() && !klausur.isEingeplant()) {
+            cout << klausur << " konnte nicht eingeplant werden!";
+        }
+    }
+     */
+    cout << "Alle Klausuren eingeplant!" << endl;
+}
+
 void Algorithmus::printResult(const string &filename) {
     ofstream file;
     file.open(filename);
@@ -38,28 +62,6 @@ void Algorithmus::printResult(const string &filename) {
         file << cKlausur.getTag() << ';';
         file << (float)cKlausur.getStartZeitTimeSlot()/Utility::timeSlotsProStunde + Utility::startZeitProTag << endl;
     }
-}
-
-void Algorithmus::run() {
-    map<string, vector<int>> klausuren = klausurenGroupByStudiengang();
-    sortMap(klausuren);
-    cout << "Klausuren nach Anzahl der Teilnehmer sortiert" << endl;
-    string nextStg = "AB";
-    int nextKlausurIndex = selectNextKlausur(klausuren, nextStg);
-    while (nextKlausurIndex != -1) {
-        if (!einsortierenKlausur(data.klausuren.at(nextKlausurIndex))) {
-            cout << "Klausur konnte nicht eingeplant werden: " << data.klausuren.at(nextKlausurIndex) << endl;
-        }
-        nextKlausurIndex = selectNextKlausur(klausuren, nextStg);
-    }
-    /*
-    for (Klausur& klausur: data.klausuren) {
-        if(klausur.isPlanbar() && !klausur.isEingeplant()) {
-            cout << klausur << " konnte nicht eingeplant werden!";
-        }
-    }
-     */
-    cout << "Alle Klausuren eingeplant!" << endl;
 }
 
 /*_____________________________________
@@ -157,7 +159,7 @@ map<string, vector<int>> Algorithmus::klausurenGroupByStudiengang() {
 
 
 //Annahme: Raum 0 >> Raum 50 und große Klausuren kommen zuerst
-bool Algorithmus::einsortierenKlausurInGleichGroßenRaum(Klausur &klausur, int maxAbweichung){
+bool Algorithmus::einsortierenKlausurInGleichGrossenRaum(Klausur &klausur, int maxAbweichung){
     int dauerTimeSlot = klausur.getDauerTimeSlots();
 
     int abweichung = 0;
@@ -244,7 +246,7 @@ bool Algorithmus::einsortierenKlausur(Klausur &klausur) {
      * Vorgeschaltete Methode um so wenig kapazitaet wie möchglich zu verschwenden
      */
     for (int maxAbweichung = 0; maxAbweichung < 5; ++maxAbweichung) {
-        if (einsortierenKlausurInGleichGroßenRaum(klausur,maxAbweichung)){
+        if (einsortierenKlausurInGleichGrossenRaum(klausur, maxAbweichung)){
             return true;
         }
     }

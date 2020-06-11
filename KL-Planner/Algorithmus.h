@@ -64,7 +64,7 @@ private:
     bool isTimeSlotTooLong(int startTimeSlot, int dauerTimeSlot);
     //versucht die Klausur in das System einzubuchen und das Ergebnis in Prüfung zu hinterlegen --> bei Erfolg return true
     bool einsortierenKlausur(Klausur& klausur);
-    bool einsortierenKlausurInGleichGroßenRaum(Klausur &klausur, int maxAbweichung);
+    bool einsortierenKlausurInGleichGrossenRaum(Klausur &klausur, int maxAbweichung);
     bool checkProfForEinsortieren(Klausur &klausur, int startZeitTimeSlot, int dauerTimeSlot, int startTag);
     bool checkStudentForEinsortieren(Klausur &klausur, int startZeitTimeSlot, int dauerTimeSlot, int startTag);
     bool checkRaeumeByKapazitaetForEinsortieren(Klausur &klausur, int startZeitTimeSlot, int dauerTimeSlot, int startTag,int raumStartIndex);
