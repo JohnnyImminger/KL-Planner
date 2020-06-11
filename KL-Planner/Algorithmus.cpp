@@ -38,6 +38,9 @@ void Algorithmus::run() {
     int nextKlausurIndex = selectNextKlausur(klausuren, nextStg);
     while (nextKlausurIndex != -1) {
         //TODO Klausur einplanen
+
+        cout << data.klausuren.at(nextKlausurIndex).getStudiengang() << ' ' << data.klausuren.at(nextKlausurIndex).getAnzTeilnehmer() << endl;
+
         nextKlausurIndex = selectNextKlausur(klausuren, nextStg);
     }
     cout << "Alle Klausuren eingeplant!" << endl;
@@ -46,29 +49,33 @@ void Algorithmus::run() {
 
 int Algorithmus::selectNextKlausur(map<string, vector<int>> &map, string &nextStg) {
     // wenn die Map leer ist, soll -1 zurückgegeben werden
-    if (map.empty()) return -1;
-    // zwischenspeichern des Index der nächsten klausur und entfernen dieser aus dem vektor der map
-    int nextKlausurIndex = map.at(nextStg).at(0);
-    map.at(nextStg).erase(map.at(nextStg).cbegin());
-    //zwischenspeichern des jetzt "verbrauchten studiengangs" um zugriffsfehler zu vermeiden, löschen falls leer erst später
-    string last = nextStg;
-    /*
-     * durchsucht die map nach dem studiengangname und schreibt dann den nächsten in nextStg für den nächsten Funktionsaufruf
-     * ist das ende der map erreicht wird der erste eintrag der Map verwendet
-     */
-    bool next = false;
-    for (const auto& studiengang: map) {
-        if(next) {
-            nextStg = studiengang.first;
-            next = false;
-            break;
+    while (!map.empty()) {
+        // zwischenspeichern des Index der nächsten klausur und entfernen dieser aus dem vektor der map
+        int nextKlausurIndex = map.at(nextStg).at(0);
+        map.at(nextStg).erase(map.at(nextStg).cbegin());
+        //zwischenspeichern des jetzt "verbrauchten studiengangs" um zugriffsfehler zu vermeiden, löschen falls leer erst später
+        string last = nextStg;
+        /*
+         * durchsucht die map nach dem studiengangname und schreibt dann den nächsten in nextStg für den nächsten Funktionsaufruf
+         * ist das ende der map erreicht wird der erste eintrag der Map verwendet
+         */
+        bool next = false;
+        for (const auto &studiengang: map) {
+            if (next) {
+                nextStg = studiengang.first;
+                next = false;
+                break;
+            }
+            if (studiengang.first == nextStg) next = true;
         }
-        if(studiengang.first == nextStg) next = true;
+        if (next) nextStg = map.begin()->first;
+        //entfernen des studiengangs falls er keine einzuplanende klausuren mehr enthält
+        if (map.at(last).empty())map.erase(last);
+        //sortiert klausuren ohne teilnehmer aus
+        if(data.klausuren.at(nextKlausurIndex).getAnzTeilnehmer() == 0) continue;
+        return nextKlausurIndex;
     }
-    if(next) nextStg = map.begin()->first;
-    //entfernen des studiengangs falls er keine einzuplanende klausuren mehr enthält
-    if(map.at(last).empty())map.erase(last);
-    return nextKlausurIndex;
+    return -1;
 }
 
 void Algorithmus::sortMap(const map<string, vector<int>>& map) {

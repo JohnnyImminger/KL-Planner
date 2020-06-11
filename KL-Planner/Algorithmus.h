@@ -51,6 +51,7 @@ private:
      * Ist der Vektor leer wird der Studiengang aus der Map entfernt.
      * Ist die map leer wird -1 zurückgegeben
      * In der Referenz nextStg wird für den nächsten aufruf gespeichert aus welchem studiengang dann gewählt werden soll
+     * Klausuren ohne Teilnehmer werden automatisch aussortiert und somit auch nicht eingeplant
      */
     int selectNextKlausur(map<string, vector<int>> &map, string &nextStg);
 
