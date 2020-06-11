@@ -47,11 +47,18 @@ void Algorithmus::run() {
     string nextStg = "AB";
     int nextKlausurIndex = selectNextKlausur(klausuren, nextStg);
     while (nextKlausurIndex != -1) {
-        //TODO Klausur einplanen
-        cout << data.klausuren.at(nextKlausurIndex).getStudiengang() << ' ' << data.klausuren.at(nextKlausurIndex).getAnzTeilnehmer() << endl;
-
+        if (!einsortierenKlausur(data.klausuren.at(nextKlausurIndex))) {
+            cout << "Klausur konnte nicht eingeplant werden: " << data.klausuren.at(nextKlausurIndex) << endl;
+        }
         nextKlausurIndex = selectNextKlausur(klausuren, nextStg);
     }
+    /*
+    for (Klausur& klausur: data.klausuren) {
+        if(klausur.isPlanbar() && !klausur.isEingeplant()) {
+            cout << klausur << " konnte nicht eingeplant werden!";
+        }
+    }
+     */
     cout << "Alle Klausuren eingeplant!" << endl;
 }
 
@@ -98,7 +105,11 @@ int Algorithmus::selectNextKlausur(map<string, vector<int>> &map, string &nextSt
         //entfernen des studiengangs falls er keine einzuplanende klausuren mehr enthält
         if (map.at(last).empty())map.erase(last);
         //sortiert klausuren ohne teilnehmer aus
-        if(data.klausuren.at(nextKlausurIndex).getAnzTeilnehmer() == 0) continue;
+        if(data.klausuren.at(nextKlausurIndex).getAnzTeilnehmer() == 0) {
+            data.klausuren.at(nextKlausurIndex).setPlanbar(false);
+            continue;
+        }
+        data.klausuren.at(nextKlausurIndex).setPlanbar(true);
         return nextKlausurIndex;
     }
     return -1;
@@ -137,14 +148,6 @@ map<string, vector<int>> Algorithmus::klausurenGroupByStudiengang() {
     }
     return result;
 }
-
-
-
-
-
-
-
-
 
 
 /*______________________________________________________________________________________________________________________
