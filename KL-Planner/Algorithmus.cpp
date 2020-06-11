@@ -69,10 +69,10 @@ void Algorithmus::printRaumplanliste(const string &filename) {
     ofstream file;
     file.open(filename);
     for (int i = 0; i < Utility::klausurTage; i++) {
-        file << "day " << i << ';';
+        file << "day " << i+1 << ';';
         vector cRaume = tage[i];
         for(Raum cRaum : cRaume){
-            file << cRaum.printFreeTimeslots().rdbuf() << endl;
+            file << cRaum.printFreeTimeslots() << endl;
         }
     }
     file.close();

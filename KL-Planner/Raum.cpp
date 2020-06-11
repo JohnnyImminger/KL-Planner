@@ -31,12 +31,13 @@ std::ostream &operator<<(ostream &out, const Raum &raum) {
     return out;
 }
 
-stringstream Raum::printFreeTimeslots() {
-    stringstream out;
+string Raum::printFreeTimeslots() {
+    string out;
     int counter = 1;
     for(bool frei : timeSlots){
         if(frei){
-            out << counter << ';';
+        //    out += counter;
+         //   out += ';';
         }
         counter ++;
     }
