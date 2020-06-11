@@ -44,10 +44,12 @@ void ReadInput::processProf(int klausurIndex, int id, const string &name) {
     int index = isProfInVector(id);
     if (index >= 0) {
         professoren.at(index).addPruefung(klausurIndex);
+        klausuren.at(klausurIndex).addProf(index);
     } else {
         Professor p(id, name);
         p.addPruefung(klausurIndex);
         professoren.push_back(p);
+        klausuren.at(klausurIndex).addProf(professoren.back().getIndex());
     }
 }
 int ReadInput::isProfInVector(int identNr) {

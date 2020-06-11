@@ -172,7 +172,7 @@ bool Algorithmus::einsortierenKlausurInGleichGrossenRaum(Klausur &klausur, int m
                 /*______________________________________________________________________________________________________________
                  * Wenn das Ende eines Tages erreicht wird, versuch den nächsten, wenn alle Tage ausprobiert wurden, ist der Raum nicht buchbar
                  */
-                if (isTimeSlotTooLong(startZeitTimeSlot,dauerTimeSlot)){
+                if (!isTimeSlotTooLong(startZeitTimeSlot,dauerTimeSlot)){
                     startTag = increaseStartTag(startTag);
                     if (startTag == lastSortedDay){
                         //alle Tage bis zur über die maximale Zeit wurden ausprobiert, beende den Versuch für den Raum
@@ -254,7 +254,7 @@ bool Algorithmus::einsortierenKlausur(Klausur &klausur) {
         /*______________________________________________________________________________________________________________
          * Wenn das Ende eines Tages erreicht wird, setze fange am nächsten Tag wieder am start an
          */
-        if (isTimeSlotTooLong(startZeitTimeSlot,dauerTimeSlot)){
+        if (!isTimeSlotTooLong(startZeitTimeSlot,dauerTimeSlot)){
             raumIndex++;
             startZeitTimeSlot = 0;
             continue;
