@@ -356,9 +356,9 @@ bool Algorithmus::checkRaeumeByKapazitaetForEinsortieren(Klausur &klausur, int s
 
 bool Algorithmus::checkProfForEinsortieren(Klausur &klausur, int startZeitTimeSlot, int dauerTimeSlot, int startTag) {
     for (int profIndex : klausur.getProfs()) {
-        /*if (!isTimeSlotValidForProf(data.professoren.at(profIndex),startZeitTimeSlot,dauerTimeSlot,startTag)){
+        if (!isTimeSlotValidForProf(data.professoren.at(profIndex),startZeitTimeSlot,dauerTimeSlot,startTag)){
             return false;
-        }*/
+        }
     }
     return true;
 }
