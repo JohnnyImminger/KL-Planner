@@ -95,13 +95,13 @@ private:
     int anzTeilnehmer = 0;
 
     int dauerTimeSlots;
-    int tag;
-    int startZeitTimeSlot;
+    int tag = 0;
+    int startZeitTimeSlot = 0;
     vector<int> raumRefs;
     vector<int> profRefs;
 
     bool planbar;
-    bool eingeplant;
+    bool eingeplant = false;
     /*_____________________________________
      * Methoden:
      */
