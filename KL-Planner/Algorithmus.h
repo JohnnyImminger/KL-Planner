@@ -26,7 +26,7 @@ public:
     void run();
     void initTage();
     void printResult(const string &filename);
-
+    void printRaumplanliste(const string &filename);
 
 private:
     /*
