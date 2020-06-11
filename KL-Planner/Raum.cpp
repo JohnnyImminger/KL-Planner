@@ -31,6 +31,18 @@ std::ostream &operator<<(ostream &out, const Raum &raum) {
     return out;
 }
 
+stringstream Raum::printFreeTimeslots() {
+    stringstream out;
+    int counter = 1;
+    for(bool frei : timeSlots){
+        if(frei){
+            out << counter << ';';
+        }
+        counter ++;
+    }
+    return out;
+}
+
 /*
  * Getter
  */

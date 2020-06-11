@@ -12,5 +12,6 @@ int main() {
     alg.initTage();
     alg.run();
     alg.printResult("../../output/result.csv");
+    alg.printRaumplanliste("../../output/raumPlanListe.csv");
     return 0;
 }

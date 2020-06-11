@@ -67,12 +67,14 @@ void Algorithmus::printResult(const string &filename) {
 void Algorithmus::printRaumplanliste(const string &filename) {
     ofstream file;
     file.open(filename);
-    for (int i = 0; i < Utility::klausurTage; ++i) {
+    for (int i = 0; i < Utility::klausurTage; i++) {
+        file << "day " << i << ';';
         vector cRaume = tage[i];
         for(Raum cRaum : cRaume){
-
+            file << cRaum.printFreeTimeslots().rdbuf() << endl;
         }
     }
+    file.close();
 }
 
 /*_____________________________________
@@ -150,8 +152,8 @@ void Algorithmus::sortMap(const map<string, vector<int>>& map) {
 map<string, vector<int>> Algorithmus::klausurenGroupByStudiengang() {
     map<string,vector<int>> result;
     for(Klausur klausur : data.klausuren){
-        //if(result.find(klausur.getStudiengang()) == result.end()) { // if-Bedingung für standards vor c++20, da contains erst seit version 20 enthalten ist
-        if(!result.contains(klausur.getStudiengang())) {
+        if(result.find(klausur.getStudiengang()) == result.end()) { // if-Bedingung für standards vor c++20, da contains erst seit version 20 enthalten ist
+        //if(!result.contains(klausur.getStudiengang())) {
             vector<int> neuerStudiengang;
             neuerStudiengang.push_back(klausur.getIndex());
             result.insert(pair<string, vector<int>>(klausur.getStudiengang(), neuerStudiengang));
@@ -353,9 +355,9 @@ bool Algorithmus::checkRaeumeByKapazitaetForEinsortieren(Klausur &klausur, int s
 
 bool Algorithmus::checkProfForEinsortieren(Klausur &klausur, int startZeitTimeSlot, int dauerTimeSlot, int startTag) {
     for (int profIndex : klausur.getProfs()) {
-        if (!isTimeSlotValidForProf(data.professoren.at(profIndex),startZeitTimeSlot,dauerTimeSlot,startTag)){
+        /*if (!isTimeSlotValidForProf(data.professoren.at(profIndex),startZeitTimeSlot,dauerTimeSlot,startTag)){
             return false;
-        }
+        }*/
     }
     return true;
 }
