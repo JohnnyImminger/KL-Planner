@@ -44,6 +44,7 @@ private:
     //string ist der studiengangname, vector<int> eine liste mit Indices der dazugehörigen klausuren
     map<string, vector<int>> klausurenGroupByStudiengang();
     void sortMap(const map<string, vector<int>>& map);
+    void doNothing();
 
     //Utility::isTimeSlotTooLong(startTimeSlot, dauerTimeSlot)
     bool isTimeSlotValidForProf(Professor& prof, int startTimeSlot, int dauerTimeSlot, int tag);

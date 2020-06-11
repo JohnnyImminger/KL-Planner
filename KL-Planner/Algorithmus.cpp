@@ -13,8 +13,6 @@ Algorithmus::Algorithmus(ReadInput& data) {
     this->data = data;
 }
 
-
-
 /*_____________________________________
 * Methoden:
 */
@@ -34,28 +32,36 @@ Algorithmus::Algorithmus(ReadInput& data) {
 void Algorithmus::run() {
     map<string, vector<int>> klausuren = klausurenGroupByStudiengang();
     sortMap(klausuren);
+    cout << "Klausuren nach Anzahl der Teilnehmer sortiert" << endl;
     string letzterStudiengang = "AB";
     int nextKlausurIndex = selectNextKlausur(klausuren, letzterStudiengang);
-
-
+    while (nextKlausurIndex != -1) {
+        //TODO Klausur einplanen
+        nextKlausurIndex = selectNextKlausur(klausuren, letzterStudiengang);
+    }
+    cout << "Alle Klausuren eingeplant!" << endl;
 }
 
 
 int Algorithmus::selectNextKlausur(map<string, vector<int>> &map, string &letzterStudiengang) {
-    //TODO
+    while(!map.empty()) {
+
+    }
+    return -1;
 }
 
 void Algorithmus::sortMap(const map<string, vector<int>>& map) { // TODO bubblesort verändert nichts
-    for (pair<string, vector<int>> studiengang: map) {
-        vector<int> current = studiengang.second;
+    for (const auto& studiengang: map) {
+        auto* current = (vector<int>*) &studiengang.second;
+        int x = 1;
         bool swapped;
         do {
             swapped = false;
-            for (int i = 0; i < current.size()-1; ++i) {
-                if (data.klausuren.at(current.at(i)).getAnzTeilnehmer() < data.klausuren.at(current.at(i+1)).getAnzTeilnehmer()) {
-                    int temp = current.at(i);
-                    current.at(i) = current.at(i+1);
-                    current.at(i+1) = temp;
+            for (int i = 0; i < current->size()-1; ++i) {
+                if (data.klausuren.at(current->at(i)).getAnzTeilnehmer() < data.klausuren.at(current->at(i+1)).getAnzTeilnehmer()) {
+                    int temp = (int) current->at(i);
+                    current->at(i) = (int) current->at(i+1);
+                    current->at(i+1) = temp;
                     swapped = true;
                 }
             }
@@ -63,11 +69,13 @@ void Algorithmus::sortMap(const map<string, vector<int>>& map) { // TODO bubbles
     }
 }
 
+void Algorithmus::doNothing() {}
+
 map<string, vector<int>> Algorithmus::klausurenGroupByStudiengang() {
     map<string,vector<int>> result;
     for(Klausur klausur : data.klausuren){
         //if(result.find(klausur.getStudiengang()) == result.end()) { // if-Bedingung für standards vor c++20, da contains erst seit version 20 enthalten ist
-        if(result.contains(klausur.getStudiengang())) {
+        if(!result.contains(klausur.getStudiengang())) {
             vector<int> neuerStudiengang;
             neuerStudiengang.push_back(klausur.getIndex());
             result.insert(pair<string, vector<int>>(klausur.getStudiengang(), neuerStudiengang));
