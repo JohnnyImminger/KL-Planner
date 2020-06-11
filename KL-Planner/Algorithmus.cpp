@@ -14,8 +14,6 @@ Algorithmus::Algorithmus(ReadInput& data) {
     this->lastSortedDay = 0;
 }
 
-
-
 /*_____________________________________
 * Methoden:
 */
@@ -35,29 +33,63 @@ Algorithmus::Algorithmus(ReadInput& data) {
 void Algorithmus::run() {
     map<string, vector<int>> klausuren = klausurenGroupByStudiengang();
     sortMap(klausuren);
-    string lastStudiengang = "AB";
-    int nextKlausur = selectNextKlausur(lastStudiengang, klausuren);
+    cout << "Klausuren nach Anzahl der Teilnehmer sortiert" << endl;
+    string nextStg = "AB";
+    int nextKlausurIndex = selectNextKlausur(klausuren, nextStg);
+    while (nextKlausurIndex != -1) {
+        //TODO Klausur einplanen
 
+        cout << data.klausuren.at(nextKlausurIndex).getStudiengang() << ' ' << data.klausuren.at(nextKlausurIndex).getAnzTeilnehmer() << endl;
+
+        nextKlausurIndex = selectNextKlausur(klausuren, nextStg);
+    }
+    cout << "Alle Klausuren eingeplant!" << endl;
 }
 
-int Algorithmus::selectNextKlausur(string &lastStg, map <string, vector<int>> &map) {
 
-
-
-    return 0;
+int Algorithmus::selectNextKlausur(map<string, vector<int>> &map, string &nextStg) {
+    // wenn die Map leer ist, soll -1 zurückgegeben werden
+    while (!map.empty()) {
+        // zwischenspeichern des Index der nächsten klausur und entfernen dieser aus dem vektor der map
+        int nextKlausurIndex = map.at(nextStg).at(0);
+        map.at(nextStg).erase(map.at(nextStg).cbegin());
+        //zwischenspeichern des jetzt "verbrauchten studiengangs" um zugriffsfehler zu vermeiden, löschen falls leer erst später
+        string last = nextStg;
+        /*
+         * durchsucht die map nach dem studiengangname und schreibt dann den nächsten in nextStg für den nächsten Funktionsaufruf
+         * ist das ende der map erreicht wird der erste eintrag der Map verwendet
+         */
+        bool next = false;
+        for (const auto &studiengang: map) {
+            if (next) {
+                nextStg = studiengang.first;
+                next = false;
+                break;
+            }
+            if (studiengang.first == nextStg) next = true;
+        }
+        if (next) nextStg = map.begin()->first;
+        //entfernen des studiengangs falls er keine einzuplanende klausuren mehr enthält
+        if (map.at(last).empty())map.erase(last);
+        //sortiert klausuren ohne teilnehmer aus
+        if(data.klausuren.at(nextKlausurIndex).getAnzTeilnehmer() == 0) continue;
+        return nextKlausurIndex;
+    }
+    return -1;
 }
 
-void Algorithmus::sortMap(const map<string, vector<int>>& map) { //TODO sort funktioniert nicht
-    for (const auto & studiengang: map) {
-        vector<int> klausuren = studiengang.second;
+void Algorithmus::sortMap(const map<string, vector<int>>& map) {
+    for (const auto& studiengang: map) {
+        auto* current = (vector<int>*) &studiengang.second;
+        int x = 1;
         bool swapped;
         do {
             swapped = false;
-            for (int i = 0; i < klausuren.size()-1; ++i) {
-                if(data.klausuren.at(klausuren.at(i)).getAnzTeilnehmer() > data.klausuren.at(klausuren.at(i+1)).getAnzTeilnehmer()) {
-                    int tmp = klausuren.at(i);
-                    klausuren.at(i) = klausuren.at(i+1);
-                    klausuren.at(i+1) = tmp;
+            for (int i = 0; i < current->size()-1; ++i) {
+                if (data.klausuren.at(current->at(i)).getAnzTeilnehmer() < data.klausuren.at(current->at(i+1)).getAnzTeilnehmer()) {
+                    int temp = (int) current->at(i);
+                    current->at(i) = (int) current->at(i+1);
+                    current->at(i+1) = temp;
                     swapped = true;
                 }
             }
@@ -66,11 +98,13 @@ void Algorithmus::sortMap(const map<string, vector<int>>& map) { //TODO sort fun
 }
 
 map<string, vector<int>> Algorithmus::klausurenGroupByStudiengang() {
-    //TODO ergebnis der methode ist so nicht verwendbar-> im debugger zu sehen
     map<string,vector<int>> result;
     for(Klausur klausur : data.klausuren){
-        if(result.find(klausur.getStudiengang()) == result.end()) {
-            result.insert(pair<string, vector<int>>(klausur.getStudiengang(), vector<int>(klausur.getIndex())));
+        //if(result.find(klausur.getStudiengang()) == result.end()) { // if-Bedingung für standards vor c++20, da contains erst seit version 20 enthalten ist
+        if(!result.contains(klausur.getStudiengang())) {
+            vector<int> neuerStudiengang;
+            neuerStudiengang.push_back(klausur.getIndex());
+            result.insert(pair<string, vector<int>>(klausur.getStudiengang(), neuerStudiengang));
         } else {
             result.find(klausur.getStudiengang())->second.push_back(klausur.getIndex());
         }
@@ -79,8 +113,8 @@ map<string, vector<int>> Algorithmus::klausurenGroupByStudiengang() {
 }
 
 void Algorithmus::initTage() {
-    for (int i = 0; i < Utility::klausurTage; i++) {
-        tage[i] = data.raeume;
+    for (auto & tag : tage) {
+        tag = data.raeume;
     }
 }
 

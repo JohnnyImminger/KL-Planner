@@ -92,7 +92,7 @@ private:
     int index;
 
     vector<int> studenten;
-    int anzTeilnehmer;
+    int anzTeilnehmer = 0;
 
     int dauerTimeSlots;
     int tag;

@@ -44,14 +44,21 @@ private:
 
     //string ist der studiengangname, vector<int> eine liste mit Indices der dazugehörigen klausuren
     map<string, vector<int>> klausurenGroupByStudiengang();
+    //sortiert die vektoren der Map die vorbereitend von klausurenGroupByStudiengang erzeugt wurde. Vergleichswert ist die Anzahl der Teilnehmer der Klausur
     void sortMap(const map<string, vector<int>>& map);
+    /*
+     * wählt rotierend über die Studiengänge die nächste einzuplanende Klausur aus und entfernt sie aus dem vektor.
+     * Ist der Vektor leer wird der Studiengang aus der Map entfernt.
+     * Ist die map leer wird -1 zurückgegeben
+     * In der Referenz nextStg wird für den nächsten aufruf gespeichert aus welchem studiengang dann gewählt werden soll
+     * Klausuren ohne Teilnehmer werden automatisch aussortiert und somit auch nicht eingeplant
+     */
+    int selectNextKlausur(map<string, vector<int>> &map, string &nextStg);
 
     //Utility::isTimeSlotTooLong(startTimeSlot, dauerTimeSlot)
     bool isTimeSlotValidForProf(Professor& prof, int startTimeSlot, int dauerTimeSlot, int tag);
     bool isTimeSlotValidForStudent(Student& student, int startTimeSlot, int dauerTimeSlot, int tag);
     bool isTimeSlotValidForRoom(int raum,int startTimeSlot, int dauerTimeSlot, int tag);
-
-    int selectNextKlausur(string &lastStg, map<string, vector<int>> &map);
 
     //versucht die Klausur in das System einzubuchen und das Ergebnis in Prüfung zu hinterlegen --> bei Erfolg return true
     bool einsortierenKlausur(Klausur& klausur);
