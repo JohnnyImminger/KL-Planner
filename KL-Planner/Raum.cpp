@@ -15,11 +15,11 @@ Raum::Raum() {
     this->capacity = 0;
 }
 
-Raum::Raum(string &art, int adrBau, int adrRaum, int kap) {
+Raum::Raum(string &art, int adrBau, int adrRaum, int cap) {
     this->raumArt = art;
     this->adrBau = adrBau;
     this->adrRaum = adrRaum;
-    this->capacity = kap;
+    this->capacity = cap;
 }
 
 /*
@@ -27,8 +27,25 @@ Raum::Raum(string &art, int adrBau, int adrRaum, int kap) {
  */
 
 std::ostream &operator<<(ostream &out, const Raum &raum) {
-    out << raum.raumArt << ';' << raum.adrBau << '/' << raum.adrRaum << ';' << raum.capacity;
+    out << raum.getRaumArt() << ';' << raum.getAdrBau() << '/' << raum.getAdrRaum() << ';' << raum.getCapacity();
     return out;
+}
+
+//A = 100% free, B = 99% - 50% , C = 49% - 20%, D = 19% - 1% E = 0% free
+void Raum::printTimeSlots(ostream& out){
+    for (int freeCapacity : timeSlots) {
+        if (freeCapacity == this->capacity){
+            out << "A;";
+        } else if (freeCapacity >= this->capacity * 0.5){
+            out << "B;";
+        } else if (freeCapacity == this->capacity * 0.2){
+            out << "C;";
+        } else if (freeCapacity == 0){
+            out << "E;";
+        } else {
+            out << "D;";
+        }
+    }
 }
 
 void Raum::printFreeTimeslots(ostream& out) {

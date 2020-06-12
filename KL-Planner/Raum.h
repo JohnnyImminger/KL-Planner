@@ -17,8 +17,11 @@ public:
      */
 
     Raum();
-    Raum(string &art, int adrBau, int adrRaum, int kap);
+    Raum(string &art, int adrBau, int adrRaum, int cap);
     friend std::ostream& operator<<(std::ostream &out, const Raum &raum);
+
+    void printTimeSlots(ostream &out);
+    void printFreeTimeslots(ostream& out);
 
     /*
      * Getter
@@ -34,9 +37,8 @@ public:
      * Methoden:
      */
 
-    //holt sich die Daten aus der csv
     static vector<Raum> parse(const string& pathToFile);
-    void printFreeTimeslots(ostream& out);
+
 
     /*
      * Ressourcen-System
@@ -59,6 +61,7 @@ private:
     int adrRaum;
     int capacity;
     int timeSlots[Utility::timeSlotsProTag + Utility::timeSlotsPauseRaum] = {capacity}; //[40] je 15min slots + die Pause als imaginärer Puffer, 0 = raum ist voll
+
 
 
 };
