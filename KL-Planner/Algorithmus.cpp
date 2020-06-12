@@ -77,7 +77,7 @@ void Algorithmus::printProfpalnliste(const string &filename) {
     for(Professor cProf : data.professoren){
         file << "Prof_" << cProf.getIdentNr() << endl;
         for(int i = 0; i < cProf.getKlausurDataIndizes().size(); i++){
-            file << "beaufsichtigt;" << data.klausuren[cProf.getKlausurDataIndizes()[i]].getPName() << ";am;" << data.klausuren[cProf.getKlausurDataIndizes()[i]].getTag() << ";um;" << data.klausuren[cProf.getKlausurDataIndizes()[i]].getStartZeitTimeSlot() << endl;
+            file << "beaufsichtigt;" << data.klausuren[cProf.getKlausurDataIndizes()[i]].getName() << ";am;" << data.klausuren[cProf.getKlausurDataIndizes()[i]].getTag() << ";um;" << data.klausuren[cProf.getKlausurDataIndizes()[i]].getStartZeitTimeSlot() << endl;
         }
     }
     file.close();
@@ -89,7 +89,7 @@ void Algorithmus::printStudentplanliste(const string &filename) {
     for(Student cStudent : data.studenten){
         file << "Student_" << cStudent.getMatrikelNr() << endl;
         for(int i = 0;i < cStudent.getKlausurDataIndizes().size(); i++){
-            file << "schreibt;" << data.klausuren[cStudent.getKlausurDataIndizes()[i]].getPName() << ";am;" << data.klausuren[cStudent.getKlausurDataIndizes()[i]].getTag() << ";um;" << data.klausuren[cStudent.getKlausurDataIndizes()[i]].getStartZeitTimeSlot() << endl;
+            file << "schreibt;" << data.klausuren[cStudent.getKlausurDataIndizes()[i]].getName() << ";am;" << data.klausuren[cStudent.getKlausurDataIndizes()[i]].getTag() << ";um;" << data.klausuren[cStudent.getKlausurDataIndizes()[i]].getStartZeitTimeSlot() << endl;
         }
     }
     file.close();
@@ -173,10 +173,10 @@ map<string, vector<int>> Algorithmus::klausurenGroupByStudiengang() {
         if(result.find(klausur.getStudiengang()) == result.end()) { // if-Bedingung für standards vor c++20, da contains erst seit version 20 enthalten ist
         //if(!result.contains(klausur.getStudiengang())) {
             vector<int> neuerStudiengang;
-            neuerStudiengang.push_back(klausur.getIndex());
+            neuerStudiengang.push_back(klausur.getDataIndex());
             result.insert(pair<string, vector<int>>(klausur.getStudiengang(), neuerStudiengang));
         } else {
-            result.find(klausur.getStudiengang())->second.push_back(klausur.getIndex());
+            result.find(klausur.getStudiengang())->second.push_back(klausur.getDataIndex());
         }
     }
     return result;

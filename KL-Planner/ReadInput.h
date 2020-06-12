@@ -64,7 +64,7 @@ private:
 
     /*
      * Klausuren sind eindeutig definier durch Studiengang, SPO-Version und Prüfungsnummer.
-     * Abgebildet durch: string studStudiengang, int klausurVersion und klausurNummer.
+     * Abgebildet durch: string studStudiengang, int version und nummer.
      * Methode durchsucht den vector klausuren danach und gibt den Index der Klausur zurück.
      * Kann die klausur nicht gefunden werden ist der Rückgabewert -1.
      */

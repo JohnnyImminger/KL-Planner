@@ -24,8 +24,8 @@ DatenObjekte:
     Anmeldung:
         int studMatrikelNr;     --> aus csv
         string studStudiengang; --> aus csv
-        int klausurVersion;       --> aus csv
-        int klausurNummer;        --> aus csv
+        int version;       --> aus csv
+        int nummer;        --> aus csv
         string klausurForm;       --> aus csv
         string klausurFormText;       --> aus csv
         int klausurSemester;      --> aus csv
@@ -35,14 +35,14 @@ DatenObjekte:
     Klausur (einfach zu schreiben als Pruefungen):
         string studStudiengang; --> aus csv
         int vertiefung;     --> aus csv
-        int klausurVersion;       --> aus csv
-        int klausurNummer;        --> aus csv
-        string pName;       --> aus csv
-        int pPruefer1;      --> aus csv
-        string pruefer1;    --> aus csv
-        int pPruefer2;      --> aus csv
-        string pruefer2;    --> aus csv
-        float pDauer;       --> aus csv
+        int version;       --> aus csv
+        int nummer;        --> aus csv
+        string name;       --> aus csv
+        int pruefer1IdentNr;      --> aus csv
+        string pruefer1Name;    --> aus csv
+        int pruefer2IdentNr;      --> aus csv
+        string pruefer2Name;    --> aus csv
+        float dauer;       --> aus csv
         string klausurForm;       --> aus csv
         int klausurSemester;      --> aus csv
         bool angeboten;     --> aus csv
@@ -52,7 +52,7 @@ DatenObjekte:
         int anzTeilnehmer;      --> Size von studenten
 
 
-        int dauerTimeSlots;     --> Umgerechnete pDauer
+        int dauerTimeSlots;     --> Umgerechnete dauer
         int tag;                --> ERGEBNIS
         int startZeitTimeSlot;  --> ERGEBNIS
         vector<int> raumRefs;   --> ERGEBNIS

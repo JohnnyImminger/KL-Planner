@@ -21,11 +21,11 @@ void ReadInput::parseInput() {
 
 void ReadInput::createProfs() {
     for (Klausur& klausur: klausuren) {
-        if (klausur.getPPruefer1() != 0) {
-            processProf(klausur.getIndex(), klausur.getPPruefer1(), klausur.getPruefer1());
+        if (klausur.getPruefer1IdentNr() != 0) {
+            processProf(klausur.getDataIndex(), klausur.getPruefer1IdentNr(), klausur.getPruefer1Name());
         }
-        if (klausur.getPPruefer2() != 0) {
-            processProf(klausur.getIndex(), klausur.getPPruefer2(), klausur.getPruefer2());
+        if (klausur.getPruefer2IdentNr() != 0) {
+            processProf(klausur.getDataIndex(), klausur.getPruefer2IdentNr(), klausur.getPruefer2Name());
         }
     }
     indexProfs();
@@ -104,9 +104,9 @@ int ReadInput::isStudentInVector(int matrikelNr) {
 int ReadInput::findKlausurIndex(const string& studiengang, int pVersion, int pNummer) {
     for (Klausur& klausur: klausuren) {
         if (studiengang != klausur.getStudiengang()) continue;
-        if (pVersion != klausur.getPVersion()) continue;
-        if (pNummer != klausur.getPNummer()) continue;
-        return klausur.getIndex();
+        if (pVersion != klausur.getVersion()) continue;
+        if (pNummer != klausur.getNummer()) continue;
+        return klausur.getDataIndex();
     }
     return -1;
 }
