@@ -16,7 +16,7 @@ public:
      */
 
     Student();
-    Student(int matikelNr, string& studiengang);
+    Student(int matikelNr, string studiengang);
     friend std::ostream& operator<<(std::ostream &out, const Student &student);
 
     /*

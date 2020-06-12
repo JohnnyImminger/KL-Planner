@@ -15,7 +15,7 @@ Student::Student() {
     this->anzKlausuren = 0;
 }
 
-Student::Student(int matikelNr, string& studiengang) {
+Student::Student(int matikelNr, string studiengang) {
     this->dataIndex = -1;
     this->matrikelNr = matikelNr;
     this->studiengang = studiengang;

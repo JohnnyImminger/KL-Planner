@@ -15,7 +15,7 @@ Professor::Professor() {
     this->anzKlausuren = 0;
 }
 
-Professor::Professor(int identNr, string& name) {
+Professor::Professor(int identNr, string name) {
     this->dataIndex = -1;
     this->identNr = identNr;
     this->name = name;

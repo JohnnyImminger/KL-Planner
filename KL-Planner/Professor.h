@@ -16,7 +16,7 @@ public:
      */
 
     Professor();
-    Professor(int identNr, string& name);
+    Professor(int identNr, string name);
     friend std::ostream& operator<<(std::ostream &out, const Professor &student);
 
     /*
