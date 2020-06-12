@@ -19,7 +19,7 @@ Raum::Raum(string &art, int adrBau, int adrRaum, int cap) {
     this->raumArt = art;
     this->adrBau = adrBau;
     this->adrRaum = adrRaum;
-    this->capacity = cap;
+    this->capacity = cap / Utility::roomDivider;
 }
 
 /*

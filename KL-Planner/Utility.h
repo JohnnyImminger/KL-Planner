@@ -53,6 +53,7 @@ public:
 
     const static int timeSlotsProStunde = 4; //15min pro Slot
     const static int roomDivider = 4; // der wievielte Sitzplaz kann belegt werden
+
     const static int timeSlotsPauseProf = (int) pauseProf * timeSlotsProStunde;
     const static int timeSlotsPauseStudent = (int) pauseStudent * timeSlotsProStunde;
     const static int timeSlotsPauseRaum = (int) pauseRaum * timeSlotsProStunde;
