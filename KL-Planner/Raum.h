@@ -56,9 +56,16 @@ private:
     //[40] je 15min slots + die Pause als imaginärer Puffer, false = nicht belegt
     bool timeSlots[Utility::timeSlotsProTag + Utility::timeSlotsPauseRaum] = {false};
 
-    /*_____________________________________
-     * Methoden:
+    /*
+     * Ressourcen-System
      */
+
+    struct Buchung{
+        bool belegt = false;
+        int belegteKapazitaet = 0;
+    };
+
+    Buchung buchungenTimeSlots[Utility::timeSlotsProTag];
 };
 
 #endif //KL_PLANNER_RAUM_H
