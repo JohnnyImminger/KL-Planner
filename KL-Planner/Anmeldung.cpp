@@ -9,24 +9,24 @@
  */
 
 Anmeldung::Anmeldung() {
-    this->matrikelNr = 404;
-    this->studiengang = "dummyAnmeldung";
-    this->pVersion = 404;
-    this->pNummer = 404;
-    this->pForm = "dummyAnmeldung";
-    this->dText = "dummyAnmeldung";
-    this->pSemester = 404;
+    this->studMatrikelNr = 404;
+    this->studStudiengang = "dummyAnmeldung";
+    this->klausurVersion = 404;
+    this->klausurNummer = 404;
+    this->klausurForm = "dummyAnmeldung";
+    this->klausurFormText = "dummyAnmeldung";
+    this->klausurSemester = 404;
 }
 
 Anmeldung::Anmeldung(int matrikelNr, string &studiengang, int pVersion, int pNummer, string &pForm, string &dText,
                      int pSemester) {
-    this->matrikelNr = matrikelNr;
-    this->studiengang = studiengang;
-    this->pVersion = pVersion;
-    this->pNummer = pNummer;
-    this->pForm = pForm;
-    this->dText = dText;
-    this->pSemester = pSemester;
+    this->studMatrikelNr = matrikelNr;
+    this->studStudiengang = studiengang;
+    this->klausurVersion = pVersion;
+    this->klausurNummer = pNummer;
+    this->klausurForm = pForm;
+    this->klausurFormText = dText;
+    this->klausurSemester = pSemester;
 }
 
 /*
@@ -34,7 +34,7 @@ Anmeldung::Anmeldung(int matrikelNr, string &studiengang, int pVersion, int pNum
  */
 
 std::ostream &operator<<(ostream &out, const Anmeldung &anmeldung) {
-    out << anmeldung.matrikelNr << ';' << anmeldung.studiengang << ';' << anmeldung.pVersion << ';' << anmeldung.pNummer << ';' << anmeldung.pForm << ';' << anmeldung.dText << ';' << anmeldung.pSemester;
+    out << anmeldung.getMatrikelNr() << ';' << anmeldung.getStudiengang() << ';' << anmeldung.getKlausurVersion() << ';' << anmeldung.getKlausurNummer() << ';' << anmeldung.getKlausurForm() << ';' << anmeldung.getKlausurFormText() << ';' << anmeldung.getKlausurSemester();
     return out;
 }
 
@@ -43,31 +43,31 @@ std::ostream &operator<<(ostream &out, const Anmeldung &anmeldung) {
  */
 
 int Anmeldung::getMatrikelNr() const {
-    return matrikelNr;
+    return studMatrikelNr;
 }
 
 const string &Anmeldung::getStudiengang() const {
-    return studiengang;
+    return studStudiengang;
 }
 
-int Anmeldung::getPVersion() const {
-    return pVersion;
+int Anmeldung::getKlausurVersion() const {
+    return klausurVersion;
 }
 
-int Anmeldung::getPNummer() const {
-    return pNummer;
+int Anmeldung::getKlausurNummer() const {
+    return klausurNummer;
 }
 
-const string &Anmeldung::getPForm() const {
-    return pForm;
+const string &Anmeldung::getKlausurForm() const {
+    return klausurForm;
 }
 
-const string &Anmeldung::getDText() const {
-    return dText;
+const string &Anmeldung::getKlausurFormText() const {
+    return klausurFormText;
 }
 
-int Anmeldung::getPSemester() const {
-    return pSemester;
+int Anmeldung::getKlausurSemester() const {
+    return klausurSemester;
 }
 
 /*______________________________________________________________

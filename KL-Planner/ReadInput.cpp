@@ -68,7 +68,8 @@ void ReadInput::createStudenten() {
     int studentenCount = 0;
     for (Anmeldung& anmeldung: anmeldungen) {
         int index = isStudentInVector(anmeldung.getMatrikelNr());
-        int klausurIndex = findKlausurIndex(anmeldung.getStudiengang(), anmeldung.getPVersion(), anmeldung.getPNummer());
+        int klausurIndex = findKlausurIndex(anmeldung.getStudiengang(), anmeldung.getKlausurVersion(),
+                                            anmeldung.getKlausurNummer());
         if (klausurIndex < 0){
             //cout << anmeldung << endl;
             //cout << "Klausur konnte nicht gefunden werden!" << endl;

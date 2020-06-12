@@ -25,11 +25,11 @@ public:
 
     int getMatrikelNr() const;
     const string &getStudiengang() const;
-    int getPVersion() const;
-    int getPNummer() const;
-    const string &getPForm() const;
-    const string &getDText() const;
-    int getPSemester() const;
+    int getKlausurVersion() const;
+    int getKlausurNummer() const;
+    const string &getKlausurForm() const;
+    const string &getKlausurFormText() const;
+    int getKlausurSemester() const;
 
     /*_____________________________________
      * Methoden:
@@ -43,17 +43,13 @@ private:
      * Attribute
      */
 
-    int matrikelNr;
-    string studiengang;
-    int pVersion;
-    int pNummer;
-    string pForm;
-    string dText;
-    int pSemester;
-
-    /*_____________________________________
-     * Methoden:
-     */
+    int studMatrikelNr;
+    string studStudiengang;
+    int klausurVersion;
+    int klausurNummer;
+    string klausurForm;
+    string klausurFormText;
+    int klausurSemester;
 };
 
 

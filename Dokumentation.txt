@@ -11,43 +11,43 @@ DatenObjekte:
         string raumArt;     --> aus csv
         int adrBau;         --> aus csv
         int adrRaum;        --> aus csv
-        int kapazitaet;     --> aus csv / festgelegten Teiler [4]
+        int capacity;     --> aus csv / festgelegten Teiler [4]
 
         bool timeSlots[Utility::timeSlotsProTag + Utility::timeSlotsPauseRaum] = {false};
 
-            TODO jeder timeSlot sollte eine kapazitaet haben um 2 klausuren gleichzeitig stattfinden zu lassen
+            TODO jeder timeSlot sollte eine capacity haben um 2 klausuren gleichzeitig stattfinden zu lassen
             --> Raum ist eine Ressource die eine buchbare TimeSlots besitzt.
             --> Zur leichteren Handhabung wird mit einer immaginären Pause am Ende gerechnet
             --> Timeslot = 15min
             --> false = NICHT belegt
 
     Anmeldung:
-        int matrikelNr;     --> aus csv
-        string studiengang; --> aus csv
-        int pVersion;       --> aus csv
-        int pNummer;        --> aus csv
-        string pForm;       --> aus csv
-        string dText;       --> aus csv
-        int pSemester;      --> aus csv
+        int studMatrikelNr;     --> aus csv
+        string studStudiengang; --> aus csv
+        int klausurVersion;       --> aus csv
+        int klausurNummer;        --> aus csv
+        string klausurForm;       --> aus csv
+        string klausurFormText;       --> aus csv
+        int klausurSemester;      --> aus csv
 
         --> Anmeldungen bilden die Verknüfung zwischen Klausuren und Studenten
 
     Klausur (einfach zu schreiben als Pruefungen):
-        string studiengang; --> aus csv
+        string studStudiengang; --> aus csv
         int vertiefung;     --> aus csv
-        int pVersion;       --> aus csv
-        int pNummer;        --> aus csv
+        int klausurVersion;       --> aus csv
+        int klausurNummer;        --> aus csv
         string pName;       --> aus csv
         int pPruefer1;      --> aus csv
         string pruefer1;    --> aus csv
         int pPruefer2;      --> aus csv
         string pruefer2;    --> aus csv
         float pDauer;       --> aus csv
-        string pForm;       --> aus csv
-        int pSemester;      --> aus csv
+        string klausurForm;       --> aus csv
+        int klausurSemester;      --> aus csv
         bool angeboten;     --> aus csv
 
-        int index;              --> Speicher Index im Data-Array    --> Referenz
+        int dataIndex;              --> Speicher Index im Data-Array    --> Referenz
         vector<int> studenten;  --> Studenten Index aus Data-Array  --> Referenz
         int anzTeilnehmer;      --> Size von studenten
 
@@ -58,17 +58,17 @@ DatenObjekte:
         vector<int> raumRefs;   --> ERGEBNIS
 
     Student:
-        int matrikelNr;             --> aus Anmeldung
-        string studiengang;         --> aus Anmeldung
+        int studMatrikelNr;             --> aus Anmeldung
+        string studStudiengang;         --> aus Anmeldung
         int anzKlausuren;           --> Size von klausuren
         vector<int> klausurIndizes; --> Klausur Index aus Data-Array    --> Referenz
-        int index;                  --> Speicher Index im Data-Array    --> Referenz
+        int dataIndex;                  --> Speicher Index im Data-Array    --> Referenz
 
     Professor:
         int identNr;                        --> aus Klausur
         string name;                        --> aus Klausur
-        int anzPruefungen;                  --> Size von klausurAufsichtIndex
-        vector<int> klausurAufsichtIndex;   --> Klausur Index aus Data-Array    --> Referenz
+        int anzKlausuren;                  --> Size von klausurDataIndizes
+        vector<int> klausurDataIndizes;   --> Klausur Index aus Data-Array    --> Referenz
 
     ReadInput:
         vector <Klausur> klausuren;         --> Speichert ALLE Daten --> Ziel aller Referenzen

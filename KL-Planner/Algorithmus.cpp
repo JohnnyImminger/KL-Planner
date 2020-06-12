@@ -100,7 +100,7 @@ void Algorithmus::printStudentplanliste(const string &filename) {
 */
 
 /*
- * gruppieren der Klausuren nach studiengang
+ * gruppieren der Klausuren nach studStudiengang
  * innerhalb der studiengänge nach größe der klausuren sortieren
  * rotierend alle studiengänge durchgehen und jeweils eine klausur einsortieren
  * klausur gegebenenfalls teilen und passenden raum suchen:
