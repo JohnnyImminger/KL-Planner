@@ -17,40 +17,38 @@ public:
      */
 
     Professor();
-    Professor(int identNr, string name);
+    Professor(int identNr, string& name);
     friend std::ostream& operator<<(std::ostream &out, const Professor &student);
 
     /*
-     * Getter
+     * Getter und Setter
      */
 
-    void addPruefung(int pIndex);
+    int getDataIndex() const;
     int getIdentNr() const;
     const string &getName() const;
-    int getAnzPruefungen() const;
-    int getIndex() const;
+    int getAnzKlausuren() const;
+    const vector<int> &getKlausurDataIndizes() const;
+
     void setIndex(int index);
-
-
-    const vector<int> &getKlausurAufsichtIndices() const;
 
     /*_____________________________________
      * Methoden:
      */
+
+    void addKlausur(int klausurDataIndex);
 
 private:
     /*
      * Attribute
      */
-    int index;
+    //TODO rename to dataIndex
+    int dataIndex;
     int identNr;
     string name;
-    int anzPruefungen;
-    vector<int> klausurAufsichtIndex;
+    int anzKlausuren;
+    vector<int> klausurDataIndizes;
 
-    /*_____________________________________
-     * Methoden:
-     */
 };
 
 

@@ -76,8 +76,8 @@ void Algorithmus::printProfpalnliste(const string &filename) {
     file.open(filename);
     for(Professor cProf : data.professoren){
         file << "Prof_" << cProf.getIdentNr() << endl;
-        for(int i = 0; i < cProf.getKlausurAufsichtIndices().size(); i++){
-            file << "beaufsichtigt;" << data.klausuren[cProf.getKlausurAufsichtIndices()[i]].getPName() << ";am;" << data.klausuren[cProf.getKlausurAufsichtIndices()[i]].getTag() << ";um;" << data.klausuren[cProf.getKlausurAufsichtIndices()[i]].getStartZeitTimeSlot()<< endl;
+        for(int i = 0; i < cProf.getKlausurDataIndizes().size(); i++){
+            file << "beaufsichtigt;" << data.klausuren[cProf.getKlausurDataIndizes()[i]].getPName() << ";am;" << data.klausuren[cProf.getKlausurDataIndizes()[i]].getTag() << ";um;" << data.klausuren[cProf.getKlausurDataIndizes()[i]].getStartZeitTimeSlot() << endl;
         }
     }
     file.close();
@@ -383,7 +383,7 @@ bool Algorithmus::checkProfForEinsortieren(Klausur &klausur, int startZeitTimeSl
 
 bool Algorithmus::isTimeSlotValidForProf(Professor& prof, int startTimeSlot, int dauerTimeSlot, int tag) {
     //iteriere über alle Klausuren die ein Prof hat
-    for (int index : prof.getKlausurAufsichtIndices()) {
+    for (int index : prof.getKlausurDataIndizes()) {
         //Hol die Klausur aus der Referenz
         Klausur beaufsichtigteKlausur = data.klausuren[index];
         //ist die Klausur vergeben?
