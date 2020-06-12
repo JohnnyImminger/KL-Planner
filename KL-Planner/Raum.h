@@ -36,7 +36,6 @@ public:
 
     //holt sich die Daten aus der csv
     static vector<Raum> parse(const string& pathToFile);
-    //TODO muss überarbeitet werden
     void printFreeTimeslots(ostream& out);
 
     /*
