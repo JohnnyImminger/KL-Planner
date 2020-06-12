@@ -234,7 +234,7 @@ bool Algorithmus::einsortierenKlausurInGleichGrossenRaum(Klausur &klausur, int m
                 klausur.setTag(startTag);
                 klausur.setStartZeitTimeSlot(startZeitTimeSlot);
                 klausur.addRaumRef(raumIndex);
-                tage[startTag].at(raumIndex).useTimeSlots(startZeitTimeSlot,dauerTimeSlot);
+                tage[startTag].at(raumIndex).bookTimeSlots(startZeitTimeSlot, dauerTimeSlot);
                 klausur.setEingeplant(true);
                 lastSortedDay = startTag;
                 return true;
@@ -254,11 +254,12 @@ vector <int> Algorithmus::findePassendeRaumIndices(int klausurKapazitaet, int ma
     for (int raumIndex = 0; raumIndex < data.raeume.size(); ++raumIndex) {
         Raum& raum = data.raeume.at(raumIndex);
         //passt die Klausur überhaupt ind en Raum?
-        if (raum.getKapazitaet() < klausurKapazitaet){
+        if (raum.getCapacity() < klausurKapazitaet){
             continue;
         }
         //low <= x && x <= high
-        if (klausurKapazitaet - maxAbweichung <= raum.getKapazitaet() && raum.getKapazitaet() <= klausurKapazitaet + maxAbweichung){
+        if (klausurKapazitaet - maxAbweichung <= raum.getCapacity() &&
+                raum.getCapacity() <= klausurKapazitaet + maxAbweichung){
             raumIndices.push_back(raumIndex);
         }
     }
@@ -274,7 +275,7 @@ bool Algorithmus::einsortierenKlausur(Klausur &klausur) {
 
     //TODO baue Methode um, dass ein guter Raum zur kapazität gesucht wird, dann wird die frühste zeit an allen tagen versucht, bei fehlversuchen wird die fehlerschranke zur kapazität erhöht
     /*__________________________________________________________________________________________________________________
-     * Vorgeschaltete Methode um so wenig kapazitaet wie möchglich zu verschwenden
+     * Vorgeschaltete Methode um so wenig capacity wie möchglich zu verschwenden
      */
     for (int maxAbweichung = 0; maxAbweichung < 5; ++maxAbweichung) {
         if (einsortierenKlausurInGleichGrossenRaum(klausur, maxAbweichung)){
@@ -293,11 +294,11 @@ bool Algorithmus::einsortierenKlausur(Klausur &klausur) {
         /*______________________________________________________________________________________________________________
          * Suche einen Raum - niedirige Uhrzeiten werden zuerst aufgefüllt
          */
-        //Überprüft ob genug räume an diesem Tag zur verfügung stehen um die kapazitaet unterzubringen
+        //Überprüft ob genug räume an diesem Tag zur verfügung stehen um die capacity unterzubringen
         if (!checkRaeumeByVectorSizeForEinsortieren(klausur, startTag, raumIndex)){
             return false;
         }
-        //überprüft ob genug die Räume zu dieser Zeit verfügbar sind um die kapazitaet unterzubringen
+        //überprüft ob genug die Räume zu dieser Zeit verfügbar sind um die capacity unterzubringen
         if (!checkRaeumeByKapazitaetForEinsortieren(klausur, startZeitTimeSlot, dauerTimeSlot, startTag, raumIndex)){
             startTag = increaseStartTag(startTag);
             if (startTag == lastSortedDay){
@@ -326,8 +327,8 @@ bool Algorithmus::einsortierenKlausur(Klausur &klausur) {
         klausur.setStartZeitTimeSlot(startZeitTimeSlot);
         while (anzTeilnehmer > 0){
             klausur.addRaumRef(raumIndex);
-            tage[startTag].at(raumIndex).useTimeSlots(startZeitTimeSlot,dauerTimeSlot);
-            anzTeilnehmer -= tage[startTag].at(raumIndex).getKapazitaet();
+            tage[startTag].at(raumIndex).bookTimeSlots(startZeitTimeSlot, dauerTimeSlot);
+            anzTeilnehmer -= tage[startTag].at(raumIndex).getCapacity();
             raumIndex++;
         }
         klausur.setEingeplant(true);
@@ -350,7 +351,7 @@ bool Algorithmus::checkRaeumeByVectorSizeForEinsortieren(Klausur &klausur, int s
         if (tempRaumIndex >= data.raeume.size()){
             return false;
         }
-        anzTeilnehmer -= tage[startTag].at(tempRaumIndex).getKapazitaet();
+        anzTeilnehmer -= tage[startTag].at(tempRaumIndex).getCapacity();
         tempRaumIndex++;
     }
     return true;
@@ -362,10 +363,10 @@ bool Algorithmus::checkRaeumeByKapazitaetForEinsortieren(Klausur &klausur, int s
     int anzTeilnehmer = klausur.getAnzTeilnehmer();
     while (anzTeilnehmer > 0){
         Raum raum = tage[startTag].at(tempRaumIndex);
-        if (!raum.areTimeSlotsFree(startZeitTimeSlot,dauerTimeSlot)){
+        if (!raum.getFreeSpaceAt(startZeitTimeSlot, dauerTimeSlot)){
             return false;
         }
-        anzTeilnehmer -= raum.getKapazitaet();
+        anzTeilnehmer -= raum.getCapacity();
         tempRaumIndex++;
     }
     return true;

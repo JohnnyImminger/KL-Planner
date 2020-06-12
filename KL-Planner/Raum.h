@@ -11,6 +11,7 @@ using namespace std;
 
 class Raum {
 public:
+
     /*
      * Konstruktoren und toString();
      */
@@ -19,8 +20,6 @@ public:
     Raum(string &art, int adrBau, int adrRaum, int kap);
     friend std::ostream& operator<<(std::ostream &out, const Raum &raum);
 
-    void printFreeTimeslots(ostream& out);
-
     /*
      * Getter
      */
@@ -28,7 +27,8 @@ public:
     const string &getRaumArt() const;
     int getAdrBau() const;
     int getAdrRaum() const;
-    int getKapazitaet() const;
+    int getCapacity() const;
+    const int *getTimeSlots() const;
 
     /*_____________________________________
      * Methoden:
@@ -36,12 +36,19 @@ public:
 
     //holt sich die Daten aus der csv
     static vector<Raum> parse(const string& pathToFile);
+    //TODO muss überarbeitet werden
+    void printFreeTimeslots(ostream& out);
+
+    /*
+     * Ressourcen-System
+     */
 
     //prüft ob die Timeslots verfügbar sind, berücksichtigt direkt die Pause für den Raum
-    bool areTimeSlotsFree(int startTimeSlot, int dauerTimeSlot);
+    int getFreeSpaceAt(int startTime, int duration);
 
     //belegt die Timeslots, berücksichtigt direkt die Pause für den Raum
-    void useTimeSlots(int startTimeSlot, int dauerTimeSlot);
+    bool bookTimeSlots(int startTime, int duration, int capacity);
+
 
 private:
     /*
@@ -51,21 +58,10 @@ private:
     string raumArt;
     int adrBau;
     int adrRaum;
-    int kapazitaet;
+    int capacity;
+    int timeSlots[Utility::timeSlotsProTag + Utility::timeSlotsPauseRaum] = {capacity}; //[40] je 15min slots + die Pause als imaginärer Puffer, 0 = raum ist voll
 
-    //[40] je 15min slots + die Pause als imaginärer Puffer, false = nicht belegt
-    bool timeSlots[Utility::timeSlotsProTag + Utility::timeSlotsPauseRaum] = {false};
 
-    /*
-     * Ressourcen-System
-     */
-
-    struct Buchung{
-        bool belegt = false;
-        int belegteKapazitaet = 0;
-    };
-
-    Buchung buchungenTimeSlots[Utility::timeSlotsProTag];
 };
 
 #endif //KL_PLANNER_RAUM_H
