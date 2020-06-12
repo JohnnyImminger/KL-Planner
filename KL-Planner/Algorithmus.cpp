@@ -88,8 +88,8 @@ void Algorithmus::printStudentplanliste(const string &filename) {
     file.open(filename);
     for(Student cStudent : data.studenten){
         file << "Student_" << cStudent.getMatrikelNr() << endl;
-        for(int i = 0;i < cStudent.getKlausurIndices().size();i++){
-            file << "schreibt;" << data.klausuren[cStudent.getKlausurIndices()[i]].getPName() << ";am;" << data.klausuren[cStudent.getKlausurIndices()[i]].getTag() << ";um;" << data.klausuren[cStudent.getKlausurIndices()[i]].getStartZeitTimeSlot()<< endl;
+        for(int i = 0;i < cStudent.getKlausurDataIndizes().size(); i++){
+            file << "schreibt;" << data.klausuren[cStudent.getKlausurDataIndizes()[i]].getPName() << ";am;" << data.klausuren[cStudent.getKlausurDataIndizes()[i]].getTag() << ";um;" << data.klausuren[cStudent.getKlausurDataIndizes()[i]].getStartZeitTimeSlot() << endl;
         }
     }
     file.close();
@@ -415,7 +415,7 @@ bool Algorithmus::checkStudentForEinsortieren(Klausur &klausur, int startZeitTim
 
 bool Algorithmus::isTimeSlotValidForStudent(Student& student, int startTimeSlot, int dauerTimeSlot, int tag) {
     //iteriere über alle Klausuren die ein Prof hat
-    for (int index : student.getKlausurIndices()) {
+    for (int index : student.getKlausurDataIndizes()) {
         //Hol die Klausur aus der Referenz
         Klausur angemeldeteKlausur = data.klausuren[index];
         //ist die Klausur vergeben?

@@ -61,7 +61,7 @@ DatenObjekte:
         int studMatrikelNr;             --> aus Anmeldung
         string studStudiengang;         --> aus Anmeldung
         int anzKlausuren;           --> Size von klausuren
-        vector<int> klausurIndizes; --> Klausur Index aus Data-Array    --> Referenz
+        vector<int> klausurDataIndizes; --> Klausur Index aus Data-Array    --> Referenz
         int dataIndex;                  --> Speicher Index im Data-Array    --> Referenz
 
     Professor:

@@ -27,7 +27,7 @@ Professor::Professor(int identNr, string& name) {
  */
 
 std::ostream &operator<<(ostream &out, const Professor &professor) {
-    out << professor.identNr << ';' << professor.name << ';' << professor.anzKlausuren;
+    out << professor.getIdentNr() << ';' << professor.getName() << ';' << professor.getAnzKlausuren();
     return out;
 }
 
@@ -69,6 +69,6 @@ void Professor::setIndex(int index) {
  */
 
 void Professor::addKlausur(int klausurDataIndex) {
-    klausurDataIndizes.push_back(klausurDataIndex);
+    this->klausurDataIndizes.push_back(klausurDataIndex);
     this->anzKlausuren++;
 }

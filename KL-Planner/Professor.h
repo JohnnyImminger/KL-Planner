@@ -6,7 +6,6 @@
 #define KL_PLANNER_PROFESSOR_H
 
 #include "Utility.h"
-#include "Klausur.h"
 
 using namespace std;
 
@@ -36,13 +35,14 @@ public:
      * Methoden:
      */
 
+    //Methode added nur die Referenz aus dem Klausur-Vektor zu dem Studenten
     void addKlausur(int klausurDataIndex);
 
 private:
     /*
      * Attribute
      */
-    //TODO rename to dataIndex
+
     int dataIndex;
     int identNr;
     string name;
@@ -50,6 +50,5 @@ private:
     vector<int> klausurDataIndizes;
 
 };
-
 
 #endif //KL_PLANNER_PROFESSOR_H

@@ -113,8 +113,8 @@ int ReadInput::findKlausurIndex(const string& studiengang, int pVersion, int pNu
 
 void ReadInput::attachStudentsToKlausur() {
     for (const Student& student: studenten) {
-        for (int klausurIndex: student.getKlausurIndices()) {
-            klausuren.at(klausurIndex).addStudent(student.getIndex());
+        for (int klausurIndex: student.getKlausurDataIndizes()) {
+            klausuren.at(klausurIndex).addStudent(student.getDataIndex());
         }
     }
     cout << "Studenten zu Klausuren hinzugefuegt" << endl;
