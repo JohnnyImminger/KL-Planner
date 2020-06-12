@@ -33,9 +33,11 @@ std::ostream &operator<<(ostream &out, const Raum &raum) {
 
 void Raum::printFreeTimeslots(ostream& out) {
     int counter = 1;
-    for(bool frei : timeSlots){
-        if(frei){
-            out << counter << ';';
+    for(bool belegt : timeSlots){
+        if(belegt){
+            out << counter << ";B;";
+        }else{
+            out << counter << ";F;";
         }
         counter ++;
     }
