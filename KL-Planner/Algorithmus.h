@@ -56,25 +56,65 @@ private:
      */
     int selectNextKlausur(map<string, vector<int>> &map, string &nextStg);
 
-    //Utility::isTimeSlotTooLong(startTimeSlot, dauerTimeSlot)
-    bool isTimeSlotValidForProf(Professor& prof, int startTimeSlot, int dauerTimeSlot, int tag);
-    bool isTimeSlotValidForStudent(Student& student, int startTimeSlot, int dauerTimeSlot, int tag);
+
 
     /*______________________________________________________________________________________________________________________
      * Klausur einsortieren und buchen
      */
-    bool isTimeSlotTooLong(int startTimeSlot, int dauerTimeSlot);
+
     //versucht die Klausur in das System einzubuchen und das Ergebnis in Prüfung zu hinterlegen --> bei Erfolg return true
-    bool einsortierenKlausur(Klausur& klausur);
-    bool einsortierenKlausurInGleichGrossenRaum(Klausur &klausur, int maxAbweichung);
-    bool checkProfForEinsortieren(Klausur &klausur, int startZeitTimeSlot, int dauerTimeSlot, int startTag);
-    bool checkStudentForEinsortieren(Klausur &klausur, int startZeitTimeSlot, int dauerTimeSlot, int startTag);
-    bool checkRaeumeByKapazitaetForEinsortieren(Klausur &klausur, int startZeitTimeSlot, int dauerTimeSlot, int startTag,int raumStartIndex);
-    bool checkRaeumeByVectorSizeForEinsortieren(Klausur &klausur, int startTag,int raumStartIndex);
 
-    vector<int> findePassendeRaumIndices(int klausurKapazitaet, int maxAbweichung);
+    bool findDateAndBookKlausur(Klausur& klausur);
 
-    int increaseStartTag(int startTag);
+    bool findDateAndBookKlausurIntoSingleRoom(Klausur& klausur);
+
+    /*
+     * Suche passende Räume nach verschiedenen Prioritäten
+     */
+
+    //Find timeSlots
+    vector <int> getFillableStartTimesFromUsedRoom(int raumIndex, int day);
+
+    //Find any room
+    vector<int> findAvailableRaumForCapacity(int klausurSize, int minAbweichung, int maxAbweichung, int duration);
+    //Find room at any time
+    vector<int> findAvailableRaumAtDay(int klausurSize, int minAbweichung, int maxAbweichung, int duration, int day);
+    //Find exact room
+    vector<int> findAvailableRaumAtDayAndTime(int klausurSize, int minAbweichung, int maxAbweichung, int duration, int day, int startTime);
+
+    //Used! - Find any room
+    vector<int> findAvailableUsedRaumForCapacity(int klausurSize, int minAbweichung, int maxAbweichung, int duration);
+    //Used! - Find room at any time
+    vector<int> findAvailableUsedRaumAtDay(int klausurSize, int minAbweichung, int maxAbweichung, int duration, int day);
+    //Used - Find exact room
+    vector<int> findAvailableUsedRaumAtDayAndTime(int klausurSize, int minAbweichung, int maxAbweichung, int duration, int day, int startTime);
+
+    //Utility
+    bool isCapacityInRange(int freeRoomCapacity, int klausurSize, int minAbweichung, int maxAbweichung);
+
+    /*
+     * Klausur bei passendem Termin buchen
+     */
+
+    bool bookKlausurDate(Klausur& klausur, int startTime, int day, int raumDataIndex, int bookedCapacity);
+
+    /*
+     * Teilnehmer Bedingungen
+     */
+    bool areAllMemberAvailable(Klausur &klausur, int startTime, int duration, int day);
+    bool areAllProfsOfKlausurAvailable(Klausur &klausur, int startTime, int duration, int day);
+    bool areAllStudentsOfKlausurAvailable(Klausur &klausur, int startTime, int duration, int day);
+    bool isProfAvailable(Professor& prof, int askedStartTime, int askedDuration, int day);
+    bool isStudentAvailable(Student& student, int askedStartTime, int askedDuration, int day);
+    bool isTimeOverlapping(int askedStartTime, int askedEndTime, int busyStartTime, int busyEndTime, int personalBreak);
+    /*
+     * Array Bedingungen
+     */
+
+    bool isTimeArrayLongEnough(int startTime, int duration);
+    bool isRaumArrayLongEnough(int raumIndexSource);
+    int increaseStartTag(int startTag); //make shure the day array is long enough
+
 };
 
 
