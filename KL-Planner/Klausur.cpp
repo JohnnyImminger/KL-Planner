@@ -23,6 +23,7 @@ Klausur::Klausur() {
     this->pForm = "DummyPruefung";
     this->pSemester = 404;
     this->angeboten = false;
+    this->tag = -1;
 }
 
 Klausur::Klausur(string& studiengang, string& vertiefung, int pVersion, int pNummer, string& pName, int pPruefer1,
@@ -42,6 +43,7 @@ Klausur::Klausur(string& studiengang, string& vertiefung, int pVersion, int pNum
     this->pForm = pForm;
     this->pSemester = pSemester;
     this->angeboten = angeboten;
+    this->tag = -1;
 }
 /*
  * toString()

@@ -27,6 +27,8 @@ public:
     void initTage();
     void printResult(const string &filename);
     void printRaumplanliste(const string &filename);
+    void printProfpalnliste(const string &filename);
+    void printStudentplanliste(const string &filename);
 
 private:
     /*

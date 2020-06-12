@@ -63,10 +63,33 @@ void Algorithmus::printRaumplanliste(const string &filename) {
         file << "day " << i+1 << endl;
         vector cRaume = tage[i];
         for(Raum cRaum : cRaume){
-            file << cRaum.getAdrBau() << '/';
-            file << cRaum.getAdrRaum() << ';';
+            file << cRaum.getAdrBau() << '/' << cRaum.getAdrRaum() << ';';
             cRaum.printFreeTimeslots(file);
             file << endl;
+        }
+    }
+    file.close();
+}
+
+void Algorithmus::printProfpalnliste(const string &filename) {
+    ofstream file;
+    file.open(filename);
+    for(Professor cProf : data.professoren){
+        file << "Prof_" << cProf.getIdentNr() << endl;
+        for(int i = 0; i < cProf.getKlausurAufsichtIndices().size(); i++){
+            file << "beaufsichtigt;" << data.klausuren[cProf.getKlausurAufsichtIndices()[i]].getPName() << ";am;" << data.klausuren[cProf.getKlausurAufsichtIndices()[i]].getTag() << ";um;" << data.klausuren[cProf.getKlausurAufsichtIndices()[i]].getStartZeitTimeSlot()<< endl;
+        }
+    }
+    file.close();
+}
+
+void Algorithmus::printStudentplanliste(const string &filename) {
+    ofstream file;
+    file.open(filename);
+    for(Student cStudent : data.studenten){
+        file << "Student_" << cStudent.getMatrikelNr() << endl;
+        for(int i = 0;i < cStudent.getKlausurIndices().size();i++){
+            file << "schreibt;" << data.klausuren[cStudent.getKlausurIndices()[i]].getPName() << ";am;" << data.klausuren[cStudent.getKlausurIndices()[i]].getTag() << ";um;" << data.klausuren[cStudent.getKlausurIndices()[i]].getStartZeitTimeSlot()<< endl;
         }
     }
     file.close();
@@ -419,4 +442,5 @@ int Algorithmus::increaseStartTag(int startTag) {
     }
     return startTag;
 }
+
 
