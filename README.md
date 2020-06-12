@@ -1,6 +1,7 @@
 # KL-Planner
 
-###Input-Files
+Input-Files
+---
 
 - _Raumliste.csv:_
 
@@ -15,8 +16,8 @@
         Studiengang (Kuerzel) ; Vertiefung (unwichtig) ; Prüfungsversion ; Prüfungsnummer ; Prüfungsname Text (ausführlich); PrüferID1 ; Prüfername1 (anonym) ; PrüferID2 ; Prüfername2 ; Prüfungsform (Kürzel) ; Prüfungssemester (Jahr+Semester) ; Angeboten (J/N)
 
 
+DatenObjekte:
 ---
-###DatenObjekte:
 
 - ___Raum:___
 
@@ -27,7 +28,7 @@
 
         bool timeSlots[Utility::timeSlotsProTag + Utility::timeSlotsPauseRaum] = {false};
 
-            TODO jeder timeSlot sollte eine capacity haben um 2 klausuren gleichzeitig stattfinden zu lassen
+            //TODO jeder timeSlot sollte eine capacity haben um 2 klausuren gleichzeitig stattfinden zu lassen
             --> Raum ist eine Ressource die eine buchbare TimeSlots besitzt.
             --> Zur leichteren Handhabung wird mit einer immaginären Pause am Ende gerechnet
             --> Timeslot = 15min
