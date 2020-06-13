@@ -189,11 +189,10 @@ map<string, vector<int>> Algorithmus::klausurenGroupByStudiengang() {
 
 
 bool Algorithmus::findDateAndBookKlausur(Klausur &klausur) {
-    int raumIndex = 0;
-    int startTime = 0;
-    int startDay = lastSortedDay;
-    int klausurDuration = klausur.getDauerTimeSlots();
-    int notBookedMember = klausur.getAnzTeilnehmer();
+    if (findDateAndBookKlausurIntoSingleRoom(klausur)){
+        return true;
+    }
+    //TODO finde größten freien Raum, buche restTeilnehmer in möglichst wenig räume rekursiv
 
     /*__________________________________________________________________________________________________________________
      * Vorgeschaltete Methode um so wenig capacity wie möchglich zu verschwenden
@@ -201,7 +200,7 @@ bool Algorithmus::findDateAndBookKlausur(Klausur &klausur) {
 
     //TODO neugestaltung der ganzen Methode mit den neuen Funktionen
 
-    return findDateAndBookKlausurIntoSingleRoom(klausur);
+    return false;
 }
 
 bool Algorithmus::findDateAndBookKlausurIntoSingleRoom(Klausur &klausur) {
@@ -235,13 +234,50 @@ bool Algorithmus::findDateAndBookKlausurIntoSingleRoom(Klausur &klausur) {
     return false;
 }
 
+
+
 bool Algorithmus::findAndBookKlausurIntoDayAndTime(Klausur &klausur, int restAnzTeilnehmer, int day, int startTime) {
-    return false;
+    int abweichung = 0;
+    vector <int> possibleRaumIndizes;
+    while (abweichung < restAnzTeilnehmer){
+        //Versuchen aufzufüllen
+        possibleRaumIndizes = findAvailableUsedRaumAtDayAndTime(restAnzTeilnehmer,abweichung, abweichung, klausur.getDauerTimeSlots(), day, startTime);
+        for (int raumIndex : possibleRaumIndizes) {
+
+        }
+
+
+
+        abweichung++;
+    }
+
 }
 
 /*
  * Suche passende Räume nach verschiedenen Prioritäten
  */
+vector<int> Algorithmus::findShortestAvailableRaumIndezesVector(Klausur &klausur, int day, int startTime) {
+    return vector<int>();
+}
+
+
+vector<int> Algorithmus::findAvailableRaumIndizes(Klausur &klausur, int day, int startTime) {
+
+
+}
+
+int Algorithmus::findBiggestAvailableRaumIndex(int day, int startTime, int duration) {
+    int maxRaumSize = 0;
+    int maxRaumIndex = -1;
+    for (int raumIndex : findAvailableRaumAtDayAndTime(200, 0, 200, duration, day, startTime)) {
+        int raumSize = tage[day].at(raumIndex).getFreeSpaceAt(startTime, duration);
+        if (raumIndex > maxRaumSize){
+            maxRaumIndex = raumIndex;
+            maxRaumSize = raumSize;
+        }
+    }
+    return maxRaumIndex;
+}
 
 vector<int> Algorithmus::getFillableStartTimesFromUsedRoom(int raumIndex, int day) {
     vector<int> startTimeSlotsToFill;
@@ -319,7 +355,7 @@ vector<int> Algorithmus::findAvailableUsedRaumForCapacity(int klausurSize, int m
         bool bookable = false;
         for (int day = 0; day < Utility::klausurTage; ++day) {
             for (int startTime = 0; startTime < Utility::timeSlotsProTag; ++startTime) {
-                if (tage[day].at(raumIndex).getFreeSpaceAt(startTime,duration) < tage[day].at(raumIndex).getCapacity()){
+                if (isRaumUsedAndAvailable(tage[day].at(raumIndex), startTime, duration)){
                     bookable = true;
                     raumIndizes.push_back(raumIndex);
                     break;
@@ -335,11 +371,11 @@ vector<int> Algorithmus::findAvailableUsedRaumForCapacity(int klausurSize, int m
 }
 
 vector<int> Algorithmus::findAvailableUsedRaumAtDay(int klausurSize, int minAbweichung, int maxAbweichung, int duration, int day) {
-    vector <int> possibleRaumIndizes = findAvailableRaumForCapacity(klausurSize,minAbweichung,maxAbweichung,duration);
+    vector <int> possibleRaumIndizes = findAvailableUsedRaumForCapacity(klausurSize,minAbweichung,maxAbweichung,duration);
     vector<int> raumIndizes;
     for (int raumIndex : possibleRaumIndizes) {
         for (int startTime = 0; startTime < Utility::timeSlotsProTag; ++startTime) {
-            if (tage[day].at(raumIndex).getFreeSpaceAt(startTime,duration) < tage[day].at(raumIndex).getCapacity()){
+            if (isRaumUsedAndAvailable(tage[day].at(raumIndex), startTime, duration)){
                 raumIndizes.push_back(raumIndex);
                 break;
             }
@@ -349,14 +385,18 @@ vector<int> Algorithmus::findAvailableUsedRaumAtDay(int klausurSize, int minAbwe
 }
 
 vector<int> Algorithmus::findAvailableUsedRaumAtDayAndTime(int klausurSize, int minAbweichung, int maxAbweichung, int duration, int day, int startTime) {
-    vector <int> possibleRaumIndizes = findAvailableRaumForCapacity(klausurSize,minAbweichung,maxAbweichung,duration);
+    vector <int> possibleRaumIndizes = findAvailableUsedRaumAtDay(klausurSize,minAbweichung,maxAbweichung,duration,day);
     vector<int> raumIndizes;
     for (int raumIndex : possibleRaumIndizes) {
-        if (tage[day].at(raumIndex).getFreeSpaceAt(startTime,duration) < tage[day].at(raumIndex).getCapacity()){
+        if (isRaumUsedAndAvailable(tage[day].at(raumIndex), startTime, duration)){
             raumIndizes.push_back(raumIndex);
         }
     }
     return raumIndizes;
+}
+
+bool Algorithmus::isRaumUsedAndAvailable(Raum &raum, int startTime, int duration) {
+    return raum.getFreeSpaceAt(startTime,duration) < raum.getCapacity();
 }
 
 /*

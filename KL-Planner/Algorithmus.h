@@ -61,6 +61,7 @@ private:
     /*______________________________________________________________________________________________________________________
      * Klausur einsortieren und buchen
      */
+    //TODO klausuren müssen nach großer Kapazität und langer dauer zuerst rein kommen
 
     //versucht die Klausur in das System einzubuchen und das Ergebnis in Prüfung zu hinterlegen --> bei Erfolg return true
 
@@ -73,6 +74,11 @@ private:
     /*
      * Suche passende Räume nach verschiedenen Prioritäten
      */
+    vector <int> findShortestAvailableRaumIndezesVector (Klausur&klausur, int day, int startTime);
+
+    vector <int> findAvailableRaumIndizes(Klausur& klausur, int day, int startTime);
+
+    int findBiggestAvailableRaumIndex(int day, int startTime, int duration);
 
     //Find timeSlots
     vector <int> getFillableStartTimesFromUsedRoom(int raumIndex, int day);
@@ -90,6 +96,8 @@ private:
     vector<int> findAvailableUsedRaumAtDay(int klausurSize, int minAbweichung, int maxAbweichung, int duration, int day);
     //Used - Find exact room
     vector<int> findAvailableUsedRaumAtDayAndTime(int klausurSize, int minAbweichung, int maxAbweichung, int duration, int day, int startTime);
+
+    bool isRaumUsedAndAvailable(Raum &raum, int startTime, int duration);
 
     //Utility
     bool isCapacityInRange(int freeRoomCapacity, int klausurSize, int minAbweichung, int maxAbweichung);
