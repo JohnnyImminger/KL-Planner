@@ -51,8 +51,7 @@ public:
      * Umrechnung der Zeiten in Timeslots - Zeitangaben werden von Stunden in Timeslots umgerechnet
      */
 
-    //TODO es gibt klausurzeiten mit 80 -> 12 slots pro stunde
-    const static int timeSlotsProStunde = 4; //15min pro Slot
+    const static int timeSlotsProStunde = 12; //5min
     const static int roomDivider = 4; // der wievielte Sitzplaz kann belegt werden
 
     const static int timeSlotsPauseProf = (int) pauseProf * timeSlotsProStunde;
