@@ -21,17 +21,15 @@ void Algorithmus::initTage() {
 }
 
 void Algorithmus::run() {
-    map<string, vector<int>> klausuren = klausurenGroupByStudiengang();
-    sortMap(klausuren);
+    vector<int> klausuren =  sortKlausurenBySize();
     cout << "Klausuren nach Anzahl der Teilnehmer sortiert" << endl;
-    string nextStg = "AB";
-    int nextKlausurIndex = selectNextKlausur(klausuren, nextStg);
+    int nextKlausurIndex = selectNextKlausur(klausuren);
     while (nextKlausurIndex != -1) {
         if (findDateAndBookKlausur(data.klausuren.at(nextKlausurIndex))) {
         } else {
             cout << "Klausur konnte nicht eingeplant werden: " << data.klausuren.at(nextKlausurIndex) << endl;
         }
-        nextKlausurIndex = selectNextKlausur(klausuren, nextStg);
+        nextKlausurIndex = selectNextKlausur(klausuren);
     }
 }
 
@@ -74,10 +72,10 @@ void Algorithmus::printRaumplanliste(const string &filename) {
 void Algorithmus::printProfpalnliste(const string &filename) {
     ofstream file;
     file.open(filename);
-    for(Professor cProf : data.professoren){
+    for(const Professor& cProf : data.professoren){
         file << "Prof_" << cProf.getIdentNr() << endl;
-        for(int i = 0; i < cProf.getKlausurDataIndizes().size(); i++){
-            file << "beaufsichtigt;" << data.klausuren[cProf.getKlausurDataIndizes()[i]].getName() << ";am;" << data.klausuren[cProf.getKlausurDataIndizes()[i]].getTag() << ";um;" << data.klausuren[cProf.getKlausurDataIndizes()[i]].getStartZeitTimeSlot() << endl;
+        for(int i : cProf.getKlausurDataIndizes()){
+            file << "beaufsichtigt;" << data.klausuren[i].getName() << ";am;" << data.klausuren[i].getTag() << ";um;" << data.klausuren[i].getStartZeitTimeSlot() << endl;
         }
     }
     file.close();
@@ -86,10 +84,10 @@ void Algorithmus::printProfpalnliste(const string &filename) {
 void Algorithmus::printStudentplanliste(const string &filename) {
     ofstream file;
     file.open(filename);
-    for(Student cStudent : data.studenten){
+    for(const Student& cStudent : data.studenten){
         file << "Student_" << cStudent.getMatrikelNr() << endl;
-        for(int i = 0;i < cStudent.getKlausurDataIndizes().size(); i++){
-            file << "schreibt;" << data.klausuren[cStudent.getKlausurDataIndizes()[i]].getName() << ";am;" << data.klausuren[cStudent.getKlausurDataIndizes()[i]].getTag() << ";um;" << data.klausuren[cStudent.getKlausurDataIndizes()[i]].getStartZeitTimeSlot() << endl;
+        for(int i : cStudent.getKlausurDataIndizes()){
+            file << "schreibt;" << data.klausuren[i].getName() << ";am;" << data.klausuren[i].getTag() << ";um;" << data.klausuren[i].getStartZeitTimeSlot() << endl;
         }
     }
     file.close();
@@ -99,89 +97,51 @@ void Algorithmus::printStudentplanliste(const string &filename) {
 * Methoden:
 */
 
-/*
- * gruppieren der Klausuren nach studStudiengang
- * innerhalb der studiengänge nach größe der klausuren sortieren
- * rotierend alle studiengänge durchgehen und jeweils eine klausur einsortieren
- * klausur gegebenenfalls teilen und passenden raum suchen:
- *      - schauen ob der(die) raum(räume) zur gleichen zeit frei sind
- *          - wenn nein nächsten aktuelle startzeit ++ und nochmal versuchen
- *      - schauen ob der prof zeit hat
- *          - wenn nein neuen slot suchen
- *      - schauen ob alle studierenden zeit haben
- *          - wenn nein neuen slot suchen
- */
 
-
-int Algorithmus::selectNextKlausur(map<string, vector<int>> &map, string &nextStg) {
-    // wenn die Map leer ist, soll -1 zurückgegeben werden
-    while (!map.empty()) {
-        // zwischenspeichern des Index der nächsten klausur und entfernen dieser aus dem vektor der map
-        int nextKlausurIndex = map.at(nextStg).at(0);
-        map.at(nextStg).erase(map.at(nextStg).cbegin());
-        //zwischenspeichern des jetzt "verbrauchten studiengangs" um zugriffsfehler zu vermeiden, löschen falls leer erst später
-        string last = nextStg;
-        /*
-         * durchsucht die map nach dem studiengangname und schreibt dann den nächsten in nextStg für den nächsten Funktionsaufruf
-         * ist das ende der map erreicht wird der erste eintrag der Map verwendet
-         */
-        bool next = false;
-        for (const auto &studiengang: map) {
-            if (next) {
-                nextStg = studiengang.first;
-                next = false;
-                break;
-            }
-            if (studiengang.first == nextStg) next = true;
-        }
-        if (next) nextStg = map.begin()->first;
-        //entfernen des studiengangs falls er keine einzuplanende klausuren mehr enthält
-        if (map.at(last).empty())map.erase(last);
-        //sortiert klausuren ohne teilnehmer aus
-        if(data.klausuren.at(nextKlausurIndex).getAnzTeilnehmer() == 0) {
-            data.klausuren.at(nextKlausurIndex).setPlanbar(false);
+int Algorithmus::selectNextKlausur(vector<int> &indices) {
+    // wenn der vector leer ist, soll -1 zurückgegeben werden
+    while (!indices.empty()) {
+        int nextIndex = indices.front();
+        //wenn die Klausur keine Teilnehmer hat, wird sie ignoriert
+        if(data.klausuren.at(nextIndex).getAnzTeilnehmer() == 0) {
+            indices.erase(indices.begin());
             continue;
         }
-        data.klausuren.at(nextKlausurIndex).setPlanbar(true);
-        return nextKlausurIndex;
+        indices.erase(indices.begin());
+        return nextIndex;
     }
     return -1;
 }
 
-void Algorithmus::sortMap(const map<string, vector<int>>& map) {
-    for (const auto& studiengang: map) {
-        auto* current = (vector<int>*) &studiengang.second;
-        int x = 1;
-        bool swapped;
-        do {
-            swapped = false;
-            for (int i = 0; i < current->size()-1; ++i) {
-                if (data.klausuren.at(current->at(i)).getAnzTeilnehmer() < data.klausuren.at(current->at(i+1)).getAnzTeilnehmer()) {
-                    int temp = (int) current->at(i);
-                    current->at(i) = (int) current->at(i+1);
-                    current->at(i+1) = temp;
-                    swapped = true;
-                }
-            }
-        } while (swapped);
+vector<int> Algorithmus::sortKlausurenBySize() {
+    vector<int> result;
+    for (Klausur& klausur: data.klausuren) {
+        result.push_back(klausur.getDataIndex());
     }
-}
-
-map<string, vector<int>> Algorithmus::klausurenGroupByStudiengang() {
-    map<string,vector<int>> result;
-    for(Klausur klausur : data.klausuren){
-        if(result.find(klausur.getStudiengang()) == result.end()) { // if-Bedingung für standards vor c++20, da contains erst seit version 20 enthalten ist
-        //if(!result.contains(klausur.getStudiengang())) {
-            vector<int> neuerStudiengang;
-            neuerStudiengang.push_back(klausur.getDataIndex());
-            result.insert(pair<string, vector<int>>(klausur.getStudiengang(), neuerStudiengang));
-        } else {
-            result.find(klausur.getStudiengang())->second.push_back(klausur.getDataIndex());
+    bool swapped;
+    do {
+        swapped = false;
+        for (int i = 0; i < result.size()-1; ++i) {
+            Klausur k1 = data.klausuren.at(result.at(i));
+            Klausur k2 = data.klausuren.at(result.at(i+1));
+            if (k1.getAnzTeilnehmer() < k2.getAnzTeilnehmer()) {
+                int temp = (int) k1.getDataIndex();
+                result.at(i) = (int) k2.getDataIndex();
+                result.at(i+1) = temp;
+                swapped = true;
+            } else if (k1.getAnzTeilnehmer() == k2.getAnzTeilnehmer() && k1.getDauerTimeSlots() < k2.getDauerTimeSlots()) {
+                int temp = (int) k1.getDataIndex();
+                result.at(i) = (int) k2.getDataIndex();
+                result.at(i+1) = temp;
+                swapped = true;
+            }
         }
+    } while (swapped);
+    for (int index: result) {
+        cout << data.klausuren.at(index).getAnzTeilnehmer() << ' ' << data.klausuren.at(index).getDauerTimeSlots() << endl;
     }
     return result;
 }
-
 
 /*______________________________________________________________________________________________________________________
  * Klausur einsortieren und buchen

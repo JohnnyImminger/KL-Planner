@@ -43,18 +43,12 @@ private:
      * Methoden:
      */
 
-    //string ist der studiengangname, vector<int> eine liste mit Indices der dazugehörigen klausuren
-    map<string, vector<int>> klausurenGroupByStudiengang();
-    //sortiert die vektoren der Map die vorbereitend von klausurenGroupByStudiengang erzeugt wurde. Vergleichswert ist die Anzahl der Teilnehmer der Klausur
-    void sortMap(const map<string, vector<int>>& map);
+    //gibt einen sortierten vektor mit Klausurindices nach Größe und Länge zurück
+    vector<int> sortKlausurenBySize();
     /*
-     * wählt rotierend über die Studiengänge die nächste einzuplanende Klausur aus und entfernt sie aus dem vektor.
-     * Ist der Vektor leer wird der Studiengang aus der Map entfernt.
-     * Ist die map leer wird -1 zurückgegeben
-     * In der Referenz nextStg wird für den nächsten aufruf gespeichert aus welchem studStudiengang dann gewählt werden soll
-     * Klausuren ohne Teilnehmer werden automatisch aussortiert und somit auch nicht eingeplant
+     * gibt den nächsten index aus dem Vektor zurück, es sei denn
      */
-    int selectNextKlausur(map<string, vector<int>> &map, string &nextStg);
+    int selectNextKlausur(vector<int> &indices);
 
 
 
