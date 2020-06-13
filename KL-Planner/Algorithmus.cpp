@@ -64,7 +64,7 @@ void Algorithmus::printRaumplanliste(const string &filename) {
         vector cRaume = tage[i];
         for(Raum cRaum : cRaume){
             file << cRaum.getAdrBau() << '/' << cRaum.getAdrRaum() << ';';
-            cRaum.printFreeTimeslots(file);
+            cRaum.printTimeSlots(file);
             file << endl;
         }
     }
