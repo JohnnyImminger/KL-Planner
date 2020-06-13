@@ -13,6 +13,7 @@ Raum::Raum() {
     this->adrBau = 404;
     this->adrRaum = 404;
     this->capacity = 0;
+    fill_n(this->timeSlots,Utility::timeSlotsProTag + Utility::timeSlotsPauseRaum, this->capacity);
 }
 
 Raum::Raum(string &art, int adrBau, int adrRaum, int cap) {
@@ -20,6 +21,7 @@ Raum::Raum(string &art, int adrBau, int adrRaum, int cap) {
     this->adrBau = adrBau;
     this->adrRaum = adrRaum;
     this->capacity = cap / Utility::roomDivider;
+    fill_n(this->timeSlots,Utility::timeSlotsProTag + Utility::timeSlotsPauseRaum, this->capacity);
 }
 
 /*
@@ -134,7 +136,7 @@ int Raum::getFreeSpaceAt(int startTime, int duration) {
         return 0;
     }
     int maxFreeCapacity = this->capacity;
-    for (int time = startTime; time < time + duration; ++time) {
+    for (int time = startTime; time < startTime + duration; ++time) {
         int freeCapacity = timeSlots[time];
         if (freeCapacity < maxFreeCapacity){
             maxFreeCapacity = freeCapacity;
