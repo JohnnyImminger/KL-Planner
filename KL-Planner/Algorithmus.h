@@ -49,9 +49,6 @@ private:
      * gibt den nächsten index aus dem Vektor zurück, es sei denn
      */
     int selectNextKlausur(vector<int> &indices);
-
-
-
     /*______________________________________________________________________________________________________________________
      * Klausur einsortieren und buchen
      */
@@ -119,6 +116,8 @@ private:
     bool isRaumArrayLongEnough(int raumIndexSource);
     int increaseStartTag(int startTag); //make shure the day array is long enough
 
+    bool alg(int index);
+    vector<int> roomsAtDay(Klausur& klausur, int day);
 };
 
 

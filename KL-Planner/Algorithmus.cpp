@@ -481,3 +481,23 @@ int Algorithmus::increaseStartTag(int startTag) {
     }
     return startTag;
 }
+
+bool Algorithmus::alg(int index) {
+    Klausur klausur = data.klausuren.at(index);
+    bool booked = false;
+    int day = 0;
+    while (!booked) {
+        vector<int> rooms = roomsAtDay(klausur, day);
+        if(rooms.empty()) break;
+        for (int room: rooms) {
+
+        }
+    }
+    return booked;
+}
+
+vector<int> Algorithmus::roomsAtDay(Klausur& klausur, int day) {
+
+
+    return vector<int>();
+}
