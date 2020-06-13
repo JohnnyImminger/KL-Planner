@@ -62,7 +62,7 @@ void Algorithmus::printRaumplanliste(const string &filename) {
         vector cRaume = tage[i];
         for(Raum cRaum : cRaume){
             file << cRaum.getAdrBau() << '/' << cRaum.getAdrRaum() << ';';
-            cRaum.printFreeTimeslots(file);
+            cRaum.printTimeSlots(file);
             file << endl;
         }
     }
@@ -308,7 +308,7 @@ vector<int> Algorithmus::findAvailableRaumAtDayAndTime(int klausurSize, int minA
  * Used
  */
 
-vector<int> Algorithmus::findAvailableUsedRaumForCapacity(int klausurSize, int minAbweichung, int maxAbweichung, int duration) {
+vector<int> Algorithmus::findAvailableUsedRaum(int klausurSize, int minAbweichung, int maxAbweichung, int duration) {
     vector <int> possibleRaumIndizes = findAvailableRaumForCapacity(klausurSize,minAbweichung,maxAbweichung,duration);
     vector<int> raumIndizes;
     for (int raumIndex : possibleRaumIndizes) {
@@ -327,11 +327,10 @@ vector<int> Algorithmus::findAvailableUsedRaumForCapacity(int klausurSize, int m
         }
     }
     return raumIndizes;
-
 }
 
 vector<int> Algorithmus::findAvailableUsedRaumAtDay(int klausurSize, int minAbweichung, int maxAbweichung, int duration, int day) {
-    vector <int> possibleRaumIndizes = findAvailableUsedRaumForCapacity(klausurSize,minAbweichung,maxAbweichung,duration);
+    vector <int> possibleRaumIndizes = findAvailableUsedRaum(klausurSize, minAbweichung, maxAbweichung, duration);
     vector<int> raumIndizes;
     for (int raumIndex : possibleRaumIndizes) {
         for (int startTime = 0; startTime < Utility::timeSlotsProTag; ++startTime) {

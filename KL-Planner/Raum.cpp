@@ -35,18 +35,20 @@ std::ostream &operator<<(ostream &out, const Raum &raum) {
 
 //A = 100% free, B = 99% - 50% , C = 49% - 20%, D = 19% - 1% E = 0% free
 void Raum::printTimeSlots(ostream& out){
+    int counter = 1;
     for (int freeCapacity : timeSlots) {
         if (freeCapacity == this->capacity){
-            out << "A;";
+            out << counter <<";A;";
         } else if (freeCapacity >= this->capacity * 0.5){
-            out << "B;";
+            out << counter<<";B;";
         } else if (freeCapacity == this->capacity * 0.2){
-            out << "C;";
+            out << counter<<";C;";
         } else if (freeCapacity == 0){
-            out << "E;";
+            out <<counter <<";E;";
         } else {
-            out << "D;";
+            out << counter<<";D;";
         }
+        counter++;
     }
 }
 

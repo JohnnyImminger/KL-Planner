@@ -85,7 +85,7 @@ private:
     vector<int> findAvailableRaumAtDayAndTime(int klausurSize, int minAbweichung, int maxAbweichung, int duration, int day, int startTime);
 
     //Used! - Find any room
-    vector<int> findAvailableUsedRaumForCapacity(int klausurSize, int minAbweichung, int maxAbweichung, int duration);
+    vector<int> findAvailableUsedRaum(int klausurSize, int minAbweichung, int maxAbweichung, int duration);
     //Used! - Find room at any time
     vector<int> findAvailableUsedRaumAtDay(int klausurSize, int minAbweichung, int maxAbweichung, int duration, int day);
     //Used - Find exact room
