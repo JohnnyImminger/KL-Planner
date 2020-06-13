@@ -13,5 +13,7 @@ int main() {
     alg.run();
     alg.printResult("../../output/result.csv");
     alg.printRaumplanliste("../../output/raumPlanListe.csv");
+    alg.printProfpalnliste("../../output/profPlanListe.csv");
+    alg.printStudentplanliste("../../output/studentPlanListe.csv");
     return 0;
 }

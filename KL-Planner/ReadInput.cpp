@@ -21,11 +21,11 @@ void ReadInput::parseInput() {
 
 void ReadInput::createProfs() {
     for (Klausur& klausur: klausuren) {
-        if (klausur.getPPruefer1() != 0) {
-            processProf(klausur.getIndex(), klausur.getPPruefer1(), klausur.getPruefer1());
+        if (klausur.getPruefer1IdentNr() != 0) {
+            processProf(klausur.getDataIndex(), klausur.getPruefer1IdentNr(), klausur.getPruefer1Name());
         }
-        if (klausur.getPPruefer2() != 0) {
-            processProf(klausur.getIndex(), klausur.getPPruefer2(), klausur.getPruefer2());
+        if (klausur.getPruefer2IdentNr() != 0) {
+            processProf(klausur.getDataIndex(), klausur.getPruefer2IdentNr(), klausur.getPruefer2Name());
         }
     }
     indexProfs();
@@ -43,11 +43,11 @@ void ReadInput::indexProfs() {
 void ReadInput::processProf(int klausurIndex, int id, const string &name) {
     int index = isProfInVector(id);
     if (index >= 0) {
-        professoren.at(index).addPruefung(klausurIndex);
+        professoren.at(index).addKlausur(klausurIndex);
         klausuren.at(klausurIndex).addProf(index);
     } else {
         Professor p(id, name);
-        p.addPruefung(klausurIndex);
+        p.addKlausur(klausurIndex);
         professoren.push_back(p);
         klausuren.at(klausurIndex).addProf(professoren.size()-1);
     }
@@ -68,7 +68,8 @@ void ReadInput::createStudenten() {
     int studentenCount = 0;
     for (Anmeldung& anmeldung: anmeldungen) {
         int index = isStudentInVector(anmeldung.getMatrikelNr());
-        int klausurIndex = findKlausurIndex(anmeldung.getStudiengang(), anmeldung.getPVersion(), anmeldung.getPNummer());
+        int klausurIndex = findKlausurIndex(anmeldung.getStudiengang(), anmeldung.getKlausurVersion(),
+                                            anmeldung.getKlausurNummer());
         if (klausurIndex < 0){
             //cout << anmeldung << endl;
             //cout << "Klausur konnte nicht gefunden werden!" << endl;
@@ -103,17 +104,17 @@ int ReadInput::isStudentInVector(int matrikelNr) {
 int ReadInput::findKlausurIndex(const string& studiengang, int pVersion, int pNummer) {
     for (Klausur& klausur: klausuren) {
         if (studiengang != klausur.getStudiengang()) continue;
-        if (pVersion != klausur.getPVersion()) continue;
-        if (pNummer != klausur.getPNummer()) continue;
-        return klausur.getIndex();
+        if (pVersion != klausur.getVersion()) continue;
+        if (pNummer != klausur.getNummer()) continue;
+        return klausur.getDataIndex();
     }
     return -1;
 }
 
 void ReadInput::attachStudentsToKlausur() {
     for (const Student& student: studenten) {
-        for (int klausurIndex: student.getKlausurIndices()) {
-            klausuren.at(klausurIndex).addStudent(student.getIndex());
+        for (int klausurIndex: student.getKlausurDataIndizes()) {
+            klausuren.at(klausurIndex).addStudent(student.getDataIndex());
         }
     }
     cout << "Studenten zu Klausuren hinzugefuegt" << endl;

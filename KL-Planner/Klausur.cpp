@@ -9,55 +9,72 @@
  */
 
 Klausur::Klausur() {
+    this->dataIndex = -1;
     this->studiengang = "DummyPruefung";
     this->vertiefung = "DummyPruefung";
-    this->pVersion = 404;
-    this->pNummer = 404;
-    this->pName = "DummyPruefung";
-    this->pPruefer1 = 404;
-    this->pruefer1 = "DummyPruefung";
-    this->pPruefer2 = 404;
-    this->pruefer2 = "DummyPruefung";
-    this->pDauer = 0;
+    this->version = 404;
+    this->nummer = 404;
+    this->name = "DummyPruefung";
+    this->pruefer1IdentNr = 404;
+    this->pruefer1Name = "DummyPruefung";
+    this->pruefer2IdentNr = 404;
+    this->pruefer2Name = "DummyPruefung";
+    this->dauer = 0;
     this->dauerTimeSlots = 0;
-    this->pForm = "DummyPruefung";
-    this->pSemester = 404;
+    this->klausurForm = "DummyPruefung";
+    this->semester = 404;
     this->angeboten = false;
+    this->planbar = false;
+    this->eingeplant = false;
+    this->anzTeilnehmer = 0;
+    this->tag = -1;
+    this->startZeitTimeSlot = -1;
+
 }
 
 Klausur::Klausur(string& studiengang, string& vertiefung, int pVersion, int pNummer, string& pName, int pPruefer1,
                  string& pruefer1, int pPruefer2, string& pruefer2, float pDauer, string& pForm, int pSemester,
                  bool angeboten) {
+    this->dataIndex = -1;
     this->studiengang = studiengang;
     this->vertiefung = vertiefung;
-    this->pVersion = pVersion;
-    this->pNummer = pNummer;
-    this->pName = pName;
-    this->pPruefer1 = pPruefer1;
-    this->pruefer1 = pruefer1;
-    this->pPruefer2 = pPruefer2;
-    this->pruefer2 = pruefer2;
-    this->pDauer = pDauer;
+    this->version = pVersion;
+    this->nummer = pNummer;
+    this->name = pName;
+    this->pruefer1IdentNr = pPruefer1;
+    this->pruefer1Name = pruefer1;
+    this->pruefer2IdentNr = pPruefer2;
+    this->pruefer2Name = pruefer2;
+    this->dauer = pDauer;
     this->dauerTimeSlots = (int) ((pDauer / 60) * Utility::timeSlotsProStunde);
-    this->pForm = pForm;
-    this->pSemester = pSemester;
+    this->klausurForm = pForm;
+    this->semester = pSemester;
     this->angeboten = angeboten;
+    this->planbar = false;
+    this->eingeplant = false;
+    this->anzTeilnehmer = 0;
+    this->tag = -1;
+    this->startZeitTimeSlot = -1;
 }
 /*
  * toString()
  */
 
 std::ostream &operator<<(ostream &out, const Klausur &klausur) {
-    out << klausur.studiengang << ';' << klausur.vertiefung << ';' << klausur.pVersion << ';' << klausur.pNummer << ';'
-        << klausur.pName << ';' << klausur.pPruefer1 << ';' << klausur.pruefer1 << ';' << klausur.pPruefer2 << ';'
-        << klausur.pruefer2 << ';' << klausur.pDauer << ';' << klausur.pForm << ';' << klausur.pSemester << ';'
-        << klausur.angeboten;
+    out << klausur.getStudiengang() << ';' << klausur.getVertiefung() << ';' << klausur.getVersion() << ';' << klausur.getNummer() << ';'
+        << klausur.getName() << ';' << klausur.getPruefer1IdentNr() << ';' << klausur.getPruefer1Name() << ';' << klausur.getPruefer2IdentNr() << ';'
+        << klausur.getPruefer2Name() << ';' << klausur.getDauerFloat() << ';' << klausur.getKlausurForm() << ';' << klausur.getSemester() << ';'
+        << klausur.isAngeboten();
     return out;
 }
 
 /*
  * Getter
  */
+
+int Klausur::getDataIndex() {
+    return this->dataIndex;
+}
 
 const string &Klausur::getStudiengang() const {
     return studiengang;
@@ -67,69 +84,76 @@ const string &Klausur::getVertiefung() const {
     return vertiefung;
 }
 
-int Klausur::getPVersion() const {
-    return pVersion;
+int Klausur::getVersion() const {
+    return version;
 }
 
-int Klausur::getPNummer() const {
-    return pNummer;
+int Klausur::getNummer() const {
+    return nummer;
 }
 
-const string &Klausur::getPName() const {
-    return pName;
+const string &Klausur::getName() const {
+    return name;
 }
 
-int Klausur::getPPruefer1() const {
-    return pPruefer1;
+int Klausur::getPruefer1IdentNr() const {
+    return pruefer1IdentNr;
 }
 
-const string &Klausur::getPruefer1() const {
-    return pruefer1;
+const string &Klausur::getPruefer1Name() const {
+    return pruefer1Name;
 }
 
-int Klausur::getPPruefer2() const {
-    return pPruefer2;
+int Klausur::getPruefer2IdentNr() const {
+    return pruefer2IdentNr;
 }
 
-const string &Klausur::getPruefer2() const {
-    return pruefer2;
+const string &Klausur::getPruefer2Name() const {
+    return pruefer2Name;
 }
 
-float Klausur::getPDauer() const {
-    return pDauer;
-}
-
-const string &Klausur::getPForm() const {
-    return pForm;
-}
-
-int Klausur::getPSemester() const {
-    return pSemester;
-}
-
-bool Klausur::isAngeboten() const {
-    return angeboten;
-}
-
-int Klausur::getIndex() {
-    return this->index;
-}
-
-int Klausur::getAnzTeilnehmer() const {
-    return anzTeilnehmer;
-}
-
-const vector<int> &Klausur::getStudenten() const {
-    return studenten;
+float Klausur::getDauerFloat() const {
+    return dauer;
 }
 
 int Klausur::getDauerTimeSlots() const {
     return dauerTimeSlots;
 }
 
-void Klausur::addStudent(int studentenIndex) {
-    anzTeilnehmer++;
-    studenten.push_back(studentenIndex);
+const string &Klausur::getKlausurForm() const {
+    return klausurForm;
+}
+
+int Klausur::getSemester() const {
+    return semester;
+}
+
+bool Klausur::isAngeboten() const {
+    return angeboten;
+}
+
+bool Klausur::isPlanbar() const {
+    return planbar;
+}
+
+bool Klausur::isEingeplant() const {
+    return eingeplant;
+}
+
+vector<int> Klausur::getProfs() {
+    return profRefs;
+}
+
+const vector<int> &Klausur::getStudenten() const {
+    return studenten;
+}
+
+int Klausur::getAnzTeilnehmer() const {
+    return anzTeilnehmer;
+}
+
+vector<int> Klausur::getRaumRefs() {
+    return raumRefs;
 }
 
 int Klausur::getTag() const {
@@ -140,28 +164,20 @@ int Klausur::getStartZeitTimeSlot() const {
     return startZeitTimeSlot;
 }
 
-vector<int> Klausur::getRaumRefs() {
-    return raumRefs;
-}
-
-bool Klausur::isEingeplant() const {
-    return eingeplant;
-}
-
-bool Klausur::isPlanbar() const {
-    return planbar;
-}
-
-vector<int> Klausur::getProfs() {
-    return profRefs;
-}
-
 /*
  * Setter
  */
 
 void Klausur::setIndex(int index) {
-    this->index = index;
+    this->dataIndex = index;
+}
+
+void Klausur::setPlanbar(bool planbar) {
+    Klausur::planbar = planbar;
+}
+
+void Klausur::setEingeplant(bool eingeplant) {
+    Klausur::eingeplant = eingeplant;
 }
 
 void Klausur::setTag(int tag) {
@@ -170,26 +186,6 @@ void Klausur::setTag(int tag) {
 
 void Klausur::setStartZeitTimeSlot(int startZeitTimeSlot) {
     Klausur::startZeitTimeSlot = startZeitTimeSlot;
-}
-
-void Klausur::addRaumRef(int raumRef) {
-    raumRefs.push_back(raumRef);
-}
-
-void Klausur::removeRaumRef(int elementToRemove) {
-    raumRefs.erase(raumRefs.begin()+elementToRemove);
-}
-
-void Klausur::setEingeplant(bool eingeplant) {
-    Klausur::eingeplant = eingeplant;
-}
-
-void Klausur::setPlanbar(bool planbar) {
-    Klausur::planbar = planbar;
-}
-
-void Klausur::addProf(int profIndex) {
-    profRefs.push_back(profIndex);
 }
 
 /*______________________________________________________________
@@ -239,6 +235,23 @@ vector<Klausur> Klausur::parse(const string& pathToFile) {
     input.close();
     cout << lines << " Klausuren eingelesen" << endl;
     return list;
+}
+
+void Klausur::addProf(int profDataIndex) {
+    profRefs.push_back(profDataIndex);
+}
+
+void Klausur::addStudent(int studentDataIndex) {
+    anzTeilnehmer++;
+    studenten.push_back(studentDataIndex);
+}
+
+void Klausur::addRaumRef(int raumRef) {
+    raumRefs.push_back(raumRef);
+}
+
+void Klausur::removeRaumRef(int elementToRemove) {
+    raumRefs.erase(raumRefs.begin()+elementToRemove);
 }
 
 void Klausur::outputIgnored(const string& line) {

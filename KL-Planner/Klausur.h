@@ -29,37 +29,39 @@ public:
      * Getter und Setter
      */
 
+    int getDataIndex();
     const string &getStudiengang() const;
     const string &getVertiefung() const;
-    int getPVersion() const;
-    int getPNummer() const;
-    const string &getPName() const;
-    int getPPruefer1() const;
-    const string &getPruefer1() const;
-    int getPPruefer2() const;
-    const string &getPruefer2() const;
-    float getPDauer() const;
-    const string &getPForm() const;
-    int getPSemester() const;
-    bool isAngeboten() const;
-    const vector<int> &getStudenten() const;
-    int getIndex();
-    void setIndex(int index);
-    int getAnzTeilnehmer() const;
+    int getVersion() const;
+    int getNummer() const;
+    const string &getName() const;
+    int getPruefer1IdentNr() const;
+    const string &getPruefer1Name() const;
+    int getPruefer2IdentNr() const;
+    const string &getPruefer2Name() const;
+    float getDauerFloat() const;
     int getDauerTimeSlots() const;
+    const string &getKlausurForm() const;
+    int getSemester() const;
+    bool isAngeboten() const;
+    bool isPlanbar() const; //TODO Planbar is never used?
+    bool isEingeplant() const;
+
+    vector<int> getProfs();
+    const vector<int> &getStudenten() const;
+    int getAnzTeilnehmer() const;
+
+    vector<int> getRaumRefs();
     int getTag() const;
     int getStartZeitTimeSlot() const;
+
+
+    void setIndex(int index);
+    void setPlanbar(bool planbar);
+    void setEingeplant(bool eingeplant);
+
     void setTag(int tag);
     void setStartZeitTimeSlot(int startZeitTimeSlot);
-    vector<int> getRaumRefs();
-    void addRaumRef(int raumRef);
-    void removeRaumRef(int index);
-    bool isEingeplant() const;
-    bool isPlanbar() const;
-    void setEingeplant(bool eingeplant);
-    void setPlanbar(bool planbar);
-    void addProf(int profIndex);
-    vector<int> getProfs();
 
     /*_____________________________________
      * Methoden:
@@ -69,39 +71,42 @@ public:
     static vector<Klausur> parse(const string& pathToFile);
 
     //added den Index des Studenten
-    void addStudent(int studentenIndex);
+    void addStudent(int studentDataIndex);
+    void addProf(int profDataIndex);
+    void addRaumRef(int raumRef);
+    void removeRaumRef(int index);
 
 private:
     /*
      * Attribute
      */
 
+    int dataIndex;
     string studiengang;
     string vertiefung;
-    int pVersion;
-    int pNummer;
-    string pName;
-    int pPruefer1;
-    string pruefer1;
-    int pPruefer2;
-    string pruefer2;
-    float pDauer;
-    string pForm;
-    int pSemester;
-    bool angeboten;
-    int index;
-
-    vector<int> studenten;
-    int anzTeilnehmer = 0;
-
+    int version;
+    int nummer;
+    string name;
+    int pruefer1IdentNr;
+    string pruefer1Name;
+    int pruefer2IdentNr;
+    string pruefer2Name;
+    float dauer;
     int dauerTimeSlots;
-    int tag = 0;
-    int startZeitTimeSlot = 0;
-    vector<int> raumRefs;
-    vector<int> profRefs;
-
+    string klausurForm;
+    int semester;
+    bool angeboten;
     bool planbar;
-    bool eingeplant = false;
+    bool eingeplant;
+
+    vector<int> profRefs;
+    vector<int> studenten;
+    int anzTeilnehmer;
+
+    vector<int> raumRefs;
+    int tag;
+    int startZeitTimeSlot;
+
     /*_____________________________________
      * Methoden:
      */

@@ -47,10 +47,10 @@ private:
     //methode um einen prof zu verarbeiten und duplizierten code zu vermeiden
     void processProf(int klausurIndex, int id, const string &name);
 
-    //vergibt allen Profs einen index
+    //vergibt allen Profs einen dataIndex
     void indexProfs();
 
-    //durchsucht einen vector von Professoren anhand der Identifikationsnummer und gibt den index zurück ist der Professor nicht enthalten, ist der rückgabewert -1
+    //durchsucht einen vector von Professoren anhand der Identifikationsnummer und gibt den dataIndex zurück ist der Professor nicht enthalten, ist der rückgabewert -1
     int isProfInVector(int identNr);
 
     //darf erst gerufen werden, nachdem die Studenten erzeugt wurden!! - weist jeder klausur eine Liste von Studenten zu
@@ -59,12 +59,12 @@ private:
     //füllt den vector student anhand der Anmeldungsliste, speichert in jedem Student die zur Anmeldung zugehörige Klausur
     void createStudenten();
 
-    //durchsucht einen vector von Studenten anhand der Identifikationsnummer und gibt den index zurück ist der Student nicht enthalten, ist der rückgabewert -1
+    //durchsucht einen vector von Studenten anhand der Identifikationsnummer und gibt den dataIndex zurück ist der Student nicht enthalten, ist der rückgabewert -1
     int isStudentInVector(int matrikelNr);
 
     /*
      * Klausuren sind eindeutig definier durch Studiengang, SPO-Version und Prüfungsnummer.
-     * Abgebildet durch: string studiengang, int pVersion und pNummer.
+     * Abgebildet durch: string studStudiengang, int version und nummer.
      * Methode durchsucht den vector klausuren danach und gibt den Index der Klausur zurück.
      * Kann die klausur nicht gefunden werden ist der Rückgabewert -1.
      */

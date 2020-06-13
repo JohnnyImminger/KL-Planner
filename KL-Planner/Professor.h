@@ -6,7 +6,6 @@
 #define KL_PLANNER_PROFESSOR_H
 
 #include "Utility.h"
-#include "Klausur.h"
 
 using namespace std;
 
@@ -21,37 +20,35 @@ public:
     friend std::ostream& operator<<(std::ostream &out, const Professor &student);
 
     /*
-     * Getter
+     * Getter und Setter
      */
 
-    void addPruefung(int pIndex);
+    int getDataIndex() const;
     int getIdentNr() const;
     const string &getName() const;
-    int getAnzPruefungen() const;
-    int getIndex() const;
+    int getAnzKlausuren() const;
+    const vector<int> &getKlausurDataIndizes() const;
+
     void setIndex(int index);
-
-
-    const vector<int> &getKlausurAufsichtIndices() const;
 
     /*_____________________________________
      * Methoden:
      */
+
+    //Methode added nur die Referenz aus dem Klausur-Vektor zu dem Studenten
+    void addKlausur(int klausurDataIndex);
 
 private:
     /*
      * Attribute
      */
-    int index;
+
+    int dataIndex;
     int identNr;
     string name;
-    int anzPruefungen;
-    vector<int> klausurAufsichtIndex;
+    int anzKlausuren;
+    vector<int> klausurDataIndizes;
 
-    /*_____________________________________
-     * Methoden:
-     */
 };
-
 
 #endif //KL_PLANNER_PROFESSOR_H
