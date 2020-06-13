@@ -133,13 +133,14 @@ int Raum::getFreeSpaceAt(int startTime, int duration) {
     if (startTime + duration >= Utility::timeSlotsProTag){
         return 0;
     }
-    int minCapacity = this->capacity;
-    for (int slotCapacity : timeSlots) {
-        if (slotCapacity < minCapacity){
-            minCapacity = slotCapacity;
+    int maxFreeCapacity = this->capacity;
+    for (int time = startTime; time < time + duration; ++time) {
+        int freeCapacity = timeSlots[time];
+        if (freeCapacity < maxFreeCapacity){
+            maxFreeCapacity = freeCapacity;
         }
     }
-    return minCapacity;
+    return maxFreeCapacity;
 }
 
 bool Raum::bookTimeSlots(int startTime, int duration, int bookedCapacity) {
