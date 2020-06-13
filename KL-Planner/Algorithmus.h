@@ -68,6 +68,8 @@ private:
 
     bool findDateAndBookKlausurIntoSingleRoom(Klausur& klausur);
 
+    bool findAndBookKlausurIntoDayAndTime(Klausur& klausur, int restAnzTeilnehmer, int day, int startTime);
+
     /*
      * Suche passende Räume nach verschiedenen Prioritäten
      */

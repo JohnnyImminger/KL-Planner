@@ -204,9 +204,6 @@ bool Algorithmus::findDateAndBookKlausur(Klausur &klausur) {
     return findDateAndBookKlausurIntoSingleRoom(klausur);
 }
 
-
-
-
 bool Algorithmus::findDateAndBookKlausurIntoSingleRoom(Klausur &klausur) {
     int abweichung = 0;
     vector <int> possibleRaumIndizes;
@@ -235,6 +232,10 @@ bool Algorithmus::findDateAndBookKlausurIntoSingleRoom(Klausur &klausur) {
         }
         abweichung++;
     }
+    return false;
+}
+
+bool Algorithmus::findAndBookKlausurIntoDayAndTime(Klausur &klausur, int restAnzTeilnehmer, int day, int startTime) {
     return false;
 }
 
@@ -484,5 +485,3 @@ int Algorithmus::increaseStartTag(int startTag) {
     }
     return startTag;
 }
-
-
