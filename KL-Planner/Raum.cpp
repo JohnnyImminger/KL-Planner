@@ -131,7 +131,6 @@ int Raum::getFreeSpaceAt(int startTime, int duration) {
     }
     //nicht valide startZeit - Vermeidung von ArrayOutOfBounds
     if (startTime + duration >= Utility::timeSlotsProTag){
-        cout << "Error: Raum::getFreeSpaceAt() - Startzeit + Dauer >= maximale Zeit pro Tag!" << endl;
         return 0;
     }
     int minCapacity = this->capacity;

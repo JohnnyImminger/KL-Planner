@@ -204,6 +204,9 @@ bool Algorithmus::findDateAndBookKlausur(Klausur &klausur) {
     return findDateAndBookKlausurIntoSingleRoom(klausur);
 }
 
+
+
+
 bool Algorithmus::findDateAndBookKlausurIntoSingleRoom(Klausur &klausur) {
     int abweichung = 0;
     vector <int> possibleRaumIndizes;
@@ -220,7 +223,6 @@ bool Algorithmus::findDateAndBookKlausurIntoSingleRoom(Klausur &klausur) {
             }
         }
         //Suche irgendwann irgendeinen Raum in den alle Studenten aufeinmal passen
-        possibleRaumIndizes = findAvailableRaumForCapacity(klausur.getAnzTeilnehmer(), abweichung, abweichung, klausur.getDauerTimeSlots());
         for (int day = 0; day < Utility::klausurTage; ++day) {
             possibleRaumIndizes = findAvailableRaumAtDay(klausur.getAnzTeilnehmer(), abweichung, abweichung, klausur.getDauerTimeSlots(), day);
             for (int raumIndex : possibleRaumIndizes) {
@@ -231,6 +233,7 @@ bool Algorithmus::findDateAndBookKlausurIntoSingleRoom(Klausur &klausur) {
                 }
             }
         }
+        abweichung++;
     }
     return false;
 }
@@ -445,6 +448,7 @@ bool Algorithmus::isStudentAvailable(Student& student, int askedStartTime, int a
 }
 
 bool Algorithmus::isTimeOverlapping(int askedStartTime, int askedEndTime, int busyStartTime, int busyEndTime, int personalBreak) {
+    //busyStartTime <= askedStarttime < busyEndTime + Break --> neue Klausur würde in der alten Starten
     bool condition1 = busyStartTime <= askedStartTime && askedStartTime < busyEndTime + personalBreak;
     //busyStartTime <= askedEndTime < busyEndTime+Pause --> Endzeit schneidet vorhandene Klausur
     bool condition2 = busyStartTime <= askedEndTime && askedEndTime < busyEndTime + personalBreak;
