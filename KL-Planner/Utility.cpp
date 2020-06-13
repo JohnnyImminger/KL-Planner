@@ -24,3 +24,38 @@ string Utility::removeChars(string &s, string &charsToRemove) {
 int Utility::getRandomInt(int max) {
     return rand() % max;
 }
+
+bool Utility::vectorContains(vector<int> &list, int element) {
+    for (int i : list) {
+        if (i == element){
+            return true;
+        }
+    }
+    return false;
+}
+
+vector<int> Utility::findShortestArray(vector<vector<int>> &list) {
+    int minSize = 404040404;
+    int minSizeIndex = -1;
+    for (int i = 0; i < list.size(); ++i) {
+        int vectorSize = list.at(i).size();
+        if (vectorSize < minSize){
+            minSize = vectorSize;
+            minSizeIndex = i;
+        }
+    }
+    return list.at(minSizeIndex);
+}
+
+int Utility::findShortestArrayIndex(vector <vector<int>> &list) {
+    int minSize = 404040404;
+    int minSizeIndex = -1;
+    for (int i = 0; i < list.size(); ++i) {
+        int vectorSize = list.at(i).size();
+        if (vectorSize < minSize){
+            minSize = vectorSize;
+            minSizeIndex = i;
+        }
+    }
+    return minSizeIndex;
+}

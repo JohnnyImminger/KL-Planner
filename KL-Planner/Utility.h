@@ -26,6 +26,9 @@ public:
     static vector<string> splitString(string &s, char delimiter);
     static string removeChars(string &s, string &charsToRemove);
     static int getRandomInt(int max);
+    static bool vectorContains(vector <int> &list, int element);
+    static vector<int> findShortestArray (vector <vector<int>> &list);
+    static int findShortestArrayIndex (vector <vector<int>> &list);
 
     /*
      * Variable Vorgaben durch Aufgabenstellung - Zeitangaben in Stunden --> float

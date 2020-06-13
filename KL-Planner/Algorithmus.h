@@ -52,17 +52,20 @@ private:
 
 
 
-    /*______________________________________________________________________________________________________________________
+    /*__________________________________________________________________________________________________________________
      * Klausur einsortieren und buchen
      */
-    //TODO klausuren müssen nach großer Kapazität und langer dauer zuerst rein kommen
 
-    //versucht die Klausur in das System einzubuchen und das Ergebnis in Prüfung zu hinterlegen --> bei Erfolg return true
-
+    //hat 2 Möglichkeiten zur Buchung eines Raums
     bool findDateAndBookKlausur(Klausur& klausur);
-
+    //1. Möglichkeit für Raumbuchung
     bool findDateAndBookKlausurIntoSingleRoom(Klausur& klausur);
+    //2. Möglichkeit für Raumbuchung
+    bool findDateAndBookKlausurIntoMultibleRooms(Klausur& klausur);
 
+    /*__________________________________________________________________________________________________________________
+     * Klausur einsortieren und buchen
+     */
     bool findAndBookKlausurIntoDayAndTime(Klausur& klausur, int restAnzTeilnehmer, int day, int startTime);
 
     /*
@@ -70,9 +73,9 @@ private:
      */
     vector <int> findShortestAvailableRaumIndezesVector (Klausur&klausur, int day, int startTime);
 
-    vector <int> findAvailableRaumIndizes(Klausur& klausur, int day, int startTime);
+    vector <int> findBiggestAvailableRaumIndizes(Klausur& klausur, int day, int startTime);
 
-    int findBiggestAvailableRaumIndex(int day, int startTime, int duration);
+    int findBiggestAvailableRaumIndex(vector <int> &possibleRaumIndizes, vector <int> &excludedRaumIndizes, int day, int startTime, int duration);
 
     //Find timeSlots
     vector <int> getFillableStartTimesFromUsedRoom(int raumIndex, int day);
