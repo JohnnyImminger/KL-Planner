@@ -191,22 +191,28 @@ bool Algorithmus::findDateAndBookKlausurIntoSingleRoom(Klausur &klausur) {
 }
 
 bool Algorithmus::findDateAndBookKlausurIntoMultibleRooms(Klausur &klausur) {
+    cout << "called find multiple rooms" << endl;
     vector <vector<int>> possibleRaumKombinationen;
     vector<int> savedStartTime;
     vector<int> savedDay;
     for (int startTime = 0; startTime < Utility::timeSlotsProTag; ++startTime) {
         for (int day = 0; day < Utility::klausurTage; ++day) {
+            cout << 1 << ' ';
             if (!areAllMemberAvailable(klausur, startTime, klausur.getDauerTimeSlots(),day)){
                 continue;
             }
+            cout << 2 << ' ';
             vector <int> possibleRaumKombination = findBiggestAvailableRaumIndizes(klausur,day,startTime);
+            cout << 3 << ' ';
             if (possibleRaumKombination.size() == 2){
                 tage[day].at(0).bookTimeSlots(startTime, klausur.getDauerTimeSlots(), tage[day].at(0).getFreeSpaceAt(startTime, klausur.getDauerTimeSlots()));
                 return tage[day].at(1).bookTimeSlots(startTime, klausur.getDauerTimeSlots(), klausur.getAnzTeilnehmer() - tage[day].at(0).getFreeSpaceAt(startTime, klausur.getDauerTimeSlots()));
             }
+            cout << 4 << ' ';
             possibleRaumKombinationen.push_back(possibleRaumKombination);
             savedStartTime.push_back(startTime);
             savedDay.push_back(day);
+            cout << 5 << endl;
         }
     }
     if (possibleRaumKombinationen.empty()){
@@ -231,10 +237,12 @@ bool Algorithmus::findDateAndBookKlausurIntoMultibleRooms(Klausur &klausur) {
 
 vector<int> Algorithmus::findBiggestAvailableRaumIndizes(Klausur &klausur, int day, int startTime) {
     vector<int> neededRaumIndizesForKlausur;
-    vector<int> possibleRaumIndizes = findAvailableRaumAtDayAndTime(klausur.getAnzTeilnehmer(), 0, klausur.getAnzTeilnehmer(), klausur.getDauerTimeSlots(), day, startTime);
+    vector<int> possibleRaumIndizes = findPossibleRoomIndices(klausur.getDauerTimeSlots(), day, startTime);
     int restAnzTeilnehmer = klausur.getAnzTeilnehmer();
     while (restAnzTeilnehmer > 0){
+
         int biggestRaumIndex = findBiggestAvailableRaumIndex(possibleRaumIndizes, neededRaumIndizesForKlausur, day, startTime, klausur.getDauerTimeSlots());
+
         if (restAnzTeilnehmer - tage[day].at(biggestRaumIndex).getFreeSpaceAt(startTime, klausur.getDauerTimeSlots()) < 0){
             int abweichung = 0;
             while (abweichung < restAnzTeilnehmer){
@@ -261,6 +269,28 @@ vector<int> Algorithmus::findBiggestAvailableRaumIndizes(Klausur &klausur, int d
     return neededRaumIndizesForKlausur;
 }
 
+vector <int> Algorithmus::findPossibleRoomIndices(int timeSlotDuration, int day, int startTime) {
+    vector<int> raumIndizes;
+    for (int raumIndex = 0; raumIndex < tage[day].size(); ++raumIndex) {
+        Raum &raum = tage[day].at(raumIndex);
+        int space = raum.getFreeSpaceAt(startTime,timeSlotDuration);
+        if(space < raum.getCapacity()) {
+            vector<int> startTimes = getFillableStartTimesFromUsedRoom(raumIndex, day);
+            bool startTimeMatch = false;
+            for (int otherStartTime: startTimes) {
+                if (startTime == otherStartTime) {
+                    startTimeMatch = true;
+                    break;
+                }
+            }
+            if(!startTimeMatch) continue;
+            else raumIndizes.push_back(raumIndex);
+        } else if (space == 0) continue;
+        raumIndizes.push_back(raumIndex);
+    }
+    return raumIndizes;
+}
+
 int Algorithmus::findBiggestAvailableRaumIndex(vector<int> &possibleRaumIndizes, vector<int> &excludedRaumIndizes, int day, int startTime, int duration) {
     int maxRaumIndex = -1;
     int maxRaumSize = 0;
@@ -273,6 +303,9 @@ int Algorithmus::findBiggestAvailableRaumIndex(vector<int> &possibleRaumIndizes,
             maxRaumSize = raumSize;
             maxRaumIndex = possibleRaumIndex;
         }
+    }
+    if (maxRaumIndex < 0) {
+        cout << "Error: Algorithmus::findBiggestAvailableRaumIndex() - returns -1 !" << endl;
     }
     return maxRaumIndex;
 }
@@ -393,7 +426,8 @@ vector<int> Algorithmus::findAvailableUsedRaumAtDayAndTime(int klausurSize, int 
 }
 
 bool Algorithmus::isRaumUsedAndAvailable(Raum &raum, int startTime, int duration) {
-    return raum.getFreeSpaceAt(startTime,duration) < raum.getCapacity();
+    int space = raum.getFreeSpaceAt(startTime,duration);
+    return 0 < space && space < raum.getCapacity();
 }
 
 /*

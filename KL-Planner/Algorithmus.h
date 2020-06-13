@@ -74,6 +74,7 @@ private:
     vector <int> findShortestAvailableRaumIndezesVector (Klausur&klausur, int day, int startTime);
 
     vector <int> findBiggestAvailableRaumIndizes(Klausur& klausur, int day, int startTime);
+    vector <int> findPossibleRoomIndices(int timeSlotDuration, int day, int startTime);
 
     int findBiggestAvailableRaumIndex(vector <int> &possibleRaumIndizes, vector <int> &excludedRaumIndizes, int day, int startTime, int duration);
 
