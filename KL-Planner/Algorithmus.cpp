@@ -137,9 +137,6 @@ vector<int> Algorithmus::sortKlausurenBySize() {
             }
         }
     } while (swapped);
-    for (int index: result) {
-        cout << data.klausuren.at(index).getAnzTeilnehmer() << ' ' << data.klausuren.at(index).getDauerTimeSlots() << endl;
-    }
     return result;
 }
 
