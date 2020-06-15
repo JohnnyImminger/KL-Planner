@@ -192,99 +192,29 @@ bool Algorithmus::findDateAndBookKlausurIntoSingleRoom(Klausur &klausur) {
 
 bool Algorithmus::findDateAndBookKlausurIntoMultibleRooms(Klausur &klausur) {
     cout << "called find multiple rooms" << endl;
-    vector <vector<int>> possibleRaumKombinationen;
-    vector<int> savedStartTime;
-    vector<int> savedDay;
+
     for (int startTime = 0; startTime < Utility::timeSlotsProTag; ++startTime) {
         for (int day = 0; day < Utility::klausurTage; ++day) {
             if (!areAllMemberAvailable(klausur, startTime, klausur.getDauerTimeSlots(),day)){
                 continue;
             }
-            vector <int> possibleRaumKombination = findBiggestAvailableRaumIndizes(klausur,day,startTime);
-            if (possibleRaumKombination.size() == 2){
-                tage[day].at(0).bookTimeSlots(startTime, klausur.getDauerTimeSlots(), tage[day].at(0).getFreeSpaceAt(startTime, klausur.getDauerTimeSlots()));
-                return tage[day].at(1).bookTimeSlots(startTime, klausur.getDauerTimeSlots(), klausur.getAnzTeilnehmer() - tage[day].at(0).getFreeSpaceAt(startTime, klausur.getDauerTimeSlots()));
+            vector<int> raumListe = findRaumListeForMember(klausur.getAnzTeilnehmer(), day, startTime, klausur.getDauerTimeSlots());
+            if (raumListe.empty()){
+                cout << "Error: Algorithmus::findDateAndBookKlausurIntoMultibleRooms() - empty raumListe !" << endl;
+                return false;
             }
-            possibleRaumKombinationen.push_back(possibleRaumKombination);
-            savedStartTime.push_back(startTime);
-            savedDay.push_back(day);
+            int restAnzTeilnehmer = klausur.getAnzTeilnehmer();
+            for (int i = 0; i < raumListe.size() - 1; ++i) {
+                Raum& raum = tage[day].at(raumListe.at(i));
+                raum.bookTimeSlots(startTime, klausur.getDauerTimeSlots(), raum.getFreeSpaceAt(startTime, klausur.getDauerTimeSlots()));
+                restAnzTeilnehmer -= raum.getFreeSpaceAt(startTime, klausur.getDauerTimeSlots());
+            }
+            return tage[day].at(raumListe.at(raumListe.size() -1)).bookTimeSlots(startTime, klausur.getDauerTimeSlots(), restAnzTeilnehmer);
         }
     }
-    if (possibleRaumKombinationen.empty()){
-        return false;
-    }
-    int resultIndex = Utility::findShortestArrayIndex(possibleRaumKombinationen);
-    int resultDay = savedDay.at(resultIndex);
-    int resultTime = savedStartTime.at(resultIndex);
-    int restAnzTeilnehmer = klausur.getAnzTeilnehmer();
-    for (int i = 0; i < possibleRaumKombinationen.at(resultIndex).size() - 1; ++i) {
-        Raum& raum = tage[resultDay].at(possibleRaumKombinationen.at(resultIndex).at(i));
-        raum.bookTimeSlots(resultTime, klausur.getDauerTimeSlots(), raum.getFreeSpaceAt(resultTime, klausur.getDauerTimeSlots()));
-        restAnzTeilnehmer -= raum.getFreeSpaceAt(resultTime, klausur.getDauerTimeSlots());
-    }
-    return tage[resultDay].at(possibleRaumKombinationen.at(resultIndex).at(possibleRaumKombinationen.at(resultIndex).size() -1)).bookTimeSlots(resultTime, klausur.getDauerTimeSlots(), restAnzTeilnehmer);
+    return false;
 }
 
-/*
- * Suche passende Räume nach verschiedenen Prioritäten
- */
-
-
-vector<int> Algorithmus::findBiggestAvailableRaumIndizes(Klausur &klausur, int day, int startTime) {
-    vector<int> neededRaumIndizesForKlausur;
-    vector<int> possibleRaumIndizes = findPossibleRoomIndices(klausur.getDauerTimeSlots(), day, startTime);
-    int restAnzTeilnehmer = klausur.getAnzTeilnehmer();
-    while (restAnzTeilnehmer > 0){
-
-        int biggestRaumIndex = findBiggestAvailableRaumIndex(possibleRaumIndizes, neededRaumIndizesForKlausur, day, startTime, klausur.getDauerTimeSlots());
-
-        if (restAnzTeilnehmer - tage[day].at(biggestRaumIndex).getFreeSpaceAt(startTime, klausur.getDauerTimeSlots()) < 0){
-            int abweichung = 0;
-            while (abweichung < restAnzTeilnehmer){
-                possibleRaumIndizes = findAvailableUsedRaumAtDayAndTime(restAnzTeilnehmer, abweichung, abweichung, klausur.getDauerTimeSlots(), day, startTime);
-                for (int raumIndex : possibleRaumIndizes) {
-                    if (restAnzTeilnehmer - tage[day].at(raumIndex).getFreeSpaceAt(startTime, klausur.getDauerTimeSlots()) < 0){
-                        neededRaumIndizesForKlausur.push_back(raumIndex);
-                        return neededRaumIndizesForKlausur;
-                    }
-                }
-                possibleRaumIndizes = findAvailableRaumAtDayAndTime(restAnzTeilnehmer, abweichung, abweichung, klausur.getDauerTimeSlots(), day, startTime);
-                for (int raumIndex : possibleRaumIndizes) {
-                    if (restAnzTeilnehmer - tage[day].at(raumIndex).getFreeSpaceAt(startTime, klausur.getDauerTimeSlots()) < 0){
-                        neededRaumIndizesForKlausur.push_back(raumIndex);
-                        return neededRaumIndizesForKlausur;
-                    }
-                }
-                abweichung++;
-            }
-        }
-        restAnzTeilnehmer -= tage[day].at(biggestRaumIndex).getFreeSpaceAt(startTime, klausur.getDauerTimeSlots());
-        neededRaumIndizesForKlausur.push_back(biggestRaumIndex);
-    }
-    return neededRaumIndizesForKlausur;
-}
-
-vector <int> Algorithmus::findPossibleRoomIndices(int timeSlotDuration, int day, int startTime) {
-    vector<int> raumIndizes;
-    for (int raumIndex = 0; raumIndex < tage[day].size(); ++raumIndex) {
-        Raum &raum = tage[day].at(raumIndex);
-        int space = raum.getFreeSpaceAt(startTime,timeSlotDuration);
-        if(space < raum.getCapacity()) {
-            vector<int> startTimes = getFillableStartTimesFromUsedRoom(raumIndex, day);
-            bool startTimeMatch = false;
-            for (int otherStartTime: startTimes) {
-                if (startTime == otherStartTime) {
-                    startTimeMatch = true;
-                    break;
-                }
-            }
-            if(!startTimeMatch) continue;
-            else raumIndizes.push_back(raumIndex);
-        } else if (space == 0) continue;
-        raumIndizes.push_back(raumIndex);
-    }
-    return raumIndizes;
-}
 
 vector <int> Algorithmus::findRaumListeForMember(int anzTeilnehmer, int day, int startTime, int duration){
 
@@ -308,6 +238,7 @@ vector <int> Algorithmus::findRaumListeForMember(int anzTeilnehmer, int day, int
             return raumListe;
         }
     }
+    return raumListe;
 }
 
 int Algorithmus::findBiggestAvailableRaum(vector<int> &excludedRaumIndizes, int day, int startTime, int duration) {
