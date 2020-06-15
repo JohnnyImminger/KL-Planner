@@ -180,7 +180,7 @@ void Klausur::setEingeplant(bool eingeplant) {
     Klausur::eingeplant = eingeplant;
 }
 
-void Klausur::setTag(int tag) {
+void Klausur::setDay(int tag) {
     Klausur::tag = tag;
 }
 

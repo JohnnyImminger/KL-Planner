@@ -60,7 +60,7 @@ public:
     void setPlanbar(bool planbar);
     void setEingeplant(bool eingeplant);
 
-    void setTag(int tag);
+    void setDay(int tag);
     void setStartZeitTimeSlot(int startZeitTimeSlot);
 
     /*_____________________________________

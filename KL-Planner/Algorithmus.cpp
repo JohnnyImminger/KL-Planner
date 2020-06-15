@@ -25,7 +25,7 @@ void Algorithmus::run() {
     cout << "Klausuren nach Anzahl der Teilnehmer sortiert" << endl;
     int nextKlausurIndex = selectNextKlausur(klausuren);
     while (nextKlausurIndex != -1) {
-        if (findDateAndBookKlausur(data.klausuren.at(nextKlausurIndex))) {
+        if (scheduleKlausur(data.klausuren.at(nextKlausurIndex))) {
         } else {
             cout << "Klausur konnte nicht eingeplant werden: " << data.klausuren.at(nextKlausurIndex) << endl;
         }
@@ -144,36 +144,79 @@ vector<int> Algorithmus::sortKlausurenBySize() {
  * Klausur einsortieren und buchen
  */
 
-bool Algorithmus::klausurEinsortieren(int index) {
-    Klausur klausur = data.klausuren.at(index);
-    bool booked = false;
-    int day = 0;
-    while (!booked) {
-        vector<int> rooms = roomsAtDay(klausur, day);
-        if(rooms.empty()) break;
-        for (int room: rooms) {
-
+bool Algorithmus::scheduleKlausur(Klausur& klausur) {
+    for (int day = 0; day<Utility::klausurTage; day++) {
+        for (int start = 0; start < Utility::timeSlotsProTag-klausur.getDauerTimeSlots(); start++) {
+            if(!areAllMemberAvailable(klausur, start, klausur.getDauerTimeSlots(), day)) continue;
+            vector<int> roomIndices = getRoomIndicesForKlausur(klausur, day, start);
+            if(roomIndices.empty()) continue;
+            return bookKlausur(klausur, day, start, roomIndices);
         }
     }
-    return booked;
+    return false;
 }
 
-vector<int> Algorithmus::roomsAtDay(Klausur& klausur, int day) {
+vector<int> Algorithmus::getRoomIndicesForKlausur(Klausur &klausur, int day, int start) {
+    vector<int> indicesForKlausur;
+    vector<int> selectableRoomIndices = getSelectableRoomIndices(klausur, day, start);
+    if(selectableRoomIndices.empty()) return indicesForKlausur;
 
+    sortRoomIndicesBySize(selectableRoomIndices);
 
-    return vector<int>();
+    //TODO: optimierung bei der raumauswahl
+    int klSize = klausur.getAnzTeilnehmer();
+    for (int i = 0; i < selectableRoomIndices.size(); i++) {
+        int roomCap = data.raeume.at(selectableRoomIndices.at(i)).getCapacity();
+        indicesForKlausur.push_back(selectableRoomIndices.at(i));
+        klSize-=roomCap;
+        if(klSize<=0) break;
+    }
+
+    return indicesForKlausur;
+}
+
+vector<int> Algorithmus::getSelectableRoomIndices(Klausur& kl, int day, int start) {
+    vector<int> roomIndices;
+    for (int rIndex = 0; rIndex<tage[day].size(); rIndex++) {
+        Raum* room = &tage[day].at(rIndex);
+        if(room->isEmpty(start, kl.getDauerTimeSlots())) {
+            roomIndices.push_back(rIndex);
+        }
+    }
+    return roomIndices;
+}
+
+void Algorithmus::sortRoomIndicesBySize(vector<int>& indices) {
+    bool swapped;
+    do {
+        swapped = false;
+        for (int i = 0; i < indices.size()-1; ++i) {
+            Raum r1 = data.raeume.at(indices.at(i));
+            Raum r2 = data.raeume.at(indices.at(i+1));
+            if (r1.getCapacity() < r2.getCapacity()) {
+                int temp = (int) indices.at(i);
+                indices.at(i) = (int) indices.at(i+1);
+                indices.at(i+1) = temp;
+                swapped = true;
+            }
+        }
+    } while (swapped);
 }
 
 /*
  * Klausur bei passendem Termin buchen
  */
 
-bool Algorithmus::bookKlausurDate(Klausur &klausur, int startTime, int day, int raumDataIndex, int bookedCapacity) {
-    klausur.setTag(day);
-    klausur.setStartZeitTimeSlot(startTime);
-    klausur.addRaumRef(raumDataIndex);
-    return tage[day].at(raumDataIndex).bookTimeSlots(startTime, klausur.getDauerTimeSlots(),bookedCapacity);
-
+bool Algorithmus::bookKlausur(Klausur &klausur, int day, int start, vector<int>& roomIndices) {
+    klausur.setDay(day);
+    klausur.setStartZeitTimeSlot(start);
+    int sumOfRoomSize = 0;
+    for(int index: roomIndices) {
+        klausur.addRaumRef(index);
+        if(! tage[day].at(index).bookTimeSlots(start, klausur.getDauerTimeSlots(), index != roomIndices.back() ? data.raeume.at(index).getCapacity() : klausur.getAnzTeilnehmer()-sumOfRoomSize)) return false;
+        sumOfRoomSize+=data.raeume.at(index).getCapacity();
+    }
+    return true;
 }
 
 /*
@@ -245,32 +288,4 @@ bool Algorithmus::isTimeOverlapping(int askedStartTime, int askedEndTime, int bu
     //askedStartTime <= busyStartTime <= busyEndTime <= askedEndTim --> neue Klausur würde vorhandene Klausur überdecken
     bool condition3 = askedStartTime <= busyStartTime && busyEndTime <= askedEndTime;
     return condition1 || condition2 || condition3;
-}
-
-/*
- * Array Bedingungen
- */
-
-bool Algorithmus::isTimeArrayLongEnough(int startTime, int duration) {
-    if (0 < startTime){
-        cout << "Error: Algorithmus::isTimeArrayLongEnough() - Startzeit < 0 !"<< endl;
-        return false;
-    }
-    return startTime + duration <= Utility::timeSlotsProTag;
-}
-
-bool Algorithmus::isRaumArrayLongEnough( int raumIndex) {
-    if (0 < raumIndex){
-        cout << "Error: Algorithmus::isRaumArrayLongEnough() - RaumIndex < 0 !"<< endl;
-        return false;
-    }
-    return raumIndex <= data.raeume.size();
-}
-
-int Algorithmus::increaseStartTag(int startTag) {
-    startTag++;
-    if (startTag == Utility::klausurTage){
-        startTag = 0;
-    }
-    return startTag;
 }

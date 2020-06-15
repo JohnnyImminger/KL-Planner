@@ -164,3 +164,10 @@ bool Raum::bookTimeSlots(int startTime, int duration, int bookedCapacity) {
     }
     return noFail;
 }
+
+bool Raum::isEmpty(int start, int dauer) {
+    for (int i = start; i<start+dauer+Utility::timeSlotsPauseRaum; i++) {
+        if (capacity > timeSlots[i]) return false;
+    }
+    return true;
+}

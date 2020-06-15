@@ -47,6 +47,8 @@ public:
     //prüft ob die Timeslots verfügbar sind, berücksichtigt direkt die Pause für den Raum
     int getFreeSpaceAt(int startTime, int duration);
 
+    bool isEmpty(int start, int dauer);
+
     //belegt die Timeslots, berücksichtigt direkt die Pause für den Raum
     bool bookTimeSlots(int startTime, int duration, int capacity);
 
