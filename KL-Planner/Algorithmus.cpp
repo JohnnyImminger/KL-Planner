@@ -191,7 +191,7 @@ bool Algorithmus::findDateAndBookKlausurIntoSingleRoom(Klausur &klausur) {
 }
 
 bool Algorithmus::findDateAndBookKlausurIntoMultibleRooms(Klausur &klausur) {
-    cout << "called find multiple rooms" << endl;
+    //cout << "called find multiple rooms" << endl;
 
     for (int startTime = 0; startTime < Utility::timeSlotsProTag; ++startTime) {
         for (int day = 0; day < Utility::klausurTage; ++day) {
@@ -200,8 +200,8 @@ bool Algorithmus::findDateAndBookKlausurIntoMultibleRooms(Klausur &klausur) {
             }
             vector<int> raumListe = findRaumListeForMember(klausur.getAnzTeilnehmer(), day, startTime, klausur.getDauerTimeSlots());
             if (raumListe.empty()){
-                cout << "Error: Algorithmus::findDateAndBookKlausurIntoMultibleRooms() - empty raumListe !" << endl;
-                return false;
+                //cout << "Error: Algorithmus::findDateAndBookKlausurIntoMultibleRooms() - empty raumListe !" << endl;
+                continue;
             }
             int restAnzTeilnehmer = klausur.getAnzTeilnehmer();
             for (int i = 0; i < raumListe.size() - 1; ++i) {
@@ -260,7 +260,7 @@ int Algorithmus::findBiggestAvailableRaum(vector<int> &excludedRaumIndizes, int 
 
     }
     if (maxRaumIndex < 0) {
-        cout << "Error: Algorithmus::findBiggestAvailableRaum() - returns -1 ! with Parameter: [day: " << day << " , startTime: " << startTime << " , duration: " << duration << "]" << endl;
+        //cout << "Error: Algorithmus::findBiggestAvailableRaum() - returns -1 ! with Parameter: [day: " << day << " , startTime: " << startTime << " , duration: " << duration << "]" << endl;
     }
     return maxRaumIndex;
 }
