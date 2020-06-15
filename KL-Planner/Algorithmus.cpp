@@ -286,24 +286,68 @@ vector <int> Algorithmus::findPossibleRoomIndices(int timeSlotDuration, int day,
     return raumIndizes;
 }
 
-int Algorithmus::findBiggestAvailableRaumIndex(vector<int> &possibleRaumIndizes, vector<int> &excludedRaumIndizes, int day, int startTime, int duration) {
-    int maxRaumIndex = -1;
-    int maxRaumSize = 0;
-    for (int possibleRaumIndex : possibleRaumIndizes) {
-        if (Utility::vectorContains(excludedRaumIndizes, possibleRaumIndex)){
-            continue;
-        }
-        int raumSize = tage[day].at(possibleRaumIndex).getFreeSpaceAt(startTime, duration);
-        if (raumSize > maxRaumSize){
-            maxRaumSize = raumSize;
-            maxRaumIndex = possibleRaumIndex;
+vector <int> Algorithmus::findRaumListeForMember(int anzTeilnehmer, int day, int startTime, int duration){
+
+    vector <int> raumListe;
+    int currentRaumIndex;
+    int raumKapazitaet;
+
+    while (anzTeilnehmer > 0){
+
+        currentRaumIndex = findBiggestAvailableRaum(raumListe, day, startTime, duration);
+        if (currentRaumIndex == -1) return raumListe; //Das sollte nicht passieren!
+        raumKapazitaet = tage[day].at(currentRaumIndex).getFreeSpaceAt(startTime,duration);
+        anzTeilnehmer -= raumKapazitaet;
+        raumListe.push_back(currentRaumIndex);
+
+        if (anzTeilnehmer <= 0) return raumListe;
+
+        currentRaumIndex = findFittingAvailableRaum(anzTeilnehmer, raumListe, day, startTime, duration);
+        if (currentRaumIndex != -1){
+            raumListe.push_back(currentRaumIndex);
+            return raumListe;
         }
     }
+}
+
+int Algorithmus::findBiggestAvailableRaum(vector<int> &excludedRaumIndizes, int day, int startTime, int duration) {
+    int maxRaumIndex = -1;
+    int maxRaumKapazitaet = 0;
+    for (int raumIndex = 0; raumIndex < tage[day].size(); ++raumIndex) {
+        Raum &raum = tage[day].at(raumIndex);
+
+        if (!Utility::vectorContains(excludedRaumIndizes, raumIndex)){
+            int freeSpace = raum.getFreeSpaceAt(startTime, duration);
+            int raumKapazitaet = raum.getCapacity();
+            if (isRaumUsedAndAvailable(raum, startTime, duration) || freeSpace == raumKapazitaet){
+                if (freeSpace > maxRaumKapazitaet){
+                    maxRaumKapazitaet = freeSpace;
+                    maxRaumIndex = raumIndex;
+                }
+            }
+        }
+
+    }
     if (maxRaumIndex < 0) {
-        cout << "Error: Algorithmus::findBiggestAvailableRaumIndex() - returns -1 !" << endl;
+        cout << "Error: Algorithmus::findBiggestAvailableRaum() - returns -1 ! with Parameter: [day: " << day << " , startTime: " << startTime << " , duration: " << duration << "]" << endl;
     }
     return maxRaumIndex;
 }
+
+int Algorithmus::findFittingAvailableRaum(int anzTeilnehmer, vector<int> &excludedRaumIndizes, int day, int startTime, int duration) {
+    int abweichungOfAnzTeilnehmer = 0;
+    vector <int> possibleRoomIndizes;
+    while (abweichungOfAnzTeilnehmer < anzTeilnehmer){
+        possibleRoomIndizes = findAvailableRaumAtDayAndTime(anzTeilnehmer, abweichungOfAnzTeilnehmer, abweichungOfAnzTeilnehmer,duration, day, startTime);
+        for (int raumIndex: possibleRoomIndizes) {
+
+        }
+        abweichungOfAnzTeilnehmer++;
+    }
+    return -1;
+}
+
+
 
 vector<int> Algorithmus::getFillableStartTimesFromUsedRoom(int raumIndex, int day) {
     vector<int> startTimeSlotsToFill;

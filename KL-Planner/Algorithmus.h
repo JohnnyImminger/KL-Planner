@@ -66,18 +66,16 @@ private:
     /*__________________________________________________________________________________________________________________
      * Klausur einsortieren und buchen
      */
-    bool findAndBookKlausurIntoDayAndTime(Klausur& klausur, int restAnzTeilnehmer, int day, int startTime);
 
     /*
      * Suche passende Räume nach verschiedenen Prioritäten
      */
-    vector <int> findShortestAvailableRaumIndezesVector (Klausur&klausur, int day, int startTime);
-
+    vector<int> findRaumListeForMember(int anzTeilnehmer, int day, int startTime, int duration);
     vector <int> findBiggestAvailableRaumIndizes(Klausur& klausur, int day, int startTime);
     vector <int> findPossibleRoomIndices(int timeSlotDuration, int day, int startTime);
 
-    int findBiggestAvailableRaumIndex(vector <int> &possibleRaumIndizes, vector <int> &excludedRaumIndizes, int day, int startTime, int duration);
-
+    int findBiggestAvailableRaum(vector <int> &excludedRaumIndizes, int day, int startTime, int duration);
+    int findFittingAvailableRaum(int anzTeilnehmer, vector<int> &excludedRaumIndizes, int day, int startTime, int duration);
     //Find timeSlots
     vector <int> getFillableStartTimesFromUsedRoom(int raumIndex, int day);
 
@@ -122,6 +120,8 @@ private:
     bool isTimeArrayLongEnough(int startTime, int duration);
     bool isRaumArrayLongEnough(int raumIndexSource);
     int increaseStartTag(int startTag); //make shure the day array is long enough
+
+
 
 };
 
