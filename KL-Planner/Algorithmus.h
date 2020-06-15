@@ -116,7 +116,7 @@ private:
     bool isRaumArrayLongEnough(int raumIndexSource);
     int increaseStartTag(int startTag); //make shure the day array is long enough
 
-    bool alg(int index);
+    bool klausurEinsortieren(int index);
     vector<int> roomsAtDay(Klausur& klausur, int day);
 };
 
