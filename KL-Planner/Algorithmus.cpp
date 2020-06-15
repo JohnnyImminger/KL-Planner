@@ -197,22 +197,17 @@ bool Algorithmus::findDateAndBookKlausurIntoMultibleRooms(Klausur &klausur) {
     vector<int> savedDay;
     for (int startTime = 0; startTime < Utility::timeSlotsProTag; ++startTime) {
         for (int day = 0; day < Utility::klausurTage; ++day) {
-            cout << 1 << ' ';
             if (!areAllMemberAvailable(klausur, startTime, klausur.getDauerTimeSlots(),day)){
                 continue;
             }
-            cout << 2 << ' ';
             vector <int> possibleRaumKombination = findBiggestAvailableRaumIndizes(klausur,day,startTime);
-            cout << 3 << ' ';
             if (possibleRaumKombination.size() == 2){
                 tage[day].at(0).bookTimeSlots(startTime, klausur.getDauerTimeSlots(), tage[day].at(0).getFreeSpaceAt(startTime, klausur.getDauerTimeSlots()));
                 return tage[day].at(1).bookTimeSlots(startTime, klausur.getDauerTimeSlots(), klausur.getAnzTeilnehmer() - tage[day].at(0).getFreeSpaceAt(startTime, klausur.getDauerTimeSlots()));
             }
-            cout << 4 << ' ';
             possibleRaumKombinationen.push_back(possibleRaumKombination);
             savedStartTime.push_back(startTime);
             savedDay.push_back(day);
-            cout << 5 << endl;
         }
     }
     if (possibleRaumKombinationen.empty()){
