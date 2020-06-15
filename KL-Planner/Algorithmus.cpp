@@ -38,6 +38,7 @@ void Algorithmus::printResult(const string &filename) {
     file.open(filename);
     for (int i = 0; i < data.klausuren.size(); ++i) {
         Klausur cKlausur = data.klausuren.at(i);
+        if(cKlausur.getAnzTeilnehmer() == 0) continue;
 
         file << cKlausur << ';';
 
@@ -145,8 +146,8 @@ vector<int> Algorithmus::sortKlausurenBySize() {
  */
 
 bool Algorithmus::scheduleKlausur(Klausur& klausur) {
-    for (int day = 0; day<Utility::klausurTage; day++) {
-        for (int start = 0; start < Utility::timeSlotsProTag-klausur.getDauerTimeSlots(); start++) {
+    for (int start = 0; start < Utility::timeSlotsProTag-klausur.getDauerTimeSlots(); start++) {
+        for (int day = 0; day<Utility::klausurTage; day++) {
             if(!areAllMemberAvailable(klausur, start, klausur.getDauerTimeSlots(), day)) continue;
             vector<int> roomIndices = getRoomIndicesForKlausur(klausur, day, start);
             if(roomIndices.empty()) continue;
