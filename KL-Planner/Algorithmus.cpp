@@ -314,9 +314,9 @@ int Algorithmus::findBiggestAvailableRaum(vector<int> &excludedRaumIndizes, int 
     int maxRaumIndex = -1;
     int maxRaumKapazitaet = 0;
     for (int raumIndex = 0; raumIndex < tage[day].size(); ++raumIndex) {
-        Raum &raum = tage[day].at(raumIndex);
 
         if (!Utility::vectorContains(excludedRaumIndizes, raumIndex)){
+            Raum &raum = tage[day].at(raumIndex);
             int freeSpace = raum.getFreeSpaceAt(startTime, duration);
             int raumKapazitaet = raum.getCapacity();
             if (isRaumUsedAndAvailable(raum, startTime, duration) || freeSpace == raumKapazitaet){
@@ -340,7 +340,14 @@ int Algorithmus::findFittingAvailableRaum(int anzTeilnehmer, vector<int> &exclud
     while (abweichungOfAnzTeilnehmer < anzTeilnehmer){
         possibleRoomIndizes = findAvailableRaumAtDayAndTime(anzTeilnehmer, abweichungOfAnzTeilnehmer, abweichungOfAnzTeilnehmer,duration, day, startTime);
         for (int raumIndex: possibleRoomIndizes) {
-
+            if (!Utility::vectorContains(excludedRaumIndizes, raumIndex)){
+                Raum &raum = tage[day].at(raumIndex);
+                int freeSpace = raum.getFreeSpaceAt(startTime, duration);
+                int raumKapazitaet = raum.getCapacity();
+                if (isRaumUsedAndAvailable(raum, startTime, duration) || freeSpace == raumKapazitaet){
+                    return raumIndex;
+                }
+            }
         }
         abweichungOfAnzTeilnehmer++;
     }
