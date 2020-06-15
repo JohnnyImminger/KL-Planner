@@ -71,8 +71,6 @@ private:
      * Suche passende Räume nach verschiedenen Prioritäten
      */
     vector<int> findRaumListeForMember(int anzTeilnehmer, int day, int startTime, int duration);
-    vector <int> findBiggestAvailableRaumIndizes(Klausur& klausur, int day, int startTime);
-    vector <int> findPossibleRoomIndices(int timeSlotDuration, int day, int startTime);
 
     int findBiggestAvailableRaum(vector <int> &excludedRaumIndizes, int day, int startTime, int duration);
     int findFittingAvailableRaum(int anzTeilnehmer, vector<int> &excludedRaumIndizes, int day, int startTime, int duration);
