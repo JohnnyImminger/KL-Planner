@@ -13,7 +13,7 @@ Room::Room() {
     this->building = 404;
     this->adrRoom = 404;
     this->capacity = 0;
-    fill_n(this->timeSlots,Utility::timeSlotsProTag + Utility::timeSlotsPauseRaum, this->capacity);
+    fill_n(this->timeSlots, Utility::timeSlotsPerDay + Utility::timeSlotsRoomBreak, this->capacity);
 }
 
 Room::Room(string &kindOfRoom, int building, int adrRoom, int capacity) {
@@ -21,7 +21,7 @@ Room::Room(string &kindOfRoom, int building, int adrRoom, int capacity) {
     this->building = building;
     this->adrRoom = adrRoom;
     this->capacity = capacity / Utility::roomDivider;
-    fill_n(this->timeSlots,Utility::timeSlotsProTag + Utility::timeSlotsPauseRaum, this->capacity);
+    fill_n(this->timeSlots, Utility::timeSlotsPerDay + Utility::timeSlotsRoomBreak, this->capacity);
 }
 
 /*
@@ -126,7 +126,7 @@ int Room::getFreeSpaceAt(int start, int duration) {
         return 0;
     }
     //nicht valide startZeit - Vermeidung von ArrayOutOfBounds
-    if (start + duration >= Utility::timeSlotsProTag){
+    if (start + duration >= Utility::timeSlotsPerDay){
         return 0;
     }
     int maxFreeCapacity = this->capacity;
@@ -147,8 +147,8 @@ bool Room::bookTimeSlots(int start, int duration, int bookedCapacity) {
 
     }
     //Ausgleich der Imaginären Slots durch die Pause in den Räumen
-    for (; index < start + duration + Utility::timeSlotsPauseRaum; ++index) {
-        if (index >= Utility::timeSlotsProTag + Utility::timeSlotsPauseRaum){
+    for (; index < start + duration + Utility::timeSlotsRoomBreak; ++index) {
+        if (index >= Utility::timeSlotsPerDay + Utility::timeSlotsRoomBreak){
             cout << "Error: bookTimeSlots() - Zu großer slotIndex bei Room: " << this->building << "/" << this->adrRoom << " bei " << start << " bis " << start + duration << "!" << endl;
             return false;
         }
@@ -158,7 +158,7 @@ bool Room::bookTimeSlots(int start, int duration, int bookedCapacity) {
 }
 
 bool Room::isEmpty(int start, int duration) {
-    for (int i = start; i< start + duration + Utility::timeSlotsPauseRaum; i++) {
+    for (int i = start; i< start + duration + Utility::timeSlotsRoomBreak; i++) {
         if (capacity > timeSlots[i]) return false;
     }
     return true;

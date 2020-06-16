@@ -2,22 +2,22 @@
 // Created by Johnny Imminger, Felix Steinke and Florian Grabowski
 //
 
-#ifndef KL_PLANNER_ALGORITHMUS_H
-#define KL_PLANNER_ALGORITHMUS_H
+#ifndef KL_PLANNER_ALGORITHM_H
+#define KL_PLANNER_ALGORITHM_H
 
 #include "ReadInput.h"
 #include <map>
 
 using namespace std;
 
-class Algorithmus {
+class Algorithm {
 
 public:
     /*
      * Konstruktoren
      */
 
-    explicit Algorithmus(ReadInput& data);
+    explicit Algorithm(ReadInput& data);
 
     /*_____________________________________
      * Methoden:
@@ -36,7 +36,7 @@ private:
      */
 
     ReadInput data;
-    vector<Room> days [Utility::klausurTage]; //9 Tage
+    vector<Room> days [Utility::examinationPeriod]; //9 Tage
 
     /*_____________________________________
      * Methoden:
@@ -70,4 +70,4 @@ private:
 };
 
 
-#endif //KL_PLANNER_ALGORITHMUS_H
+#endif //KL_PLANNER_ALGORITHM_H

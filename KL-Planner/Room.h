@@ -59,7 +59,7 @@ private:
     int building;
     int adrRoom;
     int capacity;
-    int timeSlots[Utility::timeSlotsProTag + Utility::timeSlotsPauseRaum]{}; //[40] je 15min slots + die Pause als imaginärer Puffer, 0 = raum ist voll
+    int timeSlots[Utility::timeSlotsPerDay + Utility::timeSlotsRoomBreak]{}; //[40] je 15min slots + die Pause als imaginärer Puffer, 0 = raum ist voll
 
 
 

@@ -3,4 +3,4 @@ project(KL_Planner)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(KL_Planner main.cpp Room.cpp Room.h Exam.cpp Exam.h Registration.cpp Registration.h Student.cpp Student.h Professor.cpp Professor.h ReadInput.cpp ReadInput.h Utility.cpp Utility.h Algorithmus.cpp Algorithmus.h)
+add_executable(KL_Planner main.cpp Room.cpp Room.h Exam.cpp Exam.h Registration.cpp Registration.h Student.cpp Student.h Professor.cpp Professor.h ReadInput.cpp ReadInput.h Utility.cpp Utility.h Algorithm.cpp Algorithm.h)

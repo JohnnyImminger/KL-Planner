@@ -47,7 +47,7 @@ Exam::Exam(string& course, string& vertiefung, int examVersion, int examId, stri
     this->prof2Id = prof2Id;
     this->prof2Name = prof2Name;
     this->duration = duration;
-    this->durationTimeSlots = (int) ((duration / 60) * Utility::timeSlotsProStunde);
+    this->durationTimeSlots = (int) ((duration / 60) * Utility::timeSlotsPerHour);
     this->kindOfExam = kindOfExam;
     this->semester = examSemester;
     this->offered = projectable;

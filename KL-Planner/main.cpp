@@ -3,7 +3,7 @@
 //
 
 #include "ReadInput.h"
-#include "Algorithmus.h"
+#include "Algorithm.h"
 #include <chrono>
 
 int main() {
@@ -12,7 +12,7 @@ int main() {
 
     ReadInput data;
     data.init();
-    Algorithmus alg = Algorithmus(data);
+    Algorithm alg = Algorithm(data);
     alg.initTage();
     alg.run();
     cout << ">>printing results" << endl;
