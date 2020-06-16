@@ -15,12 +15,13 @@ int main() {
     Algorithmus alg = Algorithmus(data);
     alg.initTage();
     alg.run();
-    alg.printResult("../../output/result.csv");
-    alg.printRaumplanliste("../../output/raumPlanListe.csv");
-    alg.printProfpalnliste("../../output/profPlanListe.csv");
-    alg.printStudentplanliste("../../output/studentPlanListe.csv");
+    cout << ">>printing results" << endl;
+    alg.printResultByExams("../../output/result.csv");
+    alg.printResultByRooms("../../output/raumPlanListe.csv");
+    alg.printResultByProfs("../../output/profPlanListe.csv");
+    alg.printResultByStudent("../../output/studentPlanListe.csv");
 
     milliseconds end = duration_cast<milliseconds>(system_clock::now().time_since_epoch());
-    cout << "Executed in " << (end-start).count()/1000 << 's' << endl;
+    cout << "executed in " << (end-start).count()/1000 << 's' << endl;
     return 0;
 }

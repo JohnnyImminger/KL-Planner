@@ -25,10 +25,10 @@ public:
 
     void run();
     void initTage();
-    void printResult(const string &filename);
-    void printRaumplanliste(const string &filename);
-    void printProfpalnliste(const string &filename);
-    void printStudentplanliste(const string &filename);
+    void printResultByExams(const string &filename);
+    void printResultByRooms(const string &filename);
+    void printResultByProfs(const string &filename);
+    void printResultByStudent(const string &filename);
 
 private:
     /*
@@ -36,8 +36,7 @@ private:
      */
 
     ReadInput data;
-    vector<Raum> tage [Utility::klausurTage]; //9 Tage
-    int lastSortedDay;
+    vector<Room> days [Utility::klausurTage]; //9 Tage
 
     /*_____________________________________
      * Methoden:
@@ -45,32 +44,29 @@ private:
 
     //gibt einen sortierten vektor mit Klausurindices nach Größe und Länge zurück
     vector<int> sortKlausurenBySize();
-
-    /*
-     * gibt den nächsten index aus dem Vektor zurück, es sei denn
-     */
+    //gibt den nächsten index aus dem Vektor zurück, Klausuren ohne Teilnehmer werden ignoriert
     int selectNextKlausur(vector<int> &indices);
     /*______________________________________________________________________________________________________________________
-     * Klausur einsortieren und buchen
+     * Exam einsortieren und buchen
      */
-    bool scheduleKlausur(Klausur& klausur);
-    vector<int> getRoomIndicesForKlausur(Klausur& klausur, int day, int start);
-    vector<int> getSelectableRoomIndices(Klausur& kl, int day, int start);
+    bool scheduleKlausur(Exam& klausur);
+    vector<int> getRoomIndicesForKlausur(Exam& klausur, int day, int start);
+    vector<int> getSelectableRoomIndices(Exam& kl, int day, int start);
     void sortRoomIndicesBySize(vector<int>& indices);
     /*
-     * Klausur bei passendem Termin buchen
+     * Exam bei passendem Termin buchen
      */
-    bool bookKlausur(Klausur& klausur, int day, int start, vector<int>& roomIndices);
+    bool bookKlausur(Exam& klausur, int day, int start, vector<int>& roomIndices);
 
     /*
      * Teilnehmer Bedingungen
      */
-    bool areAllMemberAvailable(Klausur &klausur, int startTime, int duration, int day);
-    bool areAllProfsOfKlausurAvailable(Klausur &klausur, int startTime, int duration, int day);
-    bool areAllStudentsOfKlausurAvailable(Klausur &klausur, int startTime, int duration, int day);
+    bool areAllMemberAvailable(Exam &klausur, int day, int start);
+    bool areAllProfsOfKlausurAvailable(Exam &klausur, int day, int start);
+    bool areAllStudentsOfKlausurAvailable(Exam &klausur, int startTime, int duration);
     bool isProfAvailable(Professor& prof, int askedStartTime, int askedDuration, int day);
-    bool isStudentAvailable(Student& student, int askedStartTime, int askedDuration, int day);
-    bool isTimeOverlapping(int askedStartTime, int askedEndTime, int busyStartTime, int busyEndTime, int personalBreak);
+    bool isStudentAvailable(Student& student, int day, int start, int duration);
+    bool isTimeOverlapping(int start, int end, int busyStart, int busyEnd, int personalBreak);
 };
 
 

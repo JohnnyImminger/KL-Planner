@@ -26,6 +26,7 @@ public:
     static vector<string> splitString(string &s, char delimiter);
     static string removeChars(string &s, string &charsToRemove);
     static int getRandomInt(int max);
+    static void printIgnoredExam(const string& line);
 
     /*
      * Variable Vorgaben durch Aufgabenstellung - Zeitangaben in Stunden --> float
@@ -35,7 +36,7 @@ public:
     constexpr const static float pauseProf = 0.5; //30min
     //Fur die Studierenden muss eine Pause von mindestens 4 Stunden zwischen zwei Klausuren liegen.
     constexpr const static float pauseStudent = 4;
-    //In demselben Raum muss zwischen zwei Klausuren eine Pause von mindestens einer Stunde liegen.
+    //In demselben Room muss zwischen zwei Klausuren eine Pause von mindestens einer Stunde liegen.
     constexpr const static float pauseRaum = 1;
     //Dabei durfen Studierende hoechstens 2 Klausuren an einem Tag schreiben.
     const static int maxKlausurenProTagStudent = 2;

@@ -1,4 +1,4 @@
-stg;vert;pversion;pnr;pdtxt;ppruefer;Prüfer 1;zweitpruefer;Prüfer 2;pdauer;pform;psem;angeboten
+stg;vert;pversion;pnr;pdtxt;ppruefer;Prüfer 1;zweitpruefer;Prüfer 2;pdauer;pform;psem;offered
 AB;;141;1030;Technik Grundlagen;6317;;;;210;KL;20201;J
 AB;;141;4030;Grundlagen Organisation 1;1224;;;;90;KL;20201;J
 AB;;161;1020;Konstruktion Grundlagen;0178;;0452;;120;KL;20201;J
@@ -354,7 +354,7 @@ PB;;132;4030;Mathematik 4;1436;;;;90;KL;20201;J
 PB;;132;4050;Energietechnik 2;1436;;0149;;120;KL;20201;J
 PB;;132;6010;Theoret. Bauphysik Wärme;0346;;;;120;KL;20201;J
 PB;;132;6030;Technischer Lärmschutz;1471;;3615;;60;KL;20201;J
-PB;;132;6040;Raum- und Psychoakustik;0833;;1471;;120;KL;20201;J
+PB;;132;6040;Room- und Psychoakustik;0833;;1471;;120;KL;20201;J
 PB;;132;6050;Energietechnik 3;1436;;0346;;120;KL;20201;J
 PB;;132;7010;Theoret. Bauphysik Schall;1471;;;;120;KL;20201;J
 PB;;132;7040;Betriebspsychologie;3715;;;;60;KL;20201;J
@@ -381,7 +381,7 @@ PB;;182;4050;Energietechnik 2;1436;;0149;;120;KL;20201;J
 PB;;182;4070;Betriebspsychologie;3715;;;;60;KL;20201;J
 PB;;182;6010;Hygrothermische Bauphysik;0346;;;;120;KL;20201;J
 PB;;182;6030;Technischer Lärmschutz;1471;;3615;;60;KL;20201;J
-PB;;182;6040;Raum- und Psychoakustik;0833;;1471;;120;KL;20201;J
+PB;;182;6040;Room- und Psychoakustik;0833;;1471;;120;KL;20201;J
 PB;;182;6050;Energietechnik 3;7412;;0346;;120;KL;20201;J
 PG;;162;1010;GIS;0027;;15660;;180;KL;20201;J
 PG;;162;1020;Photogrammetry/Remote S.;0236;;0790;;180;KL;20201;J

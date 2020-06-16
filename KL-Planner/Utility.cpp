@@ -2,6 +2,7 @@
 // Created by Johnny Imminger, Felix Steinke and Florian Grabowski
 //
 
+#include "Exam.h"
 #include "Utility.h"
 
 vector<string> Utility::splitString(string &s, char delimiter) {
@@ -23,4 +24,11 @@ string Utility::removeChars(string &s, string &charsToRemove) {
 
 int Utility::getRandomInt(int max) {
     return rand() % max;
+}
+
+void Utility::printIgnoredExam(const string& line) {
+    ofstream output;
+    output.open("../../output/ignoredExams.csv", ios_base::app);
+    output << line << endl;
+    output.close();
 }

@@ -21,80 +21,80 @@ DatenObjekte:
 
 - ___Raum:___
 
-        string raumArt;                             --> aus csv  
-        int adrBau;                                 --> aus csv  
-        int adrRaum;                                --> aus csv  
+        string kindOfRoom;                             --> aus csv  
+        int building;                                 --> aus csv  
+        int adrRoom;                                --> aus csv  
         int capacity                                --> aus csv / festgelegten Teiler [4]
 
         bool timeSlots[Utility::timeSlotsProTag + Utility::timeSlotsPauseRaum] = {false};
 
-            //TODO jeder timeSlot sollte eine capacity haben um 2 klausuren gleichzeitig stattfinden zu lassen
-            --> Raum ist eine Ressource die eine buchbare TimeSlots besitzt.
+            //TODO jeder timeSlot sollte eine capacity haben um 2 exams gleichzeitig stattfinden zu lassen
+            --> Room ist eine Ressource die eine buchbare TimeSlots besitzt.
             --> Zur leichteren Handhabung wird mit einer immaginären Pause am Ende gerechnet
             --> Timeslot = 15min
             --> false = NICHT belegt
 
 - ___Anmeldung:___
 
-        int studMatrikelNr;                         --> aus csv
-        string studStudiengang;                     --> aus csv
+        int martrikelNummer;                         --> aus csv
+        string course;                     --> aus csv
         int version;                                --> aus csv
-        int nummer;                                 --> aus csv
-        string klausurForm;                         --> aus csv
-        string klausurFormText;                     --> aus csv
-        int klausurSemester;                        --> aus csv
+        int id;                                 --> aus csv
+        string kindOfExamShort;                         --> aus csv
+        string KindOfExamLong;                     --> aus csv
+        int examSemester;                        --> aus csv
 
         --> Anmeldungen bilden die Verknüfung zwischen Klausuren und Studenten
 
 - ___Klausur (einfacher zu schreiben als Pruefungen):___
 
-        string studStudiengang;                     --> aus csv
+        string course;                     --> aus csv
         int vertiefung;                             --> aus csv
         int version;                                --> aus csv
-        int nummer;                                 --> aus csv
+        int id;                                 --> aus csv
         string name;                                --> aus csv
-        int pruefer1IdentNr;                        --> aus csv
-        string pruefer1Name;                        --> aus csv
-        int pruefer2IdentNr;                        --> aus csv
-        string pruefer2Name;                        --> aus csv
-        float dauer;                                --> aus csv
-        string klausurForm;                         --> aus csv
-        int klausurSemester;                        --> aus csv
-        bool angeboten;                             --> aus csv
+        int prof1Id;                        --> aus csv
+        string prof1Name;                        --> aus csv
+        int prof2Id;                        --> aus csv
+        string prof2Name;                        --> aus csv
+        float duration;                                --> aus csv
+        string kindOfExamShort;                         --> aus csv
+        int examSemester;                        --> aus csv
+        bool offered;                             --> aus csv
 
-        int dataIndex;                              --> Speicher Index im Data-Array    --> Referenz
-        vector<int> studenten;                      --> Studenten Index aus Data-Array  --> Referenz
-        int anzTeilnehmer;                          --> Size von studenten
+        int index;                              --> Speicher Index im Data-Array    --> Referenz
+        vector<int> studentIndices;                      --> Studenten Index aus Data-Array  --> Referenz
+        int memberCount;                          --> Size von studentIndices
 
-        int dauerTimeSlots;                         --> Umgerechnete dauer
-        int tag;                                    --> ERGEBNIS
-        int startZeitTimeSlot;                      --> ERGEBNIS
-        vector<int> raumRefs;                       --> ERGEBNIS
+        int durationTimeSlots;                         --> Umgerechnete duration
+        int day;                                    --> ERGEBNIS
+        int startTimeSlot;                      --> ERGEBNIS
+        vector<int> roomIndices;                       --> ERGEBNIS
 
 - ___Student:___
 
-        int studMatrikelNr;                         --> aus Anmeldung
-        string studStudiengang;                     --> aus Anmeldung
-        int anzKlausuren;                           --> Size von klausuren
-        vector<int> klausurDataIndizes;             --> Klausur Index aus Data-Array    --> Referenz
-        int dataIndex;                              --> Speicher Index im Data-Array    --> Referenz
+        int martrikelNummer;                         --> aus Registration
+        string course;                     --> aus Registration
+        int ExamCount;                           --> Size von exams
+        vector<int> examIndices;             --> Exam Index aus Data-Array    --> Referenz
+        int index;                              --> Speicher Index im Data-Array    --> Referenz
 
 - ___Professor:___
 
-        int identNr;                                --> aus Klausur
-        string name;                                --> aus Klausur
-        int anzKlausuren;                           --> Size von klausurDataIndizes
-        vector<int> klausurDataIndizes;             --> Klausur Index aus Data-Array    --> Referenz
+        int identNr;                                --> aus Exam
+        string name;                                --> aus Exam
+        int ExamCount;                           --> Size von examIndices
+        vector<int> examIndices;             --> Exam Index aus Data-Array    --> Referenz
 
 - ___ReadInput:___
 
-        vector <Klausur> klausuren;                 --> Speichert ALLE Daten --> Ziel aller Referenzen
-        vector <Anmeldung> anmeldungen;             --> Speichert ALLE Daten --> Ziel aller Referenzen
-        vector <Raum> raeume;                       --> Speichert ALLE Daten --> Ziel aller Referenzen
-        vector <Professor> professoren;             --> Speichert ALLE Daten --> Ziel aller Referenzen
-        vector <Student> studenten;                 --> Speichert ALLE Daten --> Ziel aller Referenzen
+        vector <Exam> exams;                 --> Speichert ALLE Daten --> Ziel aller Referenzen
+        vector <Registration> registrations;             --> Speichert ALLE Daten --> Ziel aller Referenzen
+        vector <Room> rooms;                       --> Speichert ALLE Daten --> Ziel aller Referenzen
+        vector <Professor> profs;             --> Speichert ALLE Daten --> Ziel aller Referenzen
+        vector <Student> studentIndices;                 --> Speichert ALLE Daten --> Ziel aller Referenzen
 
 - ___Algorithmus:___
 
         ReadInput data;                             --> Objekt von ReadInput mit allen Daten
-        vector<Raum> tage [Utility::klausurTage];   --> 9 Tage mit je 50+ Räumen in denen 40 TimeSlots gebucht werden können    --> Bildet die Ressource die gebucht wird
+        vector<Room> days [Utility::klausurTage];   --> 9 Tage mit je 50+ Räumen in denen 40 TimeSlots gebucht werden können    --> Bildet die Ressource die gebucht wird

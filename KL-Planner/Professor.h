@@ -17,17 +17,17 @@ public:
 
     Professor();
     Professor(int identNr, string name);
-    friend std::ostream& operator<<(std::ostream &out, const Professor &student);
+    friend std::ostream& operator<<(std::ostream &out, const Professor& professor);
 
     /*
      * Getter und Setter
      */
 
-    int getDataIndex() const;
+    int getIndex() const;
     int getIdentNr() const;
     const string &getName() const;
-    int getAnzKlausuren() const;
-    const vector<int> &getKlausurDataIndizes() const;
+    int getExamCount() const;
+    const vector<int> &getExamIndices() const;
 
     void setIndex(int index);
 
@@ -35,19 +35,19 @@ public:
      * Methoden:
      */
 
-    //Methode added nur die Referenz aus dem Klausur-Vektor zu dem Studenten
-    void addKlausur(int klausurDataIndex);
+    //Methode added nur die Referenz aus dem Exam-Vektor zu dem Studenten
+    void addKlausur(int examIndex);
 
 private:
     /*
      * Attribute
      */
 
-    int dataIndex;
+    int index;
     int identNr;
     string name;
-    int anzKlausuren;
-    vector<int> klausurDataIndizes;
+    int ExamCount;
+    vector<int> examIndices;
 
 };
 

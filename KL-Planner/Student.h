@@ -35,7 +35,7 @@ public:
      * Methoden:
      */
 
-    //Methode added nur die Referenz aus dem Klausur-Vektor zu dem Studenten
+    //Methode added nur die Referenz aus dem Exam-Vektor zu dem Studenten
     void addKlausur(int klausurDataIndex);
 
 private:
@@ -47,7 +47,7 @@ private:
     int matrikelNr;
     string studiengang;
     int anzKlausuren;
-    vector<int> klausurDataIndizes; //speicherindex der Klausur im Pruefungsarray
+    vector<int> klausurDataIndizes; //speicherindex der Exam im Pruefungsarray
 
 };
 
