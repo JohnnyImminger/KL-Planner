@@ -35,8 +35,7 @@ void Algorithm::run() {
 void Algorithm::printResultByExams(const string &filename) {
     ofstream file;
     file.open(filename);
-    for (int i = 0; i < data.exams.size(); ++i) {
-        Exam cKlausur = data.exams.at(i);
+    for (auto& cKlausur : data.exams) {
         if(cKlausur.getMemberCount() == 0) continue;
 
         file << cKlausur << ';';
