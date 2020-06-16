@@ -213,8 +213,8 @@ bool Algorithm::bookKlausur(Exam &klausur, int day, int start, vector<int>& room
     int sumOfRoomSize = 0;
     for(int index: roomIndices) {
         klausur.addRoom(index);
-        if(! days[day].at(index).bookTimeSlots(start, klausur.getDurationTimeSlots(), index != roomIndices.back() ? data.rooms.at(index).getCapacity() :
-                                                                                      klausur.getMemberCount() - sumOfRoomSize)) return false;
+        int capacity = index != roomIndices.back() ? data.rooms.at(index).getCapacity() : klausur.getMemberCount() - sumOfRoomSize;
+        if(! days[day].at(index).bookTimeSlots(start, klausur.getDurationTimeSlots(), capacity)) return false;
         sumOfRoomSize+=data.rooms.at(index).getCapacity();
     }
     return true;
