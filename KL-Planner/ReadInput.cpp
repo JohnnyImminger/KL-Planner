@@ -84,7 +84,7 @@ void ReadInput::createStudents() {
             studentCount++;
         }
     }
-    cout << countMissingSignings << "\texams for registrations not found" << endl;
+    cout << countMissingSignings << "\tregistrations matched no exam" << endl;
     cout << students.size() << "\tstudents created" << endl;
 }
 

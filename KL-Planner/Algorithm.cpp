@@ -58,10 +58,10 @@ void Algorithm::printResultByRooms(const string &filename) {
     file.open(filename);
     for (int i = 0; i < Utility::examinationPeriod; i++) {
         file << "day " << i+1 << endl;
-        vector cRaume = days[i];
-        for(Room& cRaum : cRaume){
-            file << cRaum.getAdrBau() << '/' << cRaum.getAdrRaum() << ';';
-            cRaum.printTimeSlots(file);
+        vector<Room> currRooms = days[i];
+        for(Room& currRoom : currRooms){
+            file << currRoom.getAdrBau() << '/' << currRoom.getAdrRaum() << ';';
+            currRoom.printTimeSlots(file);
             file << endl;
         }
     }
