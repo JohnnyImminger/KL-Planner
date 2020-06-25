@@ -67,6 +67,8 @@ private:
     bool isProfAvailable(Professor& prof, int askedStartTime, int askedDuration, int day);
     bool isStudentAvailable(Student& student, int day, int start, int duration);
     static bool isTimeOverlapping(int start, int end, int busyStart, int busyEnd, int personalBreak);
+
+    vector<int> getFillableStartTimesFromUsedRoom(int raumIndex, int day);
 };
 
 

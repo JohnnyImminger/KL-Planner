@@ -169,8 +169,10 @@ bool Algorithm::scheduleExamIntoSingleUsedRoom(Exam &exam) {
             possibleRaumIndizes = findAvailableUsedRaumAtDay(exam.getMemberCount(), dispersion, dispersion, exam.getDurationTimeSlots(), day);
             for (int raumIndex : possibleRaumIndizes) {
                 for (int startTime : getFillableStartTimesFromUsedRoom(raumIndex, day)) {
-                    if (days[day].at(raumIndex).getFreeSpaceAt(startTime, exam.getDurationTimeSlots()) >= exam.getMemberCount() && areAllMemberAvailable(exam, startTime, day)){
-                        return bookKlausurDate(exam, startTime, day, raumIndex, exam.getMemberCount());
+                    if (days[day].at(raumIndex).getFreeSpaceAt(startTime, exam.getDurationTimeSlots()) >= exam.getMemberCount() && areAllMemberAvailable(exam, day, startTime)){
+                        vector<int> roomIndices;
+                        roomIndices.push_back(raumIndex);
+                        return bookExam(exam, day, startTime, roomIndices);
                     }
                 }
             }
@@ -178,6 +180,24 @@ bool Algorithm::scheduleExamIntoSingleUsedRoom(Exam &exam) {
         dispersion++;
     }
     return false;
+}
+
+vector<int> Algorithm::getFillableStartTimesFromUsedRoom(int raumIndex, int day) {
+    vector<int> startTimeSlotsToFill;
+    Room& room = days[day].at(raumIndex);
+    for (int time = 0; time < Utility::timeSlotsPerDay; ++time) {
+        int spaceInRoom = days[day].at(raumIndex).getFreeSpaceAt(time,1);
+        if ( 0 < spaceInRoom && spaceInRoom < days[day].at(raumIndex).getCapacity()){
+            if (time == 0){
+                startTimeSlotsToFill.push_back(time);
+                continue;
+            }
+            if (days[day].at(raumIndex).getFreeSpaceAt(time-1,1) == 0){
+                startTimeSlotsToFill.push_back(time);
+            }
+        }
+    }
+    return startTimeSlotsToFill;
 }
 
 
