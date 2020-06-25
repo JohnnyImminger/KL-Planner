@@ -1,6 +1,6 @@
 # KL-Planner
 
-An algorithm for scheduling exams for a examination period according to some constraints:
+An algorithm for scheduling exams for an examination period according to some constraints:
 + the examination period are 9 days
 + each day starts at 8 am and ends at 6 pm
 
