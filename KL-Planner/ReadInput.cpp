@@ -9,53 +9,53 @@
 void ReadInput::init() {
     parseInput();
     createProfs();
-    createStudenten();
+    createStudents();
     attachStudentsToKlausur();
 }
 
 void ReadInput::parseInput() {
-    this->raeume = Raum::parse("../../input/Raumliste.csv");
-    this->anmeldungen = Anmeldung::parse("../../input/Anmeldungen_WS2019_KL.csv");
-    this->klausuren = Klausur::parse("../../input/Angebotene_Pruefungen_KL.csv");
+    this->rooms = Room::parse("../../input/Raumliste.csv");
+    this->registrations = Registration::parse("../../input/Anmeldungen_WS2019_KL.csv");
+    this->exams = Exam::parse("../../input/Angebotene_Pruefungen_KL.csv");
 }
 
 void ReadInput::createProfs() {
-    for (Klausur& klausur: klausuren) {
-        if (klausur.getPruefer1IdentNr() != 0) {
-            processProf(klausur.getDataIndex(), klausur.getPruefer1IdentNr(), klausur.getPruefer1Name());
+    for (Exam& klausur: exams) {
+        if (klausur.getProf1Id() != 0) {
+            processProf(klausur.getIndex(), klausur.getProf1Id(), klausur.getProf1Name());
         }
-        if (klausur.getPruefer2IdentNr() != 0) {
-            processProf(klausur.getDataIndex(), klausur.getPruefer2IdentNr(), klausur.getPruefer2Name());
+        if (klausur.getProf2Id() != 0) {
+            processProf(klausur.getIndex(), klausur.getProf2Id(), klausur.getProf2Name());
         }
     }
     indexProfs();
-    cout << professoren.size() << " Professoren angelegt" << endl;
+    cout << profs.size() << "\tprofs created" << endl;
 }
 
 void ReadInput::indexProfs() {
     int index = 0;
-    for (Professor &prof: professoren) {
+    for (Professor &prof: profs) {
         prof.setIndex(index);
         index++;
     }
 }
 
-void ReadInput::processProf(int klausurIndex, int id, const string &name) {
+void ReadInput::processProf(int examIndex, int id, const string &name) {
     int index = isProfInVector(id);
     if (index >= 0) {
-        professoren.at(index).addKlausur(klausurIndex);
-        klausuren.at(klausurIndex).addProf(index);
+        profs.at(index).addKlausur(examIndex);
+        exams.at(examIndex).addProf(index);
     } else {
         Professor p(id, name);
-        p.addKlausur(klausurIndex);
-        professoren.push_back(p);
-        klausuren.at(klausurIndex).addProf(professoren.size()-1);
+        p.addKlausur(examIndex);
+        profs.push_back(p);
+        exams.at(examIndex).addProf(profs.size() - 1);
     }
 }
 int ReadInput::isProfInVector(int identNr) {
     int index = -1;
-    for (int i = 0; i < professoren.size(); ++i) {
-        if(professoren.at(i).getIdentNr() == identNr) {
+    for (int i = 0; i < profs.size(); ++i) {
+        if(profs.at(i).getIdentNr() == identNr) {
             index = i;
             break;
         }
@@ -63,37 +63,35 @@ int ReadInput::isProfInVector(int identNr) {
     return index;
 }
 
-void ReadInput::createStudenten() {
+void ReadInput::createStudents() {
     int countMissingSignings = 0;
-    int studentenCount = 0;
-    for (Anmeldung& anmeldung: anmeldungen) {
-        int index = isStudentInVector(anmeldung.getMatrikelNr());
-        int klausurIndex = findKlausurIndex(anmeldung.getStudiengang(), anmeldung.getKlausurVersion(),
-                                            anmeldung.getKlausurNummer());
-        if (klausurIndex < 0){
-            //cout << anmeldung << endl;
-            //cout << "Klausur konnte nicht gefunden werden!" << endl;
+    int studentCount = 0;
+    for (Registration& registration: registrations) {
+        int index = isStudentInVector(registration.getMatrikelNr());
+        int examIndex = findExamIndex(registration.getCourse(), registration.getExamVersionNr(),
+                                      registration.getExamNr());
+        if (examIndex < 0){
             countMissingSignings++;
             continue;
         }
         if (index >= 0) {
-            studenten.at(index).addKlausur(klausurIndex);
+            students.at(index).addKlausur(examIndex);
         } else {
-            Student s = Student(anmeldung.getMatrikelNr(), anmeldung.getStudiengang());
-            s.addKlausur(klausurIndex);
-            s.setIndex(studentenCount);
-            studenten.push_back(s);
-            studentenCount++;
+            Student s = Student(registration.getMatrikelNr(), registration.getCourse());
+            s.addKlausur(examIndex);
+            s.setIndex(studentCount);
+            students.push_back(s);
+            studentCount++;
         }
     }
-    cout << "Klausur fuer Anmeldung nicht gefunden: " << countMissingSignings << endl;
-    cout << studenten.size() << " Studenten angelegt" << endl;
+    cout << countMissingSignings << "\tregistrations matched no exam" << endl;
+    cout << students.size() << "\tstudents created" << endl;
 }
 
 int ReadInput::isStudentInVector(int matrikelNr) {
     int index = -1;
-    for (int i = 0; i < studenten.size(); ++i) {
-        if(studenten.at(i).getMatrikelNr() == matrikelNr) {
+    for (int i = 0; i < students.size(); ++i) {
+        if(students.at(i).getMatrikelNr() == matrikelNr) {
             index = i;
             break;
         }
@@ -101,21 +99,21 @@ int ReadInput::isStudentInVector(int matrikelNr) {
     return index;
 }
 
-int ReadInput::findKlausurIndex(const string& studiengang, int pVersion, int pNummer) {
-    for (Klausur& klausur: klausuren) {
-        if (studiengang != klausur.getStudiengang()) continue;
-        if (pVersion != klausur.getVersion()) continue;
-        if (pNummer != klausur.getNummer()) continue;
-        return klausur.getDataIndex();
+int ReadInput::findExamIndex(const string& course, int examVersion, int examNr) {
+    for (Exam& klausur: exams) {
+        if (course != klausur.getCourse()) continue;
+        if (examVersion != klausur.getVersion()) continue;
+        if (examNr != klausur.getId()) continue;
+        return klausur.getIndex();
     }
     return -1;
 }
 
 void ReadInput::attachStudentsToKlausur() {
-    for (const Student& student: studenten) {
-        for (int klausurIndex: student.getKlausurDataIndizes()) {
-            klausuren.at(klausurIndex).addStudent(student.getDataIndex());
+    for (const Student& student: students) {
+        for (int klausurIndex: student.getExamDataIndizes()) {
+            exams.at(klausurIndex).addStudent(student.getDataIndex());
         }
     }
-    cout << "Studenten zu Klausuren hinzugefuegt" << endl;
+    cout << ">>attached students to exams" << endl;
 }

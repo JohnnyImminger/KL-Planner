@@ -9,17 +9,17 @@
  */
 
 Professor::Professor() {
-    this->dataIndex = -1;
+    this->index = -1;
     this->identNr = 404;
     this->name = "DummyProfessor";
-    this->anzKlausuren = 0;
+    this->examCount = 0;
 }
 
 Professor::Professor(int identNr, string name) {
-    this->dataIndex = -1;
+    this->index = -1;
     this->identNr = identNr;
     this->name = name;
-    this->anzKlausuren = 0;
+    this->examCount = 0;
 }
 
 /*
@@ -27,7 +27,7 @@ Professor::Professor(int identNr, string name) {
  */
 
 std::ostream &operator<<(ostream &out, const Professor &professor) {
-    out << professor.getIdentNr() << ';' << professor.getName() << ';' << professor.getAnzKlausuren();
+    out << professor.getIdentNr() << ';' << professor.getName() << ';' << professor.getExamCount();
     return out;
 }
 
@@ -35,8 +35,8 @@ std::ostream &operator<<(ostream &out, const Professor &professor) {
  * Getter
  */
 
-int Professor::getDataIndex() const {
-    return dataIndex;
+int Professor::getIndex() const {
+    return index;
 }
 
 int Professor::getIdentNr() const {
@@ -47,12 +47,12 @@ const string &Professor::getName() const {
     return name;
 }
 
-int Professor::getAnzKlausuren() const {
-    return anzKlausuren;
+int Professor::getExamCount() const {
+    return examCount;
 }
 
-const vector<int> &Professor::getKlausurDataIndizes() const {
-    return klausurDataIndizes;
+const vector<int> &Professor::getExamIndices() const {
+    return examIndices;
 }
 
 /*
@@ -60,7 +60,7 @@ const vector<int> &Professor::getKlausurDataIndizes() const {
  */
 
 void Professor::setIndex(int index) {
-    this->dataIndex = index;
+    this->index = index;
 }
 
 
@@ -68,7 +68,7 @@ void Professor::setIndex(int index) {
  * Methoden:
  */
 
-void Professor::addKlausur(int klausurDataIndex) {
-    this->klausurDataIndizes.push_back(klausurDataIndex);
-    this->anzKlausuren++;
+void Professor::addKlausur(int examIndex) {
+    this->examIndices.push_back(examIndex);
+    this->examCount++;
 }

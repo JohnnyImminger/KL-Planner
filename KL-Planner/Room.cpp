@@ -2,39 +2,39 @@
 // Created by Johnny Imminger, Felix Steinke and Florian Grabowski
 //
 
-#include "Raum.h"
+#include "Room.h"
 
 /*
  * Konstruktoren
  */
 
-Raum::Raum() {
-    this->raumArt = "DummyRaum";
-    this->adrBau = 404;
-    this->adrRaum = 404;
+Room::Room() {
+    this->kindOfRoom = "DummyRoom";
+    this->building = 404;
+    this->adrRoom = 404;
     this->capacity = 0;
-    fill_n(this->timeSlots,Utility::timeSlotsProTag + Utility::timeSlotsPauseRaum, this->capacity);
+    fill_n(this->timeSlots, Utility::timeSlotsPerDay + Utility::timeSlotsRoomBreak, this->capacity);
 }
 
-Raum::Raum(string &art, int adrBau, int adrRaum, int cap) {
-    this->raumArt = art;
-    this->adrBau = adrBau;
-    this->adrRaum = adrRaum;
-    this->capacity = cap / Utility::roomDivider;
-    fill_n(this->timeSlots,Utility::timeSlotsProTag + Utility::timeSlotsPauseRaum, this->capacity);
+Room::Room(string &kindOfRoom, int building, int adrRoom, int capacity) {
+    this->kindOfRoom = kindOfRoom;
+    this->building = building;
+    this->adrRoom = adrRoom;
+    this->capacity = capacity / Utility::roomDivider;
+    fill_n(this->timeSlots, Utility::timeSlotsPerDay + Utility::timeSlotsRoomBreak, this->capacity);
 }
 
 /*
  * toString()
  */
 
-std::ostream &operator<<(ostream &out, const Raum &raum) {
-    out << raum.getRaumArt() << ';' << raum.getAdrBau() << '/' << raum.getAdrRaum() << ';' << raum.getCapacity();
+std::ostream &operator<<(ostream &out, const Room &room) {
+    out << room.kindOfRoom << ';' << room.building << '/' << room.adrRoom << ';' << room.capacity;
     return out;
 }
 
 //A = 100% free, B = 99% - 50% , C = 49% - 20%, D = 19% - 1% E = 0% free
-void Raum::printTimeSlots(ostream& out){
+void Room::printTimeSlots(ostream& out){
     int counter = 1;
     for (int freeCapacity : timeSlots) {
         if (freeCapacity == this->capacity){
@@ -52,7 +52,7 @@ void Raum::printTimeSlots(ostream& out){
     }
 }
 
-void Raum::printFreeTimeslots(ostream& out) {
+void Room::printFreeTimeslots(ostream& out) {
     int counter = 1;
     for(int slot : timeSlots){
         if(slot == this->capacity){
@@ -67,37 +67,29 @@ void Raum::printFreeTimeslots(ostream& out) {
  * Getter
  */
 
-const string &Raum::getRaumArt() const {
-    return raumArt;
+int Room::getAdrBau() const {
+    return building;
 }
 
-int Raum::getAdrBau() const {
-    return adrBau;
+int Room::getAdrRaum() const {
+    return adrRoom;
 }
 
-int Raum::getAdrRaum() const {
-    return adrRaum;
-}
-
-int Raum::getCapacity() const {
+int Room::getCapacity() const {
     return capacity;
-}
-
-const int *Raum::getTimeSlots() const {
-    return timeSlots;
 }
 
 /*______________________________________________________________
  * Methoden:
  */
 
-vector<Raum> Raum::parse(const string& pathToFile) {
+vector<Room> Room::parse(const string& pathToFile) {
     ifstream input(pathToFile);
     if(!input) {
-        cerr << "Fehler beim Oeffnen der Datei " << pathToFile << endl;
+        cerr << "Error: could not open file " << pathToFile << endl;
     }
     size_t lines = 0;
-    vector<Raum> list;
+    vector<Room> list;
     string line;
     while (!input.eof()){
         getline(input, line);
@@ -112,12 +104,12 @@ vector<Raum> Raum::parse(const string& pathToFile) {
         istringstream(splitAdr[0]) >> adrBau;
         istringstream(splitAdr[1]) >> adrRaum;
         istringstream(splitRaum[2]) >> kap;
-        Raum a (splitRaum[0], adrBau, adrRaum,kap);
+        Room a (splitRaum[0], adrBau, adrRaum, kap);
         list.push_back(a);
         ++lines;
     }
     input.close();
-    cout << lines << " Raeume eingelesen" << endl;
+    cout << lines << "\tparsed rooms" << endl;
     return list;
 }
 
@@ -127,18 +119,18 @@ vector<Raum> Raum::parse(const string& pathToFile) {
  * Ressourcen-System
  */
 
-int Raum::getFreeSpaceAt(int startTime, int duration) {
+int Room::getFreeSpaceAt(int start, int duration) {
     //nicht valide startZeit - Vermeidung von ArrayOutOfBounds
-    if (startTime < 0){
-        cout << "Error: Raum::getFreeSpaceAt() - Startzeit < 0!" << endl;
+    if (start < 0){
+        cout << "Error: Room::getFreeSpaceAt() - Startzeit < 0!" << endl;
         return 0;
     }
     //nicht valide startZeit - Vermeidung von ArrayOutOfBounds
-    if (startTime + duration >= Utility::timeSlotsProTag){
+    if (start + duration >= Utility::timeSlotsPerDay){
         return 0;
     }
     int maxFreeCapacity = this->capacity;
-    for (int time = startTime; time < startTime + duration; ++time) {
+    for (int time = start; time < start + duration; ++time) {
         int freeCapacity = timeSlots[time];
         if (freeCapacity < maxFreeCapacity){
             maxFreeCapacity = freeCapacity;
@@ -147,20 +139,27 @@ int Raum::getFreeSpaceAt(int startTime, int duration) {
     return maxFreeCapacity;
 }
 
-bool Raum::bookTimeSlots(int startTime, int duration, int bookedCapacity) {
+bool Room::bookTimeSlots(int start, int duration, int bookedCapacity) {
     int noFail = true;
     int index;
-    for (index = startTime; index < startTime + duration; ++index) {
+    for (index = start; index < start + duration; ++index) {
         this->timeSlots[index] -= bookedCapacity;
 
     }
-    //Ausgleich der Immaginären Slots durch die Pause in den Räumen
-    for (; index < startTime + duration + Utility::timeSlotsPauseRaum; ++index) {
-        if (index >= Utility::timeSlotsProTag + Utility::timeSlotsPauseRaum){
-            cout << "Error: bookTimeSlots() - Zu großer slotIndex bei Raum: " << this->adrBau << "/" << this->adrRaum << " bei " << startTime << " bis " << startTime + duration << "!" << endl;
+    //Ausgleich der Imaginären Slots durch die Pause in den Räumen
+    for (; index < start + duration + Utility::timeSlotsRoomBreak; ++index) {
+        if (index >= Utility::timeSlotsPerDay + Utility::timeSlotsRoomBreak){
+            cout << "Error: bookTimeSlots() - Zu großer slotIndex bei Room: " << this->building << "/" << this->adrRoom << " bei " << start << " bis " << start + duration << "!" << endl;
             return false;
         }
         this->timeSlots[index] = 0;
     }
     return noFail;
+}
+
+bool Room::isEmpty(int start, int duration) {
+    for (int i = start; i< start + duration + Utility::timeSlotsRoomBreak; i++) {
+        if (capacity > timeSlots[i]) return false;
+    }
+    return true;
 }

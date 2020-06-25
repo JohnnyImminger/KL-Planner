@@ -26,8 +26,8 @@ public:
     int getDataIndex() const ;
     int getMatrikelNr() const;
     const string &getStudiengang() const;
-    int getAnzKlausuren() const;
-    const vector<int> &getKlausurDataIndizes() const;
+    int getAmountExams() const;
+    const vector<int> &getExamDataIndizes() const;
 
     void setIndex(int index);
 
@@ -35,7 +35,7 @@ public:
      * Methoden:
      */
 
-    //Methode added nur die Referenz aus dem Klausur-Vektor zu dem Studenten
+    //Methode added nur die Referenz aus dem Exam-Vektor zu dem Studenten
     void addKlausur(int klausurDataIndex);
 
 private:
@@ -46,8 +46,8 @@ private:
     int dataIndex;
     int matrikelNr;
     string studiengang;
-    int anzKlausuren;
-    vector<int> klausurDataIndizes; //speicherindex der Klausur im Pruefungsarray
+    int amountExams;
+    vector<int> examDataIndizes; //speicherindex der Exam im Pruefungsarray
 
 };
 
