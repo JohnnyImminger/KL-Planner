@@ -50,6 +50,10 @@ private:
      * Exam einsortieren und buchen
      */
     bool scheduleKlausur(Exam& exam);
+    bool scheduleExamIntoSingleUsedRoom(Exam &exam);
+    vector<int> getFillableStartTimesFromUsedRoom(int raumIndex, int day);
+    vector<int> findAvailableUsedRoomAtDay(int examSize, int dispersion, int duration, int day);
+    bool isRoomUsedAndAvailable(Room &room,int examSize, int dispersion, int startTime, int duration);
     vector<int> getRoomIndicesForExam(Exam& exam, int day, int start);
     vector<int> getSelectableRoomIndices(Exam& exam, int day, int start);
     void sortRoomIndicesBySize(vector<int>& indices);
@@ -67,10 +71,6 @@ private:
     bool isProfAvailable(Professor& prof, int askedStartTime, int askedDuration, int day);
     bool isStudentAvailable(Student& student, int day, int start, int duration);
     static bool isTimeOverlapping(int start, int end, int busyStart, int busyEnd, int personalBreak);
-
-    vector<int> getFillableStartTimesFromUsedRoom(int raumIndex, int day);
-
-    vector<int> findAvailableUsedRoomAtDay(int examSize, int dispersion, int duration, int day);
 };
 
 

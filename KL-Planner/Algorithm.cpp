@@ -145,6 +145,9 @@ vector<int> Algorithm::sortKlausurenBySize() {
  */
 
 bool Algorithm::scheduleKlausur(Exam& exam) {
+    if (scheduleExamIntoSingleUsedRoom(exam)){
+        return true;
+    }
     //erst die frühen uhrzeiten
     for (int start = 0; start < Utility::timeSlotsPerDay - exam.getDurationTimeSlots(); start++) {
         //für jeden tag versuchen
@@ -166,7 +169,7 @@ bool Algorithm::scheduleExamIntoSingleUsedRoom(Exam &exam) {
 
     while (dispersion < exam.getMemberCount()){
         for (int day = 0; day < Utility::examinationPeriod; ++day) {
-            possibleRaumIndizes = findAvailableUsedRaumAtDay(exam.getMemberCount(), dispersion, dispersion, exam.getDurationTimeSlots(), day);
+            possibleRaumIndizes = findAvailableUsedRoomAtDay(exam.getMemberCount(), dispersion, exam.getDurationTimeSlots(), day);
             for (int raumIndex : possibleRaumIndizes) {
                 for (int startTime : getFillableStartTimesFromUsedRoom(raumIndex, day)) {
                     if (days[day].at(raumIndex).getFreeSpaceAt(startTime, exam.getDurationTimeSlots()) >= exam.getMemberCount() && areAllMemberAvailable(exam, day, startTime)){
@@ -187,13 +190,25 @@ vector<int> Algorithm::findAvailableUsedRoomAtDay(int examSize, int dispersion, 
     for (int roomIndex = 0; roomIndex < days[day].size(); ++roomIndex) {
      Room &room = days[day].at(roomIndex);
         for (int startTime = 0; startTime < Utility::timeSlotsPerDay; ++startTime) {
-            if (isRaumUsedAndAvailable(days[day].at(roomIndex), startTime, duration)){
+            if (isRoomUsedAndAvailable(days[day].at(roomIndex),examSize, dispersion, startTime, duration)){
                 possibleRoomIndices.push_back(roomIndex);
                 break;
             }
         }
     }
     return possibleRoomIndices;
+}
+
+bool Algorithm::isRoomUsedAndAvailable(Room &room, int examSize, int dispersion, int startTime, int duration) {
+    int space = room.getFreeSpaceAt(startTime,duration);
+    if (examSize > space){
+        return false;
+    }
+    if (examSize + dispersion == space){
+        //condition for room to be used
+        return 0 < space && space < room.getCapacity();
+    }
+    return false;
 }
 
 vector<int> Algorithm::getFillableStartTimesFromUsedRoom(int raumIndex, int day) {
