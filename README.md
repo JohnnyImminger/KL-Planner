@@ -1,7 +1,5 @@
 # KL-Planner
 
-**! Before first use after cloning:** create directory "output" on same level as "input". Otherwise no output-files will be created.
-
 An algorithm for scheduling exams for a examination period according to some constraints:
 + the examination period are 9 days
 + each day starts at 8 am and ends at 6 pm
