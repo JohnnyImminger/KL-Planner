@@ -20,35 +20,35 @@ void Algorithm::initTage() {
 }
 
 void Algorithm::run() {
-    vector<int> klausuren =  sortKlausurenBySize();
+    vector<int> exams = sortExamsBySize();
     cout << ">>sorted exams by size" << endl;
-    int nextKlausurIndex = selectNextKlausur(klausuren);
-    while (nextKlausurIndex != -1) {
-        if (scheduleKlausur(data.exams.at(nextKlausurIndex))) {
+    int nextExamIndex = selectNextExam(exams);
+    while (nextExamIndex != -1) {
+        if (scheduleExam(data.exams.at(nextExamIndex))) {
         } else {
-            cout << "Exception: exam could not be scheduled: " << data.exams.at(nextKlausurIndex) << endl;
+            cout << "Exception: exam could not be scheduled: " << data.exams.at(nextExamIndex) << endl;
         }
-        nextKlausurIndex = selectNextKlausur(klausuren);
+        nextExamIndex = selectNextExam(exams);
     }
 }
 
 void Algorithm::printResultByExams(const string &filename) {
     ofstream file;
     file.open(filename);
-    for (auto& cKlausur : data.exams) {
-        if(cKlausur.getMemberCount() == 0) continue;
+    for (auto& cExam : data.exams) {
+        if(cExam.getMemberCount() == 0) continue;
 
-        file << cKlausur << ';';
+        file << cExam << ';';
 
-        vector<int> klausurRaeume = cKlausur.getRoomIndices();
-        for (int j: klausurRaeume) {
+        vector<int> examRooms = cExam.getRoomIndices();
+        for (int j: examRooms) {
             Room cRaum = data.rooms.at(j);
             file << cRaum.getAdrBau() << '/';
             file << cRaum.getAdrRaum() << ';';
         }
 
-        file << cKlausur.getDay() << ';';
-        file << (float) cKlausur.getStartTimeSlot() / Utility::timeSlotsPerHour + Utility::startTimePerDay << endl;
+        file << cExam.getDay() << ';';
+        file << (float) cExam.getStartTimeSlot() / Utility::timeSlotsPerHour + Utility::startTimePerDay << endl;
     }
     file.close();
 }
@@ -85,7 +85,7 @@ void Algorithm::printResultByStudent(const string &filename) {
     file.open(filename);
     for(const Student& cStudent : data.students){
         file << "Student_" << cStudent.getMatrikelNr() << endl;
-        for(int i : cStudent.getKlausurDataIndizes()){
+        for(int i : cStudent.getExamDataIndizes()){
             file << "schreibt;" << data.exams[i].getName() << ";am;" << data.exams[i].getDay() << ";um;" << data.exams[i].getStartTimeSlot() << endl;
         }
     }
@@ -97,7 +97,7 @@ void Algorithm::printResultByStudent(const string &filename) {
 */
 
 
-int Algorithm::selectNextKlausur(vector<int> &indices) {
+int Algorithm::selectNextExam(vector<int> &indices) {
     // wenn der vector leer ist, soll -1 zurückgegeben werden
     while (!indices.empty()) {
         int nextIndex = indices.front();
@@ -112,7 +112,7 @@ int Algorithm::selectNextKlausur(vector<int> &indices) {
     return -1;
 }
 
-vector<int> Algorithm::sortKlausurenBySize() {
+vector<int> Algorithm::sortExamsBySize() {
     vector<int> result;
     for (Exam& exam: data.exams) {
         result.push_back(exam.getIndex());
@@ -144,7 +144,7 @@ vector<int> Algorithm::sortKlausurenBySize() {
  * Exam einsortieren und buchen
  */
 
-bool Algorithm::scheduleKlausur(Exam& exam) {
+bool Algorithm::scheduleExam(Exam& exam) {
     //erst die frühen uhrzeiten
     for (int start = 0; start < Utility::timeSlotsPerDay - exam.getDurationTimeSlots(); start++) {
         //für jeden tag versuchen
@@ -237,10 +237,10 @@ bool Algorithm::bookExam(Exam &exam, int day, int start, vector<int>& roomIndice
 */
 
 bool Algorithm::areAllMemberAvailable(Exam &exam, int day, int start) {
-    return areAllProfsOfKlausurAvailable(exam, day, start) && areAllStudentsOfKlausurAvailable(exam, day, start);
+    return areAllProfsOfExamAvailable(exam, day, start) && areAllStudentsOfExamAvailable(exam, day, start);
 }
 
-bool Algorithm::areAllProfsOfKlausurAvailable(Exam &exam, int day, int start) {
+bool Algorithm::areAllProfsOfExamAvailable(Exam &exam, int day, int start) {
     for (int profIndex : exam.getProfs()) {
         if (!isProfAvailable(data.profs.at(profIndex), day, start, exam.getDurationTimeSlots())){
             return false;
@@ -249,7 +249,7 @@ bool Algorithm::areAllProfsOfKlausurAvailable(Exam &exam, int day, int start) {
     return true;
 }
 
-bool Algorithm::areAllStudentsOfKlausurAvailable(Exam &exam, int day, int start) {
+bool Algorithm::areAllStudentsOfExamAvailable(Exam &exam, int day, int start) {
     for (int studentIndex : exam.getStudents()) {
         if (!isStudentAvailable(data.students.at(studentIndex), day, start, exam.getDurationTimeSlots())){
             return false;
@@ -276,7 +276,7 @@ bool Algorithm::isProfAvailable(Professor& prof, int day, int start, int duratio
 
 bool Algorithm::isStudentAvailable(Student& student, int day, int start, int duration) {
     int examPerDay = 0;
-    for (int examIndex : student.getKlausurDataIndizes()) {
+    for (int examIndex : student.getExamDataIndizes()) {
         Exam exam = data.exams[examIndex];
         if (!exam.isScheduled()){
             continue;
