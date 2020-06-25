@@ -12,14 +12,14 @@ Professor::Professor() {
     this->index = -1;
     this->identNr = 404;
     this->name = "DummyProfessor";
-    this->ExamCount = 0;
+    this->examCount = 0;
 }
 
 Professor::Professor(int identNr, string name) {
     this->index = -1;
     this->identNr = identNr;
     this->name = name;
-    this->ExamCount = 0;
+    this->examCount = 0;
 }
 
 /*
@@ -48,7 +48,7 @@ const string &Professor::getName() const {
 }
 
 int Professor::getExamCount() const {
-    return ExamCount;
+    return examCount;
 }
 
 const vector<int> &Professor::getExamIndices() const {
@@ -70,5 +70,5 @@ void Professor::setIndex(int index) {
 
 void Professor::addKlausur(int examIndex) {
     this->examIndices.push_back(examIndex);
-    this->ExamCount++;
+    this->examCount++;
 }

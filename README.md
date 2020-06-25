@@ -1,5 +1,7 @@
 # KL-Planner
 
+**! Before first use after cloning:** create directory "output" on same level as "input". Otherwise no output-files will be created.
+
 An algorithm for scheduling exams for a examination period according to some constraints:
 + the examination period are 9 days
 + each day starts at 8 am and ends at 6 pm
@@ -117,7 +119,7 @@ DatenObjekte:
 
         int martrikelNummer;                                --> aus Registration
         string course;                                      --> aus Registration
-        int ExamCount;                                      --> Anzahl der angemeldeten Klausuren
+        int examCount;                                      --> Anzahl der angemeldeten Klausuren
         vector<int> examIndices;                            --> Speicherindices der Exams im Data-Array
         int index;                                          --> Speicherindex im Data-Array
 
@@ -125,7 +127,7 @@ DatenObjekte:
 
         int identNr;                                        --> aus Exam
         string name;                                        --> aus Exam
-        int ExamCount;                                      --> Size von examIndices
+        int examCount;                                      --> Size von examIndices
         vector<int> examIndices;                            --> Speicerindices der Exams im Data-Array
 
 - ___ReadInput:___

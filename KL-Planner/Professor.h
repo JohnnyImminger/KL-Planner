@@ -46,7 +46,7 @@ private:
     int index;
     int identNr;
     string name;
-    int ExamCount;
+    int examCount;
     vector<int> examIndices;
 
 };
