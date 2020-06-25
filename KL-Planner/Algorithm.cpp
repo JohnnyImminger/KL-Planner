@@ -182,6 +182,20 @@ bool Algorithm::scheduleExamIntoSingleUsedRoom(Exam &exam) {
     return false;
 }
 
+vector<int> Algorithm::findAvailableUsedRoomAtDay(int examSize, int dispersion, int duration, int day) {
+    vector <int> possibleRoomIndices;
+    for (int roomIndex = 0; roomIndex < days[day].size(); ++roomIndex) {
+     Room &room = days[day].at(roomIndex);
+        for (int startTime = 0; startTime < Utility::timeSlotsPerDay; ++startTime) {
+            if (isRaumUsedAndAvailable(days[day].at(roomIndex), startTime, duration)){
+                possibleRoomIndices.push_back(roomIndex);
+                break;
+            }
+        }
+    }
+    return possibleRoomIndices;
+}
+
 vector<int> Algorithm::getFillableStartTimesFromUsedRoom(int raumIndex, int day) {
     vector<int> startTimeSlotsToFill;
     Room& room = days[day].at(raumIndex);

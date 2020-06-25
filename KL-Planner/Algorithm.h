@@ -69,6 +69,8 @@ private:
     static bool isTimeOverlapping(int start, int end, int busyStart, int busyEnd, int personalBreak);
 
     vector<int> getFillableStartTimesFromUsedRoom(int raumIndex, int day);
+
+    vector<int> findAvailableUsedRoomAtDay(int examSize, int dispersion, int duration, int day);
 };
 
 
