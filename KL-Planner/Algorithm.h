@@ -49,6 +49,10 @@ private:
     /*______________________________________________________________________________________________________________________
      * Exam einsortieren und buchen
      */
+    bool scheduleExamIntoSingleUsedRoom(Exam &exam);
+    vector<int> getFillableStartTimesFromUsedRoom(int raumIndex, int day);
+    vector<int> findAvailableUsedRoomAtDay(int examSize, int dispersion, int duration, int day);
+    bool isRoomUsedAndAvailable(Room &room,int examSize, int dispersion, int startTime, int duration);
     bool scheduleExam(Exam& exam);
     vector<int> getRoomIndicesForExam(Exam& exam, int day, int start);
     vector<int> getSelectableRoomIndices(Exam& exam, int day, int start);
