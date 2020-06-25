@@ -111,7 +111,7 @@ int ReadInput::findExamIndex(const string& course, int examVersion, int examNr) 
 
 void ReadInput::attachStudentsToKlausur() {
     for (const Student& student: students) {
-        for (int klausurIndex: student.getKlausurDataIndizes()) {
+        for (int klausurIndex: student.getExamDataIndizes()) {
             exams.at(klausurIndex).addStudent(student.getDataIndex());
         }
     }

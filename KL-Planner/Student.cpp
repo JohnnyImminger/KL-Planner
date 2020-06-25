@@ -12,14 +12,14 @@ Student::Student() {
     this->dataIndex = -1;
     this->matrikelNr = 404;
     this->studiengang = "DummyStudent";
-    this->anzKlausuren = 0;
+    this->amountExams = 0;
 }
 
 Student::Student(int matikelNr, string studiengang) {
     this->dataIndex = -1;
     this->matrikelNr = matikelNr;
     this->studiengang = studiengang;
-    this->anzKlausuren = 0;
+    this->amountExams = 0;
 }
 
 /*
@@ -27,7 +27,7 @@ Student::Student(int matikelNr, string studiengang) {
  */
 
 std::ostream &operator<<(ostream &out, const Student &student) {
-    out << student.getMatrikelNr() << ';' << student.getStudiengang() << ';' << student.getAnzKlausuren();
+    out << student.getMatrikelNr() << ';' << student.getStudiengang() << ';' << student.getAmountExams();
     return out;
 }
 
@@ -47,12 +47,12 @@ const string &Student::getStudiengang() const {
     return studiengang;
 }
 
-int Student::getAnzKlausuren() const {
-    return anzKlausuren;
+int Student::getAmountExams() const {
+    return amountExams;
 }
 
-const vector<int> &Student::getKlausurDataIndizes() const {
-    return klausurDataIndizes;
+const vector<int> &Student::getExamDataIndizes() const {
+    return examDataIndizes;
 }
 
 /*
@@ -68,6 +68,6 @@ void Student::setIndex(int index) {
  */
 
 void Student::addKlausur(int klausurDataIndex) {
-    this->klausurDataIndizes.push_back(klausurDataIndex);
-    this->anzKlausuren++;
+    this->examDataIndizes.push_back(klausurDataIndex);
+    this->amountExams++;
 }

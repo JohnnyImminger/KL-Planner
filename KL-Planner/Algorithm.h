@@ -43,17 +43,17 @@ private:
      */
 
     //gibt einen sortierten vektor mit Klausurindices nach Größe und Länge zurück
-    vector<int> sortKlausurenBySize();
+    vector<int> sortExamsBySize();
     //gibt den nächsten index aus dem Vektor zurück, Klausuren ohne Teilnehmer werden ignoriert
-    int selectNextKlausur(vector<int> &indices);
+    int selectNextExam(vector<int> &indices);
     /*______________________________________________________________________________________________________________________
      * Exam einsortieren und buchen
      */
-    bool scheduleKlausur(Exam& exam);
     bool scheduleExamIntoSingleUsedRoom(Exam &exam);
     vector<int> getFillableStartTimesFromUsedRoom(int raumIndex, int day);
     vector<int> findAvailableUsedRoomAtDay(int examSize, int dispersion, int duration, int day);
     bool isRoomUsedAndAvailable(Room &room,int examSize, int dispersion, int startTime, int duration);
+    bool scheduleExam(Exam& exam);
     vector<int> getRoomIndicesForExam(Exam& exam, int day, int start);
     vector<int> getSelectableRoomIndices(Exam& exam, int day, int start);
     void sortRoomIndicesBySize(vector<int>& indices);
@@ -66,8 +66,8 @@ private:
      * Teilnehmer Bedingungen
      */
     bool areAllMemberAvailable(Exam &exam, int day, int start);
-    bool areAllProfsOfKlausurAvailable(Exam &exam, int day, int start);
-    bool areAllStudentsOfKlausurAvailable(Exam &exam, int startTime, int duration);
+    bool areAllProfsOfExamAvailable(Exam &exam, int day, int start);
+    bool areAllStudentsOfExamAvailable(Exam &exam, int day, int start);
     bool isProfAvailable(Professor& prof, int askedStartTime, int askedDuration, int day);
     bool isStudentAvailable(Student& student, int day, int start, int duration);
     static bool isTimeOverlapping(int start, int end, int busyStart, int busyEnd, int personalBreak);

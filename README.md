@@ -117,7 +117,7 @@ DatenObjekte:
 
         int martrikelNummer;                                --> aus Registration
         string course;                                      --> aus Registration
-        int ExamCount;                                      --> Anzahl der angemeldeten Klausuren
+        int examCount;                                      --> Anzahl der angemeldeten Klausuren
         vector<int> examIndices;                            --> Speicherindices der Exams im Data-Array
         int index;                                          --> Speicherindex im Data-Array
 
@@ -125,7 +125,7 @@ DatenObjekte:
 
         int identNr;                                        --> aus Exam
         string name;                                        --> aus Exam
-        int ExamCount;                                      --> Size von examIndices
+        int examCount;                                      --> Size von examIndices
         vector<int> examIndices;                            --> Speicerindices der Exams im Data-Array
 
 - ___ReadInput:___

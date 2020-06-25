@@ -26,8 +26,8 @@ public:
     int getDataIndex() const ;
     int getMatrikelNr() const;
     const string &getStudiengang() const;
-    int getAnzKlausuren() const;
-    const vector<int> &getKlausurDataIndizes() const;
+    int getAmountExams() const;
+    const vector<int> &getExamDataIndizes() const;
 
     void setIndex(int index);
 
@@ -46,8 +46,8 @@ private:
     int dataIndex;
     int matrikelNr;
     string studiengang;
-    int anzKlausuren;
-    vector<int> klausurDataIndizes; //speicherindex der Exam im Pruefungsarray
+    int amountExams;
+    vector<int> examDataIndizes; //speicherindex der Exam im Pruefungsarray
 
 };
 
