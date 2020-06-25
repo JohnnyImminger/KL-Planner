@@ -190,8 +190,8 @@ vector<int> Algorithm::getRoomIndicesForExam(Exam &exam, int day, int start) {
 vector<int> Algorithm::getSelectableRoomIndices(Exam& exam, int day, int start) {
     vector<int> roomIndices;
     for (int rIndex = 0; rIndex < days[day].size(); rIndex++) {
-        Room* room = &days[day].at(rIndex);
-        if(room->isEmpty(start, exam.getDurationTimeSlots())) {
+        Room& room = days[day].at(rIndex);
+        if(room.isEmpty(start, exam.getDurationTimeSlots())) {
             roomIndices.push_back(rIndex);
         }
     }
