@@ -49,24 +49,24 @@ private:
     /*______________________________________________________________________________________________________________________
      * Exam einsortieren und buchen
      */
-    bool scheduleKlausur(Exam& klausur);
-    vector<int> getRoomIndicesForKlausur(Exam& klausur, int day, int start);
-    vector<int> getSelectableRoomIndices(Exam& kl, int day, int start);
+    bool scheduleKlausur(Exam& exam);
+    vector<int> getRoomIndicesForExam(Exam& exam, int day, int start);
+    vector<int> getSelectableRoomIndices(Exam& exam, int day, int start);
     void sortRoomIndicesBySize(vector<int>& indices);
     /*
      * Exam bei passendem Termin buchen
      */
-    bool bookKlausur(Exam& klausur, int day, int start, vector<int>& roomIndices);
+    bool bookExam(Exam& exam, int day, int start, vector<int>& roomIndices);
 
     /*
      * Teilnehmer Bedingungen
      */
-    bool areAllMemberAvailable(Exam &klausur, int day, int start);
-    bool areAllProfsOfKlausurAvailable(Exam &klausur, int day, int start);
-    bool areAllStudentsOfKlausurAvailable(Exam &klausur, int startTime, int duration);
+    bool areAllMemberAvailable(Exam &exam, int day, int start);
+    bool areAllProfsOfKlausurAvailable(Exam &exam, int day, int start);
+    bool areAllStudentsOfKlausurAvailable(Exam &exam, int startTime, int duration);
     bool isProfAvailable(Professor& prof, int askedStartTime, int askedDuration, int day);
     bool isStudentAvailable(Student& student, int day, int start, int duration);
-    bool isTimeOverlapping(int start, int end, int busyStart, int busyEnd, int personalBreak);
+    static bool isTimeOverlapping(int start, int end, int busyStart, int busyEnd, int personalBreak);
 };
 
 

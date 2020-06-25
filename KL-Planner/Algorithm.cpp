@@ -114,24 +114,24 @@ int Algorithm::selectNextKlausur(vector<int> &indices) {
 
 vector<int> Algorithm::sortKlausurenBySize() {
     vector<int> result;
-    for (Exam& klausur: data.exams) {
-        result.push_back(klausur.getIndex());
+    for (Exam& exam: data.exams) {
+        result.push_back(exam.getIndex());
     }
     bool swapped;
     do {
         swapped = false;
         for (int i = 0; i < result.size()-1; ++i) {
-            Exam k1 = data.exams.at(result.at(i));
-            Exam k2 = data.exams.at(result.at(i + 1));
-            if (k1.getMemberCount() < k2.getMemberCount()) {
-                int temp = (int) k1.getIndex();
-                result.at(i) = (int) k2.getIndex();
+            Exam e1 = data.exams.at(result.at(i));
+            Exam e2 = data.exams.at(result.at(i + 1));
+            if (e1.getMemberCount() < e2.getMemberCount()) {
+                int temp = (int) e1.getIndex();
+                result.at(i) = (int) e2.getIndex();
                 result.at(i+1) = temp;
                 swapped = true;
-            } else if (k1.getMemberCount() == k2.getMemberCount() && k1.getDurationTimeSlots() <
-                                                                     k2.getDurationTimeSlots()) {
-                int temp = (int) k1.getIndex();
-                result.at(i) = (int) k2.getIndex();
+            } else if (e1.getMemberCount() == e2.getMemberCount()
+                && e1.getDurationTimeSlots() < e2.getDurationTimeSlots()) {
+                int temp = (int) e1.getIndex();
+                result.at(i) = (int) e2.getIndex();
                 result.at(i+1) = temp;
                 swapped = true;
             }
@@ -144,42 +144,54 @@ vector<int> Algorithm::sortKlausurenBySize() {
  * Exam einsortieren und buchen
  */
 
-bool Algorithm::scheduleKlausur(Exam& klausur) {
-    for (int start = 0; start < Utility::timeSlotsPerDay - klausur.getDurationTimeSlots(); start++) {
+bool Algorithm::scheduleKlausur(Exam& exam) {
+    //erst die frühen uhrzeiten
+    for (int start = 0; start < Utility::timeSlotsPerDay - exam.getDurationTimeSlots(); start++) {
+        //für jeden tag versuchen
         for (int day = 0; day<Utility::examinationPeriod; day++) {
-            if(!areAllMemberAvailable(klausur, day, start)) continue;
-            vector<int> roomIndices = getRoomIndicesForKlausur(klausur, day, start);
+            //wenn nicht alle teilnehmer zu dem Zeitpunkt können, weiterversuchen
+            if(!areAllMemberAvailable(exam, day, start)) continue;
+            vector<int> roomIndices = getRoomIndicesForExam(exam, day, start);
+            //wenn keine räume verfügbar, weiterversuchen
             if(roomIndices.empty()) continue;
-            return bookKlausur(klausur, day, start, roomIndices);
+            return bookExam(exam, day, start, roomIndices);
         }
     }
     return false;
 }
 
-vector<int> Algorithm::getRoomIndicesForKlausur(Exam &klausur, int day, int start) {
-    vector<int> indicesForKlausur;
-    vector<int> selectableRoomIndices = getSelectableRoomIndices(klausur, day, start);
-    if(selectableRoomIndices.empty()) return indicesForKlausur;
+vector<int> Algorithm::getRoomIndicesForExam(Exam &exam, int day, int start) {
+    vector<int> indicesForExam;
+    vector<int> selectableRoomIndices = getSelectableRoomIndices(exam, day, start);
+    if(selectableRoomIndices.empty()) return indicesForExam;
+
+    //if all selectable rooms together are smaller than the exam return no rooms
+    int sumOfCapacity = 0;
+    for (int roomIndex: selectableRoomIndices) {
+        sumOfCapacity+=data.rooms.at(roomIndex).getCapacity();
+    }
+    if(sumOfCapacity < exam.getMemberCount()) return vector<int>();
 
     sortRoomIndicesBySize(selectableRoomIndices);
 
-    //TODO: optimierung bei der raumauswahl
-    int klSize = klausur.getMemberCount();
-    for (int i = 0; i < selectableRoomIndices.size(); i++) {
-        int roomCap = data.rooms.at(selectableRoomIndices.at(i)).getCapacity();
-        indicesForKlausur.push_back(selectableRoomIndices.at(i));
-        klSize-=roomCap;
-        if(klSize<=0) break;
+    //optimization of slecting rooms is possible here
+    //always the biggest room is selected
+    int examSize = exam.getMemberCount();
+    for (int& selectableRoomIndex : selectableRoomIndices) {
+        int roomCapacity = data.rooms.at(selectableRoomIndex).getCapacity();
+        indicesForExam.push_back(selectableRoomIndex);
+        examSize-=roomCapacity;
+        if(examSize <= 0) break;
     }
 
-    return indicesForKlausur;
+    return indicesForExam;
 }
 
-vector<int> Algorithm::getSelectableRoomIndices(Exam& kl, int day, int start) {
+vector<int> Algorithm::getSelectableRoomIndices(Exam& exam, int day, int start) {
     vector<int> roomIndices;
     for (int rIndex = 0; rIndex < days[day].size(); rIndex++) {
         Room* room = &days[day].at(rIndex);
-        if(room->isEmpty(start, kl.getDurationTimeSlots())) {
+        if(room->isEmpty(start, exam.getDurationTimeSlots())) {
             roomIndices.push_back(rIndex);
         }
     }
@@ -207,14 +219,14 @@ void Algorithm::sortRoomIndicesBySize(vector<int>& indices) {
  * Exam bei passendem Termin buchen
  */
 
-bool Algorithm::bookKlausur(Exam &klausur, int day, int start, vector<int>& roomIndices) {
-    klausur.setDay(day);
-    klausur.setStartTimeSlot(start);
+bool Algorithm::bookExam(Exam &exam, int day, int start, vector<int>& roomIndices) {
+    exam.setDay(day);
+    exam.setStartTimeSlot(start);
     int sumOfRoomSize = 0;
     for(int index: roomIndices) {
-        klausur.addRoom(index);
-        int capacity = index != roomIndices.back() ? data.rooms.at(index).getCapacity() : klausur.getMemberCount() - sumOfRoomSize;
-        if(! days[day].at(index).bookTimeSlots(start, klausur.getDurationTimeSlots(), capacity)) return false;
+        exam.addRoom(index);
+        int capacity = index != roomIndices.back() ? data.rooms.at(index).getCapacity() : exam.getMemberCount() - sumOfRoomSize;
+        if(! days[day].at(index).bookTimeSlots(start, exam.getDurationTimeSlots(), capacity)) return false;
         sumOfRoomSize+=data.rooms.at(index).getCapacity();
     }
     return true;
@@ -224,22 +236,22 @@ bool Algorithm::bookKlausur(Exam &klausur, int day, int start, vector<int>& room
 * Teilnehmer Bedingungen
 */
 
-bool Algorithm::areAllMemberAvailable(Exam &klausur, int day, int start) {
-    return areAllProfsOfKlausurAvailable(klausur, day, start) && areAllStudentsOfKlausurAvailable(klausur, day, start);
+bool Algorithm::areAllMemberAvailable(Exam &exam, int day, int start) {
+    return areAllProfsOfKlausurAvailable(exam, day, start) && areAllStudentsOfKlausurAvailable(exam, day, start);
 }
 
-bool Algorithm::areAllProfsOfKlausurAvailable(Exam &klausur, int day, int start) {
-    for (int profIndex : klausur.getProfs()) {
-        if (!isProfAvailable(data.profs.at(profIndex), day, start, klausur.getDurationTimeSlots())){
+bool Algorithm::areAllProfsOfKlausurAvailable(Exam &exam, int day, int start) {
+    for (int profIndex : exam.getProfs()) {
+        if (!isProfAvailable(data.profs.at(profIndex), day, start, exam.getDurationTimeSlots())){
             return false;
         }
     }
     return true;
 }
 
-bool Algorithm::areAllStudentsOfKlausurAvailable(Exam &klausur, int day, int start) {
-    for (int studentIndex : klausur.getStudents()) {
-        if (!isStudentAvailable(data.students.at(studentIndex), day, start, klausur.getDurationTimeSlots())){
+bool Algorithm::areAllStudentsOfKlausurAvailable(Exam &exam, int day, int start) {
+    for (int studentIndex : exam.getStudents()) {
+        if (!isStudentAvailable(data.students.at(studentIndex), day, start, exam.getDurationTimeSlots())){
             return false;
         }
     }
@@ -247,14 +259,14 @@ bool Algorithm::areAllStudentsOfKlausurAvailable(Exam &klausur, int day, int sta
 }
 
 bool Algorithm::isProfAvailable(Professor& prof, int day, int start, int duration) {
-    for (int klausurIndex : prof.getExamIndices()) {
-        Exam klausur = data.exams[klausurIndex];
-        if (!klausur.isScheduled()){
+    for (int examIndex : prof.getExamIndices()) {
+        Exam exam = data.exams[examIndex];
+        if (!exam.isScheduled()){
             continue;
         }
-        if (klausur.getDay() == day) {
-            if (isTimeOverlapping(start, start + duration, klausur.getStartTimeSlot(), klausur.getStartTimeSlot() +
-                                                                                       klausur.getDurationTimeSlots(), Utility::timeSlotsProfBreak)){
+        if (exam.getDay() == day) {
+            if (isTimeOverlapping(start, start + duration, exam.getStartTimeSlot(),
+                    exam.getStartTimeSlot() + exam.getDurationTimeSlots(), Utility::timeSlotsProfBreak)){
                 return false;
             }
         }
@@ -263,19 +275,19 @@ bool Algorithm::isProfAvailable(Professor& prof, int day, int start, int duratio
 }
 
 bool Algorithm::isStudentAvailable(Student& student, int day, int start, int duration) {
-    int klausurPerDay = 0;
-    for (int klausurIndex : student.getKlausurDataIndizes()) {
-        Exam klausur = data.exams[klausurIndex];
-        if (!klausur.isScheduled()){
+    int examPerDay = 0;
+    for (int examIndex : student.getKlausurDataIndizes()) {
+        Exam exam = data.exams[examIndex];
+        if (!exam.isScheduled()){
             continue;
         }
-        if (klausur.getDay() == day) {
-            klausurPerDay++;
-            if (klausurPerDay >= Utility::maxExamsPerDayStudent){
+        if (exam.getDay() == day) {
+            examPerDay++;
+            if (examPerDay >= Utility::maxExamsPerDayStudent){
                 return false;
             }
-            if (isTimeOverlapping(start, start + duration, klausur.getStartTimeSlot(), klausur.getStartTimeSlot() +
-                                                                                       klausur.getDurationTimeSlots(), Utility::timeSlotsStudentBreak)){
+            if (isTimeOverlapping(start, start + duration, exam.getStartTimeSlot(),
+                    exam.getStartTimeSlot() + exam.getDurationTimeSlots(), Utility::timeSlotsStudentBreak)){
                 return false;
             }
         }
