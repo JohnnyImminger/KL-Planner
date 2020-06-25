@@ -160,6 +160,27 @@ bool Algorithm::scheduleKlausur(Exam& exam) {
     return false;
 }
 
+bool Algorithm::scheduleExamIntoSingleUsedRoom(Exam &exam) {
+    int dispersion = 0;
+    vector <int> possibleRaumIndizes;
+
+    while (dispersion < exam.getMemberCount()){
+        for (int day = 0; day < Utility::examinationPeriod; ++day) {
+            possibleRaumIndizes = findAvailableUsedRaumAtDay(exam.getMemberCount(), dispersion, dispersion, exam.getDurationTimeSlots(), day);
+            for (int raumIndex : possibleRaumIndizes) {
+                for (int startTime : getFillableStartTimesFromUsedRoom(raumIndex, day)) {
+                    if (days[day].at(raumIndex).getFreeSpaceAt(startTime, exam.getDurationTimeSlots()) >= exam.getMemberCount() && areAllMemberAvailable(exam, startTime, day)){
+                        return bookKlausurDate(exam, startTime, day, raumIndex, exam.getMemberCount());
+                    }
+                }
+            }
+        }
+        dispersion++;
+    }
+    return false;
+}
+
+
 vector<int> Algorithm::getRoomIndicesForExam(Exam &exam, int day, int start) {
     vector<int> indicesForExam;
     vector<int> selectableRoomIndices = getSelectableRoomIndices(exam, day, start);
